@@ -1,0 +1,898 @@
+{
+  "users": [
+    {
+      "username": "test",
+      "password": "123",
+      "name": "English",
+      "surname": "Nomma",
+      "initials": "EN",
+      "logoColor": "#B0D59F",
+      "id": 1
+    },
+    {
+      "username": "blazej2533",
+      "password": "123",
+      "name": "Błażej",
+      "surname": "Szczesny",
+      "initials": "BS",
+      "logoColor": "#EFDC4A",
+      "id": 2
+    },
+    {
+      "username": "dsa",
+      "password": "123",
+      "name": "fsda",
+      "surname": "fdsa",
+      "initials": "FF",
+      "logoColor": "#A73D26",
+      "id": 3
+    }
+  ],
+  "tasks": [
+    {
+      "title": "Hello, i'm test create task",
+      "description": "Hello, i'm test create task",
+      "clientID": 1,
+      "createDate": "20-11-2023",
+      "createHour": "21:53:50",
+      "lastModification": "23-11-2023",
+      "lastModificationHour": "22:26:33",
+      "closeDate": "22-11-2023",
+      "closeHour": "22:26:33",
+      "priority": 2,
+      "difficulty": "Hard",
+      "solver": "Błażej",
+      "status": "Close",
+      "unit": "ZRR",
+      "contactNumber": "123456789",
+      "id": 1
+    },
+    {
+      "title": "siema",
+      "description": "siem",
+      "clientID": 2,
+      "createDate": "20-11-2023",
+      "createHour": "22:28:51",
+      "lastModification": "20-11-2023",
+      "lastModificationHour": "23:28:52",
+      "closeDate": "23-11-2023",
+      "closeHour": "",
+      "priority": 2,
+      "difficulty": "Easy",
+      "solver": "Błażej",
+      "status": "In Pendend",
+      "unit": "siem",
+      "contactNumber": "siema",
+      "id": 2
+    },
+    {
+      "title": "lorem ipsum",
+      "description": "lorem",
+      "clientID": 2,
+      "createDate": "20-11-2023",
+      "createHour": "23:29:24",
+      "lastModification": "20-11-2023",
+      "lastModificationHour": "23:29:24",
+      "closeDate": "",
+      "closeHour": "",
+      "priority": 2,
+      "difficulty": "",
+      "solver": "",
+      "status": "Open",
+      "unit": "",
+      "contactNumber": "",
+      "id": 3
+    },
+    {
+      "title": "hdhd",
+      "description": "hgfdhfd",
+      "clientID": 2,
+      "createDate": "22-11-2023",
+      "createHour": "20:28:37",
+      "lastModification": "23-11-2023",
+      "lastModificationHour": "20:28:37",
+      "closeDate": "",
+      "closeHour": "",
+      "priority": 2,
+      "difficulty": "",
+      "solver": "",
+      "status": "Open",
+      "unit": "hgfdhdf",
+      "contactNumber": "hfdhd",
+      "id": 4
+    },
+    {
+      "title": "fdsa",
+      "description": "fasd",
+      "clientID": 2,
+      "createDate": "23-11-2023",
+      "createHour": "22:38:33",
+      "lastModification": "25-11-2023",
+      "lastModificationHour": "22:56:18",
+      "closeDate": "",
+      "closeHour": "",
+      "priority": 2,
+      "difficulty": "",
+      "solver": "Błażej",
+      "status": "Close",
+      "unit": "fdsa",
+      "contactNumber": "fdsa",
+      "id": 5
+    },
+    {
+      "title": "jhf",
+      "description": "jf",
+      "clientID": 2,
+      "createDate": "23-11-2023",
+      "createHour": "22:39:00",
+      "lastModification": "23-11-2023",
+      "lastModificationHour": "22:40:16",
+      "closeDate": "23-11-2023",
+      "closeHour": "",
+      "priority": 2,
+      "difficulty": "",
+      "solver": "",
+      "status": "Close",
+      "unit": "jfg",
+      "contactNumber": "jf",
+      "id": 6
+    },
+    {
+      "title": "Test",
+      "description": "Test",
+      "clientID": 2,
+      "createDate": "25-11-2023",
+      "createHour": "22:29:51",
+      "lastModification": "25-11-2023",
+      "lastModificationHour": "22:56:49",
+      "closeDate": "",
+      "closeHour": "",
+      "priority": "1",
+      "difficulty": "Medium",
+      "solver": "Błażej",
+      "status": "Close",
+      "unit": "Test",
+      "contactNumber": "Tesr",
+      "id": 7
+    },
+    {
+      "title": "dsa",
+      "description": "das",
+      "clientID": 2,
+      "createDate": "25-11-2023",
+      "createHour": "22:48:22",
+      "lastModification": "25-11-2023",
+      "lastModificationHour": "22:48:49",
+      "closeDate": "",
+      "closeHour": "",
+      "priority": "2",
+      "difficulty": "Easy",
+      "solver": "Błażej",
+      "status": "In Pendend",
+      "unit": "ZDO",
+      "contactNumber": "das",
+      "id": 8
+    }
+  ],
+  "notification": [
+    {
+      "notificationText": "created post ",
+      "taskId": 1,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "21:53:50",
+      "createdBy": {
+        "id": 1,
+        "initials": "EN",
+        "logoColor": "#B0D59F",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "test"
+      },
+      "id": 1
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 1,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "21:53:58",
+      "createdBy": {
+        "id": 1,
+        "initials": "EN",
+        "logoColor": "#B0D59F",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "test"
+      },
+      "id": 2
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 1,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "21:54:10",
+      "createdBy": {
+        "id": 1,
+        "initials": "EN",
+        "logoColor": "#B0D59F",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "test"
+      },
+      "id": 3
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 1,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "21:54:35",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 4
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 1,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "22:01:35",
+      "createdBy": {
+        "id": 1,
+        "initials": "EN",
+        "logoColor": "#B0D59F",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "test"
+      },
+      "id": 5
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 1,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "22:02:47",
+      "createdBy": {
+        "id": 1,
+        "initials": "EN",
+        "logoColor": "#B0D59F",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "test"
+      },
+      "id": 6
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 1,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "22:04:45",
+      "createdBy": {
+        "id": 1,
+        "initials": "EN",
+        "logoColor": "#B0D59F",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "test"
+      },
+      "id": 7
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 1,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "22:04:46",
+      "createdBy": {
+        "id": 1,
+        "initials": "EN",
+        "logoColor": "#B0D59F",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "test"
+      },
+      "id": 8
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 1,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "22:06:00",
+      "createdBy": {
+        "id": 3,
+        "initials": "FF",
+        "logoColor": "#A73D26",
+        "name": "fsda",
+        "surname": "fdsa",
+        "username": "dsa"
+      },
+      "id": 9
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 1,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "22:28:13",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 10
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 2,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "22:28:51",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 11
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 2,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "22:29:00",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 12
+    },
+    {
+      "notificationText": "added a comment ",
+      "taskId": 2,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "22:33:03",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 13
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 2,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "22:33:24",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 14
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 2,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "23:28:52",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 15
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 3,
+      "notificationDate": "20-11-2023",
+      "notificationTime": "23:29:24",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 16
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 4,
+      "notificationDate": "23-11-2023",
+      "notificationTime": "20:28:37",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 17
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 1,
+      "notificationDate": "23-11-2023",
+      "notificationTime": "22:26:33",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 18
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 5,
+      "notificationDate": "23-11-2023",
+      "notificationTime": "22:38:33",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 19
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 6,
+      "notificationDate": "23-11-2023",
+      "notificationTime": "22:39:00",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 20
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 6,
+      "notificationDate": "23-11-2023",
+      "notificationTime": "22:39:34",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 21
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 6,
+      "notificationDate": "23-11-2023",
+      "notificationTime": "22:39:46",
+      "createdBy": {
+        "id": 3,
+        "initials": "FF",
+        "logoColor": "#A73D26",
+        "name": "fsda",
+        "surname": "fdsa",
+        "username": "dsa"
+      },
+      "id": 22
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 5,
+      "notificationDate": "23-11-2023",
+      "notificationTime": "22:39:53",
+      "createdBy": {
+        "id": 3,
+        "initials": "FF",
+        "logoColor": "#A73D26",
+        "name": "fsda",
+        "surname": "fdsa",
+        "username": "dsa"
+      },
+      "id": 23
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 5,
+      "notificationDate": "23-11-2023",
+      "notificationTime": "22:39:57",
+      "createdBy": {
+        "id": 3,
+        "initials": "FF",
+        "logoColor": "#A73D26",
+        "name": "fsda",
+        "surname": "fdsa",
+        "username": "dsa"
+      },
+      "id": 24
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 6,
+      "notificationDate": "23-11-2023",
+      "notificationTime": "22:40:16",
+      "createdBy": {
+        "id": 3,
+        "initials": "FF",
+        "logoColor": "#A73D26",
+        "name": "fsda",
+        "surname": "fdsa",
+        "username": "dsa"
+      },
+      "id": 25
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 7,
+      "notificationDate": "25-11-2023",
+      "notificationTime": "22:29:51",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 26
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 7,
+      "notificationDate": "25-11-2023",
+      "notificationTime": "22:30:02",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 27
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 7,
+      "notificationDate": "25-11-2023",
+      "notificationTime": "22:30:11",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 28
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 8,
+      "notificationDate": "25-11-2023",
+      "notificationTime": "22:48:22",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 29
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "25-11-2023",
+      "notificationTime": "22:48:38",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 30
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "25-11-2023",
+      "notificationTime": "22:48:49",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 31
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 5,
+      "notificationDate": "25-11-2023",
+      "notificationTime": "22:56:03",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 32
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 5,
+      "notificationDate": "25-11-2023",
+      "notificationTime": "22:56:13",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 33
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 5,
+      "notificationDate": "25-11-2023",
+      "notificationTime": "22:56:18",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 34
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 7,
+      "notificationDate": "25-11-2023",
+      "notificationTime": "22:56:49",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 35
+    }
+  ],
+  "messages": [
+    {
+      "message": "Hey guys",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 1,
+        "initials": "EN",
+        "logoColor": "#B0D59F",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "test"
+      },
+      "createDate": "20-11-2023",
+      "createHour": "21:54:10",
+      "id": 1
+    },
+    {
+      "message": "HeHe",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "20-11-2023",
+      "createHour": "21:54:35",
+      "id": 2
+    },
+    {
+      "message": "All is good",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 1,
+        "initials": "EN",
+        "logoColor": "#B0D59F",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "test"
+      },
+      "createDate": "20-11-2023",
+      "createHour": "22:01:35",
+      "id": 3
+    },
+    {
+      "message": "test scroll message",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 1,
+        "initials": "EN",
+        "logoColor": "#B0D59F",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "test"
+      },
+      "createDate": "20-11-2023",
+      "createHour": "22:04:45",
+      "id": 4
+    },
+    {
+      "message": "test scroll message",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 1,
+        "initials": "EN",
+        "logoColor": "#B0D59F",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "test"
+      },
+      "createDate": "20-11-2023",
+      "createHour": "22:04:46",
+      "id": 5
+    },
+    {
+      "message": "hello",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 3,
+        "initials": "FF",
+        "logoColor": "#A73D26",
+        "name": "fsda",
+        "surname": "fdsa",
+        "username": "dsa"
+      },
+      "createDate": "20-11-2023",
+      "createHour": "22:06:00",
+      "id": 6
+    },
+    {
+      "message": "hi my friends",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "20-11-2023",
+      "createHour": "22:28:13",
+      "id": 7
+    },
+    {
+      "message": "hello",
+      "clientID": 2,
+      "taskID": 2,
+      "messageSender": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "20-11-2023",
+      "createHour": "22:29:00",
+      "id": 8
+    },
+    {
+      "message": "test notification",
+      "clientID": 2,
+      "taskID": 2,
+      "messageSender": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "20-11-2023",
+      "createHour": "22:33:03",
+      "id": 9
+    },
+    {
+      "message": "ok",
+      "clientID": 2,
+      "taskID": 6,
+      "messageSender": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "23-11-2023",
+      "createHour": "22:39:34",
+      "id": 10
+    },
+    {
+      "message": "xd",
+      "clientID": 2,
+      "taskID": 6,
+      "messageSender": {
+        "id": 3,
+        "initials": "FF",
+        "logoColor": "#A73D26",
+        "name": "fsda",
+        "surname": "fdsa",
+        "username": "dsa"
+      },
+      "createDate": "23-11-2023",
+      "createHour": "22:39:46",
+      "id": 11
+    },
+    {
+      "message": "xd",
+      "clientID": 2,
+      "taskID": 5,
+      "messageSender": {
+        "id": 3,
+        "initials": "FF",
+        "logoColor": "#A73D26",
+        "name": "fsda",
+        "surname": "fdsa",
+        "username": "dsa"
+      },
+      "createDate": "23-11-2023",
+      "createHour": "22:39:53",
+      "id": 12
+    }
+  ]
+}

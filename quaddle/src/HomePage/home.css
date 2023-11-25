@@ -1,0 +1,28 @@
+.dark-bg {
+    background-color: #161820;
+}
+
+.light-bg {
+    background-color: #20232d;
+}
+
+
+.dropdown-toggle-no-arrow::after {
+    display: none !important;
+}
+
+.custom-width {
+    width: 90%;
+    max-width: 100%;
+    margin: 0 auto;
+    /* Center the container horizontally */
+}
+
+.send-icon:hover {
+    background-color: #20232d !important;
+
+}
+
+.green-border {
+    border: 1px solid green;
+}
