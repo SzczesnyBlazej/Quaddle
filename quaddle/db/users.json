@@ -26,6 +26,141 @@
       "initials": "FF",
       "logoColor": "#A73D26",
       "id": 3
+    },
+    {
+      "username": "user1",
+      "password": "password1",
+      "name": "John",
+      "surname": "Doe",
+      "initials": "JD",
+      "logoColor": "#B0D59F",
+      "id": 4
+    },
+    {
+      "username": "user2",
+      "password": "password2",
+      "name": "Jane",
+      "surname": "Smith",
+      "initials": "JS",
+      "logoColor": "#7F7FDA",
+      "id": 5
+    },
+    {
+      "username": "user3",
+      "password": "password3",
+      "name": "Robert",
+      "surname": "Johnson",
+      "initials": "RJ",
+      "logoColor": "#E47878",
+      "id": 6
+    },
+    {
+      "username": "user4",
+      "password": "password4",
+      "name": "Emily",
+      "surname": "Brown",
+      "initials": "EB",
+      "logoColor": "#86B3D1",
+      "id": 7
+    },
+    {
+      "username": "user5",
+      "password": "password5",
+      "name": "David",
+      "surname": "Wilson",
+      "initials": "DW",
+      "logoColor": "#F29C77",
+      "id": 8
+    },
+    {
+      "username": "user6",
+      "password": "password6",
+      "name": "Sophia",
+      "surname": "Miller",
+      "initials": "SM",
+      "logoColor": "#A2A2A2",
+      "id": 9
+    },
+    {
+      "username": "user7",
+      "password": "password7",
+      "name": "Ethan",
+      "surname": "Davis",
+      "initials": "ED",
+      "logoColor": "#79C99E",
+      "id": 10
+    },
+    {
+      "username": "user8",
+      "password": "password8",
+      "name": "Ava",
+      "surname": "Jones",
+      "initials": "AJ",
+      "logoColor": "#EAB080",
+      "id": 11
+    },
+    {
+      "username": "user9",
+      "password": "password9",
+      "name": "Liam",
+      "surname": "Moore",
+      "initials": "LM",
+      "logoColor": "#B486D1",
+      "id": 12
+    },
+    {
+      "username": "user10",
+      "password": "password10",
+      "name": "Olivia",
+      "surname": "White",
+      "initials": "OW",
+      "logoColor": "#6EB1D7",
+      "id": 13
+    },
+    {
+      "username": "user11",
+      "password": "password11",
+      "name": "Noah",
+      "surname": "Taylor",
+      "initials": "NT",
+      "logoColor": "#F18F8F",
+      "id": 14
+    },
+    {
+      "username": "user12",
+      "password": "password12",
+      "name": "Emma",
+      "surname": "Allen",
+      "initials": "EA",
+      "logoColor": "#8B8BC6",
+      "id": 15
+    },
+    {
+      "username": "user13",
+      "password": "password13",
+      "name": "Mason",
+      "surname": "Anderson",
+      "initials": "MA",
+      "logoColor": "#A6DFA3",
+      "id": 16
+    },
+    {
+      "username": "user14",
+      "password": "password14",
+      "name": "Isabella",
+      "surname": "Young",
+      "initials": "IY",
+      "logoColor": "#C195E3",
+      "id": 17
+    },
+    {
+      "username": "user15",
+      "password": "password15",
+      "name": "Jackson",
+      "surname": "Harris",
+      "initials": "JH",
+      "logoColor": "#7FA0CF",
+      "id": 18
     }
   ],
   "tasks": [
@@ -125,13 +260,13 @@
       "clientID": 2,
       "createDate": "23-11-2023",
       "createHour": "22:39:00",
-      "lastModification": "23-11-2023",
-      "lastModificationHour": "22:40:16",
+      "lastModification": "26-11-2023",
+      "lastModificationHour": "00:32:10",
       "closeDate": "23-11-2023",
       "closeHour": "",
       "priority": 2,
       "difficulty": "",
-      "solver": "",
+      "solver": "Błażej",
       "status": "Close",
       "unit": "jfg",
       "contactNumber": "jf",
@@ -144,13 +279,13 @@
       "createDate": "25-11-2023",
       "createHour": "22:29:51",
       "lastModification": "26-11-2023",
-      "lastModificationHour": "00:05:12",
+      "lastModificationHour": "00:19:48",
       "closeDate": "",
       "closeHour": "",
       "priority": "1",
       "difficulty": "Easy",
       "solver": "Błażej",
-      "status": "Close",
+      "status": "In Pendend",
       "unit": "Test",
       "contactNumber": "Tesr",
       "id": 7
@@ -179,11 +314,11 @@
       "clientID": 1,
       "createDate": "20-11-2023",
       "createHour": "21:53:50",
-      "lastModification": "23-11-2023",
-      "lastModificationHour": "22:26:33",
+      "lastModification": "26-11-2023",
+      "lastModificationHour": "00:30:01",
       "closeDate": "22-11-2023",
       "closeHour": "22:26:33",
-      "priority": 2,
+      "priority": "1",
       "difficulty": "Hard",
       "solver": "Błażej",
       "status": "Close",
@@ -352,6 +487,24 @@
       "unit": "XYZ",
       "contactNumber": "654321987",
       "id": 18
+    },
+    {
+      "title": "fasd",
+      "description": "fasd",
+      "clientID": 18,
+      "createDate": "26-11-2023",
+      "createHour": "00:32:24",
+      "lastModification": "26-11-2023",
+      "lastModificationHour": "00:32:24",
+      "closeDate": "",
+      "closeHour": "",
+      "priority": 2,
+      "difficulty": "",
+      "solver": "",
+      "status": "Open",
+      "unit": "fads",
+      "contactNumber": "fasd",
+      "id": 19
     }
   ],
   "notification": [
@@ -909,6 +1062,111 @@
         "username": "dsa"
       },
       "id": 37
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 7,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:19:48",
+      "createdBy": {
+        "id": 3,
+        "initials": "FF",
+        "logoColor": "#A73D26",
+        "name": "fsda",
+        "surname": "fdsa",
+        "username": "dsa"
+      },
+      "id": 38
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 6,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:20:40",
+      "createdBy": {
+        "id": 3,
+        "initials": "FF",
+        "logoColor": "#A73D26",
+        "name": "fsda",
+        "surname": "fdsa",
+        "username": "dsa"
+      },
+      "id": 39
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 9,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:30:01",
+      "createdBy": {
+        "id": 3,
+        "initials": "FF",
+        "logoColor": "#A73D26",
+        "name": "fsda",
+        "surname": "fdsa",
+        "username": "dsa"
+      },
+      "id": 40
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 6,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:32:10",
+      "createdBy": {
+        "id": 18,
+        "initials": "JH",
+        "logoColor": "#7FA0CF",
+        "name": "Jackson",
+        "surname": "Harris",
+        "username": "user15"
+      },
+      "id": 41
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 19,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:32:24",
+      "createdBy": {
+        "id": 18,
+        "initials": "JH",
+        "logoColor": "#7FA0CF",
+        "name": "Jackson",
+        "surname": "Harris",
+        "username": "user15"
+      },
+      "id": 42
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 19,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:32:57",
+      "createdBy": {
+        "id": 18,
+        "initials": "JH",
+        "logoColor": "#7FA0CF",
+        "name": "Jackson",
+        "surname": "Harris",
+        "username": "user15"
+      },
+      "id": 43
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 1,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:34:05",
+      "createdBy": {
+        "id": 18,
+        "initials": "JH",
+        "logoColor": "#7FA0CF",
+        "name": "Jackson",
+        "surname": "Harris",
+        "username": "user15"
+      },
+      "id": 44
     }
   ],
   "messages": [
@@ -1103,6 +1361,54 @@
       "createDate": "23-11-2023",
       "createHour": "22:39:53",
       "id": 12
+    },
+    {
+      "message": "ok",
+      "clientID": 2,
+      "taskID": 6,
+      "messageSender": {
+        "id": 3,
+        "initials": "FF",
+        "logoColor": "#A73D26",
+        "name": "fsda",
+        "surname": "fdsa",
+        "username": "dsa"
+      },
+      "createDate": "26-11-2023",
+      "createHour": "00:20:40",
+      "id": 13
+    },
+    {
+      "message": "ok lets go",
+      "clientID": 18,
+      "taskID": 19,
+      "messageSender": {
+        "id": 18,
+        "initials": "JH",
+        "logoColor": "#7FA0CF",
+        "name": "Jackson",
+        "surname": "Harris",
+        "username": "user15"
+      },
+      "createDate": "26-11-2023",
+      "createHour": "00:32:57",
+      "id": 14
+    },
+    {
+      "message": "xd",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 18,
+        "initials": "JH",
+        "logoColor": "#7FA0CF",
+        "name": "Jackson",
+        "surname": "Harris",
+        "username": "user15"
+      },
+      "createDate": "26-11-2023",
+      "createHour": "00:34:05",
+      "id": 15
     }
   ]
 }

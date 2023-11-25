@@ -103,27 +103,30 @@ function HomeColFirst() {
                         <hr className="border-secondary m-2" />
                     </React.Fragment>
                 ))}
-                {suggestions.map((suggestion) => (
-                    <React.Fragment key={suggestion.id}>
-                        <Link to={"/tasks/" + suggestion?.id} className="nav-link">
-                            <div className='d-flex align-items-center text-light'>
-                                <div className='col-md-2 text-center'>
-                                    <FontAwesomeIcon
-                                        icon={faCircleDot}
-                                        style={{
-                                            color: suggestion.status === 'Open' ? "#00a347" : suggestion.status === 'Close' ? "gray" : "yellow",
-                                        }}
-                                    />
-                                </div>
+                <div style={{ overflowY: 'auto', maxHeight: '60vh' }}>
 
-                                <div className='col-md-10'>
-                                    <small>{renderSuggestion(suggestion)}</small>
+                    {suggestions.map((suggestion) => (
+                        <React.Fragment key={suggestion.id}>
+                            <Link to={"/tasks/" + suggestion?.id} className="nav-link">
+                                <div className='d-flex align-items-center text-light'>
+                                    <div className='col-md-2 text-center'>
+                                        <FontAwesomeIcon
+                                            icon={faCircleDot}
+                                            style={{
+                                                color: suggestion.status === 'Open' ? "#00a347" : suggestion.status === 'Close' ? "gray" : "yellow",
+                                            }}
+                                        />
+                                    </div>
+
+                                    <div className='col-md-10'>
+                                        <small>{renderSuggestion(suggestion)}</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </Link>
-                        <hr className="border-secondary m-2" />
-                    </React.Fragment>
-                ))}
+                            </Link>
+                            <hr className="border-secondary m-2" />
+                        </React.Fragment>
+                    ))}
+                </div>
             </div>
             <div className="text-light mt-auto position-absolute bottom-0 w-100">
                 <hr className="border-secondary" />
