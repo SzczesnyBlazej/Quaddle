@@ -7,6 +7,8 @@ import Registration from './Account/Registration';
 import { AuthProvider, useAuth } from './Account/authContext';
 import MyTasks from './Overviews/MyTasks';
 import TaskPage from './Tasks/TaskPage';
+import AllOpenedTask from './Overviews/AllOpenedTask';
+import MyAllClosedTask from './Overviews/MyAllClosedTask';
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/registration' element={<Registration />} />
         <Route path='/overviews/mytasks' element={<MyTasks />} />
+        <Route path='/overviews/allOpenedTask' element={<AllOpenedTask />} />
+        <Route path='/overviews/myAllClosedTasks' element={<MyAllClosedTask />} />
         <Route path="/tasks/:taskId" element={<TaskPage />} />
 
       </Routes>

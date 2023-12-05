@@ -100,7 +100,7 @@ const TaskContent = ({ task }) => {
                                 >
                                     {message.message}
                                 </span>
-                                <p className="card-text text-secondary text-center"><small >{task?.createDate} at {task?.createHour}</small></p>
+                                <p className="card-text text-secondary text-center"><small >{message?.createDate} at {message?.createHour}</small></p>
 
                             </div>
 

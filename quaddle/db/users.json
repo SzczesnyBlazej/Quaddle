@@ -165,7 +165,7 @@
   ],
   "tasks": [
     {
-      "title": "Hello, i'm test create task",
+      "title": " test create taskHello, i'm test create taskHello, i'm test create taskt create task",
       "description": "Hello, i'm test create task",
       "clientID": 1,
       "createDate": "20-11-2023",
@@ -505,6 +505,42 @@
       "unit": "fads",
       "contactNumber": "fasd",
       "id": 19
+    },
+    {
+      "title": "hgdhg",
+      "description": "hghd",
+      "clientID": 2,
+      "createDate": "26-11-2023",
+      "createHour": "00:39:11",
+      "lastModification": "26-11-2023",
+      "lastModificationHour": "00:39:27",
+      "closeDate": "",
+      "closeHour": "",
+      "priority": "3",
+      "difficulty": "Easy",
+      "solver": "Błażej",
+      "status": "Open",
+      "unit": "SOR",
+      "contactNumber": "hhhgfd",
+      "id": 20
+    },
+    {
+      "title": "siema",
+      "description": "siema",
+      "clientID": 2,
+      "createDate": "05-12-2023",
+      "createHour": "23:07:04",
+      "lastModification": "05-12-2023",
+      "lastModificationHour": "23:07:25",
+      "closeDate": "",
+      "closeHour": "",
+      "priority": 2,
+      "difficulty": "Medium",
+      "solver": "Błażej",
+      "status": "Open",
+      "unit": "IT",
+      "contactNumber": "siema",
+      "id": 21
     }
   ],
   "notification": [
@@ -1167,6 +1203,171 @@
         "username": "user15"
       },
       "id": 44
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 1,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:38:44",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 45
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 20,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:39:11",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 46
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 20,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:39:18",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 47
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 20,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:39:21",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 48
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 20,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:39:27",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 49
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 19,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:49:33",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 50
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 19,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:51:48",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 51
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 9,
+      "notificationDate": "26-11-2023",
+      "notificationTime": "00:52:49",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 52
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 21,
+      "notificationDate": "05-12-2023",
+      "notificationTime": "23:07:04",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 53
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 21,
+      "notificationDate": "05-12-2023",
+      "notificationTime": "23:07:10",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 54
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 21,
+      "notificationDate": "05-12-2023",
+      "notificationTime": "23:07:25",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 55
     }
   ],
   "messages": [
@@ -1409,6 +1610,86 @@
       "createDate": "26-11-2023",
       "createHour": "00:34:05",
       "id": 15
+    },
+    {
+      "message": "Roksana\n",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "26-11-2023",
+      "createHour": "00:38:44",
+      "id": 16
+    },
+    {
+      "message": "fdsafsad",
+      "clientID": 2,
+      "taskID": 20,
+      "messageSender": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "26-11-2023",
+      "createHour": "00:39:18",
+      "id": 17
+    },
+    {
+      "message": "czekam na części",
+      "clientID": 18,
+      "taskID": 19,
+      "messageSender": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "26-11-2023",
+      "createHour": "00:49:33",
+      "id": 18
+    },
+    {
+      "message": "siema",
+      "clientID": 18,
+      "taskID": 19,
+      "messageSender": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "26-11-2023",
+      "createHour": "00:51:48",
+      "id": 19
+    },
+    {
+      "message": "ok",
+      "clientID": 1,
+      "taskID": 9,
+      "messageSender": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "26-11-2023",
+      "createHour": "00:52:49",
+      "id": 20
     }
   ]
 }
