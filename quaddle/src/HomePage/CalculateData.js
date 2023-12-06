@@ -12,11 +12,10 @@ export async function getTaskCounts(user) {
         const thisWeekStartDate = new Date();
         thisWeekStartDate.setDate(thisWeekStartDate.getDate() - thisWeekStartDate.getDay());
         const thisWeek = formatDate(thisWeekStartDate.toLocaleDateString('en-GB')); // Format: dd-mm-yyyy
-
         const closedTodayCount = taskData.filter(task => formatDate(task.closeDate) === today).length;
         const closedThisWeekCount = taskData.filter(task => formatDate(task.closeDate) >= thisWeek).length;
         const myPendingCount = taskData.filter(
-            task => task.solver === `${user.name}` && !task.closeDate
+            task => task.solver === `${user.name}` && task.status != "Close"
         ).length;
         const allPendingCount = taskData.filter(task => !task.closeDate).length;
 

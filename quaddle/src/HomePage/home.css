@@ -37,3 +37,26 @@
 .MuiSvgIcon-root {
     color: #fff !important;
 }
+
+.MuiBox-root.css-ixid5k {
+    background-color: initial !important;
+    border-radius: initial !important;
+    color: #fff !important;
+    padding: 0 !important;
+}
+
+.MuiDivider-root {
+    border-color: rgb(255 255 255 / 50%) !important;
+}
+
+.MuiButtonBase-root {
+    color: #fff !important;
+}
+
+.MuiButton-root.Mui-disabled {
+    color: gray !important;
+}
+
+.MuiTableCell-root {
+    border-bottom: 1px solid rgba(108, 117, 125, 1) !important;
+}

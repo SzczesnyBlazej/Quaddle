@@ -7,6 +7,8 @@ function MenuTaskList() {
         mytasks: ['/mytasks', 'My Tasks'],
         allOpenedTasks: ['/allOpenedTask', 'All Opened Task',],
         myAllClosedTasks: ['/myAllClosedTasks', 'My All Closed Task',],
+        allUnallocated: ['/allUnallocated', 'All Unallocated',],
+
     };
     return (
         <div className="col-md-2 dark-bg min-vh-100 d-flex flex-column position-relative border-start border-secondary">

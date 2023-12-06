@@ -10,7 +10,12 @@ const MyTasks = () => {
     const { user } = useAuth();
     const userName = user.name;
     useEffect(() => {
-        axios.get(`http://localhost:3500/tasks?solver=${userName}`)
+        axios.get(`http://localhost:3500/tasks`, {
+            params: {
+                solver: userName,
+                status: ['Open', 'In Pendend'], // Use the appropriate syntax for "not equal" in your API
+            },
+        })
             .then(response => {
                 setTasks(response.data);
             })
@@ -18,6 +23,13 @@ const MyTasks = () => {
                 console.error('Error fetching tasks:', error);
             });
     }, []);
+    const additionalColumns = [
+        {
+            accessorKey: 'solver',
+            header: 'Solver',
+            size: 130,
+        }
+    ];
 
     return (
         <div>
@@ -26,7 +38,7 @@ const MyTasks = () => {
 
                 <MenuTaskList />
 
-                <TaskList tasks={tasks} />
+                <TaskList tasks={tasks} columnaaaaa={additionalColumns} />
             </div>
         </div>
     );

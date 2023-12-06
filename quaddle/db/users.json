@@ -188,15 +188,15 @@
       "clientID": 2,
       "createDate": "20-11-2023",
       "createHour": "22:28:51",
-      "lastModification": "20-11-2023",
-      "lastModificationHour": "23:28:52",
-      "closeDate": "23-11-2023",
+      "lastModification": "06-12-2023",
+      "lastModificationHour": "22:19:12",
+      "closeDate": "1-11-2023",
       "closeHour": "",
       "priority": 2,
-      "difficulty": "Easy",
+      "difficulty": "Medium",
       "solver": "Błażej",
       "status": "In Pendend",
-      "unit": "siem",
+      "unit": "",
       "contactNumber": "siema",
       "id": 2
     },
@@ -206,15 +206,15 @@
       "clientID": 2,
       "createDate": "20-11-2023",
       "createHour": "23:29:24",
-      "lastModification": "20-11-2023",
-      "lastModificationHour": "23:29:24",
+      "lastModification": "06-12-2023",
+      "lastModificationHour": "22:18:27",
       "closeDate": "",
       "closeHour": "",
       "priority": 2,
-      "difficulty": "",
+      "difficulty": "Easy",
       "solver": "",
       "status": "Open",
-      "unit": "",
+      "unit": "ZRR",
       "contactNumber": "",
       "id": 3
     },
@@ -224,15 +224,15 @@
       "clientID": 2,
       "createDate": "22-11-2023",
       "createHour": "20:28:37",
-      "lastModification": "23-11-2023",
-      "lastModificationHour": "20:28:37",
+      "lastModification": "06-12-2023",
+      "lastModificationHour": "22:20:12",
       "closeDate": "",
       "closeHour": "",
       "priority": 2,
-      "difficulty": "",
+      "difficulty": "Hard",
       "solver": "",
       "status": "Open",
-      "unit": "hgfdhdf",
+      "unit": "ZRR",
       "contactNumber": "hfdhd",
       "id": 4
     },
@@ -278,14 +278,14 @@
       "clientID": 2,
       "createDate": "25-11-2023",
       "createHour": "22:29:51",
-      "lastModification": "26-11-2023",
-      "lastModificationHour": "00:19:48",
+      "lastModification": "06-12-2023",
+      "lastModificationHour": "22:20:33",
       "closeDate": "",
       "closeHour": "",
       "priority": "1",
       "difficulty": "Easy",
       "solver": "Błażej",
-      "status": "In Pendend",
+      "status": "Close",
       "unit": "Test",
       "contactNumber": "Tesr",
       "id": 7
@@ -531,13 +531,13 @@
       "createDate": "05-12-2023",
       "createHour": "23:07:04",
       "lastModification": "05-12-2023",
-      "lastModificationHour": "23:07:25",
+      "lastModificationHour": "23:08:24",
       "closeDate": "",
       "closeHour": "",
       "priority": 2,
       "difficulty": "Medium",
       "solver": "Błażej",
-      "status": "Open",
+      "status": "Close",
       "unit": "IT",
       "contactNumber": "siema",
       "id": 21
@@ -1368,6 +1368,141 @@
         "username": "blazej2533"
       },
       "id": 55
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 21,
+      "notificationDate": "05-12-2023",
+      "notificationTime": "23:08:24",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 56
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 21,
+      "notificationDate": "05-12-2023",
+      "notificationTime": "23:08:47",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 57
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 2,
+      "notificationDate": "06-12-2023",
+      "notificationTime": "22:18:47",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 58
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 2,
+      "notificationDate": "06-12-2023",
+      "notificationTime": "22:19:02",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 59
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 2,
+      "notificationDate": "06-12-2023",
+      "notificationTime": "22:19:12",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 60
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 4,
+      "notificationDate": "06-12-2023",
+      "notificationTime": "22:19:28",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 61
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 4,
+      "notificationDate": "06-12-2023",
+      "notificationTime": "22:19:43",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 62
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 4,
+      "notificationDate": "06-12-2023",
+      "notificationTime": "22:20:12",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 63
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 7,
+      "notificationDate": "06-12-2023",
+      "notificationTime": "22:20:33",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 64
     }
   ],
   "messages": [
@@ -1690,6 +1825,22 @@
       "createDate": "26-11-2023",
       "createHour": "00:52:49",
       "id": 20
+    },
+    {
+      "message": "hehe",
+      "clientID": 2,
+      "taskID": 21,
+      "messageSender": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "05-12-2023",
+      "createHour": "23:08:47",
+      "id": 21
     }
   ]
 }

@@ -9,6 +9,7 @@ import MyTasks from './Overviews/MyTasks';
 import TaskPage from './Tasks/TaskPage';
 import AllOpenedTask from './Overviews/AllOpenedTask';
 import MyAllClosedTask from './Overviews/MyAllClosedTask';
+import AllUnallocated from './Overviews/AllUnallocated';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path='/overviews/mytasks' element={<MyTasks />} />
         <Route path='/overviews/allOpenedTask' element={<AllOpenedTask />} />
         <Route path='/overviews/myAllClosedTasks' element={<MyAllClosedTask />} />
+        <Route path='/overviews/allUnallocated' element={<AllUnallocated />} />
         <Route path="/tasks/:taskId" element={<TaskPage />} />
 
       </Routes>

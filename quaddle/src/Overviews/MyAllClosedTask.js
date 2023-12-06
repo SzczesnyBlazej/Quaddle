@@ -1,24 +1,48 @@
-import React from 'react';
-import HomeColFirst from '../HomePage/HomeColFirst'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import HomeColFirst from '../HomePage/HomeColFirst';
 import TaskList from './TaskList';
 import MenuTaskList from './MenuTaskList';
+import { useAuth } from '../Account/authContext';
+
 function MyAllClosedTask() {
+    const [tasks, setTasks] = useState([]);
+    const { user } = useAuth();
+    const userName = user.name;
+    useEffect(() => {
+        axios.get(`http://localhost:3500/tasks`, {
+            params: {
+                solver: userName,
+                status: ['Close'],
+            },
+        })
+            .then(response => {
+                setTasks(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching tasks:', error);
+            });
+    }, []);
+    const additionalColumns = [
+
+        {
+            accessorFn: (row) => `${row.closeDate} ${row.closeHour}`,
+            header: 'Closed',
+            size: 140,
+        },
+    ];
+
     return (
         <div>
             <div className="row g-0 ">
-
-                {/* First Column */}
                 <HomeColFirst />
 
-                {/* Second Column */}
                 <MenuTaskList />
 
-                {/* Third Column */}
-                <TaskList />
-
+                <TaskList tasks={tasks} columnaaaaa={additionalColumns} />
             </div>
         </div>
     );
-}
+};
 
 export default MyAllClosedTask
