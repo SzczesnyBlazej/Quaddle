@@ -13,7 +13,7 @@ function AllUnallocated() {
         axios
             .get(`http://localhost:3500/tasks`, {
                 params: {
-                    status: ['Open'],
+                    status: ['Open', 'In Pendend'],
                     solver: '',
                 },
             })

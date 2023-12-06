@@ -18,11 +18,11 @@ const App = () => {
         <Route path='/' element={<RequireAuth><Home /></RequireAuth>} />
         <Route path='/login' element={<Login />} />
         <Route path='/registration' element={<Registration />} />
-        <Route path='/overviews/mytasks' element={<MyTasks />} />
-        <Route path='/overviews/allOpenedTask' element={<AllOpenedTask />} />
-        <Route path='/overviews/myAllClosedTasks' element={<MyAllClosedTask />} />
-        <Route path='/overviews/allUnallocated' element={<AllUnallocated />} />
-        <Route path="/tasks/:taskId" element={<TaskPage />} />
+        <Route path='/overviews/mytasks' element={<RequireAuth><MyTasks /></RequireAuth>} />
+        <Route path='/overviews/allOpenedTask' element={<RequireAuth><AllOpenedTask /></RequireAuth>} />
+        <Route path='/overviews/myAllClosedTasks' element={<RequireAuth><MyAllClosedTask /></RequireAuth>} />
+        <Route path='/overviews/allUnallocated' element={<RequireAuth><AllUnallocated /></RequireAuth>} />
+        <Route path="/tasks/:taskId" element={<RequireAuth><TaskPage /></RequireAuth>} />
 
       </Routes>
     </AuthProvider>
