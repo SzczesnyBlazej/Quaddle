@@ -32,6 +32,7 @@ function HomeColFirst() {
     };
 
     const fetchSuggestions = async (inputValue) => {
+
         try {
             const response = await axios.get(`http://localhost:3500/tasks/?q=${inputValue}`);
             const newSuggestions = response.data.map((task) => ({
@@ -45,6 +46,7 @@ function HomeColFirst() {
             return newSuggestions;
         } catch (error) {
             console.error('Error fetching suggestions:', error.message);
+
             return [];
         }
     };
@@ -68,7 +70,10 @@ function HomeColFirst() {
     }, [value]);
 
     return (
+
+
         <div className="col-md-2 dark-bg min-vh-100 d-flex flex-column position-relative">
+
             <h2 className='text-light p-2'>Quaddle</h2>
             <div className="input-group rounded ps-3 pe-3">
                 <div className="input-group rounded ps-3 pe-3">

@@ -9,12 +9,12 @@ function HomeColThree() {
     const fetchData = async () => {
         try {
 
-            const response = await axios.get('http://localhost:3500/notification?_sort=id&_order=desc&_limit=15');
+            const response = await axios.get('http://localhost:3500/notification?_sort=id&_order=desc&_limit=25');
             const recordsWithTaskDetails = await getTaskDetails(response.data);
 
             setLast10Records(recordsWithTaskDetails);
         } catch (error) {
-            console.error('Error fetching last 10 records:', error.message);
+            console.error('Error fetching last 25 records:', error.message);
         }
     };
 
@@ -57,6 +57,8 @@ function HomeColThree() {
                 <h2 className='text-light p-2'>Activity</h2>
             </div>
             <hr className="border-white m-2" />
+
+
 
             {last10Records.map(record => (
                 <div key={record?.id} className="card m-3 mt-1 dark-bg text-light">

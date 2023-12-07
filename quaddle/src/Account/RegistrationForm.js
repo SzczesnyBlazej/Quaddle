@@ -43,6 +43,7 @@ const RegistrationForm = () => {
             const foundUser = users.find(user => user.username === username);
 
             if (foundUser) {
+
                 setRegistrationError('The specified username already exists');
                 return;
             }
@@ -63,7 +64,9 @@ const RegistrationForm = () => {
             setRegistrationError('');
             navigate('/');
         } catch (error) {
+
             console.error('Error during registration:', error.message);
+
             setRegistrationError('Error during registration');
         }
     };

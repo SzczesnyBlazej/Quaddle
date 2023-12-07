@@ -19,6 +19,7 @@ const LoginForm = () => {
                 const response = await axios.get('http://localhost:3500/users');
                 setUsers(response.data);
             } catch (error) {
+
                 console.error('Error fetching users:', error.message);
             }
         };

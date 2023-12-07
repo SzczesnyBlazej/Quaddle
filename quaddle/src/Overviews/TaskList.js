@@ -78,7 +78,6 @@ const TaskList = ({ tasks, columnaaaaa }) => {
         },
 
     ];
-
     // Combine existing columns with additional columns
     const allColumns = [...existingColumns, ...columnaaaaa];
 
@@ -96,7 +95,9 @@ const TaskList = ({ tasks, columnaaaaa }) => {
     });
 
     return (
+
         <div className="p-3 col-md-8 text-light dark-bg min-vh-100 border-start border-secondary">
+
             <div className="table-responsive" style={{ maxHeight: '100vh', overflowY: 'auto' }}>
                 <ThemeProvider theme={darkTheme}>
                     <MaterialReactTable table={table} />

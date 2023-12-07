@@ -10,6 +10,7 @@ import {
     ResponsiveContainer,
 } from 'recharts';
 import axios from 'axios';
+
 class LastThirtyDaysBar extends PureComponent {
     constructor(props) {
         super(props);

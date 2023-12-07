@@ -57,6 +57,38 @@ const TaskDetail = ({ task }) => {
         }
     };
 
+    const closeTask = async () => {
+        const userString = localStorage.getItem('user');
+        const user = userString ? JSON.parse(userString) : null;
+
+        if (user && user.name) {
+            try {
+                const updatedTask = {
+                    ...task,
+                    priority: selectedPriority,
+                    difficulty: selectedDifficulty,
+                    unit: selectedUnit,
+                    contactNumber: selectedPhoneNumber,
+                    lastModificationHour: getCurrentTimeFormatted(),
+                    lastModification: getCurrentDateFormatted(),
+                    solver: user.name,
+                    status: "Close",
+                    closeDate: getCurrentDateFormatted(),
+                    closeHour: getCurrentTimeFormatted(),
+                };
+
+                await axios.put(`http://localhost:3500/tasks/${task?.id}`, updatedTask);
+                sendNotification("closed post", task?.id);
+
+            } catch (error) {
+                console.error('Błąd podczas aktualizacji zadania:', error.message);
+            }
+        } else {
+            console.error('User information not found in local storage.');
+        }
+    };
+
+
     return (
         <div className="col-md-2 light-bg min-vh-100 d-flex flex-column position-relative overflow-auto" style={{ maxHeight: 'calc(100vh - 180px)' }}>
             <form>
@@ -202,9 +234,11 @@ const TaskDetail = ({ task }) => {
 
                         </div>
                         <div className='col-md-4'>
+                            <button className="btn btn-outline-light m-3" onClick={closeTask}>Zamknij</button>
 
                         </div>
                         <div className='col-md-4'>
+
                             <button className="btn btn-outline-light m-3" onClick={updateTask}>Zapisz</button>
                         </div>
                     </div>

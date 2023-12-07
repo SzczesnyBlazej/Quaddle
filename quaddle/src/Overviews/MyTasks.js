@@ -10,6 +10,7 @@ const MyTasks = () => {
     const { user } = useAuth();
     const userName = user.name;
     useEffect(() => {
+
         axios.get(`http://localhost:3500/tasks`, {
             params: {
                 solver: userName,
@@ -18,9 +19,11 @@ const MyTasks = () => {
         })
             .then(response => {
                 setTasks(response.data);
+
             })
             .catch(error => {
                 console.error('Error fetching tasks:', error);
+
             });
     }, []);
     const additionalColumns = [

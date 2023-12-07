@@ -161,6 +161,15 @@
       "initials": "JH",
       "logoColor": "#7FA0CF",
       "id": 18
+    },
+    {
+      "username": "",
+      "password": "",
+      "name": "",
+      "surname": "",
+      "initials": "",
+      "logoColor": "#ED767F",
+      "id": 19
     }
   ],
   "tasks": [
@@ -188,14 +197,14 @@
       "clientID": 2,
       "createDate": "20-11-2023",
       "createHour": "22:28:51",
-      "lastModification": "06-12-2023",
-      "lastModificationHour": "22:19:12",
-      "closeDate": "1-11-2023",
-      "closeHour": "",
+      "lastModification": "07-12-2023",
+      "lastModificationHour": "21:55:08",
+      "closeDate": "07-12-2023",
+      "closeHour": "21:55:08",
       "priority": 2,
       "difficulty": "Medium",
       "solver": "Błażej",
-      "status": "In Pendend",
+      "status": "Close",
       "unit": "",
       "contactNumber": "siema",
       "id": 2
@@ -296,14 +305,14 @@
       "clientID": 2,
       "createDate": "25-11-2023",
       "createHour": "22:48:22",
-      "lastModification": "25-11-2023",
-      "lastModificationHour": "22:48:49",
-      "closeDate": "",
-      "closeHour": "",
+      "lastModification": "07-12-2023",
+      "lastModificationHour": "21:54:13",
+      "closeDate": "07-12-2023",
+      "closeHour": "21:54:13",
       "priority": "2",
       "difficulty": "Easy",
       "solver": "Błażej",
-      "status": "In Pendend",
+      "status": "Close",
       "unit": "ZDO",
       "contactNumber": "das",
       "id": 8
@@ -332,15 +341,15 @@
       "clientID": 2,
       "createDate": "21-11-2023",
       "createHour": "09:15:30",
-      "lastModification": "23-11-2023",
-      "lastModificationHour": "16:45:22",
-      "closeDate": "24-11-2023",
-      "closeHour": "14:30:00",
-      "priority": 1,
-      "difficulty": "Medium",
-      "solver": "Krystian",
-      "status": "Open",
-      "unit": "XYZ",
+      "lastModification": "07-12-2023",
+      "lastModificationHour": "21:49:00",
+      "closeDate": "07-12-2023",
+      "closeHour": "21:49:00",
+      "priority": "2",
+      "difficulty": "Easy",
+      "solver": "Błażej",
+      "status": "Close",
+      "unit": "ZRR",
       "contactNumber": "987654321",
       "id": 10
     },
@@ -368,8 +377,8 @@
       "clientID": 1,
       "createDate": "23-11-2023",
       "createHour": "18:30:15",
-      "lastModification": "24-11-2023",
-      "lastModificationHour": "20:45:00",
+      "lastModification": "07-12-2023",
+      "lastModificationHour": "21:17:46",
       "closeDate": "26-11-2023",
       "closeHour": "09:40:22",
       "priority": 2,
@@ -386,13 +395,13 @@
       "clientID": 3,
       "createDate": "24-11-2023",
       "createHour": "11:10:45",
-      "lastModification": "06-12-2023",
-      "lastModificationHour": "22:34:25",
+      "lastModification": "07-12-2023",
+      "lastModificationHour": "21:17:42",
       "closeDate": "06-12-2023",
       "closeHour": "17:20:10",
       "priority": "2",
       "difficulty": "Medium",
-      "solver": "Krystian",
+      "solver": "Błażej",
       "status": "Close",
       "unit": "LMN",
       "contactNumber": "111222333",
@@ -440,14 +449,14 @@
       "clientID": 3,
       "createDate": "27-11-2023",
       "createHour": "17:40:15",
-      "lastModification": "28-11-2023",
-      "lastModificationHour": "19:55:00",
+      "lastModification": "07-12-2023",
+      "lastModificationHour": "21:20:12",
       "closeDate": "30-11-2023",
       "closeHour": "10:30:22",
       "priority": 1,
       "difficulty": "Medium",
       "solver": "Krystian",
-      "status": "Open",
+      "status": "In Pendend",
       "unit": "PQR",
       "contactNumber": "888999000",
       "id": 16
@@ -494,14 +503,14 @@
       "clientID": 18,
       "createDate": "26-11-2023",
       "createHour": "00:32:24",
-      "lastModification": "26-11-2023",
-      "lastModificationHour": "00:32:24",
+      "lastModification": "07-12-2023",
+      "lastModificationHour": "21:33:01",
       "closeDate": "",
       "closeHour": "",
       "priority": 2,
       "difficulty": "",
-      "solver": "",
-      "status": "Open",
+      "solver": "Krystian",
+      "status": "Close",
       "unit": "fads",
       "contactNumber": "fasd",
       "id": 19
@@ -512,17 +521,18 @@
       "clientID": 2,
       "createDate": "26-11-2023",
       "createHour": "00:39:11",
-      "lastModification": "26-11-2023",
-      "lastModificationHour": "00:39:27",
-      "closeDate": "",
-      "closeHour": "",
+      "lastModification": "07-12-2023",
+      "lastModificationHour": "21:44:47",
+      "closeDate": "07-12-2023",
+      "closeHour": "21:47:01",
       "priority": "3",
-      "difficulty": "Easy",
+      "difficulty": "Medium",
       "solver": "Błażej",
-      "status": "Open",
+      "status": "Close",
       "unit": "SOR",
-      "contactNumber": "hhhgfd",
-      "id": 20
+      "contactNumber": "123456s89",
+      "id": 20,
+      "phoneNumber": "hhhgfd"
     },
     {
       "title": "siema",
@@ -1578,6 +1588,1506 @@
         "username": "test"
       },
       "id": 69
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:02:10",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 70
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:02:25",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 71
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:05:33",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 72
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:07:30",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 73
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:08:04",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 74
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:08:07",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 75
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:13:02",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 76
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:13:46",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 77
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:14:36",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 78
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:16:34",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 79
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:16:36",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 80
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:16:38",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 81
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:16:44",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 82
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:17:33",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 83
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 13,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:17:42",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 84
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 12,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:17:46",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 85
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:17:52",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 86
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:17:56",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 87
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:17:58",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 88
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:17:58",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 89
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:18:07",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 90
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:18:10",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 91
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:18:11",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 92
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:18:29",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 93
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:18:34",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 94
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:18:36",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 95
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:18:36",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 96
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:18:40",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 97
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:18:40",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 98
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 16,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:18:52",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 99
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 16,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:18:54",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 100
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 16,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:19:38",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 101
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 16,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:19:41",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 102
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 16,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:19:41",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 103
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 16,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:19:51",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 104
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 16,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:20:04",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 105
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 16,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:20:05",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 106
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 16,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:20:05",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 107
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 16,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:20:12",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 108
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:23:23",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 109
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:23:27",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 110
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:23:28",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 111
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:23:29",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 112
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:23:33",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 113
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:24:33",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 114
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:24:33",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 115
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:24:34",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 116
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:24:59",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 117
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:25:04",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 118
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 19,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:27:03",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 119
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 19,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:27:03",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 120
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 19,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:32:54",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 121
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 19,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:32:54",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 122
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 19,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:32:56",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 123
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 19,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:32:56",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 124
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 19,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:33:01",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 125
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 19,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:33:01",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 126
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:33:14",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 127
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:33:14",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 128
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:33:16",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 129
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:33:16",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 130
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:33:25",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 131
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:33:25",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 132
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:33:33",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 133
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:33:33",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 134
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:34:52",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 135
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:34:52",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 136
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:34:54",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 137
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:34:54",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 138
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:34:56",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 139
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:34:57",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 140
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:34:57",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 141
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:35:00",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 142
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:35:00",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 143
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:35:01",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 144
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:35:01",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 145
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:35:06",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 146
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:35:07",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 147
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:35:07",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 148
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:35:10",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 149
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:35:10",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 150
+    },
+    {
+      "notificationText": "updated post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:35:18",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 151
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:35:18",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 152
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:43:41",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 153
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:43:47",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 154
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:43:54",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 155
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:43:55",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 156
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:44:27",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 157
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:44:35",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 158
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:44:47",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 159
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:44:47",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 160
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 20,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:47:01",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 161
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 10,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:47:16",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 162
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 10,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:48:45",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 163
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 10,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:49:00",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 164
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:53:29",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 165
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:54:02",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 166
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:54:08",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 167
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 8,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:54:13",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 168
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 2,
+      "notificationDate": "07-12-2023",
+      "notificationTime": "21:55:08",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 169
     }
   ],
   "messages": [
