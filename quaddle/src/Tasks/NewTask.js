@@ -3,6 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { getCurrentTimeFormatted, getCurrentDateFormatted, sendNotification } from "./Functions"
 import { useNotification } from '../Functions/NotificationContext';
+import { UnitEnum } from '../Enums/UnitEnum';
 
 const NewTask = ({ onClose }) => {
     const [title, setTitle] = useState('');
@@ -108,14 +109,29 @@ const NewTask = ({ onClose }) => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="unit">Unit:</label>
-                        <input
+                        {/* <input
                             type="text"
                             className="form-control"
                             id="unit"
                             placeholder="Enter your unit"
                             value={unit}
                             onChange={(e) => setUnit(e.target.value)}
-                        />
+                        /> */}
+                        <select
+                            className="form-control form-select"
+                            id="unit"
+                            value={unit}
+                            onChange={(e) => setUnit(e.target.value)}
+                        >
+
+                            <option value="">---</option>
+
+                            {Object.values(UnitEnum).map((value) => (
+                                <option key={value} value={value}>
+                                    {value}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div className="form-group">
                         <label htmlFor="contactNumber">Contact Number:</label>

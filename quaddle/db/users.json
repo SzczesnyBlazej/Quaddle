@@ -180,14 +180,14 @@
       "createDate": "20-11-2023",
       "createHour": "21:53:50",
       "lastModification": "09-12-2023",
-      "lastModificationHour": "19:51:12",
+      "lastModificationHour": "20:03:05",
       "closeDate": "22-11-2023",
       "closeHour": "22:26:33",
       "priority": "1",
       "difficulty": "Hard",
       "solver": "Błażej",
       "status": "Close",
-      "unit": "IT",
+      "unit": "ZDM",
       "contactNumber": "123456789",
       "id": 1
     },
@@ -413,15 +413,15 @@
       "clientID": 2,
       "createDate": "25-11-2023",
       "createHour": "08:45:30",
-      "lastModification": "26-11-2023",
-      "lastModificationHour": "12:20:15",
-      "closeDate": "06-12-2023",
-      "closeHour": "15:30:45",
+      "lastModification": "09-12-2023",
+      "lastModificationHour": "20:02:51",
+      "closeDate": "09-12-2023",
+      "closeHour": "19:54:25",
       "priority": 3,
       "difficulty": "Easy",
-      "solver": "Daniel J",
-      "status": "Pending",
-      "unit": "XYZ",
+      "solver": "Błażej",
+      "status": "In Progress",
+      "unit": "NEURO",
       "contactNumber": "777888999",
       "id": 14
     },
@@ -569,6 +569,24 @@
       "unit": "dsa",
       "contactNumber": "dsa",
       "id": 22
+    },
+    {
+      "title": "Hej",
+      "description": "Co tam koleś",
+      "clientID": 2,
+      "createDate": "09-12-2023",
+      "createHour": "20:11:25",
+      "lastModification": "09-12-2023",
+      "lastModificationHour": "20:11:25",
+      "closeDate": "",
+      "closeHour": "",
+      "priority": 2,
+      "difficulty": "",
+      "solver": "",
+      "status": "Open",
+      "unit": "",
+      "contactNumber": "123321123",
+      "id": 23
     }
   ],
   "notification": [
@@ -3136,6 +3154,81 @@
         "username": "blazej2533"
       },
       "id": 171
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 14,
+      "notificationDate": "09-12-2023",
+      "notificationTime": "19:54:25",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 172
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 14,
+      "notificationDate": "09-12-2023",
+      "notificationTime": "19:54:59",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 173
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 14,
+      "notificationDate": "09-12-2023",
+      "notificationTime": "20:02:51",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 174
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 1,
+      "notificationDate": "09-12-2023",
+      "notificationTime": "20:03:05",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 175
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 23,
+      "notificationDate": "09-12-2023",
+      "notificationTime": "20:11:25",
+      "createdBy": {
+        "id": 2,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 176
     }
   ],
   "messages": [

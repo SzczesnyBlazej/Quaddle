@@ -7,6 +7,7 @@ import { useAuth } from '../Account/authContext';
 import PriorityChart from '../Charts/PriorityChart';
 import DifficultyChart from '../Charts/DifficultyChart';
 import { useNotification } from '../Functions/NotificationContext';
+import UnitsChart from '../Charts/UnitChart';
 
 function HomeColTwo() {
     const { user } = useAuth();
@@ -90,7 +91,9 @@ function HomeColTwo() {
                     <div className="col-md-4">
                         <div className="card light-bg text-light">
                             <div className="card-body">
-                                <h5 className="card-title">xxx</h5>
+                                <h5 className="card-title">Units</h5>
+                                <UnitsChart />
+
                             </div>
                         </div>
                     </div>

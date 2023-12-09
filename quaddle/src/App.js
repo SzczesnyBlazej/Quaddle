@@ -11,6 +11,7 @@ import AllOpenedTask from './Overviews/AllOpenedTask';
 import MyAllClosedTask from './Overviews/MyAllClosedTask';
 import AllUnallocated from './Overviews/AllUnallocated';
 import { NotificationProvider } from './Functions/NotificationContext';
+import AllInPendendTask from './Overviews/AllInPendendTask';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path='/overviews/allOpenedTask' element={<RequireAuth><AllOpenedTask /></RequireAuth>} />
           <Route path='/overviews/myAllClosedTasks' element={<RequireAuth><MyAllClosedTask /></RequireAuth>} />
           <Route path='/overviews/allUnallocated' element={<RequireAuth><AllUnallocated /></RequireAuth>} />
+          <Route path='/overviews/allInPendendTask' element={<RequireAuth><AllInPendendTask /></RequireAuth>} />
           <Route path="/tasks/:taskId" element={<RequireAuth><TaskPage /></RequireAuth>} />
 
         </Routes>
