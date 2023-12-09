@@ -7,6 +7,7 @@ import { useAuth } from '../Account/authContext';
 import LogoTemplate from './LogoTemplate';
 import NewTask from '../Tasks/NewTask';
 import axios from 'axios';
+import { useNotification } from '../Functions/NotificationContext';
 
 const renderSuggestion = (suggestion) => (
     <div>
@@ -15,6 +16,8 @@ const renderSuggestion = (suggestion) => (
 );
 
 function HomeColFirst() {
+    const showNotification = useNotification();
+
     const { user } = useAuth();
 
     const menu = {
@@ -41,11 +44,12 @@ function HomeColFirst() {
                 id: task.id,
                 status: task.status,
             }));
+
             setSuggestions(newSuggestions);
             localStorage.setItem('suggestions', JSON.stringify(newSuggestions));
             return newSuggestions;
         } catch (error) {
-            console.error('Error fetching suggestions:', error.message);
+            showNotification('Error fetching suggestions:', error.message);
 
             return [];
         }

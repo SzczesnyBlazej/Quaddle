@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useNotification } from '../Functions/NotificationContext';
 
 const RegistrationForm = () => {
     const [username, setUsername] = useState('');
@@ -14,6 +15,7 @@ const RegistrationForm = () => {
     const [LogoColor, setLogoColor] = useState(getRandomColor());
     const [registrationError, setRegistrationError] = useState('');
     const navigate = useNavigate();
+    const showNotification = useNotification();
 
     function getRandomColor() {
         const letters = '0123456789ABCDEF';
@@ -31,6 +33,8 @@ const RegistrationForm = () => {
             // Check if the password and confirm password match
             if (password !== confirmPassword) {
                 setRegistrationError('Passwords do not match');
+                showNotification('Passwords do not match');
+
                 return;
             }
             // Calculate initials
@@ -43,6 +47,7 @@ const RegistrationForm = () => {
             const foundUser = users.find(user => user.username === username);
 
             if (foundUser) {
+                showNotification('The specified username already exists');
 
                 setRegistrationError('The specified username already exists');
                 return;
@@ -64,8 +69,8 @@ const RegistrationForm = () => {
             setRegistrationError('');
             navigate('/');
         } catch (error) {
+            showNotification('Error during registration:', error.message);
 
-            console.error('Error during registration:', error.message);
 
             setRegistrationError('Error during registration');
         }

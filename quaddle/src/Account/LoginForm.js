@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useAuth } from './authContext';
+import { useNotification } from '../Functions/NotificationContext';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -12,6 +13,7 @@ const LoginForm = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
     const [users, setUsers] = useState([]);
+    const showNotification = useNotification();
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -19,13 +21,14 @@ const LoginForm = () => {
                 const response = await axios.get('http://localhost:3500/users');
                 setUsers(response.data);
             } catch (error) {
+                showNotification('Error fetching users:', error.message);
 
                 console.error('Error fetching users:', error.message);
             }
         };
 
         fetchUsers();
-    }, []); // Pobranie użytkowników tylko raz przy inicjalizacji komponentu
+    }, [showNotification]);
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -39,6 +42,7 @@ const LoginForm = () => {
             login(foundUser);
             navigate('/');
         } else {
+            showNotification('Błędne dane logowania');
             setLoginError('Błędne dane logowania');
         }
     };

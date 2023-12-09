@@ -6,9 +6,11 @@ import { getTaskCounts } from './CalculateData';
 import { useAuth } from '../Account/authContext';
 import PriorityChart from './PriorityChart';
 import DifficultyChart from './DifficultyChart';
+import { useNotification } from '../Functions/NotificationContext';
 
 function HomeColTwo() {
     const { user } = useAuth();
+    const showNotification = useNotification();
 
     const [taskCounts, setTaskCounts] = useState({
         closedToday: 0,
@@ -23,12 +25,13 @@ function HomeColTwo() {
                 const newTaskCounts = await getTaskCounts(user);
                 setTaskCounts(newTaskCounts);
             } catch (error) {
-                console.error('Error fetching task counts:', error);
+                showNotification('Error fetching task counts:', error);
+
             }
         };
 
         fetchData();
-    }, []); // Include other dependencies if needed
+    }, [user, showNotification]); // Include other dependencies if needed
     const cardTop = {
         card1: ['Closed today', taskCounts.closedToday, faFire],
         card2: ['Closed this week', taskCounts.closedThisWeek, faFireFlameCurved],

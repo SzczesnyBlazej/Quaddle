@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useNotification } from '../Functions/NotificationContext';
 
 function DifficultyChart({ user }) {
     const [taskCountsByDifficulty, setTaskCountsByDifficulty] = useState({
@@ -8,6 +9,7 @@ function DifficultyChart({ user }) {
         difficultyMedium: 0,
         difficultyHard: 0,
     });
+    const showNotification = useNotification();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -41,12 +43,13 @@ function DifficultyChart({ user }) {
                     "Hard": taskCountsByDifficulty[2].count,
                 });
             } catch (error) {
-                console.error('Error fetching task data:', error);
+                showNotification('Error fetching task data:', error);
+
             }
         };
 
         fetchData();
-    }, [user]);
+    }, [user, showNotification]);
 
     return (
         <ResponsiveContainer height={150}>

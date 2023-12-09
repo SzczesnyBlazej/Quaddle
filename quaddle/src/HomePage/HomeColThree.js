@@ -3,9 +3,12 @@ import axios from 'axios';
 import { calculateTimeDifference } from './TimeUtil';
 import { Link } from 'react-router-dom';
 import LogoCircleTemplate from "../Templates/LogoCircleTemplate";
+import { useNotification } from '../Functions/NotificationContext';
 
 function HomeColThree() {
     const [last10Records, setLast10Records] = useState([]);
+    const showNotification = useNotification();
+
     const fetchData = async () => {
         try {
 
@@ -14,7 +17,8 @@ function HomeColThree() {
 
             setLast10Records(recordsWithTaskDetails);
         } catch (error) {
-            console.error('Error fetching last 25 records:', error.message);
+            showNotification('Error fetching last 25 records:', error.message);
+
         }
     };
 

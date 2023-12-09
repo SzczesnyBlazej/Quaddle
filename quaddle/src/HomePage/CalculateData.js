@@ -3,6 +3,7 @@ import axios from 'axios';
 import { formatDate } from './dateUtils';
 
 export async function getTaskCounts(user) {
+
     try {
 
         const response = await axios.get('http://localhost:3500/tasks');
@@ -15,7 +16,7 @@ export async function getTaskCounts(user) {
         const closedTodayCount = taskData.filter(task => formatDate(task.closeDate) === today).length;
         const closedThisWeekCount = taskData.filter(task => formatDate(task.closeDate) >= thisWeek).length;
         const myPendingCount = taskData.filter(
-            task => task.solver === `${user.name}` && task.status != "Close"
+            task => task.solver === `${user.name}` && task.status !== "Close"
         ).length;
         const allPendingCount = taskData.filter(task => !task.closeDate).length;
 
@@ -26,7 +27,7 @@ export async function getTaskCounts(user) {
             allPending: allPendingCount,
         };
     } catch (error) {
-        console.error('Error fetching task data:', error);
+
         return {
             closedToday: 0,
             closedThisWeek: 0,

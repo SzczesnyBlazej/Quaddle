@@ -10,21 +10,26 @@ import TaskPage from './Tasks/TaskPage';
 import AllOpenedTask from './Overviews/AllOpenedTask';
 import MyAllClosedTask from './Overviews/MyAllClosedTask';
 import AllUnallocated from './Overviews/AllUnallocated';
+import { NotificationProvider } from './Functions/NotificationContext';
 
 const App = () => {
   return (
     <AuthProvider>
-      <Routes>
-        <Route path='/' element={<RequireAuth><Home /></RequireAuth>} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/registration' element={<Registration />} />
-        <Route path='/overviews/mytasks' element={<RequireAuth><MyTasks /></RequireAuth>} />
-        <Route path='/overviews/allOpenedTask' element={<RequireAuth><AllOpenedTask /></RequireAuth>} />
-        <Route path='/overviews/myAllClosedTasks' element={<RequireAuth><MyAllClosedTask /></RequireAuth>} />
-        <Route path='/overviews/allUnallocated' element={<RequireAuth><AllUnallocated /></RequireAuth>} />
-        <Route path="/tasks/:taskId" element={<RequireAuth><TaskPage /></RequireAuth>} />
+      <NotificationProvider>
 
-      </Routes>
+        <Routes>
+          <Route path='/' element={<RequireAuth><Home /></RequireAuth>} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/registration' element={<Registration />} />
+          <Route path='/overviews/mytasks' element={<RequireAuth><MyTasks /></RequireAuth>} />
+          <Route path='/overviews/allOpenedTask' element={<RequireAuth><AllOpenedTask /></RequireAuth>} />
+          <Route path='/overviews/myAllClosedTasks' element={<RequireAuth><MyAllClosedTask /></RequireAuth>} />
+          <Route path='/overviews/allUnallocated' element={<RequireAuth><AllUnallocated /></RequireAuth>} />
+          <Route path="/tasks/:taskId" element={<RequireAuth><TaskPage /></RequireAuth>} />
+
+        </Routes>
+      </NotificationProvider>
+
     </AuthProvider>
   );
 };
