@@ -3,7 +3,7 @@ import axios from 'axios';
 import HomeColFirst from '../HomePage/HomeColFirst';
 import TaskList from './TaskList';
 import MenuTaskList from './MenuTaskList';
-import findCustomerById from './FindCustomerByID';
+import findCustomerById from './Functions/FindCustomerByID';
 import { Link } from 'react-router-dom';
 
 function AllUnallocated() {

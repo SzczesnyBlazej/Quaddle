@@ -5,8 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { getCurrentDateFormatted, getCurrentTimeFormatted, sendNotification } from './Functions'
 import { useAuth } from '../Account/authContext';
+import { useNotification } from '../Functions/NotificationContext';
 
 const TaskContent = ({ task }) => {
+    const showNotification = useNotification();
+
     const [clientDetail, setClientDetail] = useState([]);
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
@@ -19,7 +22,8 @@ const TaskContent = ({ task }) => {
                 setMessages(response.data);
             }
         } catch (error) {
-            console.error('Error fetching messages:', error.message);
+            showNotification('Error fetching messages:', error.message);
+
         }
     };
     useEffect(() => {
@@ -30,7 +34,8 @@ const TaskContent = ({ task }) => {
                     setClientDetail(userResponse.data);
                 }
             } catch (error) {
-                console.error('Error fetching user details:', error.message);
+                showNotification('Error fetching user details:', error.message);
+
             }
         };
 
@@ -59,7 +64,8 @@ const TaskContent = ({ task }) => {
             fetchMessages();
 
         } catch (error) {
-            console.error('Błąd podczas aktualizacji zadania:', error.message);
+            showNotification('Błąd podczas aktualizacji zadania:', error.message);
+
         }
     };
 

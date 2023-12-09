@@ -5,10 +5,12 @@ import axios from 'axios';
 import HomeColFirst from '../HomePage/HomeColFirst';
 import TaskContent from './TaskContent';
 import TaskDetail from './TaskDetail';
+import { useNotification } from '../Functions/NotificationContext';
 
 const TaskPage = () => {
     const { taskId } = useParams();
     const [task, setTask] = useState(null);
+    const showNotification = useNotification();
 
     useEffect(() => {
         const fetchTaskById = async () => {
@@ -16,12 +18,13 @@ const TaskPage = () => {
                 const response = await axios.get(`http://localhost:3500/tasks/${taskId}`);
                 setTask(response.data);
             } catch (error) {
-                console.error(`Error fetching task with ID ${taskId}:`, error.message);
+                showNotification(`Error fetching task with ID ${taskId}:`, error.message);
+
             }
         };
 
         fetchTaskById();
-    }, [taskId]);
+    }, [taskId, showNotification]);
 
     return (
         <div>

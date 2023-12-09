@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFire, faFireFlameCurved, faBroom, faCirclePause } from '@fortawesome/free-solid-svg-icons';
-import LastThirtyDaysBar from './LastThirtyDaysBar';
+import LastThirtyDaysBar from '../Charts/LastThirtyDaysBar';
 import React, { useState, useEffect } from 'react';
-import { getTaskCounts } from './CalculateData';
+import { getTaskCounts } from '../Charts/CalculateData';
 import { useAuth } from '../Account/authContext';
-import PriorityChart from './PriorityChart';
-import DifficultyChart from './DifficultyChart';
+import PriorityChart from '../Charts/PriorityChart';
+import DifficultyChart from '../Charts/DifficultyChart';
 import { useNotification } from '../Functions/NotificationContext';
 
 function HomeColTwo() {

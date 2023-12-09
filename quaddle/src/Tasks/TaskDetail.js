@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getCurrentDateFormatted, getCurrentTimeFormatted, sendNotification } from './Functions'
+import { useNotification } from '../Functions/NotificationContext';
+import { TaskStatusEnum } from '../Enums/TaskStatusEnum';
+import { SolverEnum } from '../Enums/SolverEnum';
+import { PriorityEnum } from '../Enums/PriorityEnum';
+import { DifficultyEnum } from '../Enums/DifficultyEnum';
+import { UnitEnum } from '../Enums/UnitEnum';
 
 const TaskDetail = ({ task }) => {
+    const showNotification = useNotification();
+
     const [selectedSolver, setSelectedSolver] = useState('');
     const [selectedPriority, setSelectedPriority] = useState('');
     const [selectedStatus, setSelectedStatus] = useState('');
@@ -53,7 +61,7 @@ const TaskDetail = ({ task }) => {
             sendNotification("updated post ", task?.id);
 
         } catch (error) {
-            console.error('Błąd podczas aktualizacji zadania:', error.message);
+            showNotification('Błąd podczas aktualizacji zadania:', error.message);
         }
     };
 
@@ -81,13 +89,15 @@ const TaskDetail = ({ task }) => {
                 sendNotification("closed post", task?.id);
 
             } catch (error) {
-                console.error('Błąd podczas aktualizacji zadania:', error.message);
+
+                showNotification('Błąd podczas aktualizacji zadania:', error.message);
+
             }
         } else {
-            console.error('User information not found in local storage.');
+            showNotification('User information not found in local storage.');
+
         }
     };
-
 
     return (
         <div className="col-md-2 light-bg min-vh-100 d-flex flex-column position-relative overflow-auto" style={{ maxHeight: 'calc(100vh - 180px)' }}>
@@ -107,7 +117,7 @@ const TaskDetail = ({ task }) => {
                             onChange={(e) => handleInputChange(e, setSelectedSolver)}
                             aria-label="Solver"
                         >
-                            {dropdownOptions(['Krystian', 'Błażej', 'Daniel J'])}
+                            {dropdownOptions(Object.values(SolverEnum))}
                         </select>
                     </div>
 
@@ -164,7 +174,8 @@ const TaskDetail = ({ task }) => {
                             onChange={(e) => handleInputChange(e, setSelectedPriority)}
                             aria-label="Priority"
                         >
-                            {dropdownOptions(['1', '2', '3'])}
+                            {dropdownOptions(Object.values(PriorityEnum))}
+
                         </select>
                     </div>
 
@@ -179,7 +190,7 @@ const TaskDetail = ({ task }) => {
                             onChange={(e) => handleInputChange(e, setSelectedStatus)}
                             aria-label="Status"
                         >
-                            {dropdownOptions(['Open', 'Close', 'In Pendend'])}
+                            {dropdownOptions(Object.values(TaskStatusEnum))}
                         </select>
                     </div>
 
@@ -194,7 +205,8 @@ const TaskDetail = ({ task }) => {
                             onChange={(e) => handleInputChange(e, setSelectedDifficulty)}
                             aria-label="Difficulty"
                         >
-                            {dropdownOptions(['Easy', 'Medium', 'Hard'])}
+                            {dropdownOptions(Object.values(DifficultyEnum))}
+
                         </select>
                     </div>
 
@@ -209,7 +221,8 @@ const TaskDetail = ({ task }) => {
                             onChange={(e) => handleInputChange(e, setSelectedUnit)}
                             aria-label="Unit"
                         >
-                            {dropdownOptions(['ZRR', 'IT', 'ZDO', 'ZDM', 'SOR', 'CHIR', 'NEURO'])}
+                            {dropdownOptions(Object.values(UnitEnum))}
+
                         </select>
                     </div>
                     <div className="form-group p-1">

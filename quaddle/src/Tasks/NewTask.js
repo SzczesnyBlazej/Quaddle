@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { getCurrentTimeFormatted, getCurrentDateFormatted, sendNotification } from "./Functions"
+import { useNotification } from '../Functions/NotificationContext';
 
 const NewTask = ({ onClose }) => {
     const [title, setTitle] = useState('');
@@ -14,6 +15,7 @@ const NewTask = ({ onClose }) => {
     const [contactNumber, setContactNumber] = useState('');
 
     const [addTaskError, setAddTaskError] = useState('');
+    const showNotification = useNotification();
 
     const handleAddTask = async (e) => {
         e.preventDefault();
@@ -48,17 +50,24 @@ const NewTask = ({ onClose }) => {
 
                     });
                     sendNotification("created post ", response.data?.id);
+                    showNotification('Successfully added post');
 
                     onClose();
 
                 } else {
+                    showNotification('User not found');
+
                     setAddTaskError('User not found');
                 }
             } else {
+                showNotification('No user stored in database');
+
                 setAddTaskError('No user stored in database');
             }
 
         } catch (error) {
+            showNotification('Error during add task');
+
             setAddTaskError('Error during add task');
         }
     };
