@@ -9,7 +9,8 @@ const UserList = ({
     handleDelete,
 }) => {
     return (
-        <div className="p-3 col-md-6 text-light dark-bg min-vh-100 border-start border-secondary">
+
+        <div className="p-3 col-md-6 text-light dark-bg min-vh-100 border-start border-secondary overflow-auto" style={{ maxHeight: '100vh' }}>
             <h2>User Management</h2>
             <div className="mb-3 ">
                 <label htmlFor="searchInput" className="form-label">
@@ -28,7 +29,7 @@ const UserList = ({
                 <ul className="list-group">
                     {suggestions.map((user) => (
                         <div className="row g-2" key={user.id}>
-                            <div className="col-md-8">
+                            <div className="col-md-8 d-flex align-items-center">
                                 <li className="nav-link">
                                     {user.name} {user.surname} ({user.username})
                                 </li>
@@ -51,8 +52,8 @@ const UserList = ({
                         </div>
                     ))}
                 </ul>
-
             )}
+
         </div>
     );
 };

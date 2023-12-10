@@ -109,6 +109,66 @@
       "isAdmin": false,
       "initials": "DW",
       "logoColor": "#c0392b"
+    },
+    {
+      "id": 12,
+      "username": "user51",
+      "password": "$2a$10$abcdefghijklmnopqrstuvwx/abcdefghijklmnopqrstuvwi0X5g.DtY7S",
+      "name": "Michael",
+      "surname": "Brown",
+      "isAdmin": false,
+      "initials": "MB",
+      "logoColor": "#9b59b6"
+    },
+    {
+      "id": 13,
+      "username": "user61",
+      "password": "$2a$10$abcdefghijklmnopqrstuvwx/abcdefghijklmnopqrstuvwi0X5g.DtY7S",
+      "name": "Olivia",
+      "surname": "Miller",
+      "isAdmin": true,
+      "initials": "OM",
+      "logoColor": "#34495e"
+    },
+    {
+      "id": 14,
+      "username": "user71",
+      "password": "$2a$10$abcdefghijklmnopqrstuvwx/abcdefghijklmnopqrstuvwi0X5g.DtY7S",
+      "name": "David",
+      "surname": "Jones",
+      "isAdmin": false,
+      "initials": "DJ",
+      "logoColor": "#e67e22"
+    },
+    {
+      "id": 15,
+      "username": "user81",
+      "password": "$2a$10$abcdefghijklmnopqrstuvwx/abcdefghijklmnopqrstuvwi0X5g.DtY7S",
+      "name": "Sophia",
+      "surname": "Williams",
+      "isAdmin": true,
+      "initials": "SW",
+      "logoColor": "#16a085"
+    },
+    {
+      "id": 16,
+      "username": "user91",
+      "password": "$2a$10$abcdefghijklmnopqrstuvwx/abcdefghijklmnopqrstuvwi0X5g.DtY7S",
+      "name": "Daniel",
+      "surname": "Wilson",
+      "isAdmin": false,
+      "initials": "DW",
+      "logoColor": "#c0392b"
+    },
+    {
+      "username": "blazej253333",
+      "password": "$2a$10$QJM9P7tC6XW9YZgEJYeTfeD4oiR3aJOqfEYj14YfHtZiUI16ABQdO",
+      "name": "Michal",
+      "surname": "Szczesny",
+      "isAdmin": false,
+      "initials": "MS",
+      "logoColor": "#10157A",
+      "id": 17
     }
   ]
 }

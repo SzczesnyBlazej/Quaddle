@@ -21,7 +21,7 @@ const AutoCompleteSearch = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:3500/users');
+                const response = await axios.get('http://localhost:3501/users');
                 setUsers(response.data);
             } catch (error) {
                 console.error('Error fetching users:', error);
@@ -39,8 +39,8 @@ const AutoCompleteSearch = () => {
         } else {
             const filteredUsers = users.filter(
                 (user) =>
-                    user.name.toLowerCase().includes(value.toLowerCase()) ||
-                    user.surname.toLowerCase().includes(value.toLowerCase()) ||
+                    (user.name.toLowerCase() + ' ' + user.surname.toLowerCase()).includes(value.toLowerCase()) ||
+                    (user.surname.toLowerCase() + ' ' + user.name.toLowerCase()).includes(value.toLowerCase()) ||
                     user.username.toLowerCase().includes(value.toLowerCase())
             );
 

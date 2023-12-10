@@ -15,8 +15,10 @@ const EditUserForm = ({
             {showEditForm && editingUser && (
                 <div className="col-md-12">
                     <form onSubmit={handleEditFormSubmit}>
-                        <h4 className='p-3'>Personal data</h4>
                         <div className='row'>
+                            <h4 className='p-3'>Personal data of user ID:{editingUser.id}</h4>
+                            <div className='row'>
+                            </div>
                             <div className="mb-3 col-md-4">
                                 <label htmlFor="editName" className="form-label">
                                     Name:

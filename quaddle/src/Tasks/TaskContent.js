@@ -70,7 +70,7 @@ const TaskContent = ({ task }) => {
     };
 
     return (
-        <div className="col-md-8 dark-bg min-vh-100 border-start border-end border-secondary d-flex flex-column position-relative " style={{ maxHeight: 'calc(100vh - 180px)' }}>
+        <div className="col-md-8 dark-bg min-vh-100 border-start border-end border-secondary d-flex flex-column position-relative" style={{ maxHeight: 'calc(100vh - 180px)' }}>
             <div className="d-flex flex-column overflow-auto" style={{ maxHeight: '85vh' }}>
                 <div className='container custom-width'>
                     <div className='d-flex flex-column justify-content-center align-items-center pt-5 text-secondary'>
