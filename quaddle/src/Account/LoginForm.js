@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useAuth } from './authContext';
 import { useNotification } from '../Functions/NotificationContext';
+import bcrypt from 'bcryptjs';  // Import bcryptjs
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -22,28 +23,36 @@ const LoginForm = () => {
                 setUsers(response.data);
             } catch (error) {
                 showNotification('Error fetching users:', error.message);
-
-                console.error('Error fetching users:', error.message);
             }
         };
 
         fetchUsers();
     }, [showNotification]);
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
 
-        const foundUser = users.find(
-            (user) => user.username === username && user.password === password
-        );
+        try {
+            const foundUser = users.find((user) => user.username === username);
 
-        if (foundUser) {
-            setLoginError('');
-            login(foundUser);
-            navigate('/');
-        } else {
-            showNotification('Błędne dane logowania');
-            setLoginError('Błędne dane logowania');
+            if (foundUser) {
+                // Porównaj zaszyfrowane hasło
+                const isPasswordMatch = await bcrypt.compare(password, foundUser.password);
+
+                if (isPasswordMatch) {
+                    setLoginError('');
+                    login(foundUser);
+                    navigate('/');
+                } else {
+                    showNotification('Błędne dane logowania');
+                    setLoginError('Błędne dane logowania');
+                }
+            } else {
+                showNotification('Błędne dane logowania');
+                setLoginError('Błędne dane logowania');
+            }
+        } catch (error) {
+            showNotification('Error during login:', error.message);
         }
     };
 

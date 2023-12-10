@@ -1,6 +1,8 @@
 // LogoTemplate.js
 import LogoutButton from "../Account/Logout";
 import LogoCircleTemplate from "../Templates/LogoCircleTemplate";
+import { Link } from 'react-router-dom';
+
 const LogoTemplate = (user) =>
 
     <div className="dropdown" data-bs-toggle="tooltip" title={user?.name + " " + user?.surname}>
@@ -19,7 +21,8 @@ const LogoTemplate = (user) =>
             <li><span className="dropdown-item ">{user?.name} {user?.surname}</span></li>
             <div className="dropdown-divider"></div>
 
-            <li><a className="dropdown-item" href="#/action-2">Option 2</a></li>
+            <li><Link to='/userManager' className="dropdown-item">User Manager</Link></li>
+
             <li><a className="dropdown-item" href="#/action-3">Option 3</a></li>
             <div className="dropdown-divider"></div>
             <LogoutButton />

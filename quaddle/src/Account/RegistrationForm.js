@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import bcrypt from 'bcryptjs';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useNotification } from '../Functions/NotificationContext';
@@ -10,6 +11,7 @@ const RegistrationForm = () => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
+    const [isAdmin, setIsAdmin] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState('');
     const [initials, setInitials] = useState('');
     const [LogoColor, setLogoColor] = useState(getRandomColor());
@@ -34,9 +36,12 @@ const RegistrationForm = () => {
             if (password !== confirmPassword) {
                 setRegistrationError('Passwords do not match');
                 showNotification('Passwords do not match');
-
                 return;
             }
+
+            // Hash the password
+            const hashedPassword = await bcrypt.hash(password, 10);
+
             // Calculate initials
             const nameInitial = name.charAt(0).toUpperCase();
             const surnameInitial = surname.charAt(0).toUpperCase();
@@ -48,34 +53,29 @@ const RegistrationForm = () => {
 
             if (foundUser) {
                 showNotification('The specified username already exists');
-
                 setRegistrationError('The specified username already exists');
                 return;
             }
 
-            // Assuming you have a registration endpoint
+            // Send hashed password to the server
             const response = await axios.post('http://localhost:3500/users', {
                 username,
-                password,
+                password: hashedPassword,
                 name,
                 surname,
+                isAdmin,
                 initials: calculatedInitials,
                 logoColor: getRandomColor(),
             });
-
-
 
             // Handle successful registration
             setRegistrationError('');
             navigate('/');
         } catch (error) {
             showNotification('Error during registration:', error.message);
-
-
             setRegistrationError('Error during registration');
         }
     };
-
     return (
         <div className="bg-dark text-light min-vh-100 d-flex align-items-center">
             <div className="container">
