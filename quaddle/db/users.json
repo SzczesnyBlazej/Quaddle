@@ -26,7 +26,7 @@
       "password": "$2a$10$XIuORY8UVthyInijLIzKnese8VAkvWxW1G1GTivLoy7Yrl6qsreeq",
       "name": "John",
       "surname": "Doe",
-      "isAdmin": false,
+      "isAdmin": true,
       "initials": "JD",
       "logoColor": "#3498db"
     },

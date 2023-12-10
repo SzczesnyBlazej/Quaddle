@@ -57,7 +57,7 @@ const AutoCompleteSearch = () => {
 
     const handleDelete = async (userId) => {
         try {
-            await axios.delete(`http://localhost:3500/users/${userId}`);
+            await axios.delete(`http://localhost:3501/users/${userId}`);
             setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
             setShowEditForm(false);
         } catch (error) {
@@ -111,7 +111,7 @@ const AutoCompleteSearch = () => {
             } else {
                 const { newPassword, confirmPassword, ...userDataWithoutPasswords } = updatedUser;
 
-                await axios.put(`http://localhost:3500/users/${editingUser.id}`, userDataWithoutPasswords);
+                await axios.put(`http://localhost:3501/users/${editingUser.id}`, userDataWithoutPasswords);
                 setUsers((prevUsers) =>
                     prevUsers.map((user) => (user.id === editingUser.id ? userDataWithoutPasswords : user))
                 );

@@ -1,4 +1,5 @@
 // LogoTemplate.js
+import AllowOnlyAdmin from '../Account/AuthContext/AllowOnlyAdmin';
 import LogoutButton from "../Account/Logout/Logout";
 import LogoCircleTemplate from "../Templates/LogoCircleTemplate";
 import { Link } from 'react-router-dom';
@@ -20,8 +21,10 @@ const LogoTemplate = (user) =>
 
             <li><span className="dropdown-item ">{user?.name} {user?.surname}</span></li>
             <div className="dropdown-divider"></div>
+            <AllowOnlyAdmin>
 
-            <li><Link to='/userManager' className="dropdown-item">User Manager</Link></li>
+                <li><Link to='/userManager' className="dropdown-item">User Manager</Link></li>
+            </AllowOnlyAdmin>
 
             <li><a className="dropdown-item" href="#/action-3">Option 3</a></li>
             <div className="dropdown-divider"></div>
