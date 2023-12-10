@@ -36,7 +36,7 @@ const LastThirtyDaysBar = () => {
 
                 setLast30Days(dates);
 
-                const taskResponse = await axios.get('http://localhost:3500/tasks', {
+                const taskResponse = await axios.get('http://localhost:3502/tasks', {
                     params: {
                         createdate: dates,
                     },

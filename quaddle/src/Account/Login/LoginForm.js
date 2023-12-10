@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useAuth } from './authContext';
-import { useNotification } from '../Functions/NotificationContext';
+import { useAuth } from '../AuthContext/authContext';
+import { useNotification } from '../../Functions/NotificationContext';
 import bcrypt from 'bcryptjs';  // Import bcryptjs
 
 const LoginForm = () => {
@@ -19,7 +19,7 @@ const LoginForm = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:3500/users');
+                const response = await axios.get('http://localhost:3501/users');
                 setUsers(response.data);
             } catch (error) {
                 showNotification('Error fetching users:', error.message);

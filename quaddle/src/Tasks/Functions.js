@@ -23,7 +23,7 @@ export const sendNotification = async (notificationText, taskID) => {
     const getStoredUsername = localStorage.getItem('user');
     const storedUser = JSON.parse(getStoredUsername);
     try {
-        await axios.post('http://localhost:3500/notification', {
+        await axios.post('http://localhost:3503/notification', {
             notificationText: notificationText,
             taskId: taskID,
             notificationDate: getCurrentDateFormatted(),

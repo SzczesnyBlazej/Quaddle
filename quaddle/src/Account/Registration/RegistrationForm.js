@@ -4,7 +4,7 @@ import axios from 'axios';
 import bcrypt from 'bcryptjs';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useNotification } from '../Functions/NotificationContext';
+import { useNotification } from '../../Functions/NotificationContext';
 
 const RegistrationForm = () => {
     const [username, setUsername] = useState('');
@@ -32,22 +32,19 @@ const RegistrationForm = () => {
         e.preventDefault();
 
         try {
-            // Check if the password and confirm password match
             if (password !== confirmPassword) {
                 setRegistrationError('Passwords do not match');
                 showNotification('Passwords do not match');
                 return;
             }
 
-            // Hash the password
             const hashedPassword = await bcrypt.hash(password, 10);
 
-            // Calculate initials
             const nameInitial = name.charAt(0).toUpperCase();
             const surnameInitial = surname.charAt(0).toUpperCase();
             const calculatedInitials = `${nameInitial}${surnameInitial}`;
 
-            const getUsers = await axios.get('http://localhost:3500/users');
+            const getUsers = await axios.get('http://localhost:3501/users');
             const users = getUsers.data;
             const foundUser = users.find(user => user.username === username);
 
@@ -57,8 +54,7 @@ const RegistrationForm = () => {
                 return;
             }
 
-            // Send hashed password to the server
-            const response = await axios.post('http://localhost:3500/users', {
+            const response = await axios.post('http://localhost:3501/users', {
                 username,
                 password: hashedPassword,
                 name,
@@ -68,7 +64,6 @@ const RegistrationForm = () => {
                 logoColor: getRandomColor(),
             });
 
-            // Handle successful registration
             setRegistrationError('');
             navigate('/');
         } catch (error) {
@@ -77,7 +72,7 @@ const RegistrationForm = () => {
         }
     };
     return (
-        <div className="bg-dark text-light min-vh-100 d-flex align-items-center">
+        <div className="dark-bg text-light min-vh-100 d-flex align-items-center">
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-md-4">

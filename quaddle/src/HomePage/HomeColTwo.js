@@ -3,7 +3,7 @@ import { faFire, faFireFlameCurved, faBroom, faCirclePause } from '@fortawesome/
 import LastThirtyDaysBar from '../Charts/LastThirtyDaysBar';
 import React, { useState, useEffect } from 'react';
 import { getTaskCounts } from '../Charts/CalculateData';
-import { useAuth } from '../Account/authContext';
+import { useAuth } from '../Account/AuthContext/authContext';
 import PriorityChart from '../Charts/PriorityChart';
 import DifficultyChart from '../Charts/DifficultyChart';
 import { useNotification } from '../Functions/NotificationContext';

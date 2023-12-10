@@ -1,5 +1,5 @@
 // LogoTemplate.js
-import LogoutButton from "../Account/Logout";
+import LogoutButton from "../Account/Logout/Logout";
 import LogoCircleTemplate from "../Templates/LogoCircleTemplate";
 import { Link } from 'react-router-dom';
 

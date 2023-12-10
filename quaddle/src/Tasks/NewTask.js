@@ -23,7 +23,7 @@ const NewTask = ({ onClose }) => {
         try {
             const getStoredUsername = localStorage.getItem('user');
 
-            const getUsers = await axios.get('http://localhost:3500/users');
+            const getUsers = await axios.get('http://localhost:3501/users');
             const customers = getUsers.data;
             const storedUser = JSON.parse(getStoredUsername);
             const storedUsername = storedUser.username;
@@ -31,7 +31,7 @@ const NewTask = ({ onClose }) => {
                 const foundUser = customers.find(user => user.username === storedUsername);
                 if (foundUser) {
 
-                    const response = await axios.post('http://localhost:3500/tasks', {
+                    const response = await axios.post('http://localhost:3502/tasks', {
                         title,
                         description,
                         clientID: foundUser?.id,

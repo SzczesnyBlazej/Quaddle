@@ -4,7 +4,7 @@ import LogoCircleTemplate from '../Templates/LogoCircleTemplate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { getCurrentDateFormatted, getCurrentTimeFormatted, sendNotification } from './Functions'
-import { useAuth } from '../Account/authContext';
+import { useAuth } from '../Account/AuthContext/authContext';
 import { useNotification } from '../Functions/NotificationContext';
 
 const TaskContent = ({ task }) => {
@@ -18,7 +18,7 @@ const TaskContent = ({ task }) => {
         try {
             if (task) {
 
-                const response = await axios.get(`http://localhost:3500/messages?taskID=${task?.id}`);
+                const response = await axios.get(`http://localhost:3504/messages?taskID=${task?.id}`);
                 setMessages(response.data);
             }
         } catch (error) {
@@ -30,7 +30,7 @@ const TaskContent = ({ task }) => {
         const fetchUserDetails = async () => {
             try {
                 if (task && task.clientID) {
-                    const userResponse = await axios.get(`http://localhost:3500/users/${task?.clientID}`);
+                    const userResponse = await axios.get(`http://localhost:3501/users/${task?.clientID}`);
                     setClientDetail(userResponse.data);
                 }
             } catch (error) {
@@ -48,7 +48,7 @@ const TaskContent = ({ task }) => {
         e.preventDefault();
 
         try {
-            await axios.post('http://localhost:3500/messages', {
+            await axios.post('http://localhost:3504/messages', {
                 message: message,
                 clientID: clientDetail?.id,
                 taskID: task?.id,

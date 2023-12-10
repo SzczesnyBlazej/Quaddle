@@ -7,7 +7,7 @@ import MenuTaskList from './MenuTaskList';
 function AllInPendendTask() {
     const [tasks, setTasks] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:3500/tasks`, {
+        axios.get(`http://localhost:3502/tasks`, {
             params: {
                 status: ['In Pendend'], // Use the appropriate syntax for "not equal" in your API
             },

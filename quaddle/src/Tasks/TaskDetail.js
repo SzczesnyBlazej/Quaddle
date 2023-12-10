@@ -57,7 +57,7 @@ const TaskDetail = ({ task }) => {
 
             };
 
-            await axios.put(`http://localhost:3500/tasks/${task?.id}`, updatedTask);
+            await axios.put(`http://localhost:3502/tasks/${task?.id}`, updatedTask);
             sendNotification("updated post ", task?.id);
 
         } catch (error) {
@@ -85,7 +85,7 @@ const TaskDetail = ({ task }) => {
                     closeHour: getCurrentTimeFormatted(),
                 };
 
-                await axios.put(`http://localhost:3500/tasks/${task?.id}`, updatedTask);
+                await axios.put(`http://localhost:3502/tasks/${task?.id}`, updatedTask);
                 sendNotification("closed post", task?.id);
 
             } catch (error) {
@@ -129,7 +129,7 @@ const TaskDetail = ({ task }) => {
                                 type="text"
                                 className="form-control me-2"
                                 id="createDateInput"
-                                value={task?.createDate || ''}
+                                value={task?.createDate || getCurrentDateFormatted()} // Use the task's createDate or the current date
                                 readOnly
                             />
                             <input

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import Login from './Account/Login';
+import Login from './Account/Login/Login';
 import Home from './HomePage/Home';
 import './App.css';
-import Registration from './Account/Registration';
-import { AuthProvider, useAuth } from './Account/authContext';
+import Registration from './Account/Registration/Registration';
+import { AuthProvider, useAuth } from './Account/AuthContext/authContext';
 import MyTasks from './Overviews/MyTasks';
 import TaskPage from './Tasks/TaskPage';
 import AllOpenedTask from './Overviews/AllOpenedTask';
@@ -12,7 +12,7 @@ import MyAllClosedTask from './Overviews/MyAllClosedTask';
 import AllUnallocated from './Overviews/AllUnallocated';
 import { NotificationProvider } from './Functions/NotificationContext';
 import AllInPendendTask from './Overviews/AllInPendendTask';
-import UserManagement from './Account/UserManagement';
+import AutoCompleteSearch from './Account/UserManagement/AutoCompleteSearch';
 
 const App = () => {
   return (
@@ -23,7 +23,7 @@ const App = () => {
           <Route path='/' element={<RequireAuth><Home /></RequireAuth>} />
           <Route path='/login' element={<Login />} />
           <Route path='/registration' element={<Registration />} />
-          <Route path='/userManager' element={<RequireAuth><UserManagement /></RequireAuth>} />
+          <Route path='/userManager' element={<RequireAuth><AutoCompleteSearch /></RequireAuth>} />
           <Route path='/overviews/mytasks' element={<RequireAuth><MyTasks /></RequireAuth>} />
           <Route path='/overviews/allOpenedTask' element={<RequireAuth><AllOpenedTask /></RequireAuth>} />
           <Route path='/overviews/myAllClosedTasks' element={<RequireAuth><MyAllClosedTask /></RequireAuth>} />

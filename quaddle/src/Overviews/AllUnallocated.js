@@ -11,7 +11,7 @@ function AllUnallocated() {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:3500/tasks`, {
+            .get(`http://localhost:3502/tasks`, {
                 params: {
                     status: ['Open', 'In Pendend'],
                     solver: '',

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const getAllUsers = async () => {
     try {
-        const response = await axios.get('http://localhost:3500/users');
+        const response = await axios.get('http://localhost:3501/users');
         return response.data.map(user => ({ id: user.id, name: user.name, surname: user.surname }));
     } catch (error) {
         console.error('Error fetching users:', error);

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGaugeHigh, faListUl, faMagnifyingGlass, faPlus, faCircleDot } from '@fortawesome/free-solid-svg-icons';
 import './home.css';
-import { useAuth } from '../Account/authContext';
+import { useAuth } from '../Account/AuthContext/authContext';
 import LogoTemplate from './LogoTemplate';
 import NewTask from '../Tasks/NewTask';
 import axios from 'axios';
@@ -37,7 +37,7 @@ function HomeColFirst() {
     const fetchSuggestions = async (inputValue) => {
 
         try {
-            const response = await axios.get(`http://localhost:3500/tasks/?q=${inputValue}`);
+            const response = await axios.get(`http://localhost:3502/tasks/?q=${inputValue}`);
             const newSuggestions = response.data.map((task) => ({
                 title: task.title,
                 description: task.description,

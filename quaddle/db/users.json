@@ -2,10 +2,10 @@
   "users": [
     {
       "username": "blazej2533",
-      "password": "$2a$10$nGZhMkWwRwUlbHGrQssP4eEYcpKsymlKVZlu80.L6fRdm6vNlQ6s6",
+      "password": "$2a$10$1CfJWlyB.G/u3kZfdhld5uwpqfIJOwmrAfNCKczGCLUqz.zcqouMG",
       "name": "Błażej",
       "surname": "Szczesny",
-      "isAdmin": false,
+      "isAdmin": true,
       "initials": "BS",
       "logoColor": "#178326",
       "id": 1
@@ -19,152 +19,96 @@
       "initials": "EN",
       "logoColor": "#E58489",
       "id": 2
-    }
-  ],
-  "tasks": [
-    {
-      "title": "siemka",
-      "description": "Siemka",
-      "clientID": 1,
-      "createDate": "09-12-2023",
-      "createHour": "21:20:51",
-      "lastModification": "10-12-2023",
-      "lastModificationHour": "16:37:48",
-      "closeDate": "10-12-2023",
-      "closeHour": "16:37:48",
-      "priority": 2,
-      "difficulty": "",
-      "solver": "English",
-      "status": "Close",
-      "unit": "IT",
-      "contactNumber": "123321123",
-      "id": 1
-    }
-  ],
-  "notification": [
-    {
-      "notificationText": "created post ",
-      "taskId": 1,
-      "notificationDate": "09-12-2023",
-      "notificationTime": "21:20:51",
-      "createdBy": {
-        "id": 1,
-        "initials": "BS",
-        "logoColor": "#EFDC4A",
-        "name": "Błażej",
-        "surname": "Szczesny",
-        "username": "blazej2533"
-      },
-      "id": 1
     },
     {
-      "notificationText": "added a comment for",
-      "taskId": 1,
-      "notificationDate": "09-12-2023",
-      "notificationTime": "21:21:02",
-      "createdBy": {
-        "id": 1,
-        "initials": "BS",
-        "logoColor": "#EFDC4A",
-        "name": "Błażej",
-        "surname": "Szczesny",
-        "username": "blazej2533"
-      },
-      "id": 2
+      "id": 3,
+      "username": "user13",
+      "password": "$2a$10$XIuORY8UVthyInijLIzKnese8VAkvWxW1G1GTivLoy7Yrl6qsreeq",
+      "name": "John",
+      "surname": "Doe",
+      "isAdmin": false,
+      "initials": "JD",
+      "logoColor": "#3498db"
     },
     {
-      "notificationText": "added a comment for",
-      "taskId": 1,
-      "notificationDate": "09-12-2023",
-      "notificationTime": "21:22:04",
-      "createdBy": {
-        "id": 1,
-        "initials": "BS",
-        "logoColor": "#EFDC4A",
-        "name": "Błażej2",
-        "surname": "Szczesny",
-        "username": "blazej2533"
-      },
-      "id": 3
+      "id": 4,
+      "username": "user2",
+      "password": "$2a$10$abcdefghijklmnopqrstuvwx/abcdefghijklmnopqrstuvwi0X5g.DtY7S",
+      "name": "Alice",
+      "surname": "Johnson",
+      "isAdmin": true,
+      "initials": "AJ",
+      "logoColor": "#e74c3c"
     },
     {
-      "notificationText": "updated post ",
-      "taskId": 1,
-      "notificationDate": "10-12-2023",
-      "notificationTime": "16:37:05",
-      "createdBy": {
-        "id": 2,
-        "initials": "EN",
-        "logoColor": "#E58489",
-        "name": "English",
-        "surname": "Nomma",
-        "username": "tets"
-      },
-      "id": 4
+      "id": 5,
+      "username": "user3",
+      "password": "$2a$10$abcdefghijklmnopqrstuvwx/abcdefghijklmnopqrstuvwi0X5g.DtY7S",
+      "name": "Bob",
+      "surname": "Smith",
+      "isAdmin": false,
+      "initials": "BS",
+      "logoColor": "#2ecc71"
     },
     {
-      "notificationText": "updated post ",
-      "taskId": 1,
-      "notificationDate": "10-12-2023",
-      "notificationTime": "16:37:28",
-      "createdBy": {
-        "id": 2,
-        "initials": "EN",
-        "logoColor": "#E58489",
-        "name": "English",
-        "surname": "Nomma",
-        "username": "tets"
-      },
-      "id": 5
+      "id": 6,
+      "username": "user4",
+      "password": "$2a$10$YSh9BPpm9wIqH7aeTJAll.ZNt0pworiqpitfpaK/Adr13N.R6hkfu",
+      "name": "Eva",
+      "surname": "White",
+      "isAdmin": true,
+      "initials": "EW",
+      "logoColor": "#f39c12"
     },
     {
-      "notificationText": "closed post",
-      "taskId": 1,
-      "notificationDate": "10-12-2023",
-      "notificationTime": "16:37:48",
-      "createdBy": {
-        "id": 2,
-        "initials": "EN",
-        "logoColor": "#E58489",
-        "name": "English",
-        "surname": "Nomma",
-        "username": "tets"
-      },
-      "id": 6
-    }
-  ],
-  "messages": [
-    {
-      "message": "ok",
-      "clientID": 1,
-      "taskID": 1,
-      "messageSender": {
-        "id": 1,
-        "initials": "BS",
-        "logoColor": "#EFDC4A",
-        "name": "Błażej",
-        "surname": "Szczesny",
-        "username": "blazej2533"
-      },
-      "createDate": "09-12-2023",
-      "createHour": "21:21:02",
-      "id": 1
+      "id": 7,
+      "username": "user5",
+      "password": "$2a$10$abcdefghijklmnopqrstuvwx/abcdefghijklmnopqrstuvwi0X5g.DtY7S",
+      "name": "Michael",
+      "surname": "Brown",
+      "isAdmin": false,
+      "initials": "MB",
+      "logoColor": "#9b59b6"
     },
     {
-      "message": "dsa",
-      "clientID": 1,
-      "taskID": 1,
-      "messageSender": {
-        "id": 1,
-        "initials": "BS",
-        "logoColor": "#EFDC4A",
-        "name": "Błażej2",
-        "surname": "Szczesny",
-        "username": "blazej2533"
-      },
-      "createDate": "09-12-2023",
-      "createHour": "21:22:04",
-      "id": 2
+      "id": 8,
+      "username": "user6",
+      "password": "$2a$10$abcdefghijklmnopqrstuvwx/abcdefghijklmnopqrstuvwi0X5g.DtY7S",
+      "name": "Olivia",
+      "surname": "Miller",
+      "isAdmin": true,
+      "initials": "OM",
+      "logoColor": "#34495e"
+    },
+    {
+      "id": 9,
+      "username": "user7",
+      "password": "$2a$10$abcdefghijklmnopqrstuvwx/abcdefghijklmnopqrstuvwi0X5g.DtY7S",
+      "name": "David",
+      "surname": "Jones",
+      "isAdmin": false,
+      "initials": "DJ",
+      "logoColor": "#e67e22"
+    },
+    {
+      "id": 10,
+      "username": "user8",
+      "password": "$2a$10$abcdefghijklmnopqrstuvwx/abcdefghijklmnopqrstuvwi0X5g.DtY7S",
+      "name": "Sophia",
+      "surname": "Williams",
+      "isAdmin": true,
+      "initials": "SW",
+      "logoColor": "#16a085"
+    },
+    {
+      "id": 11,
+      "username": "user9",
+      "password": "$2a$10$abcdefghijklmnopqrstuvwx/abcdefghijklmnopqrstuvwi0X5g.DtY7S",
+      "name": "Daniel",
+      "surname": "Wilson",
+      "isAdmin": false,
+      "initials": "DW",
+      "logoColor": "#c0392b"
     }
   ]
 }

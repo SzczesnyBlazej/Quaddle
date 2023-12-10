@@ -18,7 +18,7 @@ function UnitsChart({ user }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3500/tasks');
+                const response = await axios.get('http://localhost:3502/tasks');
                 const taskData = response.data;
                 // const taskDataFiltered = taskData.filter(task => task.solver === user.name);
 

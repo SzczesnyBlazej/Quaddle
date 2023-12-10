@@ -12,7 +12,7 @@ function HomeColThree() {
     const fetchData = async () => {
         try {
 
-            const response = await axios.get('http://localhost:3500/notification?_sort=id&_order=desc&_limit=25');
+            const response = await axios.get('http://localhost:3503/notification?_sort=id&_order=desc&_limit=25');
             const recordsWithTaskDetails = await getTaskDetails(response.data);
 
             setLast10Records(recordsWithTaskDetails);
@@ -36,10 +36,10 @@ function HomeColThree() {
         const tasksWithDetails = await Promise.all(
             notifications.map(async (notification) => {
                 const taskId = notification.taskId;
-                const taskResponse = await axios.get(`http://localhost:3500/tasks/${taskId}`);
+                const taskResponse = await axios.get(`http://localhost:3502/tasks/${taskId}`);
                 const taskDetails = taskResponse.data;
 
-                const userResponse = await axios.get(`http://localhost:3500/users/${taskDetails.clientID}`);
+                const userResponse = await axios.get(`http://localhost:3501/users/${taskDetails.clientID}`);
                 const userDetails = userResponse.data;
 
                 return {

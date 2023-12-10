@@ -15,7 +15,7 @@ const TaskPage = () => {
     useEffect(() => {
         const fetchTaskById = async () => {
             try {
-                const response = await axios.get(`http://localhost:3500/tasks/${taskId}`);
+                const response = await axios.get(`http://localhost:3502/tasks/${taskId}`);
                 setTask(response.data);
             } catch (error) {
                 showNotification(`Error fetching task with ID ${taskId}:`, error.message);

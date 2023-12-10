@@ -6,7 +6,7 @@ export async function getTaskCounts(user) {
 
     try {
 
-        const response = await axios.get('http://localhost:3500/tasks');
+        const response = await axios.get('http://localhost:3502/tasks');
         const taskData = response.data;
 
         const today = formatDate(new Date().toLocaleDateString('en-GB')); // Format: dd-mm-yyyy
