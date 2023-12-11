@@ -23,7 +23,7 @@ const AllowOnlyAdmin = ({ children }) => {
         };
 
         fetchData();
-    }, []);
+    }, [showNotification]);
 
     return isAdmin ? <>{children}</> : null;
 };

@@ -8,11 +8,11 @@ import { UnitEnum } from '../Enums/UnitEnum';
 const NewTask = ({ onClose }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [difficulty, setDifficulty] = useState('');
-    const [solver, setSolver] = useState('');
+    const [difficulty] = useState('');
+    const [solver] = useState('');
     const [unit, setUnit] = useState('');
-    const [closeDate, setCloseDate] = useState('');
-    const [closeHour, setCloseHour] = useState('');
+    const [closeDate] = useState('');
+    const [closeHour] = useState('');
     const [contactNumber, setContactNumber] = useState('');
 
     const [addTaskError, setAddTaskError] = useState('');

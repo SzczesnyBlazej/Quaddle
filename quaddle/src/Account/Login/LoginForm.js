@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext/authContext';
 import { useNotification } from '../../Functions/NotificationContext';
-import bcrypt from 'bcryptjs';  // Import bcryptjs
+import bcrypt from 'bcryptjs';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');

@@ -25,7 +25,7 @@ const MyTasks = () => {
                 console.error('Error fetching tasks:', error);
 
             });
-    }, []);
+    }, [userName]);
     const additionalColumns = [
         {
             accessorKey: 'solver',

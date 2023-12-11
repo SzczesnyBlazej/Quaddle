@@ -22,7 +22,7 @@ function MyAllClosedTask() {
             .catch(error => {
                 console.error('Error fetching tasks:', error);
             });
-    }, []);
+    }, [userName]);
     const additionalColumns = [
 
         {

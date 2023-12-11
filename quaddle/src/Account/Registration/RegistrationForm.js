@@ -11,10 +11,8 @@ const RegistrationForm = () => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [isAdmin] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [initials, setInitials] = useState('');
-    const [LogoColor, setLogoColor] = useState(getRandomColor());
     const [registrationError, setRegistrationError] = useState('');
     const navigate = useNavigate();
     const showNotification = useNotification();
@@ -53,8 +51,7 @@ const RegistrationForm = () => {
                 setRegistrationError('The specified username already exists');
                 return;
             }
-
-            const response = await axios.post('http://localhost:3501/users', {
+            await axios.post('http://localhost:3501/users', {
                 username,
                 password: hashedPassword,
                 name,
@@ -63,6 +60,7 @@ const RegistrationForm = () => {
                 initials: calculatedInitials,
                 logoColor: getRandomColor(),
             });
+
 
             setRegistrationError('');
             navigate('/');

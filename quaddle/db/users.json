@@ -169,6 +169,26 @@
       "initials": "MS",
       "logoColor": "#10157A",
       "id": 17
+    },
+    {
+      "username": "blazej2533321312",
+      "password": "$2a$10$Z/tDgF/SI2MBdhvkBX1O8ORv7ef4L0wXej9ekamyaJatRP.QhYV/K",
+      "name": "312",
+      "surname": "321",
+      "isAdmin": false,
+      "initials": "33",
+      "logoColor": "#5D986C",
+      "id": 18
+    },
+    {
+      "username": "blazej2533321321321",
+      "password": "$2a$10$e4UrTKI/15eX/huAcfMBtuYFHGsN1fakrr6wfmI0Zu7m/i5R6mtdy",
+      "name": "English",
+      "surname": "123",
+      "isAdmin": false,
+      "initials": "E1",
+      "logoColor": "#A010CD",
+      "id": 19
     }
   ]
 }

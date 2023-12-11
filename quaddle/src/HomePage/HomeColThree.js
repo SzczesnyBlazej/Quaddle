@@ -9,28 +9,26 @@ function HomeColThree() {
     const [last10Records, setLast10Records] = useState([]);
     const showNotification = useNotification();
 
-    const fetchData = async () => {
-        try {
-
-            const response = await axios.get('http://localhost:3503/notification?_sort=id&_order=desc&_limit=25');
-            const recordsWithTaskDetails = await getTaskDetails(response.data);
-
-            setLast10Records(recordsWithTaskDetails);
-        } catch (error) {
-            showNotification('Error fetching last 25 records:', error.message);
-
-        }
-    };
-
     useEffect(() => {
-        fetchData();
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:3503/notification?_sort=id&_order=desc&_limit=25');
+                const recordsWithTaskDetails = await getTaskDetails(response.data);
+                setLast10Records(recordsWithTaskDetails);
+            } catch (error) {
+                showNotification('Error fetching last 25 records:', error.message);
+            }
+        };
+
+        fetchData(); // Initial fetch
 
         const intervalId = setInterval(() => {
             fetchData();
         }, 120000);
 
         return () => clearInterval(intervalId);
-    }, []);
+    }, [showNotification]); // Include showNotification as a dependency if it's used inside fetchData
+
 
     const getTaskDetails = async (notifications) => {
         const tasksWithDetails = await Promise.all(

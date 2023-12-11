@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import LogoCircleTemplate from '../Templates/LogoCircleTemplate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,18 +14,18 @@ const TaskContent = ({ task }) => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const { user } = useAuth();
-    const fetchMessages = async () => {
+
+    const fetchMessages = useCallback(async () => {
         try {
             if (task) {
-
                 const response = await axios.get(`http://localhost:3504/messages?taskID=${task?.id}`);
                 setMessages(response.data);
             }
         } catch (error) {
             showNotification('Error fetching messages:', error.message);
-
         }
-    };
+    }, [task, showNotification]);
+
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
@@ -35,14 +35,12 @@ const TaskContent = ({ task }) => {
                 }
             } catch (error) {
                 showNotification('Error fetching user details:', error.message);
-
             }
         };
 
-
         fetchUserDetails();
         fetchMessages();
-    }, [task?.clientID]);
+    }, [task?.clientID, showNotification, fetchMessages, task]);
 
     const updateMessage = async (e) => {
         e.preventDefault();
