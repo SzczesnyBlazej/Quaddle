@@ -1,0 +1,40 @@
+{
+  "tasks": [
+    {
+      "title": "siemka",
+      "description": "Siemka",
+      "clientID": 1,
+      "createDate": "09-12-2023",
+      "createHour": "21:20:51",
+      "lastModification": "10-12-2023",
+      "lastModificationHour": "23:23:44",
+      "closeDate": "10-12-2023",
+      "closeHour": "18:30:51",
+      "priority": 2,
+      "difficulty": "",
+      "solver": "Błażej",
+      "status": "Open",
+      "unit": "IT",
+      "contactNumber": "123321123",
+      "id": 1
+    },
+    {
+      "title": "fas",
+      "description": "fas",
+      "clientID": 1,
+      "createDate": "10-12-2023",
+      "createHour": "18:43:12",
+      "lastModification": "10-12-2023",
+      "lastModificationHour": "18:44:36",
+      "closeDate": "10-12-2023",
+      "closeHour": "18:44:36",
+      "priority": 2,
+      "difficulty": "",
+      "solver": "Błażej",
+      "status": "Close",
+      "unit": "ZDO",
+      "contactNumber": "1234",
+      "id": 2
+    }
+  ]
+}

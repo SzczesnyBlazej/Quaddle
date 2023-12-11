@@ -1,0 +1,116 @@
+{
+  "messages": [
+    {
+      "message": "ok",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "09-12-2023",
+      "createHour": "21:21:02",
+      "id": 1
+    },
+    {
+      "message": "dsa",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#EFDC4A",
+        "name": "Błażej2",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "09-12-2023",
+      "createHour": "21:22:04",
+      "id": 2
+    },
+    {
+      "message": "heh\n",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#178326",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "10-12-2023",
+      "createHour": "18:31:02",
+      "id": 3
+    },
+    {
+      "message": "dasdas",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#178326",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "10-12-2023",
+      "createHour": "19:00:36",
+      "id": 4
+    },
+    {
+      "message": "dsadsadas",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#178326",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "10-12-2023",
+      "createHour": "19:00:38",
+      "id": 5
+    },
+    {
+      "message": "dsadsadsa",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#178326",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "10-12-2023",
+      "createHour": "19:00:40",
+      "id": 6
+    },
+    {
+      "message": "dsadasdsa",
+      "clientID": 1,
+      "taskID": 1,
+      "messageSender": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#178326",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "createDate": "10-12-2023",
+      "createHour": "19:00:41",
+      "id": 7
+    }
+  ]
+}
