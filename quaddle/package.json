@@ -13,13 +13,13 @@
     "axios": "^1.6.2",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.2",
-    "crypto-browserify": "^3.12.0",
     "json-server": "^0.17.4",
     "material-react-table": "^2.0.5",
     "react": "^18.2.0",
     "react-autosuggest": "^10.1.0",
     "react-bootstrap": "^2.9.1",
     "react-bootstrap-icons": "^1.10.3",
+    "react-dnd": "^16.0.1",
     "react-dom": "^18.2.0",
     "react-resizable": "^3.0.5",
     "react-router-dom": "^6.18.0",
@@ -31,14 +31,14 @@
   },
   "scripts": {
     "start": "concurrently \"npm run start-app\" \"npm run server-users\" \"npm run server-tasks\" \"npm run server-notifications\" \"npm run server-messages\"",
-    "start-app": "set PORT=5000 && react-scripts start",
+    "start-app": "set PORT=5000 && react-app-rewired start",
     "server-users": "npx json-server -p 3501 -w ./db/users.json",
     "server-tasks": "npx json-server -p 3502 -w ./db/tasks.json",
     "server-notifications": "npx json-server -p 3503 -w ./db/notifications.json",
     "server-messages": "npx json-server -p 3504 -w ./db/messages.json",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
     "extends": [
@@ -59,6 +59,16 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "assert": "^2.1.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "process": "^0.11.10",
+    "react-app-rewired": "^2.2.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.3"
   }
 }
