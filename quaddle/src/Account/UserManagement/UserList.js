@@ -1,5 +1,8 @@
 // UserList.js
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 const UserList = ({
     searchTerm,
@@ -31,6 +34,7 @@ const UserList = ({
                         <div className="row g-2" key={user.id}>
                             <div className="col-md-8 d-flex align-items-center">
                                 <li className="nav-link">
+                                    <FontAwesomeIcon icon={faCircle} style={{ color: user.logoColor }} className='pe-2' />
                                     {user.name} {user.surname} ({user.username})
                                 </li>
                             </div>

@@ -17,8 +17,6 @@ const EditUserForm = ({
                     <form onSubmit={handleEditFormSubmit}>
                         <div className='row'>
                             <h4 className='p-3'>Personal data of user ID:{editingUser.id}</h4>
-                            <div className='row'>
-                            </div>
                             <div className="mb-3 col-md-4">
                                 <label htmlFor="editName" className="form-label">
                                     Name:
@@ -60,11 +58,56 @@ const EditUserForm = ({
                             </div>
                         </div>
                         <div className='row'>
+                            <div className="mb-3 col-md-4">
+                                <label htmlFor="editUserEmail" className="form-label">
+                                    Email:
+                                </label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    id="editUserEmail"
+                                    name="email"
+                                    value={editingUser.email}
+                                    onChange={handleEditFormChange}
+                                />
+                            </div>
+                            <div className="mb-3 col-md-4">
+                                <label htmlFor="editUserPhone" className="form-label">
+                                    Phone:
+                                </label>
+                                <input
+                                    type="tel"
+                                    className="form-control"
+                                    id="editUserPhone"
+                                    name="phone"
+                                    value={editingUser.phone}
+                                    onChange={handleEditFormChange}
+                                />
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <h4 className='p-3'>Design</h4>
+                            <div className="mb-3 col-md-3">
+                                <label htmlFor="editLogoColor" className="form-label">
+                                    Logo Color:
+                                </label>
+                                <input
+                                    type="color"
+                                    className="form-control form-control-color"
+                                    id="editLogoColor"
+                                    name="logoColor"
+                                    value={editingUser.logoColor}
+                                    onChange={handleEditFormChange}
+                                />
+                            </div>
+
+                        </div>
+                        <div className='row'>
                             <h4 className='p-3'>Role</h4>
                             <div className='col-md-3'>
                                 <div className="form-check">
                                     <input
-                                        className="form-check-input"
+                                        className="form-check-input bg-transparent border border-white"
                                         type="checkbox"
                                         id="editIsAdmin"
                                         name="isAdmin"

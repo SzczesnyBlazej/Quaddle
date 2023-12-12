@@ -1,9 +1,10 @@
-// TaskList.js
 import React from 'react';
 import { useMaterialReactTable, MaterialReactTable } from 'material-react-table';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleDot } from '@fortawesome/free-solid-svg-icons';
 
 const TaskList = ({ tasks, columnaaaaa }) => {
     const darkTheme = createTheme({
@@ -19,12 +20,32 @@ const TaskList = ({ tasks, columnaaaaa }) => {
         },
     });
 
+    const getStatusIconColor = (status) => {
+        return status === 'Open' ? '#00a347' : status === 'Close' ? 'gray' : 'yellow';
+    };
+
     // Existing columns
     const existingColumns = [
         {
+            header: 'Status',
+            Cell: ({ row }) => (
+                <div className='text-center'>
+                    <FontAwesomeIcon
+                        icon={faCircleDot}
+                        style={{
+                            color: getStatusIconColor(row.original.status),
+                        }}
+                    />
+                </div>
+            ),
+            disableFilters: true,
+            disableColumnMenu: true,
+            maxSize: 10,
+        },
+        {
             accessorKey: 'id',
-            header: 'id',
-            size: 30,
+            header: 'ID',
+            maxSize: 100,
         },
         {
             id: 'title',
@@ -36,10 +57,15 @@ const TaskList = ({ tasks, columnaaaaa }) => {
                         data-tooltip-id="my-tooltip-styles"
                         data-tooltip-content={row.original.title}
                         className="truncate-text"
-                        style={{ display: 'inline-block', maxHeight: '30px', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}
+                        style={{
+                            display: 'inline-block',
+                            maxHeight: '30px',
+                            overflow: 'hidden',
+                            whiteSpace: 'nowrap',
+                            textOverflow: 'ellipsis',
+                        }}
                     >
                         {row.original.title}
-
                     </div>
                     <Tooltip id="my-tooltip-styles" arrowColor="transparent" />
                 </Link>
@@ -49,12 +75,10 @@ const TaskList = ({ tasks, columnaaaaa }) => {
         {
             accessorKey: 'unit',
             header: 'Unit',
-            size: 30,
         },
         {
             accessorKey: 'priority',
             header: 'Priority',
-            size: 30,
         },
         {
             accessorKey: 'difficulty',
@@ -76,8 +100,8 @@ const TaskList = ({ tasks, columnaaaaa }) => {
             header: 'Last Modification',
             size: 130,
         },
-
     ];
+
     // Combine existing columns with additional columns
     const allColumns = [...existingColumns, ...columnaaaaa];
 
@@ -87,7 +111,7 @@ const TaskList = ({ tasks, columnaaaaa }) => {
         enableSearch: true,
         defaultColumn: {
             maxSize: 300,
-            minSize: 80,
+            minSize: 10,
             size: 160,
         },
         enableColumnResizing: true,
@@ -95,9 +119,7 @@ const TaskList = ({ tasks, columnaaaaa }) => {
     });
 
     return (
-
         <div className="p-3 col-md-8 text-light dark-bg min-vh-100 border-start border-secondary">
-
             <div className="table-responsive" style={{ maxHeight: '100vh', overflowY: 'auto' }}>
                 <ThemeProvider theme={darkTheme}>
                     <MaterialReactTable table={table} />

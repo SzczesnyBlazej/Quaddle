@@ -6,14 +6,14 @@
       "clientID": 1,
       "createDate": "09-12-2023",
       "createHour": "21:20:51",
-      "lastModification": "10-12-2023",
-      "lastModificationHour": "23:23:44",
-      "closeDate": "10-12-2023",
-      "closeHour": "18:30:51",
+      "lastModification": "12-12-2023",
+      "lastModificationHour": "23:33:49",
+      "closeDate": "12-12-2023",
+      "closeHour": "23:33:49",
       "priority": 2,
-      "difficulty": "",
+      "difficulty": "Medium",
       "solver": "Błażej",
-      "status": "Open",
+      "status": "Close",
       "unit": "IT",
       "contactNumber": "123321123",
       "id": 1
@@ -35,6 +35,24 @@
       "unit": "ZDO",
       "contactNumber": "1234",
       "id": 2
+    },
+    {
+      "title": "Testuje",
+      "description": "Testuje",
+      "clientID": 1,
+      "createDate": "12-12-2023",
+      "createHour": "23:41:27",
+      "lastModification": "12-12-2023",
+      "lastModificationHour": "23:41:43",
+      "closeDate": "",
+      "closeHour": "",
+      "priority": 2,
+      "difficulty": "",
+      "solver": "Błażej",
+      "status": "Open",
+      "unit": "ZRR",
+      "contactNumber": "123321123",
+      "id": 3
     }
   ]
 }

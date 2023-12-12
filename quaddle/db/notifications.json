@@ -254,6 +254,36 @@
         "username": "blazej2533"
       },
       "id": 17
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 3,
+      "notificationDate": "12-12-2023",
+      "notificationTime": "23:41:27",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#4e6a52",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 18
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 3,
+      "notificationDate": "12-12-2023",
+      "notificationTime": "23:41:43",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#4e6a52",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 19
     }
   ]
 }
