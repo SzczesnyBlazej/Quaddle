@@ -5,6 +5,7 @@ import TaskList from './TaskList';
 import MenuTaskList from './MenuTaskList';
 import { useAuth } from '../Account/AuthContext/authContext';
 
+
 const MyTasks = () => {
     const [tasks, setTasks] = useState([]);
     const { user } = useAuth();
@@ -28,10 +29,9 @@ const MyTasks = () => {
     }, [userName]);
     const additionalColumns = [
         {
-            accessorKey: 'solver',
-            header: 'Solver',
-            size: 130,
-        }
+
+        },
+
     ];
 
     return (

@@ -29,6 +29,13 @@ const ColumnTemplate = ({ additionalColumns = [] }) => {
             ),
             size: 200,
         },
+        {
+            id: 'clientID',
+            accessorKey: 'clientID',
+            header: 'Client',
+            size: 130,
+            Cell: ({ row }) => <Link to={'#'} className='nav-link'><AsyncClientData clientId={row.original.clientID} /></Link>,
+        },
 
         {
             accessorKey: 'unit',

@@ -5,6 +5,10 @@ import { Tooltip } from 'react-tooltip';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleDot } from '@fortawesome/free-solid-svg-icons';
+import { OverlayTrigger } from 'react-bootstrap';
+import AsyncClientData from './Functions/AsyncClientData';
+import { ClientPopover } from './Templates/clientPopover';
+
 
 const TaskList = ({ tasks, columnaaaaa }) => {
     const darkTheme = createTheme({
@@ -24,10 +28,11 @@ const TaskList = ({ tasks, columnaaaaa }) => {
         return status === 'Open' ? '#00a347' : status === 'Close' ? 'gray' : 'yellow';
     };
 
+
     // Existing columns
     const existingColumns = [
         {
-            header: 'Status',
+            header: 'Status Icon',
             Cell: ({ row }) => (
                 <div className='text-center'>
                     <FontAwesomeIcon
@@ -41,11 +46,14 @@ const TaskList = ({ tasks, columnaaaaa }) => {
             disableFilters: true,
             disableColumnMenu: true,
             maxSize: 10,
+            enableColumnActions: false,
+
         },
         {
             accessorKey: 'id',
             header: 'ID',
             maxSize: 100,
+
         },
         {
             id: 'title',
@@ -73,12 +81,36 @@ const TaskList = ({ tasks, columnaaaaa }) => {
             size: 200,
         },
         {
+            id: 'clientID',
+            accessorKey: 'clientID',
+            header: 'Client',
+            size: 130,
+            Cell: ({ row }) => (
+                <>
+                    <OverlayTrigger
+                        trigger={['hover', 'focus']}
+                        placement="right"
+                        overlay={ClientPopover({ clientId: row.original.clientID })}
+                    >
+                        <Link to={'#'} className='nav-link'>
+                            <AsyncClientData clientId={row.original.clientID} />
+                        </Link>
+                    </OverlayTrigger>
+
+                </>
+            ),
+        },
+        {
             accessorKey: 'unit',
             header: 'Unit',
+            size: 100,
+
         },
         {
             accessorKey: 'priority',
             header: 'Priority',
+            size: 100,
+
         },
         {
             accessorKey: 'difficulty',
@@ -102,8 +134,7 @@ const TaskList = ({ tasks, columnaaaaa }) => {
         },
     ];
 
-    // Combine existing columns with additional columns
-    const allColumns = [...existingColumns, ...columnaaaaa];
+    const allColumns = columnaaaaa[0].accessorKey === undefined ? existingColumns : [...existingColumns, ...columnaaaaa];
 
     const table = useMaterialReactTable({
         columns: allColumns,
@@ -116,6 +147,7 @@ const TaskList = ({ tasks, columnaaaaa }) => {
         },
         enableColumnResizing: true,
         columnResizeMode: 'onChange',
+
     });
 
     return (

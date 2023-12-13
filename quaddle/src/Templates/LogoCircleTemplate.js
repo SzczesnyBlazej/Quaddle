@@ -5,6 +5,4 @@ const LogoCircleTemplate = (user) =>
         <span className="text-white fw-bold">{user?.initials}</span>
     </div>
 
-
-
 export default LogoCircleTemplate

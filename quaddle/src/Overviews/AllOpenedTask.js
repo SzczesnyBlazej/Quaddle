@@ -24,7 +24,8 @@ function AllOpenedTask() {
             accessorKey: 'solver',
             header: 'Solver',
             size: 130,
-        }
+        },
+
     ];
 
     return (

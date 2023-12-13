@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGaugeHigh, faListUl, faMagnifyingGlass, faPlus, faCircleDot } from '@fortawesome/free-solid-svg-icons';
+import { faGaugeHigh, faListUl, faMagnifyingGlass, faPlus, faCircleDot, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import './home.css';
 import { useAuth } from '../Account/AuthContext/authContext';
 import LogoTemplate from './LogoTemplate';
@@ -148,13 +148,22 @@ function HomeColFirst() {
                             type="button"
                             className="btn dropdown-toggle rounded-circle dropdown-toggle-no-arrow border-0"
                             onClick={handleNewTaskButtonClick}>
-                            <div className="rounded-circle d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px', backgroundColor: user?.logoColor }}>
-                                <span className="text-white"><FontAwesomeIcon icon={faPlus} size="2xl" /></span>
+                            <div className="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
+                                <span><FontAwesomeIcon icon={faPlus} size="2xl" /></span>
                             </div>
                         </button>
                         {showNewTask && <NewTask onClose={() => setShowNewTask(false)} />}
                     </div>
-                    <div className='col-md-4'>3</div>
+                    <div className='col-md-4'>
+                        <button
+                            type="button"
+                            className="btn rounded-circle border-0"
+                        >
+                            <div className="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
+                                <span><FontAwesomeIcon icon={faQuestion} size="2xl" /></span>
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

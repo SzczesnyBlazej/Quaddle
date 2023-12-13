@@ -284,6 +284,21 @@
         "username": "blazej2533"
       },
       "id": 19
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 2,
+      "notificationDate": "13-12-2023",
+      "notificationTime": "22:07:38",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#4e6a52",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 20
     }
   ]
 }

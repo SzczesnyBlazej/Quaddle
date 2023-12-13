@@ -126,6 +126,7 @@ const AutoCompleteSearch = () => {
     return (
         <div className="row g-0">
             <HomeColFirst />
+
             <UserList
                 searchTerm={searchTerm}
                 handleSearch={handleSearch}
