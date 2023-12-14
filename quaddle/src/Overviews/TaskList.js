@@ -25,7 +25,7 @@ const TaskList = ({ tasks, columnaaaaa }) => {
     });
 
     const getStatusIconColor = (status) => {
-        return status === 'Open' ? '#00a347' : status === 'Close' ? 'gray' : 'yellow';
+        return status === 'Open' ? 'orange' : status === 'Close' ? '#00a347' : 'gray';
     };
 
 
@@ -88,8 +88,9 @@ const TaskList = ({ tasks, columnaaaaa }) => {
             Cell: ({ row }) => (
                 <>
                     <OverlayTrigger
-                        trigger={['hover', 'focus']}
+                        trigger={['click']}
                         placement="right"
+                        rootClose
                         overlay={ClientPopover({ clientId: row.original.clientID })}
                     >
                         <Link to={'#'} className='nav-link'>

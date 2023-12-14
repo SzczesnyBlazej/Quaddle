@@ -1,116 +1,36 @@
 {
   "messages": [
     {
-      "message": "ok",
-      "clientID": 1,
-      "taskID": 1,
+      "message": "Enhanced system-worthy installation",
+      "clientID": 11,
+      "taskID": 99,
       "messageSender": {
         "id": 1,
         "initials": "BS",
-        "logoColor": "#EFDC4A",
+        "logoColor": "#4e6a52",
         "name": "Błażej",
         "surname": "Szczesny",
         "username": "blazej2533"
       },
-      "createDate": "09-12-2023",
-      "createHour": "21:21:02",
+      "createDate": "14-12-2023",
+      "createHour": "23:16:46",
       "id": 1
     },
     {
-      "message": "dsa",
-      "clientID": 1,
-      "taskID": 1,
+      "message": "In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n",
+      "clientID": 11,
+      "taskID": 99,
       "messageSender": {
-        "id": 1,
-        "initials": "BS",
-        "logoColor": "#EFDC4A",
-        "name": "Błażej2",
-        "surname": "Szczesny",
-        "username": "blazej2533"
+        "id": 2,
+        "initials": "EN",
+        "logoColor": "#b38d4d",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "tets"
       },
-      "createDate": "09-12-2023",
-      "createHour": "21:22:04",
+      "createDate": "14-12-2023",
+      "createHour": "23:17:04",
       "id": 2
-    },
-    {
-      "message": "heh\n",
-      "clientID": 1,
-      "taskID": 1,
-      "messageSender": {
-        "id": 1,
-        "initials": "BS",
-        "logoColor": "#178326",
-        "name": "Błażej",
-        "surname": "Szczesny",
-        "username": "blazej2533"
-      },
-      "createDate": "10-12-2023",
-      "createHour": "18:31:02",
-      "id": 3
-    },
-    {
-      "message": "dasdas",
-      "clientID": 1,
-      "taskID": 1,
-      "messageSender": {
-        "id": 1,
-        "initials": "BS",
-        "logoColor": "#178326",
-        "name": "Błażej",
-        "surname": "Szczesny",
-        "username": "blazej2533"
-      },
-      "createDate": "10-12-2023",
-      "createHour": "19:00:36",
-      "id": 4
-    },
-    {
-      "message": "dsadsadas",
-      "clientID": 1,
-      "taskID": 1,
-      "messageSender": {
-        "id": 1,
-        "initials": "BS",
-        "logoColor": "#178326",
-        "name": "Błażej",
-        "surname": "Szczesny",
-        "username": "blazej2533"
-      },
-      "createDate": "10-12-2023",
-      "createHour": "19:00:38",
-      "id": 5
-    },
-    {
-      "message": "dsadsadsa",
-      "clientID": 1,
-      "taskID": 1,
-      "messageSender": {
-        "id": 1,
-        "initials": "BS",
-        "logoColor": "#178326",
-        "name": "Błażej",
-        "surname": "Szczesny",
-        "username": "blazej2533"
-      },
-      "createDate": "10-12-2023",
-      "createHour": "19:00:40",
-      "id": 6
-    },
-    {
-      "message": "dsadasdsa",
-      "clientID": 1,
-      "taskID": 1,
-      "messageSender": {
-        "id": 1,
-        "initials": "BS",
-        "logoColor": "#178326",
-        "name": "Błażej",
-        "surname": "Szczesny",
-        "username": "blazej2533"
-      },
-      "createDate": "10-12-2023",
-      "createHour": "19:00:41",
-      "id": 7
     }
   ]
 }

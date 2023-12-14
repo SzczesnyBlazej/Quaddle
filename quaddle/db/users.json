@@ -20,7 +20,9 @@
       "isAdmin": false,
       "initials": "EN",
       "logoColor": "#b38d4d",
-      "id": 2
+      "id": 2,
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "id": 3,
@@ -30,7 +32,9 @@
       "surname": "Doe",
       "isAdmin": true,
       "initials": "JD",
-      "logoColor": "#3498db"
+      "logoColor": "#3498db",
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "id": 4,
@@ -40,7 +44,9 @@
       "surname": "Johnson",
       "isAdmin": true,
       "initials": "AJ",
-      "logoColor": "#e74c3c"
+      "logoColor": "#e74c3c",
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "id": 5,
@@ -50,7 +56,9 @@
       "surname": "Smith",
       "isAdmin": false,
       "initials": "BS",
-      "logoColor": "#2ecc71"
+      "logoColor": "#2ecc71",
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "id": 6,
@@ -60,7 +68,9 @@
       "surname": "White",
       "isAdmin": true,
       "initials": "EW",
-      "logoColor": "#f39c12"
+      "logoColor": "#f39c12",
+      "phone": "333321",
+      "email": "39@gmail.com"
     },
     {
       "id": 7,
@@ -70,7 +80,9 @@
       "surname": "Brown",
       "isAdmin": false,
       "initials": "MB",
-      "logoColor": "#9b59b6"
+      "logoColor": "#9b59b6",
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "id": 8,
@@ -80,7 +92,9 @@
       "surname": "Miller",
       "isAdmin": true,
       "initials": "OM",
-      "logoColor": "#34495e"
+      "logoColor": "#34495e",
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "id": 9,
@@ -90,7 +104,9 @@
       "surname": "Jones",
       "isAdmin": false,
       "initials": "DJ",
-      "logoColor": "#e67e22"
+      "logoColor": "#e67e22",
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "id": 10,
@@ -100,7 +116,9 @@
       "surname": "Williams",
       "isAdmin": true,
       "initials": "SW",
-      "logoColor": "#16a085"
+      "logoColor": "#16a085",
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "id": 11,
@@ -110,7 +128,9 @@
       "surname": "Wilson",
       "isAdmin": false,
       "initials": "DW",
-      "logoColor": "#c0392b"
+      "logoColor": "#c0392b",
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "id": 12,
@@ -120,7 +140,9 @@
       "surname": "Brown",
       "isAdmin": false,
       "initials": "MB",
-      "logoColor": "#9b59b6"
+      "logoColor": "#9b59b6",
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "id": 13,
@@ -130,7 +152,9 @@
       "surname": "Miller",
       "isAdmin": true,
       "initials": "OM",
-      "logoColor": "#34495e"
+      "logoColor": "#34495e",
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "id": 14,
@@ -140,7 +164,9 @@
       "surname": "Jones",
       "isAdmin": false,
       "initials": "DJ",
-      "logoColor": "#e67e22"
+      "logoColor": "#e67e22",
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "id": 15,
@@ -150,7 +176,9 @@
       "surname": "Williams",
       "isAdmin": true,
       "initials": "SW",
-      "logoColor": "#16a085"
+      "logoColor": "#16a085",
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "id": 16,
@@ -160,7 +188,9 @@
       "surname": "Wilson",
       "isAdmin": false,
       "initials": "DW",
-      "logoColor": "#c0392b"
+      "logoColor": "#c0392b",
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "username": "blazej253333",
@@ -170,7 +200,9 @@
       "isAdmin": false,
       "initials": "MS",
       "logoColor": "#10157A",
-      "id": 17
+      "id": 17,
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "username": "blazejtest",
@@ -180,7 +212,9 @@
       "isAdmin": false,
       "initials": "33",
       "logoColor": "#5D986C",
-      "id": 18
+      "id": 18,
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     },
     {
       "username": "blazejtest2",
@@ -190,7 +224,9 @@
       "isAdmin": false,
       "initials": "EE",
       "logoColor": "#A010CD",
-      "id": 19
+      "id": 19,
+      "phone": "1233213212",
+      "email": "bszczesny59@gmail.com"
     }
   ]
 }

@@ -122,7 +122,7 @@ function HomeColFirst() {
                                         <FontAwesomeIcon
                                             icon={faCircleDot}
                                             style={{
-                                                color: suggestion.status === 'Open' ? "#00a347" : suggestion.status === 'Close' ? "gray" : "yellow",
+                                                color: suggestion.status === 'Open' ? 'orange' : suggestion.status === 'Close' ? '#00a347' : 'gray',
                                             }}
                                         />
                                     </div>
