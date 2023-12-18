@@ -142,6 +142,7 @@ function HomeColFirst() {
                 <div className='row text-center mb-3'>
                     <div className='col-md-4'>
                         {LogoTemplate(user)}
+
                     </div>
                     <div className='col-md-4'>
                         <button

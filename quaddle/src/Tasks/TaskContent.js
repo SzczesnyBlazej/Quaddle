@@ -6,6 +6,8 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { getCurrentDateFormatted, getCurrentTimeFormatted, sendNotification } from './Functions'
 import { useAuth } from '../Account/AuthContext/authContext';
 import { useNotification } from '../Functions/NotificationContext';
+import ClickableLogo from '../Templates/ClicableLogo';
+import { ClientPopover } from '../Overviews/Templates/clientPopover';
 
 const TaskContent = ({ task }) => {
     const showNotification = useNotification();
@@ -57,7 +59,6 @@ const TaskContent = ({ task }) => {
 
             sendNotification("added a comment for", task?.id);
 
-            // Clear the message input after posting
             setMessage('');
             fetchMessages();
 
@@ -72,7 +73,11 @@ const TaskContent = ({ task }) => {
             <div className="d-flex flex-column overflow-auto" style={{ maxHeight: '85vh' }}>
                 <div className='container custom-width'>
                     <div className='d-flex flex-column justify-content-center align-items-center pt-5 text-secondary'>
-                        {LogoCircleTemplate(clientDetail)}
+
+                        <ClickableLogo user={clientDetail} />
+                        {/* <ClientPopover user={task.clientID} /> */}
+
+
                         <h2 className='ps-3 pe-3 mt-4 mb-3 ms-5 me-5 light-bg rounded'>{task?.title}</h2>
                         <p className='text-secondary'>Ticket #{task?.id} {task?.createDate} at {task?.createHour}</p>
                     </div>
@@ -88,12 +93,15 @@ const TaskContent = ({ task }) => {
                             <p className="card-text text-secondary text-center"><small >{task?.createDate} at {task?.createHour}</small></p>
 
                         </div>
-                        <div className='col-md-1'>{LogoCircleTemplate(clientDetail)}</div>
+                        {/* <div className='col-md-1'>{LogoCircleTemplate(clientDetail)}</div> */}
+                        <div className='col-md-1'><ClickableLogo user={clientDetail} />
+                        </div>
                     </div>
                     {messages.map((message) => (
                         <div key={message?.id} className='row flex-row'>
                             {message.messageSender?.id !== user?.id ? (
-                                <div className='col-md-1 mt-3'>{LogoCircleTemplate(message.messageSender)}</div>
+                                <div className='col-md-1 mt-3'><ClickableLogo user={message.messageSender} /></div>
+                                // <div className='col-md-1 mt-3'>{LogoCircleTemplate(message.messageSender)}</div>
                             ) : (
                                 <div className='col-md-1'></div>
                             )}
@@ -109,7 +117,8 @@ const TaskContent = ({ task }) => {
                             </div>
 
                             {message.messageSender?.id === user?.id ? (
-                                <div className='col-md-1 mt-3'>{LogoCircleTemplate(message.messageSender)}</div>
+                                <div className='col-md-1 mt-3'><ClickableLogo user={message.messageSender} /></div>
+                                // <div className='col-md-1 mt-3'>{LogoCircleTemplate(message.messageSender)}</div>
                             ) : (
                                 <div className='col-md-1'></div>
                             )}

@@ -74,6 +74,113 @@
         "username": "tets"
       },
       "id": 5
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 99,
+      "notificationDate": "15-12-2023",
+      "notificationTime": "22:23:06",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 6
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 63,
+      "notificationDate": "15-12-2023",
+      "notificationTime": "22:29:40",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 7
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 63,
+      "notificationDate": "16-12-2023",
+      "notificationTime": "23:58:33",
+      "createdBy": {
+        "id": 2,
+        "initials": "EN",
+        "logoColor": "#b38d4d",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "tets"
+      },
+      "id": 8
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 63,
+      "notificationDate": "16-12-2023",
+      "notificationTime": "23:58:43",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 9
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 51,
+      "notificationDate": "17-12-2023",
+      "notificationTime": "00:06:26",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 10
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 51,
+      "notificationDate": "17-12-2023",
+      "notificationTime": "00:06:40",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533"
+      },
+      "id": 11
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 63,
+      "notificationDate": "18-12-2023",
+      "notificationTime": "18:39:38",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "id": 12
     }
   ]
 }

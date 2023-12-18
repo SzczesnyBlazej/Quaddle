@@ -26,6 +26,7 @@ function HomeColThree() {
             fetchData();
         }, 120000);
 
+
         return () => clearInterval(intervalId);
     }, [showNotification]); // Include showNotification as a dependency if it's used inside fetchData
 
@@ -59,19 +60,16 @@ function HomeColThree() {
                 <h2 className='text-light p-2'>Activity</h2>
             </div>
             <hr className="border-white m-2" />
-
-
-
             {last10Records.map(record => (
                 <div key={record?.id} className="card m-3 mt-1 dark-bg text-light">
                     <div className="row g-0">
                         <div className="col-md-3 p-2">
-                            {LogoCircleTemplate(record.createdBy)}
 
+                            {LogoCircleTemplate(record.createdBy)}
                         </div>
 
                         <div className="col-md-9 p-2">
-                            <Link to={"/tasks/" + record.taskDetails?.id} className="nav-link">
+                            <Link to={"/tasks/" + record.taskDetails.id} className="nav-link">
                                 <p className="card-text">{record.createdBy.name} {record.createdBy.surname} <b>{record.notificationText}</b> <span data-bs-toggle="tooltip" title={record.taskDetails.description}>{record.taskDetails.title}</span></p>
                                 <span className="text-secondary">
                                     <h6 data-bs-toggle="tooltip" title={record.taskDetails.lastModification + ", " + record.taskDetails.lastModificationHour}>

@@ -2,6 +2,7 @@ import axios from 'axios';
 
 async function GetTasksByCustomerId({ clientId, taskStatus }) {
     try {
+
         const response = await axios.get(`http://localhost:3502/tasks`, {
             params: {
                 clientID: clientId,
