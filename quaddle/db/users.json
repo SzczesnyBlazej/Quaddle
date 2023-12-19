@@ -14,12 +14,12 @@
     },
     {
       "username": "tets",
-      "password": "$2a$10$ymR9LlYsHjQCCkyMUGs0VugzFME8hU8UmPFDE0QqJ65uXaX2k1jUC",
+      "password": "$2a$10$Us9rHEKyEQfRuwnGeK36BOX5txa.Ajwym2t.1LHI1Eo4WkSVGpdbq",
       "name": "English",
       "surname": "Nomma",
       "isAdmin": false,
       "initials": "EN",
-      "logoColor": "#b38d4d",
+      "logoColor": "#4db37e",
       "id": 2,
       "phone": "1233213212",
       "email": "bszczesny59@gmail.com"

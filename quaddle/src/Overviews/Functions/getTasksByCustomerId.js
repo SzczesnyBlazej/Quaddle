@@ -1,9 +1,7 @@
 import axios from 'axios';
 import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
-import { useNotification } from '../../Functions/NotificationContext';
 
 async function GetTasksByCustomerId({ clientId, taskStatus }) {
-    const showNotification = useNotification();
 
     try {
 
@@ -16,7 +14,7 @@ async function GetTasksByCustomerId({ clientId, taskStatus }) {
         });
         return response.data;
     } catch (error) {
-        showNotification('Error fetching tasks:', error.response || error);
+        console.log('Error fetching tasks:', error.response || error)
 
         return [];
     }
