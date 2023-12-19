@@ -1,8 +1,9 @@
 import axios from 'axios';
+import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
 
 const getAllUsers = async () => {
     try {
-        const response = await axios.get('http://localhost:3501/users');
+        const response = await axios.get(API_ENDPOINTS.USERS);
         return response.data.map(user => ({
             id: user.id,
             name: user.name,

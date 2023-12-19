@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import LogoCircleTemplate from '../../Templates/LogoCircleTemplate';
 import LastMonthUserTasksBar from '../../Charts/LastMonthUserTasksBar';
+import { getStatusIconColor } from '../../Tasks/Functions';
 
 export const ClientPopover = ({ clientId }) => {
     const [customerData, setCustomerData] = useState(null);
@@ -33,9 +34,6 @@ export const ClientPopover = ({ clientId }) => {
         fetchData();
     }, [clientId]);
 
-    const getStatusIconColor = (status) => {
-        return status === 'Open' ? 'orange' : status === 'Close' ? '#00a347' : 'gray';
-    };
 
     if (!customerData) {
         return null;

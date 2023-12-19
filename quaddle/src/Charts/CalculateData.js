@@ -1,12 +1,13 @@
 // CalculateData.js
 import axios from 'axios';
 import { formatDate } from './dateUtils';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 export async function getTaskCounts(user) {
 
     try {
 
-        const response = await axios.get('http://localhost:3502/tasks');
+        const response = await axios.get(API_ENDPOINTS.TASKS);
         const taskData = response.data;
 
         const today = formatDate(new Date().toLocaleDateString('en-GB')); // Format: dd-mm-yyyy

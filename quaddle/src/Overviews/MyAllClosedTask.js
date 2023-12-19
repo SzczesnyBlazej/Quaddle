@@ -4,13 +4,14 @@ import HomeColFirst from '../HomePage/HomeColFirst';
 import TaskList from './TaskList';
 import MenuTaskList from './MenuTaskList';
 import { useAuth } from '../Account/AuthContext/authContext';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 function MyAllClosedTask() {
     const [tasks, setTasks] = useState([]);
     const { user } = useAuth();
     const userName = user.name;
     useEffect(() => {
-        axios.get(`http://localhost:3502/tasks`, {
+        axios.get(API_ENDPOINTS.TASKS, {
             params: {
                 solver: userName,
                 status: ['Close'],

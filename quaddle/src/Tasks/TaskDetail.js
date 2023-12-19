@@ -7,6 +7,7 @@ import { SolverEnum } from '../Enums/SolverEnum';
 import { PriorityEnum } from '../Enums/PriorityEnum';
 import { DifficultyEnum } from '../Enums/DifficultyEnum';
 import { UnitEnum } from '../Enums/UnitEnum';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 const TaskDetail = ({ task }) => {
     const showNotification = useNotification();
@@ -57,7 +58,7 @@ const TaskDetail = ({ task }) => {
 
             };
 
-            await axios.put(`http://localhost:3502/tasks/${task?.id}`, updatedTask);
+            await axios.put(API_ENDPOINTS.TASKS + `/${task?.id}`, updatedTask);
             sendNotification("updated post ", task?.id);
 
         } catch (error) {
@@ -85,7 +86,7 @@ const TaskDetail = ({ task }) => {
                     closeHour: getCurrentTimeFormatted(),
                 };
 
-                await axios.put(`http://localhost:3502/tasks/${task?.id}`, updatedTask);
+                await axios.put(API_ENDPOINTS.TASKS + `/${task?.id}`, updatedTask);
                 sendNotification("closed post", task?.id);
 
             } catch (error) {

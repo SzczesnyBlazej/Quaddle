@@ -6,6 +6,7 @@ import { getCurrentDateFormatted, getCurrentTimeFormatted, sendNotification } fr
 import { useAuth } from '../Account/AuthContext/authContext';
 import { useNotification } from '../Functions/NotificationContext';
 import ClickableLogo from '../Overviews/Templates/ClicableLogo';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 const TaskContent = ({ task }) => {
     const showNotification = useNotification();
@@ -18,7 +19,7 @@ const TaskContent = ({ task }) => {
     const fetchMessages = useCallback(async () => {
         try {
             if (task) {
-                const response = await axios.get(`http://localhost:3504/messages?taskID=${task?.id}`);
+                const response = await axios.get(API_ENDPOINTS.MESSAGES + `?taskID=${task?.id}`);
                 setMessages(response.data);
             }
         } catch (error) {
@@ -30,7 +31,7 @@ const TaskContent = ({ task }) => {
         const fetchUserDetails = async () => {
             try {
                 if (task && task.clientID) {
-                    const userResponse = await axios.get(`http://localhost:3501/users/${task?.clientID}`);
+                    const userResponse = await axios.get(API_ENDPOINTS.USERS + `/${task?.clientID}`);
                     setClientDetail(userResponse.data);
                 }
             } catch (error) {
@@ -46,7 +47,7 @@ const TaskContent = ({ task }) => {
         e.preventDefault();
 
         try {
-            await axios.post('http://localhost:3504/messages', {
+            await axios.post(API_ENDPOINTS.MESSAGES, {
                 message: message,
                 clientID: clientDetail?.id,
                 taskID: task?.id,
@@ -90,7 +91,6 @@ const TaskContent = ({ task }) => {
                             <p className="card-text text-secondary text-center"><small >{task?.createDate} at {task?.createHour}</small></p>
 
                         </div>
-                        {/* <div className='col-md-1'>{LogoCircleTemplate(clientDetail)}</div> */}
                         <div className='col-md-1'><ClickableLogo user={clientDetail} />
                         </div>
                     </div>
@@ -98,7 +98,6 @@ const TaskContent = ({ task }) => {
                         <div key={message?.id} className='row flex-row'>
                             {message.messageSender?.id !== user?.id ? (
                                 <div className='col-md-1 mt-3'><ClickableLogo user={message.messageSender} /></div>
-                                // <div className='col-md-1 mt-3'>{LogoCircleTemplate(message.messageSender)}</div>
                             ) : (
                                 <div className='col-md-1'></div>
                             )}
@@ -115,7 +114,6 @@ const TaskContent = ({ task }) => {
 
                             {message.messageSender?.id === user?.id ? (
                                 <div className='col-md-1 mt-3'><ClickableLogo user={message.messageSender} /></div>
-                                // <div className='col-md-1 mt-3'>{LogoCircleTemplate(message.messageSender)}</div>
                             ) : (
                                 <div className='col-md-1'></div>
                             )}

@@ -6,6 +6,7 @@ import HomeColFirst from '../HomePage/HomeColFirst';
 import TaskContent from './TaskContent';
 import TaskDetail from './TaskDetail';
 import { useNotification } from '../Functions/NotificationContext';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 const TaskPage = () => {
     const { taskId } = useParams();
@@ -15,7 +16,7 @@ const TaskPage = () => {
     useEffect(() => {
         const fetchTaskById = async () => {
             try {
-                const response = await axios.get(`http://localhost:3502/tasks/${taskId}`);
+                const response = await axios.get(API_ENDPOINTS.TASKS + `/${taskId}`);
                 setTask(response.data);
             } catch (error) {
                 showNotification(`Error fetching task with ID ${taskId}:`, error.message);

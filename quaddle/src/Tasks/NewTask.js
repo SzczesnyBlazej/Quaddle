@@ -4,6 +4,7 @@ import axios from 'axios';
 import { getCurrentTimeFormatted, getCurrentDateFormatted, sendNotification } from "./Functions"
 import { useNotification } from '../Functions/NotificationContext';
 import { UnitEnum } from '../Enums/UnitEnum';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 const NewTask = ({ onClose }) => {
     const [title, setTitle] = useState('');
@@ -23,7 +24,7 @@ const NewTask = ({ onClose }) => {
         try {
             const getStoredUsername = localStorage.getItem('user');
 
-            const getUsers = await axios.get('http://localhost:3501/users');
+            const getUsers = await axios.get(API_ENDPOINTS.USERS);
             const customers = getUsers.data;
             const storedUser = JSON.parse(getStoredUsername);
             const storedUsername = storedUser.username;
@@ -31,7 +32,7 @@ const NewTask = ({ onClose }) => {
                 const foundUser = customers.find(user => user.username === storedUsername);
                 if (foundUser) {
 
-                    const response = await axios.post('http://localhost:3502/tasks', {
+                    const response = await axios.post(API_ENDPOINTS.TASKS, {
                         title,
                         description,
                         clientID: foundUser?.id,
@@ -109,14 +110,7 @@ const NewTask = ({ onClose }) => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="unit">Unit:</label>
-                        {/* <input
-                            type="text"
-                            className="form-control"
-                            id="unit"
-                            placeholder="Enter your unit"
-                            value={unit}
-                            onChange={(e) => setUnit(e.target.value)}
-                        /> */}
+
                         <select
                             className="form-control form-select"
                             id="unit"

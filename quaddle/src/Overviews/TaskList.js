@@ -8,6 +8,7 @@ import { faCircleDot } from '@fortawesome/free-solid-svg-icons';
 import { OverlayTrigger } from 'react-bootstrap';
 import AsyncClientData from './Functions/AsyncClientData';
 import { ClientPopover } from './Templates/clientPopover';
+import { getStatusIconColor } from '../Tasks/Functions';
 
 
 const TaskList = ({ tasks, columnaaaaa }) => {
@@ -23,10 +24,6 @@ const TaskList = ({ tasks, columnaaaaa }) => {
             },
         },
     });
-
-    const getStatusIconColor = (status) => {
-        return status === 'Open' ? 'orange' : status === 'Close' ? '#00a347' : 'gray';
-    };
 
 
     // Existing columns

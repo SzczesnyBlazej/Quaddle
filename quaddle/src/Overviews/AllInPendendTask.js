@@ -3,11 +3,12 @@ import axios from 'axios';
 import HomeColFirst from '../HomePage/HomeColFirst';
 import TaskList from './TaskList';
 import MenuTaskList from './MenuTaskList';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 function AllInPendendTask() {
     const [tasks, setTasks] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:3502/tasks`, {
+        axios.get(API_ENDPOINTS.TASKS, {
             params: {
                 status: ['In Pendend'], // Use the appropriate syntax for "not equal" in your API
             },

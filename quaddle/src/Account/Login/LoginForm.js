@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext/authContext';
 import { useNotification } from '../../Functions/NotificationContext';
 import bcrypt from 'bcryptjs';
+import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -19,7 +20,7 @@ const LoginForm = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:3501/users');
+                const response = await axios.get(API_ENDPOINTS.USERS);
                 setUsers(response.data);
             } catch (error) {
                 showNotification('Error fetching users:', error.message);

@@ -8,6 +8,7 @@ import LogoCircleTemplate from '../../Templates/LogoCircleTemplate';
 import GetTasksByCustomerId from '../Functions/getTasksByCustomerId';
 import findCustomerById from '../Functions/FindCustomerByID';
 import LastMonthUserTasksBar from '../../Charts/LastMonthUserTasksBar';
+import { getStatusIconColor } from '../../Tasks/Functions';
 
 const ClickableLogo = ({ user }) => {
 
@@ -36,9 +37,6 @@ const ClickableLogo = ({ user }) => {
         fetchData();
     }, [user, user.id]);
 
-    const getStatusIconColor = (status) => {
-        return status === 'Open' ? 'orange' : status === 'Close' ? '#00a347' : 'gray';
-    };
 
     const renderPopover = () => (
         <Popover id={`popover-${user.id}`} className="p-3 popover">

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 export function getCurrentDateFormatted() {
     const currentDate = new Date();
@@ -20,10 +21,11 @@ export function getCurrentTimeFormatted() {
 }
 
 export const sendNotification = async (notificationText, taskID) => {
+
     const getStoredUsername = localStorage.getItem('user');
     const storedUser = JSON.parse(getStoredUsername);
     try {
-        await axios.post('http://localhost:3503/notification', {
+        await axios.post(API_ENDPOINTS.NOTIFICATION, {
             notificationText: notificationText,
             taskId: taskID,
             notificationDate: getCurrentDateFormatted(),
@@ -35,6 +37,9 @@ export const sendNotification = async (notificationText, taskID) => {
 
         console.error('Error sending notification:', error);
     }
+};
+export const getStatusIconColor = (status) => {
+    return status === 'Open' ? 'orange' : status === 'Close' ? '#00a347' : 'gray';
 };
 
 

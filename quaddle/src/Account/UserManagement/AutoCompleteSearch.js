@@ -6,6 +6,7 @@ import HomeColFirst from '../../HomePage/HomeColFirst';
 import { useNotification } from '../../Functions/NotificationContext';
 import UserList from './UserList';
 import EditUserForm from './EditUserForm';
+import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
 
 const AutoCompleteSearch = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -21,7 +22,7 @@ const AutoCompleteSearch = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:3501/users');
+                const response = await axios.get(API_ENDPOINTS.USERS);
                 setUsers(response.data);
             } catch (error) {
                 console.error('Error fetching users:', error);
@@ -57,7 +58,7 @@ const AutoCompleteSearch = () => {
 
     const handleDelete = async (userId) => {
         try {
-            await axios.delete(`http://localhost:3501/users/${userId}`);
+            await axios.delete(API_ENDPOINTS.USERS + `/${userId}`);
             setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
             setShowEditForm(false);
         } catch (error) {
@@ -111,7 +112,7 @@ const AutoCompleteSearch = () => {
             } else {
                 const { newPassword, confirmPassword, ...userDataWithoutPasswords } = updatedUser;
 
-                await axios.put(`http://localhost:3501/users/${editingUser.id}`, userDataWithoutPasswords);
+                await axios.put(API_ENDPOINTS.USERS + `/${editingUser.id}`, userDataWithoutPasswords);
                 setUsers((prevUsers) =>
                     prevUsers.map((user) => (user.id === editingUser.id ? userDataWithoutPasswords : user))
                 );

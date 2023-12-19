@@ -3,13 +3,14 @@ import axios from 'axios';
 import HomeColFirst from '../HomePage/HomeColFirst';
 import TaskList from './TaskList';
 import MenuTaskList from './MenuTaskList';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 function AllUnallocated() {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
         axios
-            .get(`http://localhost:3502/tasks`, {
+            .get(API_ENDPOINTS.TASKS, {
                 params: {
                     status: ['Open', 'In Pendend'],
                     solver: '',

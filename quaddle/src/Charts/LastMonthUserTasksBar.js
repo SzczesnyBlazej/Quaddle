@@ -10,6 +10,7 @@ import {
 } from 'recharts';
 import axios from 'axios';
 import { useNotification } from '../Functions/NotificationContext';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 const LastMonthUserTasksBar = ({ userId }) => {
     const [last14Days, setLast14Days] = useState([]);
@@ -35,7 +36,7 @@ const LastMonthUserTasksBar = ({ userId }) => {
 
                 setLast14Days(dates);
 
-                const taskResponse = await axios.get('http://localhost:3502/tasks', {
+                const taskResponse = await axios.get(API_ENDPOINTS.TASKS, {
                     params: {
                         clientID: userId,
                         createdate: dates,

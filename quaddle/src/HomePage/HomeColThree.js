@@ -4,6 +4,7 @@ import { calculateTimeDifference } from './TimeUtil';
 import { Link } from 'react-router-dom';
 import LogoCircleTemplate from "../Templates/LogoCircleTemplate";
 import { useNotification } from '../Functions/NotificationContext';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 function HomeColThree() {
     const [last10Records, setLast10Records] = useState([]);
@@ -12,7 +13,7 @@ function HomeColThree() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3503/notification?_sort=id&_order=desc&_limit=25');
+                const response = await axios.get(API_ENDPOINTS.NOTIFICATION + '?_sort=id&_order=desc&_limit=25');
                 const recordsWithTaskDetails = await getTaskDetails(response.data);
                 setLast10Records(recordsWithTaskDetails);
             } catch (error) {
@@ -35,10 +36,10 @@ function HomeColThree() {
         const tasksWithDetails = await Promise.all(
             notifications.map(async (notification) => {
                 const taskId = notification.taskId;
-                const taskResponse = await axios.get(`http://localhost:3502/tasks/${taskId}`);
+                const taskResponse = await axios.get(API_ENDPOINTS.TASKS + `/${taskId}`);
                 const taskDetails = taskResponse.data;
 
-                const userResponse = await axios.get(`http://localhost:3501/users/${taskDetails.clientID}`);
+                const userResponse = await axios.get(API_ENDPOINTS.USERS + `/${taskDetails.clientID}`);
                 const userDetails = userResponse.data;
 
                 return {

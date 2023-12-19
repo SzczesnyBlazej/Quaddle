@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { UnitEnum } from '../Enums/UnitEnum';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 
 function UnitsChart({ user }) {
@@ -18,7 +19,7 @@ function UnitsChart({ user }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3502/tasks');
+                const response = await axios.get(API_ENDPOINTS.TASKS);
                 const taskData = response.data;
                 // const taskDataFiltered = taskData.filter(task => task.solver === user.name);
 

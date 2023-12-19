@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useNotification } from '../../Functions/NotificationContext';
+import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
 
 const RegistrationForm = () => {
     const [username, setUsername] = useState('');
@@ -42,7 +43,7 @@ const RegistrationForm = () => {
             const surnameInitial = surname.charAt(0).toUpperCase();
             const calculatedInitials = `${nameInitial}${surnameInitial}`;
 
-            const getUsers = await axios.get('http://localhost:3501/users');
+            const getUsers = await axios.get(API_ENDPOINTS.USERS);
             const users = getUsers.data;
             const foundUser = users.find(user => user.username === username);
 
@@ -51,7 +52,7 @@ const RegistrationForm = () => {
                 setRegistrationError('The specified username already exists');
                 return;
             }
-            await axios.post('http://localhost:3501/users', {
+            await axios.post(API_ENDPOINTS.USERS, {
                 username,
                 password: hashedPassword,
                 name,

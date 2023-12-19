@@ -8,6 +8,7 @@ import LogoTemplate from './LogoTemplate';
 import NewTask from '../Tasks/NewTask';
 import axios from 'axios';
 import { useNotification } from '../Functions/NotificationContext';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 const renderSuggestion = (suggestion) => (
     <div>
@@ -37,7 +38,7 @@ function HomeColFirst() {
     const fetchSuggestions = async (inputValue) => {
 
         try {
-            const response = await axios.get(`http://localhost:3502/tasks/?q=${inputValue}`);
+            const response = await axios.get(API_ENDPOINTS.TASKS + `/?q=${inputValue}`);
             const newSuggestions = response.data.map((task) => ({
                 title: task.title,
                 description: task.description,

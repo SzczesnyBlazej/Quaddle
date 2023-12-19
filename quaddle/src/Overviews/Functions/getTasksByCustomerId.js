@@ -1,9 +1,10 @@
 import axios from 'axios';
+import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
 
 async function GetTasksByCustomerId({ clientId, taskStatus }) {
     try {
 
-        const response = await axios.get(`http://localhost:3502/tasks`, {
+        const response = await axios.get(API_ENDPOINTS.TASKS, {
             params: {
                 clientID: clientId,
                 status: taskStatus,
