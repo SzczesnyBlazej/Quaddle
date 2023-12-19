@@ -181,6 +181,23 @@
         "phone": "1233213212"
       },
       "id": 12
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 4,
+      "notificationDate": "19-12-2023",
+      "notificationTime": "19:02:04",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "id": 13
     }
   ]
 }

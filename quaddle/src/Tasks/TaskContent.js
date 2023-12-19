@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import LogoCircleTemplate from '../Templates/LogoCircleTemplate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { getCurrentDateFormatted, getCurrentTimeFormatted, sendNotification } from './Functions'
 import { useAuth } from '../Account/AuthContext/authContext';
 import { useNotification } from '../Functions/NotificationContext';
-import ClickableLogo from '../Templates/ClicableLogo';
-import { ClientPopover } from '../Overviews/Templates/clientPopover';
+import ClickableLogo from '../Overviews/Templates/ClicableLogo';
 
 const TaskContent = ({ task }) => {
     const showNotification = useNotification();
@@ -75,7 +73,6 @@ const TaskContent = ({ task }) => {
                     <div className='d-flex flex-column justify-content-center align-items-center pt-5 text-secondary'>
 
                         <ClickableLogo user={clientDetail} />
-                        {/* <ClientPopover user={task.clientID} /> */}
 
 
                         <h2 className='ps-3 pe-3 mt-4 mb-3 ms-5 me-5 light-bg rounded'>{task?.title}</h2>

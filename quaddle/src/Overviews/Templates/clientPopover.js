@@ -7,6 +7,7 @@ import { Tooltip } from 'react-tooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import LogoCircleTemplate from '../../Templates/LogoCircleTemplate';
+import LastMonthUserTasksBar from '../../Charts/LastMonthUserTasksBar';
 
 export const ClientPopover = ({ clientId }) => {
     const [customerData, setCustomerData] = useState(null);
@@ -98,8 +99,13 @@ export const ClientPopover = ({ clientId }) => {
                                 </div>
                             ))}
                         </div>
-                        <span className='text-muted'>Show more</span>
-                    </div>
+                        {
+                            tasksInProgress.length > 0 ? (
+                                <span className='text-muted'>Show more</span>
+                            ) : (
+                                <span className='text-muted'>No reports</span>
+                            )
+                        }                    </div>
                     <div className='col-md-6'>
                         <label htmlFor="closed">
                             Closed:
@@ -137,15 +143,25 @@ export const ClientPopover = ({ clientId }) => {
                                 </div>
                             ))}
                         </div>
-                        <span className='text-muted'>Show more</span>
+                        {
+                            tasksClosed.length > 0 ? (
+                                <span className='text-muted'>Show more</span>
+                            ) : (
+                                <span className='text-muted'>No reports</span>
+                            )
+                        }
                     </div>
                 </div>
                 <hr className="border-secondary" />
                 <div className='row mx-auto text-center'>
                     <label htmlFor="userChart">
-                        Closed:
+                        Opened and Closed bar:
                     </label>
-                    <div id="userChart">userChart</div>
+                    <div id="userChart">
+                        <div>
+                            <LastMonthUserTasksBar userId={clientId} />
+                        </div>
+                    </div>
                 </div>
             </div>
         </Popover>

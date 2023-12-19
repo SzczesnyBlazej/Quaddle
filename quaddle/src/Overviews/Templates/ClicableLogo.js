@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import GetTasksByCustomerId from '../Overviews/Functions/getTasksByCustomerId';
-import findCustomerById from '../Overviews/Functions/FindCustomerByID';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
-import LogoCircleTemplate from './LogoCircleTemplate';
+import LogoCircleTemplate from '../../Templates/LogoCircleTemplate';
+import GetTasksByCustomerId from '../Functions/getTasksByCustomerId';
+import findCustomerById from '../Functions/FindCustomerByID';
+import LastMonthUserTasksBar from '../../Charts/LastMonthUserTasksBar';
 
 const ClickableLogo = ({ user }) => {
 
@@ -97,7 +97,13 @@ const ClickableLogo = ({ user }) => {
                                 </div>
                             ))}
                         </div>
-                        <span className='text-muted'>Show more</span>
+                        {
+                            tasksInProgress.length > 0 ? (
+                                <span className='text-muted'>Show more</span>
+                            ) : (
+                                <span className='text-muted'>No reports</span>
+                            )
+                        }
 
                     </div>
                     <div className='col-md-6'>
@@ -137,7 +143,24 @@ const ClickableLogo = ({ user }) => {
                                 </div>
                             ))}
                         </div>
-                        <span className='text-muted'>Show more</span>
+                        {
+                            tasksClosed.length > 0 ? (
+                                <span className='text-muted'>Show more</span>
+                            ) : (
+                                <span className='text-muted'>No reports</span>
+                            )
+                        }
+                    </div>
+                    <hr className="border-secondary" />
+                    <div className='row mx-auto text-center'>
+                        <label htmlFor="userChart">
+                            Opened and Closed bar:
+                        </label>
+                        <div id="userChart">
+                            <div>
+                                <LastMonthUserTasksBar userId={user.id} />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
