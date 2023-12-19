@@ -9,6 +9,7 @@ function MenuTaskList() {
         myAllClosedTasks: ['/myAllClosedTasks', 'My All Closed Task',],
         allUnallocated: ['/allUnallocated', 'All Unallocated',],
         allInPendendTask: ['/AllInPendendTask', 'All In Pendend Task',],
+        favorites: ['/Favorities', 'Favorities',],
 
     };
     return (

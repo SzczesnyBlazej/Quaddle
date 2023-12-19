@@ -15,7 +15,7 @@ export const NotificationProvider = ({ children }) => {
         setNotification(message);
         setTimeout(() => {
             setNotification(null);
-        }, 3000); // Hide after 3 seconds
+        }, 4000);
     };
 
     return (

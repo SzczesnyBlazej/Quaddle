@@ -5,11 +5,14 @@ import TaskList from './TaskList';
 import MenuTaskList from './MenuTaskList';
 import { useAuth } from '../Account/AuthContext/authContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
+import { useNotification } from '../Functions/NotificationContext';
 
 function MyAllClosedTask() {
     const [tasks, setTasks] = useState([]);
     const { user } = useAuth();
     const userName = user.name;
+    const showNotification = useNotification();
+
     useEffect(() => {
         axios.get(API_ENDPOINTS.TASKS, {
             params: {
@@ -21,9 +24,10 @@ function MyAllClosedTask() {
                 setTasks(response.data);
             })
             .catch(error => {
-                console.error('Error fetching tasks:', error);
+                showNotification('Error fetching tasks:' + error);
+
             });
-    }, [userName]);
+    }, [userName, showNotification]);
     const additionalColumns = [
 
         {

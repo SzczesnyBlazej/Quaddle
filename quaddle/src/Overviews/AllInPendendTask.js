@@ -4,9 +4,12 @@ import HomeColFirst from '../HomePage/HomeColFirst';
 import TaskList from './TaskList';
 import MenuTaskList from './MenuTaskList';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
+import { useNotification } from '../Functions/NotificationContext';
 
 function AllInPendendTask() {
     const [tasks, setTasks] = useState([]);
+    const showNotification = useNotification();
+
     useEffect(() => {
         axios.get(API_ENDPOINTS.TASKS, {
             params: {
@@ -17,9 +20,10 @@ function AllInPendendTask() {
                 setTasks(response.data);
             })
             .catch(error => {
-                console.error('Error fetching tasks:', error);
+                showNotification('Error fetching task:' + error);
+
             });
-    }, []);
+    }, [showNotification]);
     const additionalColumns = [
         {
             accessorKey: 'solver',

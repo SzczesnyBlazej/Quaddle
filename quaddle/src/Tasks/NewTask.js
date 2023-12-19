@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { getCurrentTimeFormatted, getCurrentDateFormatted, sendNotification } from "./Functions"
@@ -18,6 +18,15 @@ const NewTask = ({ onClose }) => {
 
     const [addTaskError, setAddTaskError] = useState('');
     const showNotification = useNotification();
+
+    useEffect(() => {
+        const getStoredUsername = localStorage.getItem('user');
+        const storedUser = JSON.parse(getStoredUsername);
+
+        if (storedUser) {
+            setContactNumber(storedUser.phone || '');
+        }
+    }, []);
 
     const handleAddTask = async (e) => {
         e.preventDefault();
