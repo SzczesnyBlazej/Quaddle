@@ -22,7 +22,6 @@ const checkIsTaskFavorite = async (userID, taskID) => {
 
 const toggleTaskFavorite = async (user, task, isTaskFavorite, setIsTaskFavorite) => {
     try {
-        // Fetch the current favorites
         const response = await axios.get(API_ENDPOINTS.FAVORITIES, {
             params: {
                 userID: user?.id,

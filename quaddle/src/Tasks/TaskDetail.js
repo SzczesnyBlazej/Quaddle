@@ -122,8 +122,6 @@ const TaskDetail = ({ task }) => {
                     </div>
                     <hr className="border-secondary" />
 
-
-                    {/* Solver */}
                     <div className="form-group p-1">
                         <label htmlFor="solverInput">Solver</label>
                         <select
@@ -138,7 +136,6 @@ const TaskDetail = ({ task }) => {
                         </select>
                     </div>
 
-                    {/* Create Date and Time */}
                     <div className="form-group p-1">
                         <label htmlFor="createDateTimeInput">Create Date and Time</label>
                         <div className="d-flex">
@@ -159,7 +156,6 @@ const TaskDetail = ({ task }) => {
                         </div>
                     </div>
 
-                    {/* Last Modification Date and Time */}
                     <div className="form-group p-1">
                         <label htmlFor="lastModificationDateTimeInput">Last Modification Date and Time</label>
                         <div className="d-flex">
@@ -180,7 +176,6 @@ const TaskDetail = ({ task }) => {
                         </div>
                     </div>
 
-                    {/* Priority */}
                     <div className="form-group p-1">
                         <label htmlFor="priorityInput">Priority</label>
                         <select
@@ -196,7 +191,6 @@ const TaskDetail = ({ task }) => {
                         </select>
                     </div>
 
-                    {/* Status */}
                     <div className="form-group p-1">
                         <label htmlFor="statusInput">Status</label>
                         <select
@@ -211,7 +205,6 @@ const TaskDetail = ({ task }) => {
                         </select>
                     </div>
 
-                    {/* Difficulty */}
                     <div className="form-group p-1">
                         <label htmlFor="difficultyInput">Difficulty</label>
                         <select
@@ -227,7 +220,6 @@ const TaskDetail = ({ task }) => {
                         </select>
                     </div>
 
-                    {/* Unit */}
                     <div className="form-group p-1">
                         <label htmlFor="unitInput">Unit</label>
                         <select

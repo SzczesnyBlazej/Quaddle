@@ -78,8 +78,8 @@ const TaskList = ({ tasks, columnaaaaa }) => {
             size: 200,
         },
         {
-            id: 'clientID',
-            accessorKey: 'clientID',
+            // id: 'clientID',
+            // accessorKey: 'clientID',
             header: 'Client',
             size: 130,
             Cell: ({ row }) => (
@@ -97,6 +97,9 @@ const TaskList = ({ tasks, columnaaaaa }) => {
 
                 </>
             ),
+            enableColumnActions: false,
+            disableFilters: true,
+            disableColumnMenu: true,
         },
         {
             accessorKey: 'unit',

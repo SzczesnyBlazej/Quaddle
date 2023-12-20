@@ -60,7 +60,7 @@ function HomeColFirst() {
         const newValue = event.target.value;
         setValue(newValue);
 
-        if (newValue.trim() === '') {
+        if (newValue.trim().length <= 2) {
             sessionStorage.removeItem('searchValue');
             localStorage.removeItem('suggestions');
             setSuggestions([]);
