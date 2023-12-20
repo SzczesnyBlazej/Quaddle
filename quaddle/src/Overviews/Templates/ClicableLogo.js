@@ -27,6 +27,7 @@ const ClickableLogo = ({ user }) => {
 
                 const tasksClosedData = await GetTasksByCustomerId({ clientId: user.id, taskStatus: ['Close'] });
                 setTasksClosed(tasksClosedData);
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
@@ -172,7 +173,7 @@ const ClickableLogo = ({ user }) => {
             trigger="click"
             placement="right"
             rootClose
-            overlay={loading ? <div>Loading</div> : renderPopover()} // Render the popover only when loading is false
+            overlay={loading ? <div>Loading...</div> : renderPopover()} // Render the popover only when loading is false
         >
             <div
                 className="rounded-circle d-flex align-items-center justify-content-center"

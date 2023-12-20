@@ -8,6 +8,11 @@ import { PriorityEnum } from '../Enums/PriorityEnum';
 import { DifficultyEnum } from '../Enums/DifficultyEnum';
 import { UnitEnum } from '../Enums/UnitEnum';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
+import { useAuth } from '../Account/AuthContext/authContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
+import { checkIsTaskFavorite, toggleTaskFavorite } from './FavoriteService';
 
 const TaskDetail = ({ task }) => {
     const showNotification = useNotification();
@@ -18,16 +23,18 @@ const TaskDetail = ({ task }) => {
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
     const [selectedUnit, setSelectedUnit] = useState('');
     const [selectedPhoneNumber, setSelectedPhoneNumber] = useState('');
+    const { user } = useAuth();
+    const [isTaskFavorite, setIsTaskFavorite] = useState(false);
 
     useEffect(() => {
-        // Update the state when the task prop changes
         setSelectedSolver(task?.solver || '');
         setSelectedPriority(task?.priority || '');
         setSelectedStatus(task?.status || '');
         setSelectedDifficulty(task?.difficulty || '');
         setSelectedUnit(task?.unit || '');
         setSelectedPhoneNumber(task?.contactNumber || '');
-    }, [task]);
+        checkIsTaskFavorite(user?.id, task?.id).then((result) => setIsTaskFavorite(result));
+    }, [task, user]);
 
     const handleInputChange = (e, setterFunction) => {
         setterFunction(e.target.value);
@@ -43,6 +50,7 @@ const TaskDetail = ({ task }) => {
             ))}
         </>
     );
+
     const updateTask = async () => {
         try {
             const updatedTask = {
@@ -55,12 +63,10 @@ const TaskDetail = ({ task }) => {
                 contactNumber: selectedPhoneNumber,
                 lastModificationHour: getCurrentTimeFormatted(),
                 lastModification: getCurrentDateFormatted(),
-
             };
 
             await axios.put(API_ENDPOINTS.TASKS + `/${task?.id}`, updatedTask);
             sendNotification("updated post ", task?.id);
-
         } catch (error) {
             showNotification('Błąd podczas aktualizacji zadania:', error.message);
         }
@@ -88,24 +94,34 @@ const TaskDetail = ({ task }) => {
 
                 await axios.put(API_ENDPOINTS.TASKS + `/${task?.id}`, updatedTask);
                 sendNotification("closed post", task?.id);
-
             } catch (error) {
-
                 showNotification('Błąd podczas aktualizacji zadania:', error.message);
-
             }
         } else {
             showNotification('User information not found in local storage.');
-
         }
+    };
+
+    const handleToggleFavorite = () => {
+        toggleTaskFavorite(user, task, isTaskFavorite, setIsTaskFavorite);
     };
 
     return (
         <div className="col-md-2 light-bg min-vh-100 d-flex flex-column position-relative overflow-auto" style={{ maxHeight: 'calc(100vh - 180px)' }}>
             <form>
                 <div className="container text-light">
-                    <h2 className=' p-2'>Task</h2>
+                    <div className="d-flex align-items-center justify-content-between p-2">
+                        <h2 className='mb-0'>Task</h2>
+                        <FontAwesomeIcon
+                            icon={isTaskFavorite ? faStar : faStarRegular}
+                            style={{ color: isTaskFavorite ? 'gold' : 'inherit', cursor: 'pointer' }}
+                            size="xl"
+                            title={isTaskFavorite ? 'Click to remove from favorites' : 'Click to add to favorites'}
+                            onClick={handleToggleFavorite}
+                        />
+                    </div>
                     <hr className="border-secondary" />
+
 
                     {/* Solver */}
                     <div className="form-group p-1">

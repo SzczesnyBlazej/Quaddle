@@ -51,13 +51,13 @@
     {
       "id": 5,
       "username": "user3",
-      "password": "$2a$10$abcdefghijklmnopqrstuvwx/abcdefghijklmnopqrstuvwi0X5g.DtY7S",
+      "password": "$2a$10$IMJEffsHphyifo.4tmpBm.d1W70D1otqFM2nHnZRkLlU8PBIsoiZS",
       "name": "Bob",
       "surname": "Smith",
       "isAdmin": false,
       "initials": "BS",
       "logoColor": "#2ecc71",
-      "phone": "1233213212",
+      "phone": "123325",
       "email": "bszczesny59@gmail.com"
     },
     {
