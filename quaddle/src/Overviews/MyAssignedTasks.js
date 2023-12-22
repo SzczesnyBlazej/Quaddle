@@ -7,34 +7,36 @@ import { useAuth } from '../Account/AuthContext/authContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import { useNotification } from '../Functions/NotificationContext';
 
-function MyAllClosedTask() {
+
+const MyAssignedTasks = () => {
     const [tasks, setTasks] = useState([]);
     const { user } = useAuth();
     const userName = user.name;
     const showNotification = useNotification();
 
     useEffect(() => {
+
         axios.get(API_ENDPOINTS.TASKS, {
             params: {
                 solver: userName,
-                status: ['Close'],
+                status: ['Open', 'In Pendend'], // Use the appropriate syntax for "not equal" in your API
             },
         })
             .then(response => {
                 setTasks(response.data);
+
             })
             .catch(error => {
                 showNotification('Error fetching tasks:' + error);
 
+
             });
     }, [userName, showNotification]);
     const additionalColumns = [
-
         {
-            accessorFn: (row) => `${row.closeDate} ${row.closeHour}`,
-            header: 'Closed',
-            size: 140,
+
         },
+
     ];
 
     return (
@@ -50,4 +52,4 @@ function MyAllClosedTask() {
     );
 };
 
-export default MyAllClosedTask
+export default MyAssignedTasks;

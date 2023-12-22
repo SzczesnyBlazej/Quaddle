@@ -1,15 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import AllowOnlyAdmin from '../Account/AuthContext/AllowOnlyAdmin';
 
 function MenuTaskList() {
     const menuChild = "/Overviews";
     const menu = {
-        mytasks: ['/mytasks', 'My Tasks'],
-        allOpenedTasks: ['/allOpenedTask', 'All Opened Task',],
-        myAllClosedTasks: ['/myAllClosedTasks', 'My All Closed Task',],
-        allUnallocated: ['/allUnallocated', 'All Unallocated',],
-        allInPendendTask: ['/AllInPendendTask', 'All In Pendend Task',],
-        favorites: ['/Favorities', 'Favorities',],
+        mytasks: ['/mytasks', 'My Tasks', false],
+        myAssignedTasks: ['/myAssignedTasks', 'My Assigned Tasks', true],
+        allOpenedTasks: ['/allOpenedTask', 'All Opened Task', true],
+        myAllClosedTasks: ['/myClosedTasks', 'My Closed Task', false],
+        allUnallocated: ['/allUnallocated', 'All Unallocated', true],
+        allInPendendTask: ['/AllInPendendTask', 'All In Pendend Task', true],
+        favorites: ['/Favorities', 'Favorities', false],
 
     };
     return (
@@ -17,15 +19,29 @@ function MenuTaskList() {
             <h2 className='text-light p-2'>Select tasks</h2>
             {Object.entries(menu).map(([key, value]) => (
                 <React.Fragment key={key}>
-                    <Link to={menuChild + value[0]} className="nav-link">
-                        <div className='d-flex align-items-center text-light'>
-
-                            <div className='col-md-10 m-2'>
-                                {value[1]}
+                    {value[2] && (
+                        <AllowOnlyAdmin>
+                            <Link to={menuChild + value[0]} className="nav-link">
+                                <div className='d-flex align-items-center text-light'>
+                                    <div className='col-md-10 m-2'>
+                                        {value[1]}
+                                    </div>
+                                </div>
+                                <hr className="border-secondary m-2" />
+                            </Link>
+                        </AllowOnlyAdmin>
+                    )}
+                    {!value[2] && (
+                        <Link to={menuChild + value[0]} className="nav-link">
+                            <div className='d-flex align-items-center text-light'>
+                                <div className='col-md-10 m-2'>
+                                    {value[1]}
+                                </div>
                             </div>
-                        </div>
-                    </Link>
-                    <hr className="border-secondary m-2" />
+                            <hr className="border-secondary m-2" />
+                        </Link>
+
+                    )}
                 </React.Fragment>
             ))}
         </div>

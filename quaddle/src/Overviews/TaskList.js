@@ -78,8 +78,6 @@ const TaskList = ({ tasks, columnaaaaa }) => {
             size: 200,
         },
         {
-            // id: 'clientID',
-            // accessorKey: 'clientID',
             header: 'Client',
             size: 130,
             Cell: ({ row }) => (
@@ -131,11 +129,13 @@ const TaskList = ({ tasks, columnaaaaa }) => {
         {
             accessorFn: (row) => `${row.lastModification} ${row.lastModificationHour}`,
             header: 'Last Modification',
+            id: 'LastModification',
             size: 130,
         },
     ];
 
     const allColumns = columnaaaaa[0].accessorKey === undefined ? existingColumns : [...existingColumns, ...columnaaaaa];
+
 
     const table = useMaterialReactTable({
         columns: allColumns,
@@ -148,6 +148,7 @@ const TaskList = ({ tasks, columnaaaaa }) => {
         },
         enableColumnResizing: true,
         columnResizeMode: 'onChange',
+
 
     });
 

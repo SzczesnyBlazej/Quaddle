@@ -81,6 +81,42 @@
       "createDate": "18-12-2023",
       "createHour": "18:39:38",
       "id": 5
+    },
+    {
+      "message": "okej",
+      "clientID": 2,
+      "taskID": 75,
+      "messageSender": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "createDate": "22-12-2023",
+      "createHour": "17:37:23",
+      "id": 6
+    },
+    {
+      "message": "okej",
+      "clientID": 2,
+      "taskID": 75,
+      "messageSender": {
+        "id": 2,
+        "initials": "EN",
+        "logoColor": "#4db37e",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "tets",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "createDate": "22-12-2023",
+      "createHour": "17:37:33",
+      "id": 7
     }
   ]
 }

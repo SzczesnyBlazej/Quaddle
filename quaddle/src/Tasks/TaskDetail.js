@@ -13,6 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import { checkIsTaskFavorite, toggleTaskFavorite } from './FavoriteService';
+import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
+import AllowOnlyAdmin from '../Account/AuthContext/AllowOnlyAdmin';
 
 const TaskDetail = ({ task }) => {
     const showNotification = useNotification();
@@ -25,8 +27,20 @@ const TaskDetail = ({ task }) => {
     const [selectedPhoneNumber, setSelectedPhoneNumber] = useState('');
     const { user } = useAuth();
     const [isTaskFavorite, setIsTaskFavorite] = useState(false);
-
+    const [isAdmin, setIsAdmin] = useState('')
     useEffect(() => {
+        const fetchAdminStatus = async () => {
+            try {
+                const adminStatus = await ifUserIsAdminBoolean(user.id);
+                setIsAdmin(adminStatus);
+            } catch (error) {
+                console.error('Error fetching admin status:', error);
+                setIsAdmin(false); // Set to false in case of an error
+            }
+        };
+
+        fetchAdminStatus(); // Call the async function
+
         setSelectedSolver(task?.solver || '');
         setSelectedPriority(task?.priority || '');
         setSelectedStatus(task?.status || '');
@@ -72,6 +86,7 @@ const TaskDetail = ({ task }) => {
         }
     };
 
+
     const closeTask = async () => {
         const userString = localStorage.getItem('user');
         const user = userString ? JSON.parse(userString) : null;
@@ -86,11 +101,14 @@ const TaskDetail = ({ task }) => {
                     contactNumber: selectedPhoneNumber,
                     lastModificationHour: getCurrentTimeFormatted(),
                     lastModification: getCurrentDateFormatted(),
-                    solver: user.name,
+                    // solver: user.name,
                     status: "Close",
                     closeDate: getCurrentDateFormatted(),
                     closeHour: getCurrentTimeFormatted(),
                 };
+                if (isAdmin) {
+                    updatedTask.solver = user.name;
+                }
 
                 await axios.put(API_ENDPOINTS.TASKS + `/${task?.id}`, updatedTask);
                 sendNotification("closed post", task?.id);
@@ -131,8 +149,12 @@ const TaskDetail = ({ task }) => {
                             value={selectedSolver}
                             onChange={(e) => handleInputChange(e, setSelectedSolver)}
                             aria-label="Solver"
+                            disabled={!isAdmin}
+
                         >
+                            {console.log(isAdmin)}
                             {dropdownOptions(Object.values(SolverEnum))}
+
                         </select>
                     </div>
 
@@ -175,50 +197,51 @@ const TaskDetail = ({ task }) => {
                             />
                         </div>
                     </div>
+                    <AllowOnlyAdmin>
+                        <div className="form-group p-1">
+                            <label htmlFor="priorityInput">Priority</label>
+                            <select
+                                className="form-control form-select"
+                                id="priorityInput"
+                                aria-describedby="emailHelp"
+                                value={selectedPriority}
+                                onChange={(e) => handleInputChange(e, setSelectedPriority)}
+                                aria-label="Priority"
+                            >
+                                {dropdownOptions(Object.values(PriorityEnum))}
 
-                    <div className="form-group p-1">
-                        <label htmlFor="priorityInput">Priority</label>
-                        <select
-                            className="form-control form-select"
-                            id="priorityInput"
-                            aria-describedby="emailHelp"
-                            value={selectedPriority}
-                            onChange={(e) => handleInputChange(e, setSelectedPriority)}
-                            aria-label="Priority"
-                        >
-                            {dropdownOptions(Object.values(PriorityEnum))}
+                            </select>
+                        </div>
 
-                        </select>
-                    </div>
+                        <div className="form-group p-1">
+                            <label htmlFor="statusInput">Status</label>
+                            <select
+                                className="form-control form-select"
+                                id="statusInput"
+                                aria-describedby="emailHelp"
+                                value={selectedStatus}
+                                onChange={(e) => handleInputChange(e, setSelectedStatus)}
+                                aria-label="Status"
+                            >
+                                {dropdownOptions(Object.values(TaskStatusEnum))}
+                            </select>
+                        </div>
 
-                    <div className="form-group p-1">
-                        <label htmlFor="statusInput">Status</label>
-                        <select
-                            className="form-control form-select"
-                            id="statusInput"
-                            aria-describedby="emailHelp"
-                            value={selectedStatus}
-                            onChange={(e) => handleInputChange(e, setSelectedStatus)}
-                            aria-label="Status"
-                        >
-                            {dropdownOptions(Object.values(TaskStatusEnum))}
-                        </select>
-                    </div>
+                        <div className="form-group p-1">
+                            <label htmlFor="difficultyInput">Difficulty</label>
+                            <select
+                                className="form-control form-select"
+                                id="difficultyInput"
+                                aria-describedby="emailHelp"
+                                value={selectedDifficulty}
+                                onChange={(e) => handleInputChange(e, setSelectedDifficulty)}
+                                aria-label="Difficulty"
+                            >
+                                {dropdownOptions(Object.values(DifficultyEnum))}
 
-                    <div className="form-group p-1">
-                        <label htmlFor="difficultyInput">Difficulty</label>
-                        <select
-                            className="form-control form-select"
-                            id="difficultyInput"
-                            aria-describedby="emailHelp"
-                            value={selectedDifficulty}
-                            onChange={(e) => handleInputChange(e, setSelectedDifficulty)}
-                            aria-label="Difficulty"
-                        >
-                            {dropdownOptions(Object.values(DifficultyEnum))}
-
-                        </select>
-                    </div>
+                            </select>
+                        </div>
+                    </AllowOnlyAdmin>
 
                     <div className="form-group p-1">
                         <label htmlFor="unitInput">Unit</label>

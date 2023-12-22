@@ -5,8 +5,9 @@ import { getUserFromLocalStorage } from "./getUserFromLocalStorage";
 import { useNotification } from '../../Functions/NotificationContext';
 import API_ENDPOINTS from "../../ApiEndpoints/apiConfig";
 
-const AllowOnlyAdmin = ({ children }) => {
+const AllowOnlyAdmin = ({ children, taskId = null }) => {
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isAuthorized, setIsAuthorized] = useState(false);
     const showNotification = useNotification();
 
     useEffect(() => {
@@ -17,16 +18,25 @@ const AllowOnlyAdmin = ({ children }) => {
                 const user = response.data;
                 const userIsAdmin = user && user.isAdmin;
                 setIsAdmin(userIsAdmin);
-            } catch (e) {
-                showNotification('Error fetching user:', e);
 
+                if (taskId) {
+                    const taskResponse = await axios.get(API_ENDPOINTS.TASKS + `/${taskId}`);
+                    const task = taskResponse.data;
+
+                    const isAuthorizedUser = task && task.customerId === user.id;
+                    setIsAuthorized(isAuthorizedUser);
+                } else {
+                    setIsAuthorized(false);
+                }
+            } catch (e) {
+                showNotification('Error fetching user or task:', e);
             }
         };
 
         fetchData();
-    }, [showNotification]);
+    }, [showNotification, taskId]);
 
-    return isAdmin ? <>{children}</> : null;
+    return (isAdmin || isAuthorized) ? <>{children}</> : null;
 };
 
 export default AllowOnlyAdmin;

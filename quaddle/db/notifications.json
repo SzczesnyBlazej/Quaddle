@@ -198,6 +198,159 @@
         "phone": "1233213212"
       },
       "id": 13
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 101,
+      "notificationDate": "22-12-2023",
+      "notificationTime": "16:54:10",
+      "createdBy": {
+        "id": 2,
+        "initials": "EN",
+        "logoColor": "#4db37e",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "tets",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "id": 14
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 33,
+      "notificationDate": "22-12-2023",
+      "notificationTime": "16:56:37",
+      "createdBy": {
+        "id": 2,
+        "initials": "EN",
+        "logoColor": "#4db37e",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "tets",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "id": 15
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 75,
+      "notificationDate": "22-12-2023",
+      "notificationTime": "17:37:23",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "id": 16
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 75,
+      "notificationDate": "22-12-2023",
+      "notificationTime": "17:37:33",
+      "createdBy": {
+        "id": 2,
+        "initials": "EN",
+        "logoColor": "#4db37e",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "tets",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "id": 17
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 75,
+      "notificationDate": "22-12-2023",
+      "notificationTime": "17:40:57",
+      "createdBy": {
+        "id": 2,
+        "initials": "EN",
+        "logoColor": "#4db37e",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "tets",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "id": 18
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 76,
+      "notificationDate": "22-12-2023",
+      "notificationTime": "17:45:18",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "id": 19
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 76,
+      "notificationDate": "22-12-2023",
+      "notificationTime": "17:45:22",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "id": 20
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 75,
+      "notificationDate": "22-12-2023",
+      "notificationTime": "17:47:56",
+      "createdBy": {
+        "id": 2,
+        "initials": "EN",
+        "logoColor": "#4db37e",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "tets",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "id": 21
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 75,
+      "notificationDate": "22-12-2023",
+      "notificationTime": "18:30:58",
+      "createdBy": {
+        "id": 2,
+        "initials": "EN",
+        "logoColor": "#4db37e",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "tets",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "id": 22
     }
   ]
 }

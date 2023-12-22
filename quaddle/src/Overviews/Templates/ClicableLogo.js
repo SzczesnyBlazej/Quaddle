@@ -9,6 +9,7 @@ import GetTasksByCustomerId from '../Functions/getTasksByCustomerId';
 import findCustomerById from '../Functions/FindCustomerByID';
 import LastMonthUserTasksBar from '../../Charts/LastMonthUserTasksBar';
 import { getStatusIconColor } from '../../Tasks/Functions';
+import AllowOnlyAdmin from '../../Account/AuthContext/AllowOnlyAdmin';
 
 const ClickableLogo = ({ user }) => {
 
@@ -58,110 +59,113 @@ const ClickableLogo = ({ user }) => {
                     </div>
                 </div>
                 <hr className="border-secondary" />
-                <div className='row'>
-                    <div className='col-md-6'>
-                        <label htmlFor="opened">
-                            Opened:
-                        </label>
-                        <div id="opened" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                            {tasksInProgress.map(task => (
-                                <div key={task.id} className="d-flex align-items-center">
-                                    <FontAwesomeIcon
-                                        icon={faCircleDot}
-                                        style={{
-                                            color: getStatusIconColor(task.status),
-                                            marginRight: '5px',
-                                        }}
-                                    />
-                                    <div>
-                                        <Link to={`/tasks/${task.id}`} className="nav-link">
-                                            <div
-                                                data-tooltip-id="my-tooltip-styles"
-                                                data-tooltip-content={task.title}
-                                                className="truncate-text"
-                                                style={{
-                                                    display: 'inline-block',
-                                                    maxHeight: '30px',
-                                                    maxWidth: '100%',
-                                                    overflow: 'hidden',
-                                                    whiteSpace: 'nowrap',
-                                                    textOverflow: 'ellipsis',
-                                                }}
-                                            >
-                                                {task.title}
-                                            </div>
-                                            <Tooltip id="my-tooltip-styles" arrowColor="transparent" />
-                                        </Link>
+                <AllowOnlyAdmin>
+                    <div className='row'>
+                        <div className='col-md-6'>
+                            <label htmlFor="opened">
+                                Opened:
+                            </label>
+                            <div id="opened" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                {tasksInProgress.map(task => (
+                                    <div key={task.id} className="d-flex align-items-center">
+                                        <FontAwesomeIcon
+                                            icon={faCircleDot}
+                                            style={{
+                                                color: getStatusIconColor(task.status),
+                                                marginRight: '5px',
+                                            }}
+                                        />
+                                        <div>
+                                            <Link to={`/tasks/${task.id}`} className="nav-link">
+                                                <div
+                                                    data-tooltip-id="my-tooltip-styles"
+                                                    data-tooltip-content={task.title}
+                                                    className="truncate-text"
+                                                    style={{
+                                                        display: 'inline-block',
+                                                        maxHeight: '30px',
+                                                        maxWidth: '100%',
+                                                        overflow: 'hidden',
+                                                        whiteSpace: 'nowrap',
+                                                        textOverflow: 'ellipsis',
+                                                    }}
+                                                >
+                                                    {task.title}
+                                                </div>
+                                                <Tooltip id="my-tooltip-styles" arrowColor="transparent" />
+                                            </Link>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-                        {
-                            tasksInProgress.length > 0 ? (
-                                <span className='text-muted'>Show more</span>
-                            ) : (
-                                <span className='text-muted'>No reports</span>
-                            )
-                        }
+                                ))}
+                            </div>
+                            {
+                                tasksInProgress.length > 0 ? (
+                                    <span className='text-muted'>Show more</span>
+                                ) : (
+                                    <span className='text-muted'>No reports</span>
+                                )
+                            }
 
-                    </div>
-                    <div className='col-md-6'>
-                        <label htmlFor="closed">
-                            Closed:
-                        </label>
-                        <div id="closed" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                            {tasksClosed.map(task => (
-                                <div key={task.id} className="d-flex align-items-center">
-                                    <FontAwesomeIcon
-                                        icon={faCircleDot}
-                                        style={{
-                                            color: getStatusIconColor(task.status),
-                                            marginRight: '5px',
-                                        }}
-                                    />
-                                    <div>
-                                        <Link to={`/tasks/${task.id}`} className="nav-link">
-                                            <div
-                                                data-tooltip-id="my-tooltip-styles"
-                                                data-tooltip-content={task.title}
-                                                className="truncate-text"
-                                                style={{
-                                                    display: 'inline-block',
-                                                    maxHeight: '30px',
-                                                    maxWidth: '100%',
-                                                    overflow: 'hidden',
-                                                    whiteSpace: 'nowrap',
-                                                    textOverflow: 'ellipsis',
-                                                }}
-                                            >
-                                                {task.title}
-                                            </div>
-                                            <Tooltip id="my-tooltip-styles" arrowColor="transparent" />
-                                        </Link>
-                                    </div>
-                                </div>
-                            ))}
                         </div>
-                        {
-                            tasksClosed.length > 0 ? (
-                                <span className='text-muted'>Show more</span>
-                            ) : (
-                                <span className='text-muted'>No reports</span>
-                            )
-                        }
-                    </div>
-                    <hr className="border-secondary" />
-                    <div className='row mx-auto text-center'>
-                        <label htmlFor="userChart">
-                            Opened and Closed bar:
-                        </label>
-                        <div id="userChart">
-                            <div>
-                                <LastMonthUserTasksBar userId={user.id} />
+                        <div className='col-md-6'>
+                            <label htmlFor="closed">
+                                Closed:
+                            </label>
+                            <div id="closed" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                {tasksClosed.map(task => (
+                                    <div key={task.id} className="d-flex align-items-center">
+                                        <FontAwesomeIcon
+                                            icon={faCircleDot}
+                                            style={{
+                                                color: getStatusIconColor(task.status),
+                                                marginRight: '5px',
+                                            }}
+                                        />
+                                        <div>
+                                            <Link to={`/tasks/${task.id}`} className="nav-link">
+                                                <div
+                                                    data-tooltip-id="my-tooltip-styles"
+                                                    data-tooltip-content={task.title}
+                                                    className="truncate-text"
+                                                    style={{
+                                                        display: 'inline-block',
+                                                        maxHeight: '30px',
+                                                        maxWidth: '100%',
+                                                        overflow: 'hidden',
+                                                        whiteSpace: 'nowrap',
+                                                        textOverflow: 'ellipsis',
+                                                    }}
+                                                >
+                                                    {task.title}
+                                                </div>
+                                                <Tooltip id="my-tooltip-styles" arrowColor="transparent" />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            {
+                                tasksClosed.length > 0 ? (
+                                    <span className='text-muted'>Show more</span>
+                                ) : (
+                                    <span className='text-muted'>No reports</span>
+                                )
+                            }
+                        </div>
+                        <hr className="border-secondary" />
+                        <div className='row mx-auto text-center'>
+                            <label htmlFor="userChart">
+                                Opened and Closed bar:
+                            </label>
+                            <div id="userChart">
+                                <div>
+                                    <LastMonthUserTasksBar userId={user.id} />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </AllowOnlyAdmin>
+
 
             </div>
         </Popover>

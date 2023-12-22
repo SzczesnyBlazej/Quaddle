@@ -11,7 +11,8 @@ const getAllUsers = async () => {
             email: user.email,
             phone: user.phone,
             initials: user.initials,
-            logoColor: user.logoColor
+            logoColor: user.logoColor,
+            isAdmin: user.isAdmin
         }));
     } catch (error) {
         console.error('Error fetching users:', error);
@@ -33,3 +34,5 @@ const findCustomerById = async (customerId) => {
 };
 
 export default findCustomerById;
+
+

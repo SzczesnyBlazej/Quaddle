@@ -8,34 +8,36 @@ import { AuthProvider, useAuth } from './Account/AuthContext/authContext';
 import MyTasks from './Overviews/MyTasks';
 import TaskPage from './Tasks/TaskPage';
 import AllOpenedTask from './Overviews/AllOpenedTask';
-import MyAllClosedTask from './Overviews/MyAllClosedTask';
+import MyClosedTask from './Overviews/MyClosedTask';
 import AllUnallocated from './Overviews/AllUnallocated';
 import { NotificationProvider } from './Functions/NotificationContext';
 import AllInPendendTask from './Overviews/AllInPendendTask';
 import Favorities from './Overviews/Favorities';
 import AutoCompleteSearch from './Account/UserManagement/AutoCompleteSearch';
+import RouteGuard from './Account/AuthContext/RouteGuard';
+import MyAssignedTasks from './Overviews/MyAssignedTasks';
 
 const App = () => {
   return (
     <AuthProvider>
       <NotificationProvider>
-
         <Routes>
           <Route path='/' element={<RequireAuth><Home /></RequireAuth>} />
           <Route path='/login' element={<Login />} />
           <Route path='/registration' element={<Registration />} />
-          <Route path='/userManager' element={<RequireAuth><AutoCompleteSearch /></RequireAuth>} />
+          <Route path='/userManager' element={<RouteGuard><AutoCompleteSearch /></RouteGuard>} />
           <Route path='/overviews/mytasks' element={<RequireAuth><MyTasks /></RequireAuth>} />
-          <Route path='/overviews/allOpenedTask' element={<RequireAuth><AllOpenedTask /></RequireAuth>} />
-          <Route path='/overviews/myAllClosedTasks' element={<RequireAuth><MyAllClosedTask /></RequireAuth>} />
-          <Route path='/overviews/allUnallocated' element={<RequireAuth><AllUnallocated /></RequireAuth>} />
+          <Route path='/overviews/allOpenedTask' element={<RouteGuard><AllOpenedTask /></RouteGuard>} />
+          <Route path='/overviews/myAssignedTasks' element={<RouteGuard><MyAssignedTasks /></RouteGuard>} />
+          <Route path='/overviews/myClosedTasks' element={<RequireAuth><MyClosedTask /></RequireAuth>} />
+          <Route path='/overviews/allUnallocated' element={<RouteGuard><AllUnallocated /></RouteGuard>} />
           <Route path='/overviews/favorities' element={<RequireAuth><Favorities /></RequireAuth>} />
-          <Route path='/overviews/allInPendendTask' element={<RequireAuth><AllInPendendTask /></RequireAuth>} />
+          <Route path='/overviews/allInPendendTask' element={<RouteGuard><AllInPendendTask /></RouteGuard>} />
           <Route path="/tasks/:taskId" element={<RequireAuth><TaskPage /></RequireAuth>} />
+          <Route path='*' element={<Navigate to="/" />} />
 
         </Routes>
       </NotificationProvider>
-
     </AuthProvider>
   );
 };
@@ -49,5 +51,7 @@ const RequireAuth = ({ children }) => {
 
   return children;
 };
+
+
 
 export default App;
