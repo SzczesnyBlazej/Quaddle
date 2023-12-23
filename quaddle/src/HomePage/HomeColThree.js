@@ -59,7 +59,7 @@ function HomeColThree() {
 
 
         return () => clearInterval(intervalId);
-    }, [showNotification]);
+    }, [showNotification, user.id]);
 
 
     const getTaskDetails = async (notifications) => {

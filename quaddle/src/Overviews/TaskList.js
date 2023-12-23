@@ -9,6 +9,7 @@ import { OverlayTrigger } from 'react-bootstrap';
 import AsyncClientData from './Functions/AsyncClientData';
 import { ClientPopover } from './Templates/clientPopover';
 import { getStatusIconColor } from '../Tasks/Functions';
+import Box from '@mui/material/Box';
 
 
 const TaskList = ({ tasks, columnaaaaa }) => {
@@ -48,6 +49,7 @@ const TaskList = ({ tasks, columnaaaaa }) => {
             accessorKey: 'id',
             header: 'ID',
             maxSize: 100,
+
 
         },
         {
@@ -107,7 +109,23 @@ const TaskList = ({ tasks, columnaaaaa }) => {
             accessorKey: 'priority',
             header: 'Priority',
             size: 100,
-
+            Cell: ({ cell }) => (
+                <Box
+                    sx={(theme) => ({
+                        backgroundColor:
+                            cell.row.original.priority === 1
+                                ? theme.palette.success.dark
+                                : cell.row.original.priority === 2
+                                    ? theme.palette.warning.light
+                                    : theme.palette.error.dark,
+                        borderRadius: '0.25rem',
+                        p: '0.4rem',
+                        opacity: 0.75,
+                    })}
+                >
+                    {cell.row.original.priority}
+                </Box>
+            ),
         },
         {
             accessorKey: 'difficulty',

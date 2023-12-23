@@ -16,17 +16,14 @@ const TaskPage = () => {
     const { user } = useAuth();
     const userID = user.id;
     const navigate = useNavigate();
-    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const [isAdmin, taskResponse] = await Promise.all([
-                    ifUserIsAdminBoolean(user.id),
+                    ifUserIsAdminBoolean(userID),
                     axios.get(API_ENDPOINTS.TASKS + `/${taskId}`)
                 ]);
-
-                setIsAdmin(isAdmin);
 
                 const fetchedTask = taskResponse.data;
 
