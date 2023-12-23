@@ -15,6 +15,7 @@ const getAllUsers = async () => {
 };
 
 const ifUserIsAdminBoolean = async (userIdToCheck) => {
+
     try {
         const users = await getAllUsers();
         const foundUser = users.find(user => user.id === userIdToCheck) || null;
