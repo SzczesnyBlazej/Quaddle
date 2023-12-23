@@ -152,7 +152,6 @@ const TaskDetail = ({ task }) => {
                             disabled={!isAdmin}
 
                         >
-                            {console.log(isAdmin)}
                             {dropdownOptions(Object.values(SolverEnum))}
 
                         </select>

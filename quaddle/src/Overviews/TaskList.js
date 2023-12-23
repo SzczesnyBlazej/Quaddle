@@ -25,8 +25,6 @@ const TaskList = ({ tasks, columnaaaaa }) => {
         },
     });
 
-
-    // Existing columns
     const existingColumns = [
         {
             header: 'Status Icon',
@@ -148,6 +146,8 @@ const TaskList = ({ tasks, columnaaaaa }) => {
         },
         enableColumnResizing: true,
         columnResizeMode: 'onChange',
+
+
 
 
     });

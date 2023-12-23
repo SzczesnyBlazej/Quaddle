@@ -351,6 +351,91 @@
         "phone": "1233213212"
       },
       "id": 22
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 101,
+      "notificationDate": "22-12-2023",
+      "notificationTime": "18:53:10",
+      "createdBy": {
+        "id": 2,
+        "initials": "EN",
+        "logoColor": "#4db37e",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "tets",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "id": 23
+    },
+    {
+      "notificationText": "closed post",
+      "taskId": 9,
+      "notificationDate": "22-12-2023",
+      "notificationTime": "19:22:14",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "id": 24
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 15,
+      "notificationDate": "23-12-2023",
+      "notificationTime": "00:32:31",
+      "createdBy": {
+        "id": 3,
+        "initials": "JD",
+        "logoColor": "#3498db",
+        "name": "John",
+        "surname": "Doe",
+        "username": "user13",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "id": 25
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 1,
+      "notificationDate": "23-12-2023",
+      "notificationTime": "00:42:54",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "id": 26
+    },
+    {
+      "notificationText": "updated post ",
+      "taskId": 15,
+      "notificationDate": "23-12-2023",
+      "notificationTime": "00:43:14",
+      "createdBy": {
+        "id": 3,
+        "initials": "JD",
+        "logoColor": "#3498db",
+        "name": "John",
+        "surname": "Doe",
+        "username": "user13",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "id": 27
     }
   ]
 }

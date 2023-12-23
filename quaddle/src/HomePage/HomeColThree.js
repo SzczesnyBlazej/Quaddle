@@ -5,23 +5,53 @@ import { Link } from 'react-router-dom';
 import LogoCircleTemplate from "../Templates/LogoCircleTemplate";
 import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
+import { useAuth } from '../Account/AuthContext/authContext';
+import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
 
 function HomeColThree() {
-    const [last10Records, setLast10Records] = useState([]);
+    const [last25Records, setlast25Records] = useState([]);
     const showNotification = useNotification();
+    const { user } = useAuth();
+
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(API_ENDPOINTS.NOTIFICATION + '?_sort=id&_order=desc&_limit=25');
-                const recordsWithTaskDetails = await getTaskDetails(response.data);
-                setLast10Records(recordsWithTaskDetails);
+                const isAdmin = await ifUserIsAdminBoolean(user.id);
+                if (isAdmin) {
+                    const response = await axios.get(API_ENDPOINTS.NOTIFICATION, {
+                        params: {
+                            _sort: 'id',
+                            _order: 'desc',
+                            _limit: 25,
+                        }
+                    });
+                    const recordsWithTaskDetails = await getTaskDetails(response.data);
+                    setlast25Records(recordsWithTaskDetails);
+                } else {
+                    const taskResponse = await axios.get(API_ENDPOINTS.TASKS, {
+                        params: {
+                            clientID: user.id
+                        }
+                    });
+                    const taskIds = taskResponse.data.map(task => task.id);
+                    const response = await axios.get(API_ENDPOINTS.NOTIFICATION, {
+                        params: {
+                            _sort: 'id',
+                            _order: 'desc',
+                            taskId: taskIds,
+                            _limit: 25,
+                        }
+                    });
+                    const recordsWithTaskDetails = await getTaskDetails(response.data);
+                    setlast25Records(recordsWithTaskDetails);
+                }
             } catch (error) {
                 showNotification('Error fetching last 25 records:', error.message);
             }
         };
 
-        fetchData(); // Initial fetch
+        fetchData();
 
         const intervalId = setInterval(() => {
             fetchData();
@@ -29,7 +59,7 @@ function HomeColThree() {
 
 
         return () => clearInterval(intervalId);
-    }, [showNotification]); // Include showNotification as a dependency if it's used inside fetchData
+    }, [showNotification]);
 
 
     const getTaskDetails = async (notifications) => {
@@ -61,7 +91,7 @@ function HomeColThree() {
                 <h2 className='text-light p-2'>Activity</h2>
             </div>
             <hr className="border-white m-2" />
-            {last10Records.map(record => (
+            {last25Records.map(record => (
                 <div key={record?.id} className="card m-3 mt-1 dark-bg text-light">
                     <div className="row g-0">
                         <div className="col-md-3 p-2">

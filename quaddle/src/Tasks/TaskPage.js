@@ -1,39 +1,55 @@
-// TaskPage.js
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import HomeColFirst from '../HomePage/HomeColFirst';
 import TaskContent from './TaskContent';
 import TaskDetail from './TaskDetail';
 import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
+import { useAuth } from '../Account/AuthContext/authContext';
+import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
 
 const TaskPage = () => {
     const { taskId } = useParams();
     const [task, setTask] = useState(null);
     const showNotification = useNotification();
+    const { user } = useAuth();
+    const userID = user.id;
+    const navigate = useNavigate();
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
-        const fetchTaskById = async () => {
+        const fetchData = async () => {
             try {
-                const response = await axios.get(API_ENDPOINTS.TASKS + `/${taskId}`);
-                setTask(response.data);
-            } catch (error) {
-                showNotification(`Error fetching task with ID ${taskId}:`, error.message);
+                const [isAdmin, taskResponse] = await Promise.all([
+                    ifUserIsAdminBoolean(user.id),
+                    axios.get(API_ENDPOINTS.TASKS + `/${taskId}`)
+                ]);
 
+                setIsAdmin(isAdmin);
+
+                const fetchedTask = taskResponse.data;
+
+                if (isAdmin || fetchedTask.clientID === userID) {
+                    setTask(fetchedTask);
+                } else {
+                    showNotification(`No permission to view this task`);
+                    navigate('/');
+                }
+            } catch (error) {
+                showNotification(`Error fetching task with ID ${taskId}: ${error.message}`);
             }
         };
 
-        fetchTaskById();
-    }, [taskId, showNotification]);
+        fetchData();
+    }, [taskId, showNotification, navigate, userID]);
 
     return (
         <div>
-            <div className="row g-0 ">
+            <div className="row g-0">
                 <HomeColFirst />
                 <TaskContent task={task} />
                 <TaskDetail task={task} />
-
             </div>
         </div>
     );
