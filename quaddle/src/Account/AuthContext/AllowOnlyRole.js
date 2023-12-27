@@ -5,7 +5,7 @@ import { getUserFromLocalStorage } from "./getUserFromLocalStorage";
 import { useNotification } from '../../Functions/NotificationContext';
 import API_ENDPOINTS from "../../ApiEndpoints/apiConfig";
 
-const AllowOnlyRole = ({ children, roles = [], taskId = null }) => {
+const AllowOnlyRole = ({ children, roles = [], taskId = null, onlyAdmin = false }) => {
     const [isAuthorized, setIsAuthorized] = useState(false);
     const showNotification = useNotification();
 
@@ -25,7 +25,10 @@ const AllowOnlyRole = ({ children, roles = [], taskId = null }) => {
                     return false;
                 });
 
-                if (hasAccess) {
+                // Allow only if 'onlyAdmin' is true and user has 'admin' role
+                const allowOnlyAdmin = onlyAdmin && user.isAdmin;
+
+                if (hasAccess || allowOnlyAdmin) {
                     setIsAuthorized(true);
                 } else if (taskId) {
                     const taskResponse = await axios.get(API_ENDPOINTS.TASKS + `/${taskId}`);
@@ -42,7 +45,7 @@ const AllowOnlyRole = ({ children, roles = [], taskId = null }) => {
         };
 
         fetchData();
-    }, [showNotification, roles, taskId]);
+    }, [showNotification, roles, taskId, onlyAdmin]);
 
     return isAuthorized ? <>{children}</> : null;
 };

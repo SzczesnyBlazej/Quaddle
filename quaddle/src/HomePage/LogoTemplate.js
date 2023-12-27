@@ -22,7 +22,7 @@ const LogoTemplate = (user) =>
 
             <li><span className="dropdown-item ">{user?.name} {user?.surname}</span></li>
             <div className="dropdown-divider"></div>
-            <AllowOnlyRole roles={["admin"]}>
+            <AllowOnlyRole roles={["admin"]} onlyAdmin={true}>
 
                 <li><Link to='/userManager' className="dropdown-item">User Manager</Link></li>
                 <li><Link to='/optionManager' className="dropdown-item">Options Manager</Link></li>

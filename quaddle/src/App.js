@@ -26,8 +26,8 @@ const App = () => {
           <Route path='/' element={<RequireAuth><Home /></RequireAuth>} />
           <Route path='/login' element={<Login />} />
           <Route path='/registration' element={<Registration />} />
-          <Route path='/userManager' element={<RouteGuard><AutoCompleteSearch /></RouteGuard>} />
-          <Route path='/optionManager' element={<RouteGuard><OptionManager /></RouteGuard>} />
+          <Route path='/userManager' element={<RouteGuard onlyAdmin={true}><AutoCompleteSearch /></RouteGuard>} />
+          <Route path='/optionManager' element={<RouteGuard onlyAdmin={true}><OptionManager /></RouteGuard>} />
           <Route path='/overviews/mytasks' element={<RequireAuth><MyTasks /></RequireAuth>} />
           <Route path='/overviews/allOpenedTask' element={<RouteGuard><AllOpenedTask /></RouteGuard>} />
           <Route path='/overviews/myAssignedTasks' element={<RouteGuard><MyAssignedTasks /></RouteGuard>} />

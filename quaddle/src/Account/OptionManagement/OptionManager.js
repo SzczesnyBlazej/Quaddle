@@ -4,12 +4,14 @@ import HomeColFirst from '../../HomePage/HomeColFirst';
 import getOptionsToManager from './getOptionsToManager';
 import OptionRenderer from './OptionRenderer';
 import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
+import { useNotification } from '../../Functions/NotificationContext';
 
 const OptionManager = () => {
     const [priorityOptions, setPriorityOptions] = useState([]);
     const [difficultyOptions, setDifficultyOptions] = useState([]);
     const [statusOptions, setStatusOptions] = useState([]);
     const [unitsOptions, setUnitsOptions] = useState([]);
+    const showNotification = useNotification();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,18 +25,18 @@ const OptionManager = () => {
                 const unitList = await getOptionsToManager('units');
                 setUnitsOptions(unitList);
             } catch (error) {
-                console.error('Error fetching data:', error);
+                showNotification('Error fetching data:' + error);
+
             }
         };
 
         fetchData();
-    }, []);
+    }, [showNotification]);
 
     const handleDelete = async (optionId, groupName) => {
         try {
-            const response = await axios.delete(`${API_ENDPOINTS.OPTIONS}/${groupName}/${optionId}`);
-
-            console.log('Option deleted successfully:', response.data);
+            await axios.delete(`${API_ENDPOINTS.OPTIONS}/${groupName}/${optionId}`);
+            showNotification('Option deleted successfully.');
 
             const updatedOptions = await getOptionsToManager(groupName);
             switch (groupName) {
@@ -54,7 +56,8 @@ const OptionManager = () => {
                     break;
             }
         } catch (error) {
-            console.error('Error deleting option:', error);
+            showNotification('Error deleting option:' + error);
+
         }
     };
 

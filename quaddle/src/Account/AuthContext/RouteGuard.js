@@ -5,11 +5,11 @@ import ifUserIsAdminBoolean from './ifUserIsAdminBoolean';
 import { useNotification } from '../../Functions/NotificationContext';
 import ifUserIsSolverBoolean from './ifUserIsSolverBoolean';
 
-const RouteGuard = ({ children }) => {
+const RouteGuard = ({ children, onlyAdmin = false }) => {
     const { user } = useAuth();
     const navigate = useNavigate();
     const [isAdmin, setIsAdmin] = useState(false);
-    const [isSolver, setIsSolver] = useState(false); // Zmiana nazwy stanu
+    const [isSolver, setIsSolver] = useState(false);
 
     const showNotification = useNotification();
 
@@ -25,8 +25,14 @@ const RouteGuard = ({ children }) => {
                 const userIsAdmin = await ifUserIsAdminBoolean(user.id);
                 const userIsSolver = await ifUserIsSolverBoolean(user.id);
                 setIsAdmin(userIsAdmin);
-                setIsSolver(userIsSolver); // Ustawienie wartości dla isSolver
-                if (!(userIsAdmin || userIsSolver)) {
+                setIsSolver(userIsSolver);
+
+                if (onlyAdmin && !userIsAdmin) {
+                    showNotification(`You don't have administrator rights`);
+                    navigate('/');
+                }
+
+                if (!onlyAdmin && !(userIsAdmin || userIsSolver)) {
                     showNotification(`You don't have administrator or solver rights`);
                     navigate('/');
                 }
@@ -36,13 +42,13 @@ const RouteGuard = ({ children }) => {
         };
 
         checkAdminStatus();
-    }, [user, navigate, showNotification]);
+    }, [user, navigate, showNotification, onlyAdmin]);
 
     if (isAdmin === null || isSolver === null) {
         showNotification('Error checking admin status, roles are null');
     }
-    // console.log(isAdmin, isSolver)
-    return isAdmin || isSolver ? <>{children}</> : null;
+
+    return (onlyAdmin ? isAdmin : isAdmin || isSolver) ? <>{children}</> : null;
 };
 
 export default RouteGuard;
