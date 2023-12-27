@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import AllowOnlyAdmin from '../Account/AuthContext/AllowOnlyAdmin';
+// import AllowOnlyAdmin from '../Account/AuthContext/AllowOnlyAdmin';
+import AllowOnlyRole from '../Account/AuthContext/AllowOnlyRole';
 
 function MenuTaskList() {
     const menuChild = "/Overviews";
@@ -20,7 +21,7 @@ function MenuTaskList() {
             {Object.entries(menu).map(([key, value]) => (
                 <React.Fragment key={key}>
                     {value[2] && (
-                        <AllowOnlyAdmin>
+                        <AllowOnlyRole roles={["admin", "solver"]}>
                             <Link to={menuChild + value[0]} className="nav-link">
                                 <div className='d-flex align-items-center text-light'>
                                     <div className='col-md-10 m-2'>
@@ -29,7 +30,7 @@ function MenuTaskList() {
                                 </div>
                                 <hr className="border-secondary m-2" />
                             </Link>
-                        </AllowOnlyAdmin>
+                        </AllowOnlyRole>
                     )}
                     {!value[2] && (
                         <Link to={menuChild + value[0]} className="nav-link">

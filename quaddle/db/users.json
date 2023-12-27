@@ -6,6 +6,7 @@
       "name": "Błażej",
       "surname": "Szczesny",
       "isAdmin": true,
+      "isSolver": true,
       "initials": "BS",
       "logoColor": "#c0e830",
       "id": 1,
@@ -22,19 +23,21 @@
       "logoColor": "#4db37e",
       "id": 2,
       "phone": "1233213212",
-      "email": "bszczesny59@gmail.com"
+      "email": "bszczesny59@gmail.com",
+      "isSolver": true
     },
     {
       "id": 3,
       "username": "user13",
-      "password": "$2a$10$K6aYmi/njb1yxcc169fVWu2uZnDmzuaEIUQIrQPGnzpz20xjZ4mZi",
+      "password": "$2a$10$ekTIJl6hXZob4CgG4zHcUOVJ8lFP3jDUrwb650GtZxmT2yo23LGb.",
       "name": "John",
       "surname": "Doe",
       "isAdmin": false,
       "initials": "JD",
       "logoColor": "#3498db",
       "phone": "1233213212",
-      "email": "bszczesny59@gmail.com"
+      "email": "bszczesny59@gmail.com",
+      "isSolver": false
     },
     {
       "id": 4,
@@ -46,7 +49,8 @@
       "initials": "AJ",
       "logoColor": "#e74c3c",
       "phone": "1233213212",
-      "email": "bszczesny59@gmail.com"
+      "email": "bszczesny59@gmail.com",
+      "isSolver": false
     },
     {
       "id": 5,
@@ -227,6 +231,16 @@
       "id": 19,
       "phone": "1233213212",
       "email": "bszczesny59@gmail.com"
+    },
+    {
+      "username": "roksana",
+      "password": "$2a$10$gwbko5saKTMIs.u7EMqu3.nNX/SbJVEQ8wtJ1Yn0DlxY7kwNiq9q6",
+      "name": "Roksana",
+      "surname": "Skowrońska",
+      "isAdmin": false,
+      "initials": "RS",
+      "logoColor": "#FC9D87",
+      "id": 20
     }
   ]
 }

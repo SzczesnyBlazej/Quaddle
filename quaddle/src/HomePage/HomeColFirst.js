@@ -11,6 +11,7 @@ import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
 
+
 const renderSuggestion = (suggestion) => (
     <div>
         <strong>{suggestion.title}</strong>
@@ -21,7 +22,6 @@ function HomeColFirst() {
     const showNotification = useNotification();
 
     const { user } = useAuth();
-
     const menu = {
         home: ['/', 'Dashboard', faGaugeHigh],
         overviews: ['/Overviews/mytasks', 'Overviews', faListUl],
@@ -86,8 +86,9 @@ function HomeColFirst() {
 
 
         <div className="col-md-2 dark-bg min-vh-100 d-flex flex-column position-relative">
-
-            <h2 className='text-light p-2'>Quaddle</h2>
+            <Link to="/" className="text-decoration-none">
+                <h2 className='text-light p-2'>Quaddle</h2>
+            </Link>
             <div className="input-group rounded ps-3 pe-3">
                 <div className="input-group rounded ps-3 pe-3">
                     <input

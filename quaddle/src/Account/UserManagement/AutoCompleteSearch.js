@@ -15,6 +15,7 @@ const AutoCompleteSearch = () => {
     const [editingUser, setEditingUser] = useState(null);
     const [showEditForm, setShowEditForm] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isSolver, setisSolver] = useState(false);
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const showNotification = useNotification();
@@ -53,6 +54,7 @@ const AutoCompleteSearch = () => {
         const userToEdit = users.find((user) => user.id === userId);
         setEditingUser(userToEdit);
         setIsAdmin(userToEdit.isAdmin || false);
+        setisSolver(userToEdit.isSolver || false);
         setShowEditForm(true);
     };
 
@@ -74,6 +76,8 @@ const AutoCompleteSearch = () => {
 
         if (e.target.name === 'isAdmin') {
             setIsAdmin(e.target.checked);
+        } else if (e.target.name === 'isSolver') {
+            setisSolver(e.target.checked);
         } else if (e.target.name === 'newPassword') {
             setNewPassword(e.target.value);
         } else if (e.target.name === 'confirmPassword') {
@@ -88,6 +92,7 @@ const AutoCompleteSearch = () => {
             const updatedUser = {
                 ...editingUser,
                 isAdmin: isAdmin,
+                isSolver: isSolver,
             };
 
             if (newPassword && newPassword === confirmPassword) {
@@ -139,6 +144,7 @@ const AutoCompleteSearch = () => {
                 showEditForm={showEditForm}
                 editingUser={editingUser}
                 isAdmin={isAdmin}
+                isSolver={isSolver}
                 newPassword={newPassword}
                 confirmPassword={confirmPassword}
                 handleEditFormChange={handleEditFormChange}

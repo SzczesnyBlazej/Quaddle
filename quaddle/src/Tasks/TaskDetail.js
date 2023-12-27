@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { getCurrentDateFormatted, getCurrentTimeFormatted, sendNotification } from './Functions'
+import { getCurrentDateFormatted, getCurrentTimeFormatted, sendNotification } from './Functions';
 import { useNotification } from '../Functions/NotificationContext';
 import { TaskStatusEnum } from '../Enums/TaskStatusEnum';
-import { SolverEnum } from '../Enums/SolverEnum';
 import { PriorityEnum } from '../Enums/PriorityEnum';
 import { DifficultyEnum } from '../Enums/DifficultyEnum';
 import { UnitEnum } from '../Enums/UnitEnum';
@@ -14,32 +13,41 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import { checkIsTaskFavorite, toggleTaskFavorite } from './FavoriteService';
 import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
-import AllowOnlyAdmin from '../Account/AuthContext/AllowOnlyAdmin';
+// import AllowOnlyAdmin from '../Account/AuthContext/AllowOnlyRole';
+import AllowOnlyRole from '../Account/AuthContext/AllowOnlyRole';
+import getSolverList from '../Account/UserManagement/getSolverList';
+import ifUserIsSolverBoolean from '../Account/AuthContext/ifUserIsSolverBoolean';
 
 const TaskDetail = ({ task }) => {
     const showNotification = useNotification();
-
+    const { user } = useAuth();
+    const [isTaskFavorite, setIsTaskFavorite] = useState(false);
+    const [isAdmin, setIsAdmin] = useState('');
+    const [isSolver, setisSolver] = useState('');
+    const [solverList, setSolverList] = useState([]);
     const [selectedSolver, setSelectedSolver] = useState('');
     const [selectedPriority, setSelectedPriority] = useState('');
     const [selectedStatus, setSelectedStatus] = useState('');
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
     const [selectedUnit, setSelectedUnit] = useState('');
     const [selectedPhoneNumber, setSelectedPhoneNumber] = useState('');
-    const { user } = useAuth();
-    const [isTaskFavorite, setIsTaskFavorite] = useState(false);
-    const [isAdmin, setIsAdmin] = useState('')
+
     useEffect(() => {
-        const fetchAdminStatus = async () => {
+        const fetchData = async () => {
             try {
+                const list = await getSolverList();
+                setSolverList(list);
+
                 const adminStatus = await ifUserIsAdminBoolean(user.id);
+                const solverStatus = await ifUserIsSolverBoolean(user.id);
+                setisSolver(solverStatus);
                 setIsAdmin(adminStatus);
             } catch (error) {
-                console.error('Error fetching admin status:', error);
-                setIsAdmin(false); // Set to false in case of an error
+                console.error('Error fetching data:', error);
             }
         };
 
-        fetchAdminStatus(); // Call the async function
+        fetchData();
 
         setSelectedSolver(task?.solver || '');
         setSelectedPriority(task?.priority || '');
@@ -65,9 +73,30 @@ const TaskDetail = ({ task }) => {
         </>
     );
 
+    const acceptTask = async () => {
+        try {
+            const acceptTaskData = {
+                ...task,
+                solver: user.name,
+                priority: selectedPriority,
+                status: selectedStatus,
+                difficulty: selectedDifficulty,
+                unit: selectedUnit,
+                contactNumber: selectedPhoneNumber,
+                lastModificationHour: getCurrentTimeFormatted(),
+                lastModification: getCurrentDateFormatted(),
+            };
+
+            await axios.put(`${API_ENDPOINTS.TASKS}/${task?.id}`, acceptTaskData);
+            sendNotification('Updated post', task?.id);
+        } catch (error) {
+            showNotification('Error updating task:', error.message);
+        }
+    };
+
     const updateTask = async () => {
         try {
-            const updatedTask = {
+            const updatedTaskData = {
                 ...task,
                 solver: selectedSolver,
                 priority: selectedPriority,
@@ -79,21 +108,20 @@ const TaskDetail = ({ task }) => {
                 lastModification: getCurrentDateFormatted(),
             };
 
-            await axios.put(API_ENDPOINTS.TASKS + `/${task?.id}`, updatedTask);
-            sendNotification("updated post ", task?.id);
+            await axios.put(`${API_ENDPOINTS.TASKS}/${task?.id}`, updatedTaskData);
+            sendNotification('Updated post', task?.id);
         } catch (error) {
-            showNotification('Błąd podczas aktualizacji zadania:', error.message);
+            showNotification('Error updating task:', error.message);
         }
     };
 
-
     const closeTask = async () => {
         const userString = localStorage.getItem('user');
-        const user = userString ? JSON.parse(userString) : null;
+        const currentUser = userString ? JSON.parse(userString) : null;
 
-        if (user && user.name) {
+        if (currentUser && currentUser.name) {
             try {
-                const updatedTask = {
+                const updatedTaskData = {
                     ...task,
                     priority: selectedPriority,
                     difficulty: selectedDifficulty,
@@ -101,19 +129,19 @@ const TaskDetail = ({ task }) => {
                     contactNumber: selectedPhoneNumber,
                     lastModificationHour: getCurrentTimeFormatted(),
                     lastModification: getCurrentDateFormatted(),
-                    // solver: user.name,
-                    status: "Close",
+                    status: 'Close',
                     closeDate: getCurrentDateFormatted(),
                     closeHour: getCurrentTimeFormatted(),
                 };
+
                 if (isAdmin) {
-                    updatedTask.solver = user.name;
+                    updatedTaskData.solver = currentUser.name;
                 }
 
-                await axios.put(API_ENDPOINTS.TASKS + `/${task?.id}`, updatedTask);
-                sendNotification("closed post", task?.id);
+                await axios.put(`${API_ENDPOINTS.TASKS}/${task?.id}`, updatedTaskData);
+                sendNotification('Closed post', task?.id);
             } catch (error) {
-                showNotification('Błąd podczas aktualizacji zadania:', error.message);
+                showNotification('Error updating task:', error.message);
             }
         } else {
             showNotification('User information not found in local storage.');
@@ -129,7 +157,7 @@ const TaskDetail = ({ task }) => {
             <form>
                 <div className="container text-light">
                     <div className="d-flex align-items-center justify-content-between p-2">
-                        <h2 className='mb-0'>Task</h2>
+                        <h2 className="mb-0">Task</h2>
                         <FontAwesomeIcon
                             icon={isTaskFavorite ? faStar : faStarRegular}
                             style={{ color: isTaskFavorite ? 'gold' : 'inherit', cursor: 'pointer' }}
@@ -149,11 +177,9 @@ const TaskDetail = ({ task }) => {
                             value={selectedSolver}
                             onChange={(e) => handleInputChange(e, setSelectedSolver)}
                             aria-label="Solver"
-                            disabled={!isAdmin}
-
+                            disabled={!isSolver && !isAdmin}
                         >
-                            {dropdownOptions(Object.values(SolverEnum))}
-
+                            {dropdownOptions(solverList)}
                         </select>
                     </div>
 
@@ -164,7 +190,7 @@ const TaskDetail = ({ task }) => {
                                 type="text"
                                 className="form-control me-2"
                                 id="createDateInput"
-                                value={task?.createDate || getCurrentDateFormatted()} // Use the task's createDate or the current date
+                                value={task?.createDate || getCurrentDateFormatted()}
                                 readOnly
                             />
                             <input
@@ -196,7 +222,9 @@ const TaskDetail = ({ task }) => {
                             />
                         </div>
                     </div>
-                    <AllowOnlyAdmin>
+
+                    <AllowOnlyRole roles={["admin", "solver"]}>
+
                         <div className="form-group p-1">
                             <label htmlFor="priorityInput">Priority</label>
                             <select
@@ -208,23 +236,9 @@ const TaskDetail = ({ task }) => {
                                 aria-label="Priority"
                             >
                                 {dropdownOptions(Object.values(PriorityEnum))}
-
                             </select>
                         </div>
 
-                        <div className="form-group p-1">
-                            <label htmlFor="statusInput">Status</label>
-                            <select
-                                className="form-control form-select"
-                                id="statusInput"
-                                aria-describedby="emailHelp"
-                                value={selectedStatus}
-                                onChange={(e) => handleInputChange(e, setSelectedStatus)}
-                                aria-label="Status"
-                            >
-                                {dropdownOptions(Object.values(TaskStatusEnum))}
-                            </select>
-                        </div>
 
                         <div className="form-group p-1">
                             <label htmlFor="difficultyInput">Difficulty</label>
@@ -237,10 +251,25 @@ const TaskDetail = ({ task }) => {
                                 aria-label="Difficulty"
                             >
                                 {dropdownOptions(Object.values(DifficultyEnum))}
-
                             </select>
                         </div>
-                    </AllowOnlyAdmin>
+                    </AllowOnlyRole>
+
+                    <div className="form-group p-1">
+                        <label htmlFor="statusInput">Status</label>
+                        <select
+                            className="form-control form-select"
+                            id="statusInput"
+                            aria-describedby="emailHelp"
+                            value={selectedStatus}
+                            onChange={(e) => handleInputChange(e, setSelectedStatus)}
+                            aria-label="Status"
+                            disabled={!isSolver && !isAdmin}
+
+                        >
+                            {dropdownOptions(Object.values(TaskStatusEnum))}
+                        </select>
+                    </div>
 
                     <div className="form-group p-1">
                         <label htmlFor="unitInput">Unit</label>
@@ -253,9 +282,9 @@ const TaskDetail = ({ task }) => {
                             aria-label="Unit"
                         >
                             {dropdownOptions(Object.values(UnitEnum))}
-
                         </select>
                     </div>
+
                     <div className="form-group p-1">
                         <label htmlFor="phoneInput">Phone</label>
                         <input
@@ -266,29 +295,31 @@ const TaskDetail = ({ task }) => {
                             value={selectedPhoneNumber}
                             onChange={(e) => handleInputChange(e, setSelectedPhoneNumber)}
                             aria-label="Phone"
-                        >
-                        </input>
+                        />
                     </div>
-
                 </div>
                 <div className="text-light mt-auto position-absolute bottom-0 w-100">
                     <hr className="border-secondary" />
-                    <div className='row w-100'>
-                        <div className='col-md-4'>
-
+                    <div className="row w-100">
+                        <div className="col-md-4">
+                            <AllowOnlyRole roles={["admin", "solver"]}>
+                                <button className="btn btn-outline-light m-3" onClick={acceptTask}>
+                                    Accept
+                                </button>
+                            </AllowOnlyRole>
                         </div>
-                        <div className='col-md-4'>
-                            <button className="btn btn-outline-light m-3" onClick={closeTask}>Zamknij</button>
-
+                        <div className="col-md-4">
+                            <button className="btn btn-outline-light m-3" onClick={closeTask}>
+                                Close
+                            </button>
                         </div>
-                        <div className='col-md-4'>
-
-                            <button className="btn btn-outline-light m-3" onClick={updateTask}>Zapisz</button>
+                        <div className="col-md-4">
+                            <button className="btn btn-outline-light m-3" onClick={updateTask}>
+                                Save
+                            </button>
                         </div>
                     </div>
                 </div>
-
-
             </form>
         </div>
     );

@@ -7,6 +7,7 @@ import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import { useAuth } from '../Account/AuthContext/authContext';
 import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
+import ifUserIsSolverBoolean from '../Account/AuthContext/ifUserIsSolverBoolean';
 
 function HomeColThree() {
     const [last25Records, setlast25Records] = useState([]);
@@ -17,8 +18,10 @@ function HomeColThree() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+
                 const isAdmin = await ifUserIsAdminBoolean(user.id);
-                if (isAdmin) {
+                const isSolver = await ifUserIsSolverBoolean(user.id);
+                if (isAdmin || isSolver) {
                     const response = await axios.get(API_ENDPOINTS.NOTIFICATION, {
                         params: {
                             _sort: 'id',
@@ -34,17 +37,19 @@ function HomeColThree() {
                             clientID: user.id
                         }
                     });
-                    const taskIds = taskResponse.data.map(task => task.id);
-                    const response = await axios.get(API_ENDPOINTS.NOTIFICATION, {
-                        params: {
-                            _sort: 'id',
-                            _order: 'desc',
-                            taskId: taskIds,
-                            _limit: 25,
-                        }
-                    });
-                    const recordsWithTaskDetails = await getTaskDetails(response.data);
-                    setlast25Records(recordsWithTaskDetails);
+                    if (taskResponse.data.length !== 0) {
+                        const taskIds = taskResponse.data.map(task => task.id);
+                        const response = await axios.get(API_ENDPOINTS.NOTIFICATION, {
+                            params: {
+                                _sort: 'id',
+                                _order: 'desc',
+                                taskId: taskIds,
+                                _limit: 25,
+                            }
+                        });
+                        const recordsWithTaskDetails = await getTaskDetails(response.data);
+                        setlast25Records(recordsWithTaskDetails);
+                    }
                 }
             } catch (error) {
                 showNotification('Error fetching last 25 records:', error.message);

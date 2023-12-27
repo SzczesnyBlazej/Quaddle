@@ -1,12 +1,11 @@
-// AllowOnlyAdmin.js
+// AllowOnlyRole.js
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { getUserFromLocalStorage } from "./getUserFromLocalStorage";
 import { useNotification } from '../../Functions/NotificationContext';
 import API_ENDPOINTS from "../../ApiEndpoints/apiConfig";
 
-const AllowOnlyAdmin = ({ children, taskId = null }) => {
-    const [isAdmin, setIsAdmin] = useState(false);
+const AllowOnlyRole = ({ children, roles = [], taskId = null }) => {
     const [isAuthorized, setIsAuthorized] = useState(false);
     const showNotification = useNotification();
 
@@ -16,10 +15,19 @@ const AllowOnlyAdmin = ({ children, taskId = null }) => {
                 const loggedInUser = getUserFromLocalStorage();
                 const response = await axios.get(API_ENDPOINTS.USERS + `/${loggedInUser}`);
                 const user = response.data;
-                const userIsAdmin = user && user.isAdmin;
-                setIsAdmin(userIsAdmin);
 
-                if (taskId) {
+                const hasAccess = roles.some(role => {
+                    if (role === 'admin') {
+                        return user.isAdmin;
+                    } else if (role === 'solver') {
+                        return user.isSolver;
+                    }
+                    return false;
+                });
+
+                if (hasAccess) {
+                    setIsAuthorized(true);
+                } else if (taskId) {
                     const taskResponse = await axios.get(API_ENDPOINTS.TASKS + `/${taskId}`);
                     const task = taskResponse.data;
 
@@ -34,9 +42,9 @@ const AllowOnlyAdmin = ({ children, taskId = null }) => {
         };
 
         fetchData();
-    }, [showNotification, taskId]);
+    }, [showNotification, roles, taskId]);
 
-    return (isAdmin || isAuthorized) ? <>{children}</> : null;
+    return isAuthorized ? <>{children}</> : null;
 };
 
-export default AllowOnlyAdmin;
+export default AllowOnlyRole;

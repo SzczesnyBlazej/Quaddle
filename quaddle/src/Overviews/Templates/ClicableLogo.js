@@ -9,7 +9,8 @@ import GetTasksByCustomerId from '../Functions/getTasksByCustomerId';
 import findCustomerById from '../Functions/FindCustomerByID';
 import LastMonthUserTasksBar from '../../Charts/LastMonthUserTasksBar';
 import { getStatusIconColor } from '../../Tasks/Functions';
-import AllowOnlyAdmin from '../../Account/AuthContext/AllowOnlyAdmin';
+// import AllowOnlyAdmin from '../../Account/AuthContext/AllowOnlyAdmin';
+import AllowOnlyRole from '../../Account/AuthContext/AllowOnlyRole';
 
 const ClickableLogo = ({ user }) => {
 
@@ -59,7 +60,8 @@ const ClickableLogo = ({ user }) => {
                     </div>
                 </div>
                 <hr className="border-secondary" />
-                <AllowOnlyAdmin>
+                <AllowOnlyRole roles={["admin", "solver"]}>
+
                     <div className='row'>
                         <div className='col-md-6'>
                             <label htmlFor="opened">
@@ -164,7 +166,7 @@ const ClickableLogo = ({ user }) => {
                             </div>
                         </div>
                     </div>
-                </AllowOnlyAdmin>
+                </AllowOnlyRole>
 
 
             </div>

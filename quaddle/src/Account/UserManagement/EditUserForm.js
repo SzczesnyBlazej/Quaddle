@@ -5,6 +5,7 @@ const EditUserForm = ({
     showEditForm,
     editingUser,
     isAdmin,
+    isSolver,
     newPassword,
     confirmPassword,
     handleEditFormChange,
@@ -116,6 +117,21 @@ const EditUserForm = ({
                                     />
                                     <label className="form-check-label" htmlFor="editIsAdmin">
                                         Admin
+                                    </label>
+                                </div>
+                            </div>
+                            <div className='col-md-3'>
+                                <div className="form-check">
+                                    <input
+                                        className="form-check-input bg-transparent border border-white"
+                                        type="checkbox"
+                                        id="editIsSolver"
+                                        name="isSolver"
+                                        checked={isSolver}
+                                        onChange={handleEditFormChange}
+                                    />
+                                    <label className="form-check-label" htmlFor="editIsSolver">
+                                        Is solver
                                     </label>
                                 </div>
                             </div>

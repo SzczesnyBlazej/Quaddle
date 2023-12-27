@@ -9,7 +9,8 @@ import { faCircleDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-ic
 import LogoCircleTemplate from '../../Templates/LogoCircleTemplate';
 import LastMonthUserTasksBar from '../../Charts/LastMonthUserTasksBar';
 import { getStatusIconColor } from '../../Tasks/Functions';
-import AllowOnlyAdmin from '../../Account/AuthContext/AllowOnlyAdmin';
+// import AllowOnlyAdmin from '../../Account/AuthContext/AllowOnlyAdmin';
+import AllowOnlyRole from '../../Account/AuthContext/AllowOnlyRole';
 
 export const ClientPopover = ({ clientId }) => {
     const [customerData, setCustomerData] = useState(null);
@@ -60,7 +61,7 @@ export const ClientPopover = ({ clientId }) => {
                 </div>
 
                 <hr className="border-secondary" />
-                <AllowOnlyAdmin>
+                <AllowOnlyRole roles={["admin", "solver"]}>
                     <div className='row'>
                         <div className='col-md-6'>
                             <label htmlFor="opened">
@@ -163,7 +164,7 @@ export const ClientPopover = ({ clientId }) => {
                             </div>
                         </div>
                     </div>
-                </AllowOnlyAdmin>
+                </AllowOnlyRole>
             </div>
         </Popover>
     );

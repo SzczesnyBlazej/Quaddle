@@ -8,6 +8,7 @@ import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import { useAuth } from '../Account/AuthContext/authContext';
 import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
+import ifUserIsSolverBoolean from '../Account/AuthContext/ifUserIsSolverBoolean';
 
 const TaskPage = () => {
     const { taskId } = useParams();
@@ -20,14 +21,15 @@ const TaskPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [isAdmin, taskResponse] = await Promise.all([
+                const [isAdmin, isSolver, taskResponse] = await Promise.all([
                     ifUserIsAdminBoolean(userID),
+                    ifUserIsSolverBoolean(userID),
                     axios.get(API_ENDPOINTS.TASKS + `/${taskId}`)
                 ]);
 
                 const fetchedTask = taskResponse.data;
 
-                if (isAdmin || fetchedTask.clientID === userID) {
+                if (isAdmin || isSolver || fetchedTask.clientID === userID) {
                     setTask(fetchedTask);
                 } else {
                     showNotification(`No permission to view this task`);

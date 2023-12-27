@@ -21,10 +21,9 @@ const getAllUsers = async () => {
 };
 
 
-// Function to find a user by ID
 const findCustomerById = async (customerId) => {
     try {
-        const users = await getAllUsers(); // Make sure to await here
+        const users = await getAllUsers();
         const foundUser = users.find(user => user.id === customerId) || null;
         return foundUser;
     } catch (error) {
