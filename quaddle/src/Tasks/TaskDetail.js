@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getCurrentDateFormatted, getCurrentTimeFormatted, sendNotification } from './Functions';
 import { useNotification } from '../Functions/NotificationContext';
-import { TaskStatusEnum } from '../Enums/TaskStatusEnum';
-import { PriorityEnum } from '../Enums/PriorityEnum';
-import { DifficultyEnum } from '../Enums/DifficultyEnum';
-import { UnitEnum } from '../Enums/UnitEnum';
+// import { TaskStatusEnum } from '../Enums/TaskStatusEnum';
+// import { PriorityEnum } from '../Enums/PriorityEnum';
+// import { DifficultyEnum } from '../Enums/DifficultyEnum';
+// import { UnitEnum } from '../Enums/UnitEnum';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import { useAuth } from '../Account/AuthContext/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,10 +13,10 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import { checkIsTaskFavorite, toggleTaskFavorite } from './FavoriteService';
 import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
-// import AllowOnlyAdmin from '../Account/AuthContext/AllowOnlyRole';
 import AllowOnlyRole from '../Account/AuthContext/AllowOnlyRole';
 import getSolverList from '../Account/UserManagement/getSolverList';
 import ifUserIsSolverBoolean from '../Account/AuthContext/ifUserIsSolverBoolean';
+import getOptions from '../Config/getOptions';
 
 const TaskDetail = ({ task }) => {
     const showNotification = useNotification();
@@ -31,12 +31,24 @@ const TaskDetail = ({ task }) => {
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
     const [selectedUnit, setSelectedUnit] = useState('');
     const [selectedPhoneNumber, setSelectedPhoneNumber] = useState('');
+    const [priorityOptions, setPriorityOptions] = useState([]);
+    const [difficultyOptions, setDifficultyOptions] = useState([]);
+    const [statusOptions, setStatusOptions] = useState([]);
+    const [unitsOptions, setUnitsOptions] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const list = await getSolverList();
                 setSolverList(list);
+                const priorityList = await getOptions('priority');
+                setPriorityOptions(priorityList);
+                const difficultyList = await getOptions('difficulty');
+                setDifficultyOptions(difficultyList);
+                const statusList = await getOptions('status');
+                setStatusOptions(statusList);
+                const unitList = await getOptions('units');
+                setUnitsOptions(unitList);
 
                 const adminStatus = await ifUserIsAdminBoolean(user.id);
                 const solverStatus = await ifUserIsSolverBoolean(user.id);
@@ -235,7 +247,7 @@ const TaskDetail = ({ task }) => {
                                 onChange={(e) => handleInputChange(e, setSelectedPriority)}
                                 aria-label="Priority"
                             >
-                                {dropdownOptions(Object.values(PriorityEnum))}
+                                {dropdownOptions(priorityOptions)}
                             </select>
                         </div>
 
@@ -250,7 +262,7 @@ const TaskDetail = ({ task }) => {
                                 onChange={(e) => handleInputChange(e, setSelectedDifficulty)}
                                 aria-label="Difficulty"
                             >
-                                {dropdownOptions(Object.values(DifficultyEnum))}
+                                {dropdownOptions(difficultyOptions)}
                             </select>
                         </div>
                     </AllowOnlyRole>
@@ -267,7 +279,7 @@ const TaskDetail = ({ task }) => {
                             disabled={!isSolver && !isAdmin}
 
                         >
-                            {dropdownOptions(Object.values(TaskStatusEnum))}
+                            {dropdownOptions(statusOptions)}
                         </select>
                     </div>
 
@@ -281,7 +293,7 @@ const TaskDetail = ({ task }) => {
                             onChange={(e) => handleInputChange(e, setSelectedUnit)}
                             aria-label="Unit"
                         >
-                            {dropdownOptions(Object.values(UnitEnum))}
+                            {dropdownOptions(unitsOptions)}
                         </select>
                     </div>
 

@@ -691,6 +691,74 @@
         "phone": "1233213212"
       },
       "id": 42
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 29,
+      "notificationDate": "27-12-2023",
+      "notificationTime": "16:49:52",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "id": 43
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 29,
+      "notificationDate": "27-12-2023",
+      "notificationTime": "17:03:59",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "id": 44
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 102,
+      "notificationDate": "27-12-2023",
+      "notificationTime": "17:13:03",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "id": 45
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 102,
+      "notificationDate": "27-12-2023",
+      "notificationTime": "17:13:37",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "id": 46
     }
   ]
 }

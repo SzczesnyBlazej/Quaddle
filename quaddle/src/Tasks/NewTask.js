@@ -3,8 +3,8 @@ import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { getCurrentTimeFormatted, getCurrentDateFormatted, sendNotification } from "./Functions"
 import { useNotification } from '../Functions/NotificationContext';
-import { UnitEnum } from '../Enums/UnitEnum';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
+import getOptions from '../Config/getOptions';
 
 const NewTask = ({ onClose }) => {
     const [title, setTitle] = useState('');
@@ -15,18 +15,25 @@ const NewTask = ({ onClose }) => {
     const [closeDate] = useState('');
     const [closeHour] = useState('');
     const [contactNumber, setContactNumber] = useState('');
+    const [unitsOptions, setUnitsOptions] = useState([]);
 
     const [addTaskError, setAddTaskError] = useState('');
     const showNotification = useNotification();
 
     useEffect(() => {
-        const getStoredUsername = localStorage.getItem('user');
-        const storedUser = JSON.parse(getStoredUsername);
-
-        if (storedUser) {
-            setContactNumber(storedUser.phone || '');
+        async function fetchData() {
+            const getStoredUsername = localStorage.getItem('user');
+            const storedUser = JSON.parse(getStoredUsername);
+            const unitList = await getOptions('units');
+            setUnitsOptions(unitList);
+            if (storedUser) {
+                setContactNumber(storedUser.phone || '');
+            }
         }
+
+        fetchData();
     }, []);
+
 
     const handleAddTask = async (e) => {
         e.preventDefault();
@@ -129,7 +136,7 @@ const NewTask = ({ onClose }) => {
 
                             <option value="">---</option>
 
-                            {Object.values(UnitEnum).map((value) => (
+                            {Object.values(unitsOptions).map((value) => (
                                 <option key={value} value={value}>
                                     {value}
                                 </option>

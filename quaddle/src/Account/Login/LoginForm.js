@@ -23,7 +23,7 @@ const LoginForm = () => {
                 const response = await axios.get(API_ENDPOINTS.USERS);
                 setUsers(response.data);
             } catch (error) {
-                showNotification('Error fetching users:', error.message);
+                showNotification('Error fetching users: ' + error.message);
             }
         };
 

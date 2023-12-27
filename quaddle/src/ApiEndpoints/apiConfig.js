@@ -3,7 +3,8 @@ const API_ENDPOINTS = {
     NOTIFICATION: 'http://localhost:3503/notification',
     USERS: 'http://localhost:3501/users',
     MESSAGES: 'http://localhost:3504/messages',
-    FAVORITIES: 'http://localhost:3505/favorities'
+    FAVORITIES: 'http://localhost:3505/favorities',
+    OPTIONS: 'http://localhost:3506/options',
 };
 
 export default API_ENDPOINTS;
