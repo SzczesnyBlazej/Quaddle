@@ -16,6 +16,7 @@ import Favorities from './Overviews/Favorities';
 import AutoCompleteSearch from './Account/UserManagement/AutoCompleteSearch';
 import RouteGuard from './Account/AuthContext/RouteGuard';
 import MyAssignedTasks from './Overviews/MyAssignedTasks';
+import OptionManager from './Account/OptionManagement/OptionManager';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/registration' element={<Registration />} />
           <Route path='/userManager' element={<RouteGuard><AutoCompleteSearch /></RouteGuard>} />
+          <Route path='/optionManager' element={<RouteGuard><OptionManager /></RouteGuard>} />
           <Route path='/overviews/mytasks' element={<RequireAuth><MyTasks /></RequireAuth>} />
           <Route path='/overviews/allOpenedTask' element={<RouteGuard><AllOpenedTask /></RouteGuard>} />
           <Route path='/overviews/myAssignedTasks' element={<RouteGuard><MyAssignedTasks /></RouteGuard>} />

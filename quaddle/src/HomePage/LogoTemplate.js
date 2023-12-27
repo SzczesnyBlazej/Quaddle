@@ -25,6 +25,8 @@ const LogoTemplate = (user) =>
             <AllowOnlyRole roles={["admin"]}>
 
                 <li><Link to='/userManager' className="dropdown-item">User Manager</Link></li>
+                <li><Link to='/optionManager' className="dropdown-item">Options Manager</Link></li>
+
             </AllowOnlyRole>
 
             <li><a className="dropdown-item" href="#/action-3">Option 3</a></li>

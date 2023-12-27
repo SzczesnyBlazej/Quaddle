@@ -8,7 +8,6 @@ const getSolverList = async () => {
                 isSolver: true,
             },
         });
-        // return response.data
         return response.data.map(user => user.name);
 
     } catch (error) {

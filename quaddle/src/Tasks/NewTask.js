@@ -136,7 +136,7 @@ const NewTask = ({ onClose }) => {
 
                             <option value="">---</option>
 
-                            {Object.values(unitsOptions).map((value) => (
+                            {unitsOptions.map((value) => (
                                 <option key={value} value={value}>
                                     {value}
                                 </option>

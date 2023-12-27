@@ -1,7 +1,7 @@
 import axios from 'axios';
-import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
+import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
 
-const getOptions = async (groupName) => {
+const getOptionsToManager = async (groupName) => {
     try {
         const response = await axios.get(`${API_ENDPOINTS.OPTIONS}/${groupName}`);
         const options = response.data;
@@ -11,13 +11,11 @@ const getOptions = async (groupName) => {
             return [];
         }
 
-        const filteredOptions = options.filter(option => option.active);
-        const optionNames = filteredOptions.map(option => option.name);
-        return optionNames;
+        return options;
     } catch (error) {
         console.error('Error fetching options:', error);
         return [];
     }
 };
 
-export default getOptions;
+export default getOptionsToManager;
