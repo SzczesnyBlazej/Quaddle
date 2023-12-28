@@ -3,10 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Modal, Button } from 'react-bootstrap';
 
-const OptionRenderer = ({ title, options, handleDelete }) => {
+const OptionRenderer = ({ title, options, handleDelete, handleAddOption, handleUpdateOption }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [optionToDelete, setOptionToDelete] = useState(null);
+    // const [showUpdateForm, setShowUpdateForm] = useState(false);
+    // const [updateOptionData, setUpdateOptionData] = useState(null);
 
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
@@ -22,14 +24,29 @@ const OptionRenderer = ({ title, options, handleDelete }) => {
         setShowConfirmModal(true);
     };
 
+    // const openUpdateForm = (optionId, groupName, optionData) => {
+    //     setUpdateOptionData({ id: optionId, groupName, optionData });
+    //     setShowUpdateForm(true);
+    // };
+
+    // const closeUpdateForm = () => {
+    //     setUpdateOptionData(null);
+    //     setShowUpdateForm(false);
+    // };
+
     return (
         <div className="mb-4">
             <div className="d-flex justify-content-between align-items-center">
                 <h4>{title}</h4>
                 <div className="d-flex">
-                    <button className="btn btn-outline-light ms-2 mb-2">
-                        Add
-                    </button>
+                    <div className="input-group mb-2">
+                        <button
+                            className="btn btn-outline-light"
+                            onClick={() => handleAddOption(title)}
+                        >
+                            Add
+                        </button>
+                    </div>
                     <button
                         className="btn btn-outline-light ms-2 mb-2"
                         onClick={toggleVisibility}
@@ -66,19 +83,13 @@ const OptionRenderer = ({ title, options, handleDelete }) => {
                                     <div className="d-flex">
                                         <button
                                             className="btn btn-outline-light ms-2"
-                                        /* onClick={() => handleUpdate(option.id)} */
+                                            onClick={() => handleUpdateOption(option.id, title.toLowerCase(), option)}
                                         >
                                             Update
                                         </button>
                                         <button
                                             className="btn btn-outline-light ms-2"
-                                            onClick={() =>
-                                                openDeleteModal(
-                                                    option.id,
-                                                    title.toLowerCase(),
-                                                    option.name
-                                                )
-                                            }
+                                            onClick={() => openDeleteModal(option.id, title.toLowerCase(), option.name)}
                                         >
                                             Delete
                                         </button>
@@ -91,9 +102,8 @@ const OptionRenderer = ({ title, options, handleDelete }) => {
                     )}
                 </ul>
             )}
-            <hr className="border-secondary" />
 
-            {/* Delete Confirmation Modal */}
+            <hr className="border-secondary" />
             <Modal
                 show={showConfirmModal}
                 onHide={() => setShowConfirmModal(false)}
@@ -117,6 +127,7 @@ const OptionRenderer = ({ title, options, handleDelete }) => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
         </div>
     );
 };
