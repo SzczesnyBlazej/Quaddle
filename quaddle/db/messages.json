@@ -135,6 +135,24 @@
       "createDate": "23-12-2023",
       "createHour": "12:39:17",
       "id": 8
+    },
+    {
+      "message": "hehe\n",
+      "clientID": 12,
+      "taskID": 40,
+      "messageSender": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "createDate": "28-12-2023",
+      "createHour": "23:01:23",
+      "id": 9
     }
   ]
 }

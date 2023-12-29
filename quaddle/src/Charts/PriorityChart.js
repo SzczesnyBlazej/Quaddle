@@ -2,17 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
+import getOptions from '../Config/getOptions';
 
 function PriorityChart({ user }) {
-    const [taskCountsByPriority, setTaskCountsByPriority] = useState({
-        priorityOne: 0,
-        priorityTwo: 0,
-        priorityThree: 0,
-    });
+    const [taskCountsByPriority, setTaskCountsByPriority] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                const priorityList = await getOptions('priority');
                 const response = await axios.get(API_ENDPOINTS.TASKS);
                 const taskData = response.data;
                 const taskDataFiltered = taskData.filter(task => task.solver === user.name);
@@ -29,18 +27,18 @@ function PriorityChart({ user }) {
                     return groups;
                 }, {});
 
-                const allPriorities = [1, 2, 3];
 
-                const taskCountsByPriority = allPriorities.map(priority => ({
-                    priority: `Priority ${priority}`,
+                const taskCountsByPriority = priorityList.map(priority => ({
+                    priority: `P: ${priority}`,
                     count: (groupedTasks[priority] || []).length,
                 }));
 
-                setTaskCountsByPriority({
-                    "Priority 1": taskCountsByPriority[0].count,
-                    "Priority 2": taskCountsByPriority[1].count,
-                    "Priority 3": taskCountsByPriority[2].count,
-                });
+                const resultObject = priorityList.reduce((acc, currentValue, index) => {
+                    acc[`P: ${currentValue}`] = taskCountsByPriority[index].count;
+                    return acc;
+                }, {});
+
+                setTaskCountsByPriority(resultObject);
             } catch (error) {
                 console.error('Error fetching task data:', error);
             }
@@ -56,13 +54,12 @@ function PriorityChart({ user }) {
             >
                 <XAxis dataKey="priority" />
                 <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
-                <Tooltip
-                    labelClassName='text-dark'
-                />
+                <Tooltip labelClassName='text-dark' />
                 <Legend
                     payload={[
                         { value: 'Priority', type: 'line', color: '#8884d8' },
-                    ]} />
+                    ]}
+                />
                 <Bar yAxisId="left" dataKey="count" fill="#FFA500" />
             </BarChart>
         </ResponsiveContainer>

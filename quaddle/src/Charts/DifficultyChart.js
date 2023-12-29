@@ -3,18 +3,17 @@ import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
+import getOptions from '../Config/getOptions';
 
 function DifficultyChart({ user }) {
-    const [taskCountsByDifficulty, setTaskCountsByDifficulty] = useState({
-        difficultyEasy: 0,
-        difficultyMedium: 0,
-        difficultyHard: 0,
-    });
+    const [taskCountsByDifficulty, setTaskCountsByDifficulty] = useState({});
     const showNotification = useNotification();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                const difficultyList = await getOptions('difficulty');
+
                 const response = await axios.get(API_ENDPOINTS.TASKS);
                 const taskData = response.data;
                 const taskDataFiltered = taskData.filter(task => task.solver === user.name);
@@ -31,18 +30,19 @@ function DifficultyChart({ user }) {
                     return groups;
                 }, {});
 
-                const allDifficulty = ["Easy", "Medium", "Hard"];
 
-                const taskCountsByDifficulty = allDifficulty.map(difficulty => ({
-                    difficulty: `Difficulty ${difficulty}`,
+                const taskCountsByDifficulty = difficultyList.map(difficulty => ({
+                    difficulty: `D: ${difficulty}`,
                     count: (groupedTasks[difficulty] || []).length,
                 }));
 
-                setTaskCountsByDifficulty({
-                    "Easy": taskCountsByDifficulty[0].count,
-                    "Medium": taskCountsByDifficulty[1].count,
-                    "Hard": taskCountsByDifficulty[2].count,
-                });
+                const resultObject = difficultyList.reduce((acc, currentValue, index) => {
+                    acc[`D: ${currentValue}`] = taskCountsByDifficulty[index].count;
+                    return acc;
+                }, {});
+
+                setTaskCountsByDifficulty(resultObject);
+
             } catch (error) {
                 showNotification('Error fetching task data:', error);
 

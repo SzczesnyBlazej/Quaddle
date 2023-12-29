@@ -3,26 +3,25 @@ import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { UnitEnum } from '../Enums/UnitEnum';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
+import getOptions from '../Config/getOptions';
 
 
 function UnitsChart({ user }) {
-    const [taskCountsByUnit, setTaskCountsByUnit] = useState({
-        ZRR: 0,
-        IT: 0,
-        ZDO: 0,
-        ZDM: 0,
-        SOR: 0,
-        CHIR: 0,
-        NEURO: 0,
-    });
+
+    const [taskCountsByUnit, setTaskCountsByUnit] = useState({});
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(API_ENDPOINTS.TASKS);
                 const taskData = response.data;
-                // const taskDataFiltered = taskData.filter(task => task.solver === user.name);
+                const unitList = await getOptions('units');
+                const resultObject = unitList.reduce((acc, currentValue) => {
+                    acc[currentValue] = 0;
+                    return acc;
+                }, {});
 
+                setTaskCountsByUnit(resultObject)
                 const groupedTasks = taskData.reduce((groups, task) => {
                     const key = task.unit;
 
@@ -31,11 +30,10 @@ function UnitsChart({ user }) {
                     }
 
                     groups[key].push(task);
-
                     return groups;
-                }, {});
 
-                const allUnits = Object.keys(UnitEnum);
+                }, {});
+                const allUnits = unitList;
 
                 const taskCountsByUnit = allUnits.map(unit => ({
                     unit,
