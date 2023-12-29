@@ -25,7 +25,6 @@ export async function CountTaskToMenuTaskList(menuName, userid, name) {
                 count = taskData.filter(task => task.status === 'Open').length;
                 break;
             case "myClosedTasks":
-                console.log(taskData)
                 count = taskData.filter(task => task.clientID == `${userid}` && task.status === 'Close').length;
                 break;
             case "allUnallocated":
@@ -35,7 +34,7 @@ export async function CountTaskToMenuTaskList(menuName, userid, name) {
                 count = taskData.filter(task => task.status === 'In Pendend').length;
                 break;
             case "Favorities":
-                count = favoritesData.length;
+                count = favoritesData[0].favoritesTasksID.length;
                 break;
             default:
                 break;

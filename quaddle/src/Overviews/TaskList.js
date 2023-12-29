@@ -17,8 +17,9 @@ const TaskList = ({ tasks, columnaaaaa }) => {
     const [dataLoaded, setDataLoaded] = useState(false);
 
     useEffect(() => {
-        // Check if your data is loaded (you might need to adjust this based on your data loading logic)
-        if (tasks && tasks.length > 0) {
+        if (tasks.length > 0) {
+            setDataLoaded(true);
+        } else {
             setDataLoaded(true);
         }
     }, [tasks]);

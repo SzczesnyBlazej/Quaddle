@@ -912,6 +912,57 @@
         "phone": "123321"
       },
       "id": 55
+    },
+    {
+      "notificationText": "Closed post",
+      "taskId": 35,
+      "notificationDate": "29-12-2023",
+      "notificationTime": "23:49:57",
+      "createdBy": {
+        "id": 3,
+        "initials": "JD",
+        "logoColor": "#3498db",
+        "name": "John",
+        "surname": "Doe",
+        "username": "user13",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "id": 56
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 35,
+      "notificationDate": "29-12-2023",
+      "notificationTime": "23:52:35",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "id": 57
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 35,
+      "notificationDate": "30-12-2023",
+      "notificationTime": "00:02:11",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "id": 58
     }
   ]
 }
