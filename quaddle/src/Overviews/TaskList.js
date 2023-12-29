@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMaterialReactTable, MaterialReactTable } from 'material-react-table';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
@@ -10,9 +10,18 @@ import AsyncClientData from './Functions/AsyncClientData';
 import { ClientPopover } from './Templates/clientPopover';
 import { getStatusIconColor } from '../Tasks/Functions';
 import Box from '@mui/material/Box';
+import LoadingSpinner from '../spinner';
 
 
 const TaskList = ({ tasks, columnaaaaa }) => {
+    const [dataLoaded, setDataLoaded] = useState(false);
+
+    useEffect(() => {
+        // Check if your data is loaded (you might need to adjust this based on your data loading logic)
+        if (tasks && tasks.length > 0) {
+            setDataLoaded(true);
+        }
+    }, [tasks]);
     const darkTheme = createTheme({
         palette: {
             background: {
@@ -152,7 +161,6 @@ const TaskList = ({ tasks, columnaaaaa }) => {
 
     const allColumns = columnaaaaa[0].accessorKey === undefined ? existingColumns : [...existingColumns, ...columnaaaaa];
 
-
     const table = useMaterialReactTable({
         columns: allColumns,
         data: tasks,
@@ -164,19 +172,21 @@ const TaskList = ({ tasks, columnaaaaa }) => {
         },
         enableColumnResizing: true,
         columnResizeMode: 'onChange',
-
-
-
-
     });
 
     return (
         <div className="p-3 col-md-8 text-light dark-bg min-vh-100 border-start border-secondary">
-            <div className="table-responsive" style={{ maxHeight: '100vh', overflowY: 'auto' }}>
-                <ThemeProvider theme={darkTheme}>
-                    <MaterialReactTable table={table} />
-                </ThemeProvider>
-            </div>
+            {dataLoaded ? (
+                <div className="table-responsive" style={{ maxHeight: '100vh', overflowY: 'auto' }}>
+                    <ThemeProvider theme={darkTheme}>
+                        <MaterialReactTable table={table} />
+                    </ThemeProvider>
+                </div>
+            ) : (
+
+                <div><LoadingSpinner />
+                </div>
+            )}
         </div>
     );
 };

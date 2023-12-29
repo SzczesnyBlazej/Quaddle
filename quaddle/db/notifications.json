@@ -895,6 +895,23 @@
         "phone": "123321"
       },
       "id": 54
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 103,
+      "notificationDate": "29-12-2023",
+      "notificationTime": "22:49:34",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "id": 55
     }
   ]
 }

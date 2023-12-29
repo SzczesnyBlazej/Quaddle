@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { UnitEnum } from '../Enums/UnitEnum';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import getOptions from '../Config/getOptions';
 

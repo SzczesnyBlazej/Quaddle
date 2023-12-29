@@ -1,20 +1,49 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import AllowOnlyAdmin from '../Account/AuthContext/AllowOnlyAdmin';
 import AllowOnlyRole from '../Account/AuthContext/AllowOnlyRole';
+import { CountTaskToMenuTaskList } from './Functions/CountTaskToMenuTaskList';
+import { useAuth } from '../Account/AuthContext/authContext';
 
 function MenuTaskList() {
+    const { user } = useAuth();
+
+    const [mytasks, setmytasks] = useState(0);
+    const [myAssignedTasks, setmyAssignedTasks] = useState(0);
+    const [allOpenedTask, setallOpenedTask] = useState(0);
+    const [myClosedTasks, setmyClosedTasks] = useState(0);
+    const [allUnallocated, setallUnallocated] = useState(0);
+    const [AllInPendendTask, setAllInPendendTask] = useState(0);
+    const [Favorities, setFavorities] = useState(0);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setmytasks(await CountTaskToMenuTaskList("MyTasks", user.id, user.name));
+                setmyAssignedTasks(await CountTaskToMenuTaskList("myAssignedTasks", user.id, user.name));
+                setallOpenedTask(await CountTaskToMenuTaskList("allOpenedTask", user.id, user.name));
+                setmyClosedTasks(await CountTaskToMenuTaskList("myClosedTasks", user.id, user.name));
+                setallUnallocated(await CountTaskToMenuTaskList("allUnallocated", user.id, user.name));
+                setAllInPendendTask(await CountTaskToMenuTaskList("AllInPendendTask", user.id, user.name));
+                setFavorities(await CountTaskToMenuTaskList("Favorities", user.id, user.name));
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchData();
+    }, [user.id, user.name]);
+
     const menuChild = "/Overviews";
     const menu = {
-        mytasks: ['/mytasks', 'My Tasks', false],
-        myAssignedTasks: ['/myAssignedTasks', 'My Assigned Tasks', true],
-        allOpenedTasks: ['/allOpenedTask', 'All Opened Task', true],
-        myAllClosedTasks: ['/myClosedTasks', 'My Closed Task', false],
-        allUnallocated: ['/allUnallocated', 'All Unallocated', true],
-        allInPendendTask: ['/AllInPendendTask', 'All In Pendend Task', true],
-        favorites: ['/Favorities', 'Favorities', false],
-
+        mytasks: ['/mytasks', 'My Tasks', false, mytasks],
+        myAssignedTasks: ['/myAssignedTasks', 'My Assigned Tasks', true, myAssignedTasks],
+        allOpenedTasks: ['/allOpenedTask', 'All Opened Task', true, allOpenedTask],
+        myAllClosedTasks: ['/myClosedTasks', 'My Closed Task', false, myClosedTasks],
+        allUnallocated: ['/allUnallocated', 'All Unallocated', true, allUnallocated],
+        allInPendendTask: ['/AllInPendendTask', 'All In Pendend Task', true, AllInPendendTask],
+        favorites: ['/Favorities', 'Favorities', false, Favorities],
     };
+
     return (
         <div className="col-md-2 dark-bg min-vh-100 d-flex flex-column position-relative border-start border-secondary">
             <h2 className='text-light p-2'>Select tasks</h2>
@@ -24,9 +53,10 @@ function MenuTaskList() {
                         <AllowOnlyRole roles={["admin", "solver"]}>
                             <Link to={menuChild + value[0]} className="nav-link">
                                 <div className='d-flex align-items-center text-light'>
-                                    <div className='col-md-10 m-2'>
+                                    <div className='col-md-10 ps-3 p-2'>
                                         {value[1]}
                                     </div>
+                                    <div className="col-md-2"><strong>{value[3]}</strong></div>
                                 </div>
                                 <hr className="border-secondary m-2" />
                             </Link>
@@ -35,18 +65,19 @@ function MenuTaskList() {
                     {!value[2] && (
                         <Link to={menuChild + value[0]} className="nav-link">
                             <div className='d-flex align-items-center text-light'>
-                                <div className='col-md-10 m-2'>
+                                <div className='col-md-10 ps-3 p-2'>
                                     {value[1]}
                                 </div>
+                                <div className="col-md-2"><strong>{value[3]}</strong></div>
                             </div>
+
                             <hr className="border-secondary m-2" />
                         </Link>
-
                     )}
                 </React.Fragment>
             ))}
         </div>
-    )
+    );
 }
 
-export default MenuTaskList
+export default MenuTaskList;
