@@ -33,6 +33,9 @@ export async function CountTaskToMenuTaskList(menuName, userid, name) {
             case "AllInPendendTask":
                 count = taskData.filter(task => task.status === 'In Pendend').length;
                 break;
+            case "allClosedTask":
+                count = taskData.filter(task => task.status === 'Close').length;
+                break;
             case "Favorities":
                 count = favoritesData[0].favoritesTasksID.length;
                 break;

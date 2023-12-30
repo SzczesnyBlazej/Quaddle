@@ -138,7 +138,9 @@ function HomeColFirst() {
                                     </div>
 
                                     <div className='col-md-10'>
-                                        <small>{renderSuggestion(suggestion)}</small>
+                                        <small >
+                                            {renderSuggestion(suggestion)}
+                                        </small>
                                     </div>
                                 </div>
                             </Link>

@@ -17,6 +17,7 @@ import AutoCompleteSearch from './Account/UserManagement/AutoCompleteSearch';
 import RouteGuard from './Account/AuthContext/RouteGuard';
 import MyAssignedTasks from './Overviews/MyAssignedTasks';
 import OptionManager from './Account/OptionManagement/OptionManager';
+import AllClossedTask from './Overviews/AllClossedTask';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
           <Route path='/overviews/allOpenedTask' element={<RouteGuard><AllOpenedTask /></RouteGuard>} />
           <Route path='/overviews/myAssignedTasks' element={<RouteGuard><MyAssignedTasks /></RouteGuard>} />
           <Route path='/overviews/myClosedTasks' element={<RequireAuth><MyClosedTask /></RequireAuth>} />
+          <Route path='/overviews/allClosedTask' element={<RouteGuard><AllClossedTask /></RouteGuard>} />
           <Route path='/overviews/allUnallocated' element={<RouteGuard><AllUnallocated /></RouteGuard>} />
           <Route path='/overviews/favorities' element={<RequireAuth><Favorities /></RequireAuth>} />
           <Route path='/overviews/allInPendendTask' element={<RouteGuard><AllInPendendTask /></RouteGuard>} />

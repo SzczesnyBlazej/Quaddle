@@ -153,6 +153,24 @@
       "createDate": "28-12-2023",
       "createHour": "23:01:23",
       "id": 9
+    },
+    {
+      "message": "zrobię w piątek",
+      "clientID": 3,
+      "taskID": 35,
+      "messageSender": {
+        "id": 2,
+        "initials": "EN",
+        "logoColor": "#4db37e",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "tets",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "createDate": "30-12-2023",
+      "createHour": "00:04:33",
+      "id": 10
     }
   ]
 }

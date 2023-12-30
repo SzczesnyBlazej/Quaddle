@@ -22,6 +22,9 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         setUser(null);
+        localStorage.removeItem('suggestions');
+        sessionStorage.removeItem('searchValue');
+
         localStorage.removeItem('user');
         navigate('/login');
 

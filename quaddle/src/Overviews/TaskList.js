@@ -53,14 +53,11 @@ const TaskList = ({ tasks, columnaaaaa }) => {
             disableColumnMenu: true,
             maxSize: 10,
             enableColumnActions: false,
-
         },
         {
             accessorKey: 'id',
             header: 'ID',
             maxSize: 100,
-
-
         },
         {
             id: 'title',
@@ -102,7 +99,6 @@ const TaskList = ({ tasks, columnaaaaa }) => {
                             <AsyncClientData clientId={row.original.clientID} />
                         </Link>
                     </OverlayTrigger>
-
                 </>
             ),
             enableColumnActions: false,

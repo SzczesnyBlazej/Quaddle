@@ -9,8 +9,10 @@ function MenuTaskList() {
 
     const [mytasks, setmytasks] = useState(0);
     const [myAssignedTasks, setmyAssignedTasks] = useState(0);
-    const [allOpenedTask, setallOpenedTask] = useState(0);
     const [myClosedTasks, setmyClosedTasks] = useState(0);
+
+    const [allOpenedTask, setallOpenedTask] = useState(0);
+    const [allClosedTask, setallClosedTask] = useState(0);
     const [allUnallocated, setallUnallocated] = useState(0);
     const [AllInPendendTask, setAllInPendendTask] = useState(0);
     const [Favorities, setFavorities] = useState(0);
@@ -23,6 +25,7 @@ function MenuTaskList() {
                 setallOpenedTask(await CountTaskToMenuTaskList("allOpenedTask", user.id, user.name));
                 setmyClosedTasks(await CountTaskToMenuTaskList("myClosedTasks", user.id, user.name));
                 setallUnallocated(await CountTaskToMenuTaskList("allUnallocated", user.id, user.name));
+                setallClosedTask(await CountTaskToMenuTaskList("allClosedTask", user.id, user.name));
                 setAllInPendendTask(await CountTaskToMenuTaskList("AllInPendendTask", user.id, user.name));
                 setFavorities(await CountTaskToMenuTaskList("Favorities", user.id, user.name));
             } catch (error) {
@@ -36,9 +39,10 @@ function MenuTaskList() {
     const menuChild = "/Overviews";
     const menu = {
         mytasks: ['/mytasks', 'My Tasks', false, mytasks],
+        myAllClosedTasks: ['/myClosedTasks', 'My Closed Task', false, myClosedTasks],
         myAssignedTasks: ['/myAssignedTasks', 'My Assigned Tasks', true, myAssignedTasks],
         allOpenedTasks: ['/allOpenedTask', 'All Opened Task', true, allOpenedTask],
-        myAllClosedTasks: ['/myClosedTasks', 'My Closed Task', false, myClosedTasks],
+        allClosedTask: ['/allClosedTask', 'All Closed Task', true, allClosedTask],
         allUnallocated: ['/allUnallocated', 'All Unallocated', true, allUnallocated],
         allInPendendTask: ['/AllInPendendTask', 'All In Pendend Task', true, AllInPendendTask],
         favorites: ['/Favorities', 'Favorities', false, Favorities],

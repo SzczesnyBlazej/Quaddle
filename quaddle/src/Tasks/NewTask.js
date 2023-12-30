@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 import { getCurrentTimeFormatted, getCurrentDateFormatted, sendNotification } from "./Functions"
 import { useNotification } from '../Functions/NotificationContext';
@@ -155,9 +155,9 @@ const NewTask = ({ onClose }) => {
                         />
                     </div>
 
-                    <Button variant="primary" type="submit">
+                    <button type="submit" className="btn btn-outline-dark mt-3">
                         Submit
-                    </Button>
+                    </button>
                 </form>
 
             </Modal.Body>
