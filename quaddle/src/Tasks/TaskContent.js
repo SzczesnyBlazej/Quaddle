@@ -108,7 +108,7 @@ const TaskContent = ({ task }) => {
             fetchMessages();
 
         } catch (error) {
-            showNotification('Błąd podczas aktualizacji zadania:', error.message);
+            showNotification('Error while updating a task:' + error.message);
         }
     };
 

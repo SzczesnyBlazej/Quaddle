@@ -5,8 +5,8 @@ const LogoutButton = () => {
     const { logout } = useAuth();
 
     const handleLogout = () => {
+
         logout();
-        // Dodatkowe czynności po wylogowaniu, jeśli są potrzebne
     };
 
     return (

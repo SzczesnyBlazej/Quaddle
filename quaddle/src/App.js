@@ -18,31 +18,42 @@ import RouteGuard from './Account/AuthContext/RouteGuard';
 import MyAssignedTasks from './Overviews/MyAssignedTasks';
 import OptionManager from './Account/OptionManagement/OptionManager';
 import AllClossedTask from './Overviews/AllClossedTask';
+import GlobalClickDetector from './Account/AuthContext/GlobalClickDetector';
 
 const App = () => {
-  return (
-    <AuthProvider>
-      <NotificationProvider>
-        <Routes>
-          <Route path='/' element={<RequireAuth><Home /></RequireAuth>} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/registration' element={<Registration />} />
-          <Route path='/userManager' element={<RouteGuard onlyAdmin={true}><AutoCompleteSearch /></RouteGuard>} />
-          <Route path='/optionManager' element={<RouteGuard onlyAdmin={true}><OptionManager /></RouteGuard>} />
-          <Route path='/overviews/mytasks' element={<RequireAuth><MyTasks /></RequireAuth>} />
-          <Route path='/overviews/allOpenedTask' element={<RouteGuard><AllOpenedTask /></RouteGuard>} />
-          <Route path='/overviews/myAssignedTasks' element={<RouteGuard><MyAssignedTasks /></RouteGuard>} />
-          <Route path='/overviews/myClosedTasks' element={<RequireAuth><MyClosedTask /></RequireAuth>} />
-          <Route path='/overviews/allClosedTask' element={<RouteGuard><AllClossedTask /></RouteGuard>} />
-          <Route path='/overviews/allUnallocated' element={<RouteGuard><AllUnallocated /></RouteGuard>} />
-          <Route path='/overviews/favorities' element={<RequireAuth><Favorities /></RequireAuth>} />
-          <Route path='/overviews/allInPendendTask' element={<RouteGuard><AllInPendendTask /></RouteGuard>} />
-          <Route path="/tasks/:taskId" element={<RequireAuth><TaskPage /></RequireAuth>} />
-          <Route path='*' element={<Navigate to="/" />} />
+  const handleGlobalClick = (event) => {
+    localStorage.setItem('lastActivityTime', new Date().getTime().toString());
 
-        </Routes>
-      </NotificationProvider>
-    </AuthProvider>
+  };
+  return (
+    <GlobalClickDetector onGlobalClick={handleGlobalClick}>
+
+      <AuthProvider>
+        <NotificationProvider>
+
+          <Routes>
+            <Route path='/' element={<RequireAuth><Home /></RequireAuth>} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/registration' element={<Registration />} />
+            <Route path='/userManager' element={<RouteGuard onlyAdmin={true}><AutoCompleteSearch /></RouteGuard>} />
+            <Route path='/optionManager' element={<RouteGuard onlyAdmin={true}><OptionManager /></RouteGuard>} />
+            <Route path='/overviews/mytasks' element={<RequireAuth><MyTasks /></RequireAuth>} />
+            <Route path='/overviews/allOpenedTask' element={<RouteGuard><AllOpenedTask /></RouteGuard>} />
+            <Route path='/overviews/myAssignedTasks' element={<RouteGuard><MyAssignedTasks /></RouteGuard>} />
+            <Route path='/overviews/myClosedTasks' element={<RequireAuth><MyClosedTask /></RequireAuth>} />
+            <Route path='/overviews/allClosedTask' element={<RouteGuard><AllClossedTask /></RouteGuard>} />
+            <Route path='/overviews/allUnallocated' element={<RouteGuard><AllUnallocated /></RouteGuard>} />
+            <Route path='/overviews/favorities' element={<RequireAuth><Favorities /></RequireAuth>} />
+            <Route path='/overviews/allInPendendTask' element={<RouteGuard><AllInPendendTask /></RouteGuard>} />
+            <Route path="/tasks/:taskId" element={<RequireAuth><TaskPage /></RequireAuth>} />
+            <Route path='*' element={<Navigate to="/" />} />
+
+          </Routes>
+
+        </NotificationProvider>
+      </AuthProvider>
+    </GlobalClickDetector>
+
   );
 };
 

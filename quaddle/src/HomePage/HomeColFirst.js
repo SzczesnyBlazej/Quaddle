@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
+import SessionTimer from '../Account/AuthContext/SessionTimer';
 
 
 const renderSuggestion = (suggestion) => (
@@ -149,7 +150,10 @@ function HomeColFirst() {
                     ))}
                 </div>
             </div>
+
             <div className="text-light mt-auto position-absolute bottom-0 w-100">
+                <span className='ps-2'>        <SessionTimer /></span>
+
                 <hr className="border-secondary" />
                 <div className='row text-center mb-3'>
                     <div className='col-md-4'>

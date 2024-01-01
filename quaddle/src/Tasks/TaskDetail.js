@@ -98,9 +98,9 @@ const TaskDetail = ({ task }) => {
                 lastModificationHour: getCurrentTimeFormatted(),
                 lastModification: getCurrentDateFormatted(),
             };
+            sendNotification('Updated post', task?.id);
 
             await axios.put(`${API_ENDPOINTS.TASKS}/${task?.id}`, acceptTaskData);
-            sendNotification('Updated post', task?.id);
         } catch (error) {
             showNotification('Error updating task:', error.message);
         }
@@ -119,9 +119,9 @@ const TaskDetail = ({ task }) => {
                 lastModificationHour: getCurrentTimeFormatted(),
                 lastModification: getCurrentDateFormatted(),
             };
+            sendNotification('Updated post', task?.id);
 
             await axios.put(`${API_ENDPOINTS.TASKS}/${task?.id}`, updatedTaskData);
-            sendNotification('Updated post', task?.id);
         } catch (error) {
             showNotification('Error updating task:', error.message);
         }
@@ -149,9 +149,9 @@ const TaskDetail = ({ task }) => {
                 if (isAdmin) {
                     updatedTaskData.solver = currentUser.name;
                 }
+                sendNotification('Closed post', task?.id);
 
                 await axios.put(`${API_ENDPOINTS.TASKS}/${task?.id}`, updatedTaskData);
-                sendNotification('Closed post', task?.id);
             } catch (error) {
                 showNotification('Error updating task:', error.message);
             }
