@@ -7,8 +7,6 @@ const OptionRenderer = ({ title, options, handleDelete, handleAddOption, handleU
     const [isVisible, setIsVisible] = useState(false);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [optionToDelete, setOptionToDelete] = useState(null);
-    // const [showUpdateForm, setShowUpdateForm] = useState(false);
-    // const [updateOptionData, setUpdateOptionData] = useState(null);
 
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
@@ -23,16 +21,6 @@ const OptionRenderer = ({ title, options, handleDelete, handleAddOption, handleU
         setOptionToDelete({ id: optionId, groupName, optionName });
         setShowConfirmModal(true);
     };
-
-    // const openUpdateForm = (optionId, groupName, optionData) => {
-    //     setUpdateOptionData({ id: optionId, groupName, optionData });
-    //     setShowUpdateForm(true);
-    // };
-
-    // const closeUpdateForm = () => {
-    //     setUpdateOptionData(null);
-    //     setShowUpdateForm(false);
-    // };
 
     return (
         <div className="mb-4">

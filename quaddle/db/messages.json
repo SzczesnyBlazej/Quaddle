@@ -14,7 +14,8 @@
       },
       "createDate": "14-12-2023",
       "createHour": "23:16:46",
-      "id": 1
+      "id": 1,
+      "isLock": false
     },
     {
       "message": "In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n",
@@ -30,7 +31,8 @@
       },
       "createDate": "14-12-2023",
       "createHour": "23:17:04",
-      "id": 2
+      "id": 2,
+      "isLock": false
     },
     {
       "message": "heh",
@@ -46,7 +48,8 @@
       },
       "createDate": "16-12-2023",
       "createHour": "23:58:33",
-      "id": 3
+      "id": 3,
+      "isLock": false
     },
     {
       "message": "heh\n",
@@ -62,7 +65,8 @@
       },
       "createDate": "16-12-2023",
       "createHour": "23:58:43",
-      "id": 4
+      "id": 4,
+      "isLock": false
     },
     {
       "message": "test",
@@ -80,7 +84,8 @@
       },
       "createDate": "18-12-2023",
       "createHour": "18:39:38",
-      "id": 5
+      "id": 5,
+      "isLock": false
     },
     {
       "message": "okej",
@@ -98,7 +103,8 @@
       },
       "createDate": "22-12-2023",
       "createHour": "17:37:23",
-      "id": 6
+      "id": 6,
+      "isLock": false
     },
     {
       "message": "okej",
@@ -116,7 +122,8 @@
       },
       "createDate": "22-12-2023",
       "createHour": "17:37:33",
-      "id": 7
+      "id": 7,
+      "isLock": false
     },
     {
       "message": "it looking good",
@@ -134,7 +141,8 @@
       },
       "createDate": "23-12-2023",
       "createHour": "12:39:17",
-      "id": 8
+      "id": 8,
+      "isLock": false
     },
     {
       "message": "hehe\n",
@@ -152,7 +160,8 @@
       },
       "createDate": "28-12-2023",
       "createHour": "23:01:23",
-      "id": 9
+      "id": 9,
+      "isLock": false
     },
     {
       "message": "zrobię w piątek",
@@ -170,7 +179,122 @@
       },
       "createDate": "30-12-2023",
       "createHour": "00:04:33",
-      "id": 10
+      "id": 10,
+      "isLock": false
+    },
+    {
+      "message": "hej",
+      "clientID": 1,
+      "taskID": 64,
+      "messageSender": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "createDate": "30-12-2023",
+      "createHour": "20:56:54",
+      "id": 11,
+      "isLock": false
+    },
+    {
+      "message": "hehe",
+      "clientID": 3,
+      "taskID": 35,
+      "messageSender": {
+        "id": 3,
+        "initials": "JD",
+        "logoColor": "#3498db",
+        "name": "John",
+        "surname": "Doe",
+        "username": "user13",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "createDate": "30-12-2023",
+      "createHour": "21:29:34",
+      "id": 13,
+      "isLock": false
+    },
+    {
+      "message": "siema",
+      "clientID": 14,
+      "taskID": 26,
+      "messageSender": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "createDate": "01-01-2024",
+      "createHour": "18:00:58",
+      "id": 14,
+      "isLock": false
+    },
+    {
+      "message": "siema",
+      "clientID": 3,
+      "taskID": 35,
+      "messageSender": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "createDate": "01-01-2024",
+      "createHour": "18:18:21",
+      "isLock": true,
+      "id": 15
+    },
+    {
+      "message": "hehe\n",
+      "clientID": 3,
+      "taskID": 35,
+      "messageSender": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c0e830",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "123321"
+      },
+      "createDate": "01-01-2024",
+      "createHour": "19:08:43",
+      "isLock": false,
+      "id": 16
+    },
+    {
+      "message": "ok",
+      "clientID": 3,
+      "taskID": 35,
+      "messageSender": {
+        "id": 2,
+        "initials": "EN",
+        "logoColor": "#4db37e",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "tets",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "createDate": "01-01-2024",
+      "createHour": "19:09:35",
+      "isLock": false,
+      "id": 17
     }
   ]
 }
