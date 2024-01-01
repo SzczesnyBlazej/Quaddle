@@ -1,19 +1,33 @@
 // AuthProvider.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const AuthContext = createContext();
 
-const SESSION_TIMEOUT = 10 * 60 * 1000;
 
 export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
+    const [sessionConfig, setSessionConfig] = useState([{ id: 1, enable: true, session_timeout: 10 }]);
 
     const [user, setUser] = useState(() => {
         const storedUser = localStorage.getItem('user');
         return storedUser ? JSON.parse(storedUser) : null;
     });
 
+    useEffect(() => {
+        const fetchSessionConfig = async () => {
+            try {
+                const response = await axios.get('http://localhost:3507/enableSessionTimeout');
+                setSessionConfig(response.data);
+            } catch (error) {
+                console.error('Error fetching session config:', error);
+
+            }
+        };
+
+        fetchSessionConfig();
+    }, []);
     useEffect(() => {
         const checkSessionTimeout = () => {
             const lastActivityTime = localStorage.getItem('lastActivityTime');
@@ -22,6 +36,7 @@ export const AuthProvider = ({ children }) => {
                 const currentTime = new Date().getTime();
                 const elapsedTime = currentTime - parseInt(lastActivityTime, 10);
 
+                const SESSION_TIMEOUT = sessionConfig[0].session_timeout * 60 * 1000;
                 if (elapsedTime > SESSION_TIMEOUT) {
                     logout();
                     navigate('/login');
@@ -46,10 +61,9 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         setUser(null);
+        localStorage.removeItem('lastActivityTime');
         localStorage.removeItem('suggestions');
         sessionStorage.removeItem('searchValue');
-        localStorage.removeItem('lastActivityTime');
-
         localStorage.removeItem('user');
         navigate('/login');
     };
@@ -65,8 +79,6 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={contextValue}>
-            {localStorage.setItem('lastActivityTime', new Date().getTime().toString())}
-
             {children}
         </AuthContext.Provider>
     );

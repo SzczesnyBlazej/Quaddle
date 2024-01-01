@@ -34,7 +34,7 @@
     "webpack": "^5.89.0"
   },
   "scripts": {
-    "start": "concurrently \"npm run start-app\" \"npm run server-users\" \"npm run server-tasks\" \"npm run server-notifications\" \"npm run server-messages\" \"npm run server-favorities\" \"npm run server-task-config\"",
+    "start": "concurrently \"npm run start-app\" \"npm run server-users\" \"npm run server-tasks\" \"npm run server-notifications\" \"npm run server-messages\" \"npm run server-favorities\" \"npm run server-task-config\" \"npm run server-application-config\"",
     "start-app": "set PORT=5000 && react-app-rewired start",
     "server-users": "npx json-server -p 3501 -w ./db/users.json",
     "server-tasks": "npx json-server -p 3502 -w ./db/tasks.json",
@@ -42,6 +42,7 @@
     "server-messages": "npx json-server -p 3504 -w ./db/messages.json",
     "server-favorities": "npx json-server -p 3505 -w ./db/favorities.json",
     "server-task-config": "npx json-server -p 3506 -w ./db/taskConfig.json",
+    "server-application-config": "npx json-server -p 3507 -w ./db/applicationConfig.json",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
