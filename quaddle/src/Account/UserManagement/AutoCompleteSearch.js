@@ -25,6 +25,8 @@ const AutoCompleteSearch = () => {
             try {
                 const response = await axios.get(API_ENDPOINTS.USERS);
                 setUsers(response.data);
+                setSuggestions(response.data); // Set initial suggestions to all users
+
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
@@ -32,12 +34,17 @@ const AutoCompleteSearch = () => {
 
         fetchUsers();
     }, []);
-
     const handleSearch = (value) => {
         setSearchTerm(value);
 
         if (value.trim() === '') {
-            setSuggestions([]);
+            const filteredUsers = users.filter(
+                (user) =>
+                    (user.name.toLowerCase() + ' ' + user.surname.toLowerCase()) ||
+                    (user.surname.toLowerCase() + ' ' + user.name.toLowerCase()) ||
+                    user.username.toLowerCase()
+            );
+            setSuggestions(filteredUsers);
         } else {
             const filteredUsers = users.filter(
                 (user) =>
@@ -49,6 +56,7 @@ const AutoCompleteSearch = () => {
             setSuggestions(filteredUsers);
         }
     };
+
 
     const handleUpdate = (userId) => {
         const userToEdit = users.find((user) => user.id === userId);

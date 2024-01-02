@@ -15,7 +15,7 @@
     },
     {
       "username": "tets",
-      "password": "$2a$10$Us9rHEKyEQfRuwnGeK36BOX5txa.Ajwym2t.1LHI1Eo4WkSVGpdbq",
+      "password": "$2a$10$TW1TGQZ4a7/WvOFfOR9eLuLlYLJDmffPtPHi/2iT3898QIUgv3hdS",
       "name": "English",
       "surname": "Nomma",
       "isAdmin": false,
@@ -79,14 +79,15 @@
     {
       "id": 7,
       "username": "user5",
-      "password": "$2a$10$abcdefghijklmnopqrstuvwx/abcdefghijklmnopqrstuvwi0X5g.DtY7S",
+      "password": "$2a$10$PTpF8X/EangjIG1nL2j.EukoUHzRqbg6/zntvxIIObcYJ/sCehzmO",
       "name": "Michael",
       "surname": "Brown",
       "isAdmin": false,
       "initials": "MB",
       "logoColor": "#9b59b6",
       "phone": "1233213212",
-      "email": "bszczesny59@gmail.com"
+      "email": "bszczesny59@gmail.com",
+      "isSolver": false
     },
     {
       "id": 8,

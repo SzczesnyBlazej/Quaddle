@@ -1422,6 +1422,23 @@
         "phone": "123321"
       },
       "id": 85
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 8,
+      "notificationDate": "02-01-2024",
+      "notificationTime": "19:05:11",
+      "createdBy": {
+        "id": 2,
+        "initials": "EN",
+        "logoColor": "#4db37e",
+        "name": "English",
+        "surname": "Nomma",
+        "username": "tets",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1233213212"
+      },
+      "id": 86
     }
   ]
 }

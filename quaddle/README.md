@@ -1,74 +1,53 @@
-# Getting Started with Create React App
+# Quaddle
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+Quaddle is a task management application project that allows users to organize their responsibilities, plan projects and track progress.
 
-In the project directory, you can run:
+## Installation
 
-### `npm start`
+To run the project locally, follow these steps:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Clone the repository:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+git clone https://github.com/SzczesnyBlazej/Quaddle.git
 
-### `npm test`
+2. Go to the project directory:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+cd Quaddle
 
-### `npm run build`
+3. Install dependencies:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Clean up sample data in json files 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* applicationConfig.json (contains the default settings for the application)
+* favorities.json (Includes favorite tasks for sample added users)
+* messages.json (Includes sample test messages)
+* notifications.json (Includes sample test notifications)
+* taskConfig.json (contains default settings for tasks)
+* tasks.json (contains sample test tasks)
+* users.json (includes sample test users)
 
-### `npm run eject`
+5. Launch the application:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+npm start
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## How to use
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+After installing the app, you can log into your account or create a new one. Then you can add tasks, create projects and manage them in the intuitive user interface.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## License
 
-## Learn More
+This project is licensed under the MIT license - see the LICENSE file for details.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Changes
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+History of changes to the project.
 
-### Code Splitting
+Version 0.1.0
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Contact
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-### fix error
-https://alchemy.com/blog/how-to-polyfill-node-core-modules-in-webpack-5
-https://github.com/react-dnd/react-dnd/issues/3425
+If you have any questions or suggestions, please contact me through [my email address](bszczesny59@gmail.com) or via [Linkedin](https://www.linkedin.com/in/blazej-szczesny/)

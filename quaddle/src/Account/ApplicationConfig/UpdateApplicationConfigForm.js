@@ -36,16 +36,16 @@ const UpdateApplicationConfig = ({ handleUpdateOption, groupName, initialOption,
 
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="name" className="form-label">
+                    <label htmlFor="description" className="form-label">
                         Description:
                     </label>
-                    <input
-                        type="text"
+                    <textarea
                         className="form-control"
-                        id="name"
-                        name="name"
+                        id="description"
+                        name="description"
                         value={updatedOption.description}
                         onChange={handleChange}
+                        rows="2"
                         required
                     />
                 </div>
