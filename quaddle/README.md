@@ -4,6 +4,8 @@
 
 Quaddle is a task management application project that allows users to organize their responsibilities, plan projects and track progress.
 
+The application runs on port 5000 by default, and jsonserver runs on ports 3501-3507
+
 ## Installation
 
 To run the project locally, follow these steps:
@@ -58,4 +60,4 @@ Version 0.1.0
 
 ## Contact
 
-If you have any questions or suggestions, please contact me through [my email address](bszczesny59@gmail.com) or via [Linkedin](https://www.linkedin.com/in/blazej-szczesny/)
+If you have any questions or suggestions, please contact me through [my email address](mailto:bszczesny59@gmail.com) or via [Linkedin](https://www.linkedin.com/in/blazej-szczesny/)
