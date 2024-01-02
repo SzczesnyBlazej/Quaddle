@@ -50,7 +50,7 @@ After installing the app, you can log into your account or create a new one. The
 
 ## License
 
-This project is licensed under the MIT license - see the LICENSE file for details.
+This project is licensed under the MIT license - see the [LICENSE](https://github.com/SzczesnyBlazej/Quaddle/blob/main/quaddle/LICENSE) file for details.
 
 ## Changes
 
