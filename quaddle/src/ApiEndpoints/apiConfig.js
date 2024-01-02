@@ -5,6 +5,7 @@ const API_ENDPOINTS = {
     MESSAGES: 'http://localhost:3504/messages',
     FAVORITIES: 'http://localhost:3505/favorities',
     OPTIONS: 'http://localhost:3506',
+    APPLICATIONCONFIG: 'http://localhost:3507',
 
 };
 

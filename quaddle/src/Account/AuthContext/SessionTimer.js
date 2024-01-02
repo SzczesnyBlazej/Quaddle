@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { useAuth } from './authContext';
+import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
 
 const SessionTimer = () => {
     const { isAuthenticated, logout } = useAuth();
@@ -11,7 +12,7 @@ const SessionTimer = () => {
     useEffect(() => {
         const fetchSessionConfig = async () => {
             try {
-                const response = await axios.get('http://localhost:3507/enableSessionTimeout');
+                const response = await axios.get(API_ENDPOINTS.APPLICATIONCONFIG + '/enableSessionTimeout');
                 setSessionConfig(response.data);
             } catch (error) {
                 console.error('Error fetching session config:', error);
@@ -25,7 +26,7 @@ const SessionTimer = () => {
 
         if (sessionConfig.length > 0 && sessionConfig[0].enable) {
             const enable = sessionConfig[0]?.enable;
-            const sessionTimeout = sessionConfig[0]?.session_timeout;
+            const sessionTimeout = sessionConfig[0]?.value;
 
 
             if (enable) {
@@ -69,7 +70,7 @@ const SessionTimer = () => {
         sessionConfig.length > 0 && sessionConfig[0].enable ? (
             <div>
                 {remainingTime !== null ? (
-                    <p className='fw-lighter fst-italic'>Time remaining session: {formatTime(remainingTime)}</p>
+                    <p className='ps-3 fw-lighter fst-italic'>Time remaining session: {formatTime(remainingTime)}</p>
                 ) : (
                     <p className='text-light'>Session has timed out</p>
                 )}

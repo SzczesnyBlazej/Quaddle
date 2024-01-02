@@ -26,6 +26,7 @@ const LogoTemplate = (user) =>
 
                 <li><Link to='/userManager' className="dropdown-item">User Manager</Link></li>
                 <li><Link to='/optionManager' className="dropdown-item">Options Manager</Link></li>
+                <li><Link to='/applicationConfig' className="dropdown-item">Appliacation Config</Link></li>
 
             </AllowOnlyRole>
 

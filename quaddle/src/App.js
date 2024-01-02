@@ -19,6 +19,7 @@ import MyAssignedTasks from './Overviews/MyAssignedTasks';
 import OptionManager from './Account/OptionManagement/OptionManager';
 import AllClossedTask from './Overviews/AllClossedTask';
 import GlobalClickDetector from './Account/AuthContext/GlobalClickDetector';
+import ApplicationConfig from './Account/ApplicationConfig/ApplicationConfig';
 
 const App = () => {
   const handleGlobalClick = (event) => {
@@ -37,6 +38,7 @@ const App = () => {
             <Route path='/registration' element={<Registration />} />
             <Route path='/userManager' element={<RouteGuard onlyAdmin={true}><AutoCompleteSearch /></RouteGuard>} />
             <Route path='/optionManager' element={<RouteGuard onlyAdmin={true}><OptionManager /></RouteGuard>} />
+            <Route path='/applicationConfig' element={<RouteGuard onlyAdmin={true}><ApplicationConfig /></RouteGuard>} />
             <Route path='/overviews/mytasks' element={<RequireAuth><MyTasks /></RequireAuth>} />
             <Route path='/overviews/allOpenedTask' element={<RouteGuard><AllOpenedTask /></RouteGuard>} />
             <Route path='/overviews/myAssignedTasks' element={<RouteGuard><MyAssignedTasks /></RouteGuard>} />
