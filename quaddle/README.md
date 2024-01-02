@@ -10,15 +10,21 @@ To run the project locally, follow these steps:
 
 1. Clone the repository:
 
+```bash
 git clone https://github.com/SzczesnyBlazej/Quaddle.git
+```
 
 2. Go to the project directory:
 
+```bash
 cd Quaddle
+```
 
 3. Install dependencies:
 
+```bash
 npm install
+```
 
 4. Clean up sample data in json files 
 
@@ -32,7 +38,9 @@ npm install
 
 5. Launch the application:
 
+```bash
 npm start
+```
 
 ## How to use
 
