@@ -10,6 +10,8 @@ import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
 import ifUserIsSolverBoolean from '../Account/AuthContext/ifUserIsSolverBoolean';
 import { Modal, Button } from 'react-bootstrap';
+// import { DragAndDropFileUpload } from './DragAndDropFileUpload';
+import DragAndDropFileUpload from './DragAndDropFileUpload';
 
 const TaskContent = ({ task }) => {
     const showNotification = useNotification();
@@ -114,7 +116,7 @@ const TaskContent = ({ task }) => {
 
     return (
         <div className="col-md-8 dark-bg min-vh-100 border-start border-end border-secondary d-flex flex-column position-relative" style={{ maxHeight: 'calc(100vh - 180px)' }}>
-            <div className="d-flex flex-column overflow-auto" style={{ maxHeight: '85vh' }}>
+            <div className="d-flex flex-column overflow-auto" style={{ maxHeight: '79vh' }}>
                 <div className='container custom-width'>
                     <div className='d-flex flex-column justify-content-center align-items-center pt-5 text-secondary'>
                         <ClickableLogo user={clientDetail} />
@@ -201,9 +203,16 @@ const TaskContent = ({ task }) => {
                 </div>
                 <div className="text-light mt-auto position-absolute bottom-0 w-100">
                     <hr className="border-secondary" />
+
                     <div className='w-100'>
+                        {/* <div className="col ms-3 me-3 mb-3">
+                            <label className="form-label">attachment</label>
+                            <input className="form-control btn btn-outline-light" type="file" id="formFile" multiple />
+                        </div> */}
+                        <DragAndDropFileUpload />
                         <div className='col ms-3 me-3 mb-3'>
                             <div className="input-group">
+
                                 <textarea
                                     className="form-control"
                                     id="exampleTextarea"
@@ -215,6 +224,7 @@ const TaskContent = ({ task }) => {
                                 <button className="btn btn-outline-light send-icon" type="button" onClick={updateMessage}>
                                     <FontAwesomeIcon icon={faPaperPlane} style={{ color: 'antiquewhite' }} size="2xl" />
                                 </button>
+
                             </div>
                         </div>
                     </div>
