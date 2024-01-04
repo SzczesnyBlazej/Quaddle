@@ -67,16 +67,39 @@ const DragAndDropFileUpload = () => {
   const renderFilePreview = () => {
     if (!selectedFile) return null;
 
-    if (selectedFile.type.startsWith('image/')) {
-      return <Image src={URL.createObjectURL(selectedFile)} fluid />;
-    } else if (selectedFile.type.startsWith('text/')) {
-      // Tutaj możesz dodać kod do renderowania tekstu
-      return <pre>{/* ... */}</pre>;
+    const isImage = selectedFile.type.startsWith('image/');
+    const isPdf = selectedFile.type === 'application/pdf';
+    const isText = selectedFile.type.startsWith('text/');
+
+    if (isImage || isPdf || isText) {
+      return (
+        <iframe
+          src={URL.createObjectURL(selectedFile)}
+          width="100%"
+          height="600"
+          title="File Preview"
+        />
+      );
     } else {
-      // Obsługa innych typów plików
-      return <p>Podgląd pliku nie jest obsługiwany.</p>;
+      return (
+        <div>
+          <p>{selectedFile.name}</p>
+          <p>Podgląd pliku nie jest obsługiwany.</p>
+          <p>Obsługiwane podglądy: PDF, TXT, PNG</p></div>
+      );
     }
   };
+  const downloadFile = () => {
+    const url = URL.createObjectURL(selectedFile);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = selectedFile.name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+
 
   return (
     <div
@@ -87,7 +110,7 @@ const DragAndDropFileUpload = () => {
       onDrop={handleDrop}
       onClick={handleDropZoneClick}
     >
-      <div className='selectFile'>Drag and drop files here</div>
+      <div className='selectFile btn btn-outline-light'>Drag and drop files here</div>
       <input
         type="file"
         ref={fileInputRef}
@@ -120,7 +143,7 @@ const DragAndDropFileUpload = () => {
           </ul>
         </div>
       )}
-      <Modal show={showModal} onHide={closeModal} centered>
+      <Modal show={showModal} onHide={closeModal} centered size="xl">
         <Modal.Header closeButton>
           <Modal.Title>File Preview</Modal.Title>
         </Modal.Header>
@@ -128,9 +151,14 @@ const DragAndDropFileUpload = () => {
           {renderFilePreview()}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={closeModal}>
+
+          <Button variant="btn btn-outline-dark" onClick={downloadFile}>
+            Download
+          </Button>
+          <Button variant="btn btn-outline-dark" onClick={closeModal}>
             Close
           </Button>
+
         </Modal.Footer>
       </Modal>
     </div>

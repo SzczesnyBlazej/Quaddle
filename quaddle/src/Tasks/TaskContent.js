@@ -10,7 +10,6 @@ import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
 import ifUserIsSolverBoolean from '../Account/AuthContext/ifUserIsSolverBoolean';
 import { Modal, Button } from 'react-bootstrap';
-// import { DragAndDropFileUpload } from './DragAndDropFileUpload';
 import DragAndDropFileUpload from './DragAndDropFileUpload';
 
 const TaskContent = ({ task }) => {
@@ -30,7 +29,7 @@ const TaskContent = ({ task }) => {
         if (messageToDelete) {
             await handleDeleteMessage(messageToDelete.id);
             setShowConfirmModal(false);
-            setMessageToDelete(null); // Reset the messageToDelete state
+            setMessageToDelete(null);
         }
     };
 
@@ -205,10 +204,7 @@ const TaskContent = ({ task }) => {
                     <hr className="border-secondary" />
 
                     <div className='w-100'>
-                        {/* <div className="col ms-3 me-3 mb-3">
-                            <label className="form-label">attachment</label>
-                            <input className="form-control btn btn-outline-light" type="file" id="formFile" multiple />
-                        </div> */}
+
                         <DragAndDropFileUpload />
                         <div className='col ms-3 me-3 mb-3'>
                             <div className="input-group">
@@ -241,15 +237,15 @@ const TaskContent = ({ task }) => {
                         Are you sure you want to delete this message?
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button
-                            variant="secondary"
+                        <div
+                            className="btn btn-outline-dark"
                             onClick={() => setShowConfirmModal(false)}
                         >
                             Cancel
-                        </Button>
-                        <Button variant="danger" onClick={confirmDelete}>
+                        </div >
+                        <div className='btn btn-outline-dark' onClick={confirmDelete}>
                             Delete
-                        </Button>
+                        </div>
                     </Modal.Footer>
                 </Modal>
             </div>
