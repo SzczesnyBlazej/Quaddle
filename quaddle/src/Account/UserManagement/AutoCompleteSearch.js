@@ -7,6 +7,7 @@ import { useNotification } from '../../Functions/NotificationContext';
 import UserList from './UserList';
 import EditUserForm from './EditUserForm';
 import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
+import getOptions from '../../Config/getOptions';
 
 const AutoCompleteSearch = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -19,13 +20,17 @@ const AutoCompleteSearch = () => {
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const showNotification = useNotification();
+    const [unitsOptions, setUnitsOptions] = useState([]);
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
+
+                const unitList = await getOptions('units');
+                setUnitsOptions(unitList);
                 const response = await axios.get(API_ENDPOINTS.USERS);
                 setUsers(response.data);
-                setSuggestions(response.data); // Set initial suggestions to all users
+                setSuggestions(response.data);
 
             } catch (error) {
                 console.error('Error fetching users:', error);
@@ -153,6 +158,7 @@ const AutoCompleteSearch = () => {
                 editingUser={editingUser}
                 isAdmin={isAdmin}
                 isSolver={isSolver}
+                unitsOptions={unitsOptions}
                 newPassword={newPassword}
                 confirmPassword={confirmPassword}
                 handleEditFormChange={handleEditFormChange}

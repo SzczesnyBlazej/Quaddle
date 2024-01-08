@@ -28,6 +28,7 @@ const NewTask = ({ onClose }) => {
             setUnitsOptions(unitList);
             if (storedUser) {
                 setContactNumber(storedUser.phone || '');
+                setUnit(storedUser.unit)
             }
         }
 

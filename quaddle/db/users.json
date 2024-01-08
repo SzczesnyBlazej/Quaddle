@@ -10,8 +10,9 @@
       "initials": "BS",
       "logoColor": "#c0e830",
       "id": 1,
-      "phone": "123321",
-      "email": "bszczesny59@gmail.com"
+      "email": "bszczesny59@gmail.com",
+      "unit": "IT",
+      "phone": "1231321"
     },
     {
       "username": "tets",
@@ -24,7 +25,8 @@
       "id": 2,
       "phone": "1233213212",
       "email": "bszczesny59@gmail.com",
-      "isSolver": true
+      "isSolver": true,
+      "unit": "IT"
     },
     {
       "id": 3,

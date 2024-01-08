@@ -52,8 +52,8 @@ export const AuthProvider = ({ children }) => {
     }, [navigate]);
 
     const login = (userData) => {
-        const { id, initials, logoColor, name, surname, username, email, phone } = userData;
-        const newUser = { id, initials, logoColor, name, surname, username, email, phone };
+        const { id, initials, logoColor, name, surname, username, email, phone, unit } = userData;
+        const newUser = { id, initials, logoColor, name, surname, username, email, phone, unit };
         setUser(newUser);
         localStorage.setItem('user', JSON.stringify(newUser));
         localStorage.setItem('lastActivityTime', new Date().getTime().toString());

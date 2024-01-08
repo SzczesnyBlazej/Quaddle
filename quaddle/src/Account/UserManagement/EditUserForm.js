@@ -6,11 +6,13 @@ const EditUserForm = ({
     editingUser,
     isAdmin,
     isSolver,
+    unitsOptions,
     newPassword,
     confirmPassword,
     handleEditFormChange,
     handleEditFormSubmit,
 }) => {
+
     return (
         <div className="p-3 col-md-4 text-light dark-bg min-vh-100 border-start border-secondary">
             {showEditForm && editingUser && (
@@ -27,7 +29,7 @@ const EditUserForm = ({
                                     className="form-control"
                                     id="editName"
                                     name="name"
-                                    value={editingUser.name}
+                                    value={editingUser.name ? editingUser.name : ''}
                                     onChange={handleEditFormChange}
                                 />
                             </div>
@@ -40,7 +42,7 @@ const EditUserForm = ({
                                     className="form-control"
                                     id="editSurname"
                                     name="surname"
-                                    value={editingUser.surname}
+                                    value={editingUser.surname ? editingUser.surname : ''}
                                     onChange={handleEditFormChange}
                                 />
                             </div>
@@ -53,7 +55,7 @@ const EditUserForm = ({
                                     className="form-control"
                                     id="editUsername"
                                     name="username"
-                                    value={editingUser.username}
+                                    value={editingUser.username ? editingUser.username : ''}
                                     onChange={handleEditFormChange}
                                 />
                             </div>
@@ -68,7 +70,7 @@ const EditUserForm = ({
                                     className="form-control"
                                     id="editUserEmail"
                                     name="email"
-                                    value={editingUser.email}
+                                    value={editingUser.email ? editingUser.email : ''}
                                     onChange={handleEditFormChange}
                                 />
                             </div>
@@ -81,9 +83,32 @@ const EditUserForm = ({
                                     className="form-control"
                                     id="editUserPhone"
                                     name="phone"
-                                    value={editingUser.phone}
+                                    value={editingUser.phone ? editingUser.phone : ''}
                                     onChange={handleEditFormChange}
                                 />
+                            </div>
+                            <div className="mb-3 col-md-4">
+                                <label htmlFor="editUserUnit" className="form-label">
+                                    Unit:
+                                </label>
+                                <select
+                                    className="form-control form-select"
+                                    id="editUserUnit"
+                                    value={editingUser.unit ? editingUser.unit : ''}
+                                    onChange={handleEditFormChange}
+                                    name="unit"
+
+                                >
+
+                                    <option value="">---</option>
+
+                                    {unitsOptions.map((value) => (
+                                        <option key={value} value={value}>
+                                            {value}
+                                        </option>
+                                    ))}
+                                </select>
+
                             </div>
                         </div>
                         <div className='row'>
