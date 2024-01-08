@@ -11,7 +11,7 @@ import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
 import SessionTimer from '../Account/AuthContext/SessionTimer';
-
+import logo from '../LOGO.png'
 
 const renderSuggestion = (suggestion) => (
     <div>
@@ -87,10 +87,17 @@ function HomeColFirst() {
 
 
         <div className="col-md-2 dark-bg min-vh-100 d-flex flex-column position-relative">
-            <Link to="/" className="text-decoration-none">
-                <h2 className='text-light p-2'>Quaddle</h2>
+            <Link to="/" className="text-decoration-none d-flex align-items-center">
+                <div className='row position-relative'>
+                    <div className='col-md-4 d-flex flex-column align-items-center justify-content-center text-center'>
+                        <img src={logo} alt="Quaddle Logo" className="img-fluid position-relative" />
+                    </div>
+                    <div className='col-md-8 d-flex flex-column align-items-center justify-content-center text-center'>
+                        <h2 className='text-light position-relative'>Quaddle</h2>
+                    </div>
+                </div>
             </Link>
-            <div className="input-group rounded ps-3 pe-3">
+            <div className="input-group rounded ps-3 pe-3 pt-2">
                 <div className="input-group rounded ps-3 pe-3">
                     <input
                         type="search"
