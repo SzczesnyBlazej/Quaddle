@@ -2,21 +2,24 @@
   "users": [
     {
       "username": "blazej2533",
-      "password": "$2a$10$1CfJWlyB.G/u3kZfdhld5uwpqfIJOwmrAfNCKczGCLUqz.zcqouMG",
+      "password": "$2a$10$GVtQYeYANYs820w1pwdoMuXhMpkzWQJCf5HlNCT.0JYwEUxmW0RmS",
       "name": "Błażej",
       "surname": "Szczesny",
       "isAdmin": true,
       "isSolver": true,
       "initials": "BS",
-      "logoColor": "#91a44c",
+      "logoColor": "#c2ed26",
       "id": 1,
       "email": "bszczesny59@gmail.com",
       "unit": "IT",
-      "phone": "1231321"
+      "phone": "1231321",
+      "dateOfLastLogin": "08-01-2024, 22:49:44",
+      "dateOfLastChangedPassword": "08-01-2024, 22:46:30",
+      "dateOfLastIncorrectLogin": "08-01-2024, 22:49:20"
     },
     {
       "username": "tets",
-      "password": "$2a$10$TW1TGQZ4a7/WvOFfOR9eLuLlYLJDmffPtPHi/2iT3898QIUgv3hdS",
+      "password": "$2a$10$3kwKvSjO40Umt4NR89j3oe7Yey8VvXPzyyzbEB2Kmeg.iNhQC2x6y",
       "name": "English",
       "surname": "Nomma",
       "isAdmin": false,
@@ -26,7 +29,8 @@
       "phone": "1233213212",
       "email": "bszczesny59@gmail.com",
       "isSolver": true,
-      "unit": "IT"
+      "unit": "IT",
+      "dateOfLastChangedPassword": "08-01-2024, 22:46:51"
     },
     {
       "id": 3,
@@ -39,7 +43,8 @@
       "logoColor": "#3498db",
       "phone": "1233213212",
       "email": "bszczesny59@gmail.com",
-      "isSolver": false
+      "isSolver": false,
+      "dateOfLastLogin": "08-01-2024 22:27:08"
     },
     {
       "id": 4,

@@ -20,7 +20,6 @@ const ifUserIsSolverBoolean = async (userIdToCheck) => {
         const users = await getAllUsers();
         const foundUser = users.find(user => user.id === userIdToCheck) || null;
         const isSolver = foundUser ? foundUser.isSolver : false;
-        // console.log(isSolver)
         return isSolver;
     } catch (error) {
         console.error('Error finding user by ID:', error);

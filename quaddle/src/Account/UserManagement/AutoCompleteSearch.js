@@ -8,6 +8,7 @@ import UserList from './UserList';
 import EditUserForm from './EditUserForm';
 import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
 import getOptions from '../../Config/getOptions';
+import setUserData from '../Functions/SetDataToUser';
 
 const AutoCompleteSearch = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -92,6 +93,7 @@ const AutoCompleteSearch = () => {
         } else if (e.target.name === 'isSolver') {
             setisSolver(e.target.checked);
         } else if (e.target.name === 'newPassword') {
+
             setNewPassword(e.target.value);
         } else if (e.target.name === 'confirmPassword') {
             setConfirmPassword(e.target.value);
@@ -112,6 +114,7 @@ const AutoCompleteSearch = () => {
                 if (editingUser.password && !bcrypt.compareSync(editingUser.password, newPassword)) {
                     const hashedPassword = await bcrypt.hash(newPassword, 10);
                     updatedUser.password = hashedPassword;
+
                 } else if (!editingUser.password) {
                     const hashedPassword = await bcrypt.hash(newPassword, 10);
                     updatedUser.password = hashedPassword;
@@ -134,6 +137,7 @@ const AutoCompleteSearch = () => {
                 setUsers((prevUsers) =>
                     prevUsers.map((user) => (user.id === editingUser.id ? userDataWithoutPasswords : user))
                 );
+                await setUserData('dateOfLastChangedPassword', editingUser.id);
                 setShowEditForm(false);
                 showNotification('Successfully saved user data');
             }

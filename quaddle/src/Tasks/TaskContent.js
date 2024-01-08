@@ -9,7 +9,7 @@ import ClickableLogo from '../Overviews/Templates/ClicableLogo';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
 import ifUserIsSolverBoolean from '../Account/AuthContext/ifUserIsSolverBoolean';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import DragAndDropFileUpload from './DragAndDropFileUpload';
 
 const TaskContent = ({ task }) => {

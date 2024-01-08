@@ -8,6 +8,7 @@ import { useNotification } from '../../Functions/NotificationContext';
 import bcrypt from 'bcryptjs';
 import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
 import logo from '../../LOGO.png'
+import setUserData from '../Functions/SetDataToUser';
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -42,16 +43,22 @@ const LoginForm = () => {
                 if (isPasswordMatch) {
                     setLoginError('');
                     login(foundUser);
+                    setUserData('dateOfLastLogin', foundUser.id);
+
                     navigate('/');
                 } else {
+                    await setUserData('dateOfLastIncorrectLogin', foundUser.id);
                     showNotification('Błędne dane logowania');
                     setLoginError('Błędne dane logowania');
                 }
             } else {
+                await setUserData('dateOfLastIncorrectLogin', foundUser.id);
+
                 showNotification('Błędne dane logowania');
                 setLoginError('Błędne dane logowania');
             }
         } catch (error) {
+
             showNotification('Error during login:', error.message);
         }
     };

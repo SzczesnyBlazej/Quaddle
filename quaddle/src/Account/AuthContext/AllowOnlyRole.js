@@ -25,7 +25,6 @@ const AllowOnlyRole = ({ children, roles = [], taskId = null, onlyAdmin = false 
                     return false;
                 });
 
-                // Allow only if 'onlyAdmin' is true and user has 'admin' role
                 const allowOnlyAdmin = onlyAdmin && user.isAdmin;
 
                 if (hasAccess || allowOnlyAdmin) {

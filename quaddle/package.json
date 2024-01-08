@@ -35,7 +35,7 @@
   },
   "scripts": {
     "start": "concurrently \"npm run start-app\" \"npm run server-users\" \"npm run server-tasks\" \"npm run server-notifications\" \"npm run server-messages\" \"npm run server-favorities\" \"npm run server-task-config\" \"npm run server-application-config\"",
-    "start-app": "set PORT=5000 && react-app-rewired start",
+    "start-app": "set PORT=5002 && react-app-rewired start",
     "server-users": "npx json-server -p 3501 -w ./db/users.json",
     "server-tasks": "npx json-server -p 3502 -w ./db/tasks.json",
     "server-notifications": "npx json-server -p 3503 -w ./db/notifications.json",

@@ -21,8 +21,6 @@ const EditUserForm = ({
     };
     return (
         <div className="p-3 col-md-4 text-light dark-bg min-vh-100 border-start border-secondary">
-
-
             {showEditForm && editingUser && (
 
                 <div className="col-md-12">
@@ -234,6 +232,19 @@ const EditUserForm = ({
                                 <div className='row'>
                                     <h4 className='p-3'>User Info</h4>
                                     <div className="mb-3 col-md-4">
+                                        <label htmlFor="dateOfLastLogin" className="form-label">
+                                            Last Login:
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="dateOfLastLogin"
+                                            name="dateOfLastLogin"
+                                            value={editingUser.dateOfLastLogin ? editingUser.dateOfLastLogin : 'None'}
+                                            readOnly
+                                        />
+                                    </div>
+                                    <div className="mb-3 col-md-4">
                                         <label htmlFor="dateOfLastChangedPassword" className="form-label">
                                             Last Password Changed:
                                         </label>
@@ -246,16 +257,17 @@ const EditUserForm = ({
                                             readOnly
                                         />
                                     </div>
+
                                     <div className="mb-3 col-md-4">
-                                        <label htmlFor="dateOfLastLogin" className="form-label">
-                                            Last Login:
+                                        <label htmlFor="dateOfLastIncorrectLogin" className="form-label">
+                                            Last Incorrect Login:
                                         </label>
                                         <input
                                             type="text"
                                             className="form-control"
-                                            id="dateOfLastLogin"
-                                            name="dateOfLastLogin"
-                                            value={editingUser.dateOfLastLogin ? editingUser.dateOfLastLogin : 'None'}
+                                            id="dateOfLastIncorrectLogin"
+                                            name="dateOfLastIncorrectLogin"
+                                            value={editingUser.dateOfLastIncorrectLogin ? editingUser.dateOfLastIncorrectLogin : 'None'}
                                             readOnly
                                         />
                                     </div>
