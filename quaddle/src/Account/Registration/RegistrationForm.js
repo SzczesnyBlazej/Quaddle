@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useNotification } from '../../Functions/NotificationContext';
 import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
-
+import logo from '../../LOGO.png'
 const RegistrationForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -73,7 +73,19 @@ const RegistrationForm = () => {
     return (
         <div className="dark-bg text-light min-vh-100 d-flex align-items-center">
             <div className="container">
-                <div className="row justify-content-center">
+                <div className='row justify-content-center'>
+                    <div className='d-flex flex-column align-items-center justify-content-center text-center'>
+                        <h2 className='text-light position-relative'>Quaddle</h2>
+                    </div>
+                    <div className='d-flex flex-column align-items-center justify-content-center text-center'>
+                        <img
+                            src={logo}
+                            alt="Quaddle Logo"
+                            className="img-fluid position-relative max-logo-size"
+                        />
+                    </div>
+                </div>
+                <div className="row justify-content-center mt-5">
                     <div className="col-md-4">
                         <div className="card">
                             <div className="card-body">

@@ -90,7 +90,7 @@ function HomeColFirst() {
             <Link to="/" className="text-decoration-none d-flex align-items-center">
                 <div className='row position-relative'>
                     <div className='col-md-4 d-flex flex-column align-items-center justify-content-center text-center'>
-                        <img src={logo} alt="Quaddle Logo" className="img-fluid position-relative" />
+                        <img src={logo} alt="Quaddle Logo" className="img-fluid position-relative ms-3" />
                     </div>
                     <div className='col-md-8 d-flex flex-column align-items-center justify-content-center text-center'>
                         <h2 className='text-light position-relative'>Quaddle</h2>
