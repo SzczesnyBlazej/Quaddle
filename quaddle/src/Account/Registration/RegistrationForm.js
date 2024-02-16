@@ -1,75 +1,69 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import bcrypt from 'bcryptjs';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useNotification } from '../../Functions/NotificationContext';
 import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
-import logo from '../../LOGO.png'
+import logo from '../../LOGO.png';
+import { useAuth } from '../AuthContext/authContext';
+
 const RegistrationForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
-    const [isAdmin] = useState(false);
+    const [email, setEmail] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [registrationError, setRegistrationError] = useState('');
     const navigate = useNavigate();
     const showNotification = useNotification();
-
-    function getRandomColor() {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
+    const { login } = useAuth();
 
     const handleRegistration = async (e) => {
         e.preventDefault();
 
         try {
-            if (password !== confirmPassword) {
-                setRegistrationError('Passwords do not match');
-                showNotification('Passwords do not match');
-                return;
-            }
-
-            const hashedPassword = await bcrypt.hash(password, 10);
-
-            const nameInitial = name.charAt(0).toUpperCase();
-            const surnameInitial = surname.charAt(0).toUpperCase();
-            const calculatedInitials = `${nameInitial}${surnameInitial}`;
-
-            const getUsers = await axios.get(API_ENDPOINTS.USERS);
-            const users = getUsers.data;
-            const foundUser = users.find(user => user.username === username);
-
-            if (foundUser) {
-                showNotification('The specified username already exists');
-                setRegistrationError('The specified username already exists');
-                return;
-            }
-            await axios.post(API_ENDPOINTS.USERS, {
+            const response = await axios.post(API_ENDPOINTS.REGISTRATION, {
+                email,
                 username,
-                password: hashedPassword,
-                name,
-                surname,
-                isAdmin,
-                initials: calculatedInitials,
-                logoColor: getRandomColor(),
+                password,
+                confirmPassword,
+                first_name: name,
+                last_name: surname,
             });
 
+            if (response.data && response.data.error) {
+                setRegistrationError(response.data.error);
+            } else {
+                await login(username, password);
 
-            setRegistrationError('');
-            navigate('/');
+                navigate('/');
+            }
         } catch (error) {
-            showNotification('Error during registration:', error.message);
-            setRegistrationError('Error during registration');
+
+            if (error.response && error.response.data && error.response.data.error) {
+                const errorObject = error.response.data.error;
+                let errorMessage = '';
+
+                for (const key in errorObject) {
+                    if (Array.isArray(errorObject[key])) {
+                        errorMessage += `${key}: ${errorObject[key].join(", \n")}\n`;
+                    }
+                }
+
+                showNotification('Error during registration:', errorMessage);
+                setRegistrationError('Error during registration: ' + errorMessage);
+            } else {
+                showNotification('Error during registration:', error.message);
+                setRegistrationError('Error during registration: ' + error.message);
+            }
         }
     };
+
+
+
+
     return (
         <div className="dark-bg text-light min-vh-100 d-flex align-items-center">
             <div className="container">
@@ -87,7 +81,7 @@ const RegistrationForm = () => {
                 </div>
                 <div className="row justify-content-center mt-5">
                     <div className="col-md-4">
-                        <div className="card">
+                        <div className="card bg-white">
                             <div className="card-body">
                                 <h2 className="text-center mb-4">Register</h2>
                                 {registrationError && (
@@ -96,6 +90,17 @@ const RegistrationForm = () => {
                                     </div>
                                 )}
                                 <form onSubmit={handleRegistration}>
+                                    <div className="form-group">
+                                        <label htmlFor="username">Email:</label>
+                                        <input
+                                            type="email"
+                                            className="form-control"
+                                            id="email"
+                                            placeholder="Enter your email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                        />
+                                    </div>
                                     <div className="form-group">
                                         <label htmlFor="username">Username:</label>
                                         <input
@@ -107,24 +112,25 @@ const RegistrationForm = () => {
                                             onChange={(e) => setUsername(e.target.value)}
                                         />
                                     </div>
+
                                     <div className="form-group">
-                                        <label htmlFor="name">Name:</label>
+                                        <label htmlFor="name">First name:</label>
                                         <input
                                             type="text"
                                             className="form-control"
                                             id="name"
-                                            placeholder="Enter your name"
+                                            placeholder="Enter your first name"
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="surname">Surname:</label>
+                                        <label htmlFor="surname">Last name:</label>
                                         <input
                                             type="text"
                                             className="form-control"
                                             id="surname"
-                                            placeholder="Enter your surname"
+                                            placeholder="Enter your last name"
                                             value={surname}
                                             onChange={(e) => setSurname(e.target.value)}
                                         />
@@ -155,8 +161,6 @@ const RegistrationForm = () => {
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <button type="submit" className="btn btn-primary btn-block m-2">Register</button>
-
-
                                             </div>
                                             <div className="col-md-6 d-flex align-items-center">
                                                 <div className="ms-auto">

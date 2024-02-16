@@ -10,28 +10,26 @@ import { useNotification } from '../Functions/NotificationContext';
 
 const MyAssignedTasks = () => {
     const [tasks, setTasks] = useState([]);
-    const { user } = useAuth();
-    const userName = user.name;
+    const { authState } = useAuth();
+    const user = authState.user;
+    const userID = user.id;
     const showNotification = useNotification();
-
     useEffect(() => {
-
-        axios.get(API_ENDPOINTS.TASKS, {
+        axios.get(API_ENDPOINTS.TASK_API, {
             params: {
-                solver: userName,
-                status: ['Open', 'In Pendend'], // Use the appropriate syntax for "not equal" in your API
+                solver: userID && userID,
+                status: ['Open', 'In Pendend'],
             },
         })
             .then(response => {
                 setTasks(response.data);
-
             })
             .catch(error => {
                 showNotification('Error fetching tasks:' + error);
 
-
             });
-    }, [userName, showNotification]);
+    }, [user]);
+
     const additionalColumns = [
         {
 

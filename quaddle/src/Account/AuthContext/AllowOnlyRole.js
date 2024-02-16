@@ -1,36 +1,34 @@
 // AllowOnlyRole.js
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { getUserFromLocalStorage } from "./getUserFromLocalStorage";
 import { useNotification } from '../../Functions/NotificationContext';
 import API_ENDPOINTS from "../../ApiEndpoints/apiConfig";
+import { useAuth } from './authContext';
 
 const AllowOnlyRole = ({ children, roles = [], taskId = null, onlyAdmin = false }) => {
     const [isAuthorized, setIsAuthorized] = useState(false);
     const showNotification = useNotification();
+    const { authState } = useAuth();
+    const user = authState.user;
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const loggedInUser = getUserFromLocalStorage();
-                const response = await axios.get(API_ENDPOINTS.USERS + `/${loggedInUser}`);
-                const user = response.data;
-
                 const hasAccess = roles.some(role => {
                     if (role === 'admin') {
-                        return user.isAdmin;
+                        return user.is_admin;
                     } else if (role === 'solver') {
-                        return user.isSolver;
+                        return user.is_solver;
                     }
                     return false;
                 });
 
-                const allowOnlyAdmin = onlyAdmin && user.isAdmin;
+                const allowOnlyAdmin = onlyAdmin && user.is_admin;
 
                 if (hasAccess || allowOnlyAdmin) {
                     setIsAuthorized(true);
                 } else if (taskId) {
-                    const taskResponse = await axios.get(API_ENDPOINTS.TASKS + `/${taskId}`);
+                    const taskResponse = await axios.get(API_ENDPOINTS.TASK_API + `/${taskId}`);
                     const task = taskResponse.data;
 
                     const isAuthorizedUser = task && task.customerId === user.id;
@@ -44,7 +42,7 @@ const AllowOnlyRole = ({ children, roles = [], taskId = null, onlyAdmin = false 
         };
 
         fetchData();
-    }, [showNotification, roles, taskId, onlyAdmin]);
+    }, [showNotification, roles, onlyAdmin]);
 
     return isAuthorized ? <>{children}</> : null;
 };

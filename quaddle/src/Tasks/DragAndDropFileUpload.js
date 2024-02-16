@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Modal, Button, Image } from 'react-bootstrap';
 
-const DragAndDropFileUpload = () => {
+const DragAndDropFileUpload = ({ handleAddedFiles }) => {
   const [dragging, setDragging] = useState(false);
   const [files, setFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -99,7 +99,10 @@ const DragAndDropFileUpload = () => {
     document.body.removeChild(a);
   };
 
-
+  const handleDropAndAddedFiles = (e) => {
+    handleDrop(e);
+    handleAddedFiles(e);
+  };
 
   return (
     <div
@@ -107,7 +110,7 @@ const DragAndDropFileUpload = () => {
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDragOver={handleDragOver}
-      onDrop={handleDrop}
+      onDrop={handleDropAndAddedFiles}
       onClick={handleDropZoneClick}
     >
       <div className='selectFile btn btn-outline-light'>Drag and drop files here</div>

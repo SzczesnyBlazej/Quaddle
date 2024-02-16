@@ -10,16 +10,19 @@ import { useNotification } from '../Functions/NotificationContext';
 
 const MyTasks = () => {
     const [tasks, setTasks] = useState([]);
-    const { user } = useAuth();
-    const userID = user.id;
+    const { authState } = useAuth();
+    const user = authState.user;
     const showNotification = useNotification();
 
     useEffect(() => {
-
-        axios.get(API_ENDPOINTS.TASKS, {
+        if (!user) {
+            // Jeśli dane użytkownika nie są jeszcze dostępne, nie wykonuj żadnych zapytań
+            return;
+        }
+        axios.get(API_ENDPOINTS.TASK_API, {
             params: {
-                clientID: userID,
-                status: ['Open', 'In Pendend'], // Use the appropriate syntax for "not equal" in your API
+                client_id: user.id,
+                status: ['Open', 'In Pendend'],
             },
         })
             .then(response => {
@@ -31,7 +34,7 @@ const MyTasks = () => {
 
 
             });
-    }, [userID, showNotification]);
+    }, [user]);
     const additionalColumns = [
         {
 

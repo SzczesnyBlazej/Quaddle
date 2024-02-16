@@ -44,7 +44,7 @@ const UpdateOptionForm = ({ handleUpdateOption, groupName, initialOption, closeU
                         className="form-control"
                         id="name"
                         name="name"
-                        value={updatedOption.name}
+                        value={updatedOption.title}
                         onChange={handleChange}
                         required
                     />

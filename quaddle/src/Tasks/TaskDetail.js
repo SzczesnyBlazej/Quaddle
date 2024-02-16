@@ -2,25 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getCurrentDateFormatted, getCurrentTimeFormatted, sendNotification } from './Functions';
 import { useNotification } from '../Functions/NotificationContext';
-// import { TaskStatusEnum } from '../Enums/TaskStatusEnum';
-// import { PriorityEnum } from '../Enums/PriorityEnum';
-// import { DifficultyEnum } from '../Enums/DifficultyEnum';
-// import { UnitEnum } from '../Enums/UnitEnum';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import { useAuth } from '../Account/AuthContext/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import { checkIsTaskFavorite, toggleTaskFavorite } from './FavoriteService';
-import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
 import AllowOnlyRole from '../Account/AuthContext/AllowOnlyRole';
 import getSolverList from '../Account/UserManagement/getSolverList';
-import ifUserIsSolverBoolean from '../Account/AuthContext/ifUserIsSolverBoolean';
 import getOptions from '../Config/getOptions';
 
 const TaskDetail = ({ task }) => {
     const showNotification = useNotification();
-    const { user } = useAuth();
+    const { authState } = useAuth();
+    const user = authState.user;
     const [isTaskFavorite, setIsTaskFavorite] = useState(false);
     const [isAdmin, setIsAdmin] = useState('');
     const [isSolver, setisSolver] = useState('');
@@ -41,17 +36,17 @@ const TaskDetail = ({ task }) => {
             try {
                 const list = await getSolverList();
                 setSolverList(list);
-                const priorityList = await getOptions('priority');
+                const priorityList = await getOptions('Priority');
                 setPriorityOptions(priorityList);
-                const difficultyList = await getOptions('difficulty');
+                const difficultyList = await getOptions('Difficulty');
                 setDifficultyOptions(difficultyList);
-                const statusList = await getOptions('status');
+                const statusList = await getOptions('Status');
                 setStatusOptions(statusList);
-                const unitList = await getOptions('units');
+                const unitList = await getOptions('Unit');
                 setUnitsOptions(unitList);
 
-                const adminStatus = await ifUserIsAdminBoolean(user.id);
-                const solverStatus = await ifUserIsSolverBoolean(user.id);
+                const adminStatus = user && user.is_admin;
+                const solverStatus = user && user.is_solver;
                 setisSolver(solverStatus);
                 setIsAdmin(adminStatus);
             } catch (error) {
@@ -60,14 +55,17 @@ const TaskDetail = ({ task }) => {
         };
 
         fetchData();
-
         setSelectedSolver(task?.solver || '');
         setSelectedPriority(task?.priority || '');
         setSelectedStatus(task?.status || '');
         setSelectedDifficulty(task?.difficulty || '');
         setSelectedUnit(task?.unit || '');
-        setSelectedPhoneNumber(task?.contactNumber || '');
-        checkIsTaskFavorite(user?.id, task?.id).then((result) => setIsTaskFavorite(result));
+        setSelectedPhoneNumber(task?.client_fk.phone || '');
+        if (task && user) {
+
+            checkIsTaskFavorite(user?.id, task?.id).then((result) => setIsTaskFavorite(result));
+        }
+
     }, [task, user]);
 
     const handleInputChange = (e, setterFunction) => {
@@ -78,8 +76,18 @@ const TaskDetail = ({ task }) => {
         <>
             <option value="">---</option>
             {options.map((option) => (
-                <option key={option} value={option}>
-                    {option}
+                <option key={option.id} value={option.id}>
+                    {option.value}
+                </option>
+            ))}
+        </>
+    );
+    const dropdownOptionsUsers = (options) => (
+        <>
+            <option value="">---</option>
+            {options.map((option) => (
+                <option key={option.id} value={option.id}>
+                    {option.first_name} {option.last_name}
                 </option>
             ))}
         </>
@@ -87,20 +95,30 @@ const TaskDetail = ({ task }) => {
 
     const acceptTask = async () => {
         try {
+            const { data: csrfToken } = await axios.get(API_ENDPOINTS.USER_DATA);
+
             const acceptTaskData = {
-                ...task,
-                solver: user.name,
+                solver: user.id,
                 priority: selectedPriority,
                 status: selectedStatus,
                 difficulty: selectedDifficulty,
                 unit: selectedUnit,
                 contactNumber: selectedPhoneNumber,
-                lastModificationHour: getCurrentTimeFormatted(),
-                lastModification: getCurrentDateFormatted(),
+                last_modification_hour: getCurrentTimeFormatted(),
+                last_modification: getCurrentDateFormatted(),
             };
-            sendNotification('Updated post', task?.id);
+            sendNotification('Updated post', task?.id, user.id);
 
-            await axios.put(`${API_ENDPOINTS.TASKS}/${task?.id}`, acceptTaskData);
+            await axios.put(
+                `${API_ENDPOINTS.UPDATE_TASK}/${task?.id}`,
+                acceptTaskData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken,
+                    },
+                }
+            );
         } catch (error) {
             showNotification('Error updating task:', error.message);
         }
@@ -108,56 +126,71 @@ const TaskDetail = ({ task }) => {
 
     const updateTask = async () => {
         try {
+            const { data: csrfToken } = await axios.get(API_ENDPOINTS.USER_DATA);
+
             const updatedTaskData = {
-                ...task,
                 solver: selectedSolver,
                 priority: selectedPriority,
                 status: selectedStatus,
                 difficulty: selectedDifficulty,
                 unit: selectedUnit,
                 contactNumber: selectedPhoneNumber,
-                lastModificationHour: getCurrentTimeFormatted(),
-                lastModification: getCurrentDateFormatted(),
+                last_modification_hour: getCurrentTimeFormatted(),
+                last_modification: getCurrentDateFormatted(),
             };
             sendNotification('Updated post', task?.id);
 
-            await axios.put(`${API_ENDPOINTS.TASKS}/${task?.id}`, updatedTaskData);
+            await axios.put(
+                `${API_ENDPOINTS.UPDATE_TASK}/${task?.id}`,
+                updatedTaskData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken,
+                    },
+                }
+            );
         } catch (error) {
             showNotification('Error updating task:', error.message);
         }
     };
 
     const closeTask = async () => {
-        const userString = localStorage.getItem('user');
-        const currentUser = userString ? JSON.parse(userString) : null;
 
-        if (currentUser && currentUser.name) {
-            try {
-                const updatedTaskData = {
-                    ...task,
-                    priority: selectedPriority,
-                    difficulty: selectedDifficulty,
-                    unit: selectedUnit,
-                    contactNumber: selectedPhoneNumber,
-                    lastModificationHour: getCurrentTimeFormatted(),
-                    lastModification: getCurrentDateFormatted(),
-                    status: 'Close',
-                    closeDate: getCurrentDateFormatted(),
-                    closeHour: getCurrentTimeFormatted(),
-                };
 
-                if (isAdmin) {
-                    updatedTaskData.solver = currentUser.name;
-                }
-                sendNotification('Closed post', task?.id);
+        try {
+            const updatedTaskData = {
+                priority: selectedPriority,
+                difficulty: selectedDifficulty,
+                unit: selectedUnit,
+                contactNumber: selectedPhoneNumber,
+                lastModificationHour: getCurrentTimeFormatted(),
+                lastModification: getCurrentDateFormatted(),
+                status: 8,
+                close_date: getCurrentDateFormatted(),
+                close_hour: getCurrentTimeFormatted(),
+            };
 
-                await axios.put(`${API_ENDPOINTS.TASKS}/${task?.id}`, updatedTaskData);
-            } catch (error) {
-                showNotification('Error updating task:', error.message);
+            if (isAdmin) {
+                updatedTaskData.solver = user.id;
             }
-        } else {
-            showNotification('User information not found in local storage.');
+            sendNotification('Closed post', task?.id, user.id);
+            const { data: csrfToken } = await axios.get(API_ENDPOINTS.USER_DATA);
+
+            await axios.put(
+                `${API_ENDPOINTS.UPDATE_TASK}/${task?.id}`,
+                updatedTaskData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken,
+                    },
+                }
+            );
+        } catch (error) {
+            showNotification('Error updating task:', error.message);
         }
+
     };
 
     const handleToggleFavorite = () => {
@@ -191,7 +224,7 @@ const TaskDetail = ({ task }) => {
                             aria-label="Solver"
                             disabled={!isSolver && !isAdmin}
                         >
-                            {dropdownOptions(solverList)}
+                            {dropdownOptionsUsers(solverList)}
                         </select>
                     </div>
 
@@ -202,14 +235,14 @@ const TaskDetail = ({ task }) => {
                                 type="text"
                                 className="form-control me-2"
                                 id="createDateInput"
-                                value={task?.createDate || getCurrentDateFormatted()}
+                                value={task?.create_date || ''}
                                 readOnly
                             />
                             <input
                                 type="text"
                                 className="form-control"
                                 id="createHourInput"
-                                value={task?.createHour || ''}
+                                value={task?.create_hour || ''}
                                 readOnly
                             />
                         </div>
@@ -222,14 +255,14 @@ const TaskDetail = ({ task }) => {
                                 type="text"
                                 className="form-control me-2"
                                 id="lastModificationDateInput"
-                                value={task?.lastModification || ''}
+                                value={task?.last_modification || ''}
                                 readOnly
                             />
                             <input
                                 type="text"
                                 className="form-control"
                                 id="lastModificationHourInput"
-                                value={task?.lastModificationHour || ''}
+                                value={task?.last_modification_hour || ''}
                                 readOnly
                             />
                         </div>

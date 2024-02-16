@@ -15,7 +15,7 @@
       "createDate": "14-12-2023",
       "createHour": "23:16:46",
       "id": 1,
-      "isLock": false
+      "isLock": true
     },
     {
       "message": "In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n",
@@ -333,6 +333,110 @@
       "createHour": "19:05:11",
       "isLock": true,
       "id": 19
+    },
+    {
+      "message": "d",
+      "clientID": 1,
+      "taskID": 27,
+      "messageSender": {
+        "id": 1,
+        "first_name": "Błażej",
+        "last_name": "Szczesny",
+        "is_active": true,
+        "username": "blazej2533",
+        "is_admin": true,
+        "is_solver": false,
+        "initials": "BS",
+        "logo_color": "#fcba03",
+        "email": "wp@wp.pl",
+        "phone": "1233213212",
+        "date_of_last_changed_password": null,
+        "date_of_last_incorrect_login": null,
+        "unit": null,
+        "last_login": "2024-02-06T20:27:05.289416Z"
+      },
+      "createDate": "2024-02-06",
+      "createHour": "21:33:25",
+      "isLock": false,
+      "id": 20
+    },
+    {
+      "message": "hehe",
+      "clientID": 1,
+      "taskID": 21,
+      "messageSender": {
+        "id": 1,
+        "first_name": "Błażej",
+        "last_name": "Szczesny",
+        "is_active": true,
+        "username": "blazej2533",
+        "is_admin": true,
+        "is_solver": false,
+        "initials": "BS",
+        "logo_color": "#fcba03",
+        "email": "wp@wp.pl",
+        "phone": "1233213212",
+        "date_of_last_changed_password": null,
+        "date_of_last_incorrect_login": null,
+        "unit": null,
+        "last_login": "2024-02-07T17:47:53.498046Z"
+      },
+      "createDate": "2024-02-07",
+      "createHour": "18:49:52",
+      "isLock": false,
+      "id": 21
+    },
+    {
+      "message": "fds",
+      "clientID": 1,
+      "taskID": 21,
+      "messageSender": {
+        "id": 1,
+        "first_name": "Błażej",
+        "last_name": "Szczesny",
+        "is_active": true,
+        "username": "blazej2533",
+        "is_admin": true,
+        "is_solver": false,
+        "initials": "BS",
+        "logo_color": "#fcba03",
+        "email": "wp@wp.pl",
+        "phone": "1233213212",
+        "date_of_last_changed_password": null,
+        "date_of_last_incorrect_login": null,
+        "unit": null,
+        "last_login": "2024-02-07T18:06:51.014628Z"
+      },
+      "createDate": "2024-02-07",
+      "createHour": "19:16:00",
+      "isLock": false,
+      "id": 22
+    },
+    {
+      "message": "fdsafads",
+      "clientID": 1,
+      "taskID": 21,
+      "messageSender": {
+        "id": 1,
+        "first_name": "Błażej",
+        "last_name": "Szczesny",
+        "is_active": true,
+        "username": "blazej2533",
+        "is_admin": true,
+        "is_solver": false,
+        "initials": "BS",
+        "logo_color": "#fcba03",
+        "email": "wp@wp.pl",
+        "phone": "1233213212",
+        "date_of_last_changed_password": null,
+        "date_of_last_incorrect_login": null,
+        "unit": null,
+        "last_login": "2024-02-07T18:17:07.381763Z"
+      },
+      "createDate": "2024-02-07",
+      "createHour": "19:17:10",
+      "isLock": false,
+      "id": 23
     }
   ]
 }

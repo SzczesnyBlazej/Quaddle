@@ -1,24 +1,36 @@
 // EditUserForm.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import getOptions from '../../Config/getOptions';
 
 const EditUserForm = ({
     showEditForm,
     editingUser,
+    newPassword,
     isAdmin,
     isSolver,
-    unitsOptions,
-    newPassword,
+    is_active,
     confirmPassword,
     handleEditFormChange,
     handleEditFormSubmit,
 }) => {
     const [currentTab, setCurrentTab] = useState(0);
+    const [unitsOptions, setUnitsOptions] = useState([]);
 
     const handleChangeTab = (event, newValue) => {
         setCurrentTab(newValue);
     };
+    useEffect(() => {
+        async function fetchData() {
+
+            const unitList = await getOptions('Unit');
+            setUnitsOptions(unitList);
+        }
+
+        fetchData();
+    }, []);
+
     return (
         <div className="p-3 col-md-4 text-light dark-bg min-vh-100 border-start border-secondary">
             {showEditForm && editingUser && (
@@ -50,8 +62,8 @@ const EditUserForm = ({
                                         type="text"
                                         className="form-control"
                                         id="editName"
-                                        name="name"
-                                        value={editingUser.name ? editingUser.name : ''}
+                                        name="first_name"
+                                        value={editingUser.first_name ? editingUser.first_name : ''}
                                         onChange={handleEditFormChange}
                                     />
                                 </div>
@@ -63,8 +75,8 @@ const EditUserForm = ({
                                         type="text"
                                         className="form-control"
                                         id="editSurname"
-                                        name="surname"
-                                        value={editingUser.surname ? editingUser.surname : ''}
+                                        name="last_name"
+                                        value={editingUser.last_name ? editingUser.last_name : ''}
                                         onChange={handleEditFormChange}
                                     />
                                 </div>
@@ -126,8 +138,8 @@ const EditUserForm = ({
                                         <option value="">---</option>
 
                                         {unitsOptions.map((value) => (
-                                            <option key={value} value={value}>
-                                                {value}
+                                            <option key={value.id} value={value.id}>
+                                                {value.value}
                                             </option>
                                         ))}
                                     </select>
@@ -148,8 +160,8 @@ const EditUserForm = ({
                                             type="color"
                                             className="form-control form-control-color"
                                             id="editLogoColor"
-                                            name="logoColor"
-                                            value={editingUser.logoColor}
+                                            name="logo_color"
+                                            value={editingUser.logo_color}
                                             onChange={handleEditFormChange}
                                         />
                                     </div>
@@ -167,7 +179,7 @@ const EditUserForm = ({
                                                 className="form-check-input bg-transparent border border-white"
                                                 type="checkbox"
                                                 id="editIsAdmin"
-                                                name="isAdmin"
+                                                name="is_admin"
                                                 checked={isAdmin}
                                                 onChange={handleEditFormChange}
                                             />
@@ -182,12 +194,28 @@ const EditUserForm = ({
                                                 className="form-check-input bg-transparent border border-white"
                                                 type="checkbox"
                                                 id="editIsSolver"
-                                                name="isSolver"
+                                                name="is_solver"
                                                 checked={isSolver}
                                                 onChange={handleEditFormChange}
                                             />
                                             <label className="form-check-label" htmlFor="editIsSolver">
                                                 Is solver
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div className='col-md-3'>
+                                        <div className="form-check">
+                                            <input
+                                                className="form-check-input bg-transparent border border-white"
+                                                type="checkbox"
+                                                id="editis_active"
+                                                name="is_active"
+                                                value={is_active}
+                                                checked={is_active}
+                                                onChange={handleEditFormChange}
+                                            />
+                                            <label className="form-check-label" htmlFor="editis_active">
+                                                User is is_active
                                             </label>
                                         </div>
                                     </div>
@@ -240,7 +268,7 @@ const EditUserForm = ({
                                             className="form-control"
                                             id="dateOfLastLogin"
                                             name="dateOfLastLogin"
-                                            value={editingUser.dateOfLastLogin ? editingUser.dateOfLastLogin : 'None'}
+                                            value={editingUser.last_login ? editingUser.last_login : 'None'}
                                             readOnly
                                         />
                                     </div>
@@ -253,7 +281,7 @@ const EditUserForm = ({
                                             className="form-control"
                                             id="dateOfLastChangedPassword"
                                             name="dateOfLastChangedPassword"
-                                            value={editingUser.dateOfLastChangedPassword ? editingUser.dateOfLastChangedPassword : 'None'}
+                                            value={editingUser.date_of_last_changed_password ? editingUser.date_of_last_changed_password : 'None'}
                                             readOnly
                                         />
                                     </div>
@@ -267,7 +295,22 @@ const EditUserForm = ({
                                             className="form-control"
                                             id="dateOfLastIncorrectLogin"
                                             name="dateOfLastIncorrectLogin"
-                                            value={editingUser.dateOfLastIncorrectLogin ? editingUser.dateOfLastIncorrectLogin : 'None'}
+                                            value={editingUser.date_of_last_incorrect_login ? editingUser.date_of_last_incorrect_login : 'None'}
+                                            readOnly
+                                        />
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <div className="mb-3 col-md-4">
+                                        <label htmlFor="dateOfLastIncorrectLogin" className="form-label">
+                                            Joined at:
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="dateOfJoined"
+                                            name="dateOfJoined"
+                                            value={editingUser.date_joined ? editingUser.date_joined : 'None'}
                                             readOnly
                                         />
                                     </div>

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const LogoTemplate = (user) =>
 
-    <div className="dropdown" data-bs-toggle="tooltip" title={user?.name + " " + user?.surname}>
+    <div className="dropdown" data-bs-toggle="tooltip" title={user?.first_name + " " + user?.last_name}>
         <button
             className="btn dropdown-toggle rounded-circle dropdown-toggle-no-arrow border-0"
             type="button"
@@ -20,7 +20,7 @@ const LogoTemplate = (user) =>
         </button>
         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-            <li><span className="dropdown-item ">{user?.name} {user?.surname}</span></li>
+            <li><span className="dropdown-item ">{user?.first_name} {user?.last_name}</span></li>
             <div className="dropdown-divider"></div>
             <AllowOnlyRole roles={["admin"]} onlyAdmin={true}>
 

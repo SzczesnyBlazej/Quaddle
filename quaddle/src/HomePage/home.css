@@ -1,9 +1,9 @@
 .dark-bg {
-    background-color: #161820;
+    background-color: #161820 !important;
 }
 
 .light-bg {
-    background-color: #20232d;
+    background-color: #20232d !important;
 }
 
 
@@ -128,4 +128,8 @@
     max-width: 100%;
     height: auto;
     max-height: 150px;
+}
+
+.card {
+    --bs-card-bg: unset !important;
 }

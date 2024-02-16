@@ -16,7 +16,6 @@ const AsyncClientData = ({ clientId }) => {
     if (!customer) {
         return 'Loading...';
     }
-
-    return `${customer.name} ${customer.surname}`;
+    return `${customer.first_name} ${customer.last_name}`;
 };
 export default AsyncClientData;

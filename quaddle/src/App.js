@@ -4,7 +4,6 @@ import Login from './Account/Login/Login';
 import Home from './HomePage/Home';
 import './App.css';
 import Registration from './Account/Registration/Registration';
-import { AuthProvider, useAuth } from './Account/AuthContext/authContext';
 import MyTasks from './Overviews/MyTasks';
 import TaskPage from './Tasks/TaskPage';
 import AllOpenedTask from './Overviews/AllOpenedTask';
@@ -20,53 +19,42 @@ import OptionManager from './Account/OptionManagement/OptionManager';
 import AllClossedTask from './Overviews/AllClossedTask';
 import GlobalClickDetector from './Account/AuthContext/GlobalClickDetector';
 import ApplicationConfig from './Account/ApplicationConfig/ApplicationConfig';
+import { AuthProvider } from './Account/AuthContext/authContext';
+import RequireAuth from './Account/AuthContext/RequireAuth';
 
 const App = () => {
-  const handleGlobalClick = (event) => {
+  const handleGlobalClick = () => {
     localStorage.setItem('lastActivityTime', new Date().getTime().toString());
-
   };
+
   return (
     <GlobalClickDetector onGlobalClick={handleGlobalClick}>
-
-      <AuthProvider>
-        <NotificationProvider>
+      <NotificationProvider>
+        <AuthProvider>
 
           <Routes>
             <Route path='/' element={<RequireAuth><Home /></RequireAuth>} />
             <Route path='/login' element={<Login />} />
             <Route path='/registration' element={<Registration />} />
-            <Route path='/userManager' element={<RouteGuard onlyAdmin={true}><AutoCompleteSearch /></RouteGuard>} />
-            <Route path='/optionManager' element={<RouteGuard onlyAdmin={true}><OptionManager /></RouteGuard>} />
-            <Route path='/applicationConfig' element={<RouteGuard onlyAdmin={true}><ApplicationConfig /></RouteGuard>} />
+            <Route path='/userManager' element={<RequireAuth><RouteGuard onlyAdmin={true}><AutoCompleteSearch /></RouteGuard></RequireAuth>} />
+            <Route path='/optionManager' element={<RequireAuth><RouteGuard onlyAdmin={true}><OptionManager /></RouteGuard></RequireAuth>} />
+            <Route path='/applicationConfig' element={<RequireAuth><RouteGuard onlyAdmin={true}><ApplicationConfig /></RouteGuard></RequireAuth>} />
             <Route path='/overviews/mytasks' element={<RequireAuth><MyTasks /></RequireAuth>} />
-            <Route path='/overviews/allOpenedTask' element={<RouteGuard><AllOpenedTask /></RouteGuard>} />
-            <Route path='/overviews/myAssignedTasks' element={<RouteGuard><MyAssignedTasks /></RouteGuard>} />
+            <Route path='/overviews/allOpenedTask' element={<RouteGuard><RequireAuth><AllOpenedTask /></RequireAuth></RouteGuard>} />
+            <Route path='/overviews/myAssignedTasks' element={<RouteGuard><RequireAuth><MyAssignedTasks /></RequireAuth></RouteGuard>} />
             <Route path='/overviews/myClosedTasks' element={<RequireAuth><MyClosedTask /></RequireAuth>} />
-            <Route path='/overviews/allClosedTask' element={<RouteGuard><AllClossedTask /></RouteGuard>} />
-            <Route path='/overviews/allUnallocated' element={<RouteGuard><AllUnallocated /></RouteGuard>} />
+            <Route path='/overviews/allClosedTask' element={<RouteGuard><RequireAuth><AllClossedTask /></RequireAuth></RouteGuard>} />
+            <Route path='/overviews/allUnallocated' element={<RouteGuard><RequireAuth><AllUnallocated /></RequireAuth></RouteGuard>} />
             <Route path='/overviews/favorities' element={<RequireAuth><Favorities /></RequireAuth>} />
-            <Route path='/overviews/allInPendendTask' element={<RouteGuard><AllInPendendTask /></RouteGuard>} />
+            <Route path='/overviews/allInPendendTask' element={<RouteGuard><RequireAuth><AllInPendendTask /></RequireAuth></RouteGuard>} />
             <Route path="/tasks/:taskId" element={<RequireAuth><TaskPage /></RequireAuth>} />
-            <Route path='*' element={<Navigate to="/" />} />
-
+            <Route path='*' element={<RequireAuth><Navigate to="/" /></RequireAuth>} />
           </Routes>
+        </AuthProvider>
 
-        </NotificationProvider>
-      </AuthProvider>
+      </NotificationProvider>
     </GlobalClickDetector>
-
   );
-};
-
-const RequireAuth = ({ children }) => {
-  const { user } = useAuth();
-
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
-
-  return children;
 };
 
 

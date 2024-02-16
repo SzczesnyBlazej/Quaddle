@@ -1439,6 +1439,308 @@
         "phone": "1233213212"
       },
       "id": 86
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 8,
+      "notificationDate": "09-01-2024",
+      "notificationTime": "20:49:54",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c2ed26",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1231321",
+        "unit": "IT"
+      },
+      "id": 87
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 8,
+      "notificationDate": "09-01-2024",
+      "notificationTime": "20:57:39",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c2ed26",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1231321",
+        "unit": "IT"
+      },
+      "id": 88
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 8,
+      "notificationDate": "09-01-2024",
+      "notificationTime": "21:00:16",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c2ed26",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1231321",
+        "unit": "IT"
+      },
+      "id": 89
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 8,
+      "notificationDate": "09-01-2024",
+      "notificationTime": "21:00:32",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c2ed26",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1231321",
+        "unit": "IT"
+      },
+      "id": 90
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 8,
+      "notificationDate": "09-01-2024",
+      "notificationTime": "21:05:05",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c2ed26",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1231321",
+        "unit": "IT"
+      },
+      "id": 91
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 8,
+      "notificationDate": "09-01-2024",
+      "notificationTime": "21:05:36",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c2ed26",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1231321",
+        "unit": "IT"
+      },
+      "id": 92
+    },
+    {
+      "notificationText": "added a comment for",
+      "taskId": 8,
+      "notificationDate": "09-01-2024",
+      "notificationTime": "21:06:47",
+      "createdBy": {
+        "id": 1,
+        "initials": "BS",
+        "logoColor": "#c2ed26",
+        "name": "Błażej",
+        "surname": "Szczesny",
+        "username": "blazej2533",
+        "email": "bszczesny59@gmail.com",
+        "phone": "1231321",
+        "unit": "IT"
+      },
+      "id": 93
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 1,
+      "notificationDate": "27-01-2024",
+      "notificationTime": "17:09:52",
+      "createdBy": null,
+      "id": 94
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 106,
+      "notificationDate": "27-01-2024",
+      "notificationTime": "17:40:05",
+      "createdBy": null,
+      "id": 95
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 3,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "18:35:17",
+      "createdBy": null,
+      "id": 96
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 4,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "18:35:41",
+      "createdBy": null,
+      "id": 97
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 5,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "18:36:11",
+      "createdBy": null,
+      "id": 98
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 6,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "18:41:12",
+      "createdBy": null,
+      "id": 99
+    },
+    {
+      "notificationText": "created post ",
+      "taskId": 7,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "18:47:45",
+      "createdBy": null,
+      "id": 100
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:32:31",
+      "createdBy": null,
+      "id": 101
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:33:14",
+      "createdBy": null,
+      "id": 102
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:34:17",
+      "createdBy": null,
+      "id": 103
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:34:45",
+      "createdBy": null,
+      "id": 104
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:35:13",
+      "createdBy": null,
+      "id": 105
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:37:33",
+      "createdBy": null,
+      "id": 106
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:38:22",
+      "createdBy": null,
+      "id": 107
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:38:59",
+      "createdBy": null,
+      "id": 108
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:39:33",
+      "createdBy": null,
+      "id": 109
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:40:15",
+      "createdBy": null,
+      "id": 110
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:43:45",
+      "createdBy": null,
+      "id": 111
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:44:19",
+      "createdBy": null,
+      "id": 112
+    },
+    {
+      "notificationText": "Closed post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:53:28",
+      "createdBy": null,
+      "id": 113
+    },
+    {
+      "notificationText": "Updated post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:54:39",
+      "createdBy": null,
+      "id": 114
+    },
+    {
+      "notificationText": "Closed post",
+      "taskId": 1,
+      "notificationDate": "2024-01-27",
+      "notificationTime": "19:56:38",
+      "createdBy": null,
+      "id": 115
     }
   ]
 }

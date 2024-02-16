@@ -1,6 +1,6 @@
 {
   "name": "quaddle",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -17,6 +17,7 @@
     "axios": "^1.6.2",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.2",
+    "js-cookie": "^3.0.5",
     "json-server": "^0.17.4",
     "material-react-table": "^2.0.5",
     "react": "^18.2.0",
@@ -34,15 +35,8 @@
     "webpack": "^5.89.0"
   },
   "scripts": {
-    "start": "concurrently \"npm run start-app\" \"npm run server-users\" \"npm run server-tasks\" \"npm run server-notifications\" \"npm run server-messages\" \"npm run server-favorities\" \"npm run server-task-config\" \"npm run server-application-config\"",
+    "start": "concurrently \"npm run start-app\" ",
     "start-app": "set PORT=5002 && react-app-rewired start",
-    "server-users": "npx json-server -p 3501 -w ./db/users.json",
-    "server-tasks": "npx json-server -p 3502 -w ./db/tasks.json",
-    "server-notifications": "npx json-server -p 3503 -w ./db/notifications.json",
-    "server-messages": "npx json-server -p 3504 -w ./db/messages.json",
-    "server-favorities": "npx json-server -p 3505 -w ./db/favorities.json",
-    "server-task-config": "npx json-server -p 3506 -w ./db/taskConfig.json",
-    "server-application-config": "npx json-server -p 3507 -w ./db/applicationConfig.json",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"

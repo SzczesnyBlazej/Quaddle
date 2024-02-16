@@ -5,15 +5,17 @@ import { useAuth } from './authContext';
 import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
 
 const SessionTimer = () => {
-    const { isAuthenticated, logout } = useAuth();
+    const { logout } = useAuth();
     const [remainingTime, setRemainingTime] = useState(null);
-    const [sessionConfig, setSessionConfig] = useState([{ id: 1, enable: true, session_timeout: 10 }]);
+    const [sessionConfig, setSessionConfig] = useState([]);
+    const [dataFetched, setDataFetched] = useState(false);
 
     useEffect(() => {
         const fetchSessionConfig = async () => {
             try {
-                const response = await axios.get(API_ENDPOINTS.APPLICATIONCONFIG + '/enableSessionTimeout');
-                setSessionConfig(response.data);
+                const response = await axios.get(`${API_ENDPOINTS.APPLICATIONCONFIG}/1`);
+                setSessionConfig([response.data]);
+                setDataFetched(true);
             } catch (error) {
                 console.error('Error fetching session config:', error);
             }
@@ -23,41 +25,38 @@ const SessionTimer = () => {
     }, []);
 
     useEffect(() => {
+        if (dataFetched) {
+            if (sessionConfig[0].enable) {
+                const enable = sessionConfig[0].enable;
+                const sessionTimeout = sessionConfig[0]?.value;
+                if (enable) {
+                    const SESSION_TIMEOUT = sessionTimeout * 60 * 1000;
+                    let intervalId;
 
-        if (sessionConfig.length > 0 && sessionConfig[0].enable) {
-            const enable = sessionConfig[0]?.enable;
-            const sessionTimeout = sessionConfig[0]?.value;
+                    const calculateRemainingTime = () => {
+                        const lastActivityTime = localStorage.getItem('lastActivityTime');
+                        if (lastActivityTime) {
+                            const currentTime = new Date().getTime();
+                            const elapsedTime = currentTime - parseInt(lastActivityTime, 10);
+                            const remainingTime = Math.max(0, SESSION_TIMEOUT - elapsedTime);
 
+                            setRemainingTime(remainingTime);
 
-            if (enable) {
-                const SESSION_TIMEOUT = sessionTimeout * 60 * 1000;
-
-                let intervalId;
-
-                const calculateRemainingTime = () => {
-                    const lastActivityTime = localStorage.getItem('lastActivityTime');
-
-                    if (isAuthenticated() && lastActivityTime) {
-                        const currentTime = new Date().getTime();
-                        const elapsedTime = currentTime - parseInt(lastActivityTime, 10);
-                        const remainingTime = Math.max(0, SESSION_TIMEOUT - elapsedTime);
-
-                        setRemainingTime(remainingTime);
-
-                        if (remainingTime === 0) {
-                            logout();
+                            if (remainingTime === 0) {
+                                logout();
+                            }
                         }
-                    }
-                };
+                    };
 
-                calculateRemainingTime();
+                    calculateRemainingTime();
 
-                intervalId = setInterval(calculateRemainingTime, 1000);
+                    intervalId = setInterval(calculateRemainingTime, 1000);
 
-                return () => clearInterval(intervalId);
+                    return () => clearInterval(intervalId);
+                }
             }
         }
-    }, [isAuthenticated, logout, sessionConfig]);
+    }, [dataFetched, logout, sessionConfig]);
 
     const formatTime = (milliseconds) => {
         const seconds = Math.floor(milliseconds / 1000);

@@ -36,6 +36,20 @@ const UpdateApplicationConfig = ({ handleUpdateOption, groupName, initialOption,
 
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
+                    <label htmlFor="title" className="form-label">
+                        Title:
+                    </label>
+                    <input
+                        type='text'
+                        className="form-control"
+                        id="title"
+                        name="title"
+                        value={updatedOption.title}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="mb-3">
                     <label htmlFor="description" className="form-label">
                         Description:
                     </label>

@@ -2,29 +2,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFire, faFireFlameCurved, faBroom, faCirclePause } from '@fortawesome/free-solid-svg-icons';
 import LastThirtyDaysBar from '../Charts/LastThirtyDaysBar';
 import React, { useState, useEffect } from 'react';
-import { getTaskCounts } from '../Charts/CalculateData';
 import { useAuth } from '../Account/AuthContext/authContext';
 import PriorityChart from '../Charts/PriorityChart';
 import DifficultyChart from '../Charts/DifficultyChart';
 import { useNotification } from '../Functions/NotificationContext';
-import UnitsChart from '../Charts/UnitChart';
+import UnitsChart from '../Charts/UnitsChart';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
+import axios from 'axios';
 
 function HomeColTwo() {
-    const { user } = useAuth();
+    const { authState } = useAuth();
+    const user = authState.user;
     const showNotification = useNotification();
 
-    const [taskCounts, setTaskCounts] = useState({
-        closedToday: 0,
-        closedThisWeek: 0,
-        myPending: 0,
-        allPending: 0,
-    });
+    const [taskCounts, setTaskCounts] = useState();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const newTaskCounts = await getTaskCounts(user);
-                setTaskCounts(newTaskCounts);
+                const response = await axios.get(API_ENDPOINTS.GET_TASKS_COUNTS_DASHBOARD, {
+                    params: {
+                        userID: user && user.id,
+                    },
+                });
+                setTaskCounts(response.data);
             } catch (error) {
                 showNotification('Error fetching task counts:', error);
 
@@ -32,12 +33,12 @@ function HomeColTwo() {
         };
 
         fetchData();
-    }, [user, showNotification]); // Include other dependencies if needed
+    }, [user]);
     const cardTop = {
-        card1: ['Closed today', taskCounts.closedToday, faFire],
-        card2: ['Closed this week', taskCounts.closedThisWeek, faFireFlameCurved],
-        card3: ['My pending', taskCounts.myPending, faBroom],
-        card4: ['All pending', taskCounts.allPending, faCirclePause],
+        card1: ['Closed today', taskCounts && taskCounts.closed_today_count, faFire],
+        card2: ['Closed this week', taskCounts && taskCounts.closed_this_week_count, faFireFlameCurved],
+        card3: ['My pending', taskCounts && taskCounts.my_pending_count, faBroom],
+        card4: ['All pending', taskCounts && taskCounts.all_pending_count, faCirclePause],
     };
 
 
@@ -65,7 +66,7 @@ function HomeColTwo() {
                     <div className="col">
                         <div className="card light-bg text-light">
                             <div className="card-body">
-                                <LastThirtyDaysBar />
+                                <LastThirtyDaysBar user={user} />
                             </div>
                         </div>
                     </div>
@@ -92,7 +93,7 @@ function HomeColTwo() {
                         <div className="card light-bg text-light">
                             <div className="card-body">
                                 <h5 className="card-title">Units</h5>
-                                <UnitsChart />
+                                <UnitsChart user={user} />
 
                             </div>
                         </div>

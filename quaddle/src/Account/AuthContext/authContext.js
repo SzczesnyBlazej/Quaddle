@@ -1,94 +1,91 @@
+// AuthContext.js
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
+const fetchUserData = async (accessToken) => {
+    try {
+        const response = await axios.get(`${API_ENDPOINTS.USER_MANAGEMENT}get_user_data_by_token`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        });
+        const user = response.data;
+        return { isAuthenticated: true, user };
+    } catch (error) {
+        return { isAuthenticated: false, user: null };
+    }
+};
+
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-    const navigate = useNavigate();
-    const [sessionConfig, setSessionConfig] = useState([{ id: 1, enable: true, session_timeout: 10 }]);
-
-    const [user, setUser] = useState(() => {
-        const storedUser = localStorage.getItem('user');
-        return storedUser ? JSON.parse(storedUser) : null;
+    const [authState, setAuthState] = useState(() => {
+        const accessToken = Cookies.get('access_token');
+        if (accessToken) {
+            return fetchUserData(accessToken);
+        } else {
+            return { isAuthenticated: false, user: null };
+        }
     });
 
-    useEffect(() => {
-        const fetchSessionConfig = async () => {
-            try {
-                const response = await axios.get('http://localhost:3507/enableSessionTimeout');
-                setSessionConfig(response.data);
-            } catch (error) {
-                console.error('Error fetching session config:', error);
+    const navigate = useNavigate();
 
-            }
-        };
-
-        fetchSessionConfig();
-    }, []);
-    useEffect(() => {
-        const checkSessionTimeout = () => {
-            const lastActivityTime = localStorage.getItem('lastActivityTime');
-
-            if (lastActivityTime) {
-                const currentTime = new Date().getTime();
-                const elapsedTime = currentTime - parseInt(lastActivityTime, 10);
-
-                const SESSION_TIMEOUT = sessionConfig[0].session_timeout * 60 * 1000;
-                if (elapsedTime > SESSION_TIMEOUT) {
-                    logout();
-                    navigate('/login');
-                }
-            }
-        };
-
-        checkSessionTimeout();
-
-        const intervalId = setInterval(checkSessionTimeout, 60000);
-
-        return () => clearInterval(intervalId);
-    }, [navigate]);
-
-    const login = (userData) => {
-        const { id, initials, logoColor, name, surname, username, email, phone, unit } = userData;
-        const newUser = { id, initials, logoColor, name, surname, username, email, phone, unit };
-        setUser(newUser);
-        localStorage.setItem('user', JSON.stringify(newUser));
-        localStorage.setItem('lastActivityTime', new Date().getTime().toString());
+    const login = async (username, password) => {
+        try {
+            const response = await axios.post(
+                `${API_ENDPOINTS.USER_MANAGEMENT}login/`,
+                { username, password },
+                { headers: { 'Content-Type': 'application/json' } }
+            );
+            Cookies.set('access_token', response.data.access_token, { expires: 7 });
+            Cookies.set('refresh_token', response.data.refresh_token, { expires: 7 });
+            setAuthState({
+                isAuthenticated: true,
+                user: response.data.user,
+            });
+        } catch (error) {
+            console.error('Login Error:', error);
+            throw new Error('Invalid login credentials');
+        }
     };
 
     const logout = () => {
-        setUser(null);
-        localStorage.removeItem('lastActivityTime');
-        localStorage.removeItem('suggestions');
-        sessionStorage.removeItem('searchValue');
-        localStorage.removeItem('user');
+        Cookies.remove('access_token');
+        Cookies.remove('refresh_token');
+
+        setAuthState({
+            isAuthenticated: false,
+            user: null,
+        });
+
         navigate('/login');
     };
 
-    const isAuthenticated = () => !!user;
+    useEffect(() => {
+        const accessToken = Cookies.get('access_token');
+        if (accessToken) {
+            fetchUserData(accessToken)
+                .then((userData) => {
+                    setAuthState(userData);
+                    console.log("Dane użytkownika useEffect", userData)
+                })
+                .catch((error) => {
+                    console.error('Error fetching user data:', error);
+                    logout();
+                });
+        }
+    }, []);
 
-    const contextValue = {
-        user,
-        login,
-        logout,
-        isAuthenticated,
-    };
 
     return (
-        <AuthContext.Provider value={contextValue}>
+        <AuthContext.Provider value={{ login, logout, authState }}>
             {children}
         </AuthContext.Provider>
     );
-};
-
-export const useAuth = () => {
-    const context = useContext(AuthContext);
-
-    if (!context) {
-        throw new Error('useAuth must be used within an AuthProvider');
-    }
-
-    return context;
 };

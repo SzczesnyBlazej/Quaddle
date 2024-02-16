@@ -6,25 +6,22 @@ import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
 import LogoCircleTemplate from '../../Templates/LogoCircleTemplate';
 import GetTasksByCustomerId from '../Functions/getTasksByCustomerId';
-import findCustomerById from '../Functions/FindCustomerByID';
 import LastMonthUserTasksBar from '../../Charts/LastMonthUserTasksBar';
 import { getStatusIconColor } from '../../Tasks/Functions';
-// import AllowOnlyAdmin from '../../Account/AuthContext/AllowOnlyAdmin';
 import AllowOnlyRole from '../../Account/AuthContext/AllowOnlyRole';
 
 const ClickableLogo = ({ user }) => {
 
-    const [customerData, setCustomerData] = useState(user);
     const [tasksInProgress, setTasksInProgress] = useState([]);
     const [tasksClosed, setTasksClosed] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [visibleTasksInProgress, setVisibleTasksInProgress] = useState(5);
+    const [visibleTasksClosed, setVisibleClosed] = useState(5);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await findCustomerById(user.id);
-                setCustomerData(data);
-                const tasksInProgressData = await GetTasksByCustomerId({ clientId: user.id, taskStatus: ['Open'] });
+                const tasksInProgressData = await GetTasksByCustomerId({ clientId: user.id, taskStatus: ['Open', 'In Pendend'] });
                 setTasksInProgress(tasksInProgressData);
 
                 const tasksClosedData = await GetTasksByCustomerId({ clientId: user.id, taskStatus: ['Close'] });
@@ -39,7 +36,12 @@ const ClickableLogo = ({ user }) => {
 
         fetchData();
     }, [user, user.id]);
-
+    const handleShowMoreTasksInProgress = () => {
+        setVisibleTasksInProgress(prevVisibleTasks => prevVisibleTasks + 5); // Zwiększenie liczby widocznych zadań o 5
+    };
+    const handleShowMoreTasksClosed = () => {
+        setVisibleClosed(prevVisibleTasks => prevVisibleTasks + 5); // Zwiększenie liczby widocznych zadań o 5
+    };
 
     const renderPopover = () => (
         <Popover id={`popover-${user.id}`} className="p-3 popover">
@@ -47,10 +49,10 @@ const ClickableLogo = ({ user }) => {
                 <div className='row'>
                     <div className='col-md-5 d-flex align-items-center'>
                         <div>
-                            {LogoCircleTemplate(customerData)}
+                            {LogoCircleTemplate(user)}
 
                         </div>
-                        <h5 className='ps-2'>{user.name}<br /> {user.surname}</h5>
+                        <h5 className='ps-2'>{user.first_name}<br /> {user.last_name}</h5>
                     </div>
                     <div className='col-md-7'>
 
@@ -65,10 +67,10 @@ const ClickableLogo = ({ user }) => {
                     <div className='row'>
                         <div className='col-md-6'>
                             <label htmlFor="opened">
-                                Opened:
+                                Opened ({tasksInProgress.length})
                             </label>
                             <div id="opened" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                {tasksInProgress.map(task => (
+                                {tasksInProgress.slice(0, visibleTasksInProgress).map(task => (
                                     <div key={task.id} className="d-flex align-items-center">
                                         <FontAwesomeIcon
                                             icon={faCircleDot}
@@ -100,21 +102,17 @@ const ClickableLogo = ({ user }) => {
                                     </div>
                                 ))}
                             </div>
-                            {
-                                tasksInProgress.length > 0 ? (
-                                    <span className='text-muted'>Show more</span>
-                                ) : (
-                                    <span className='text-muted'>No reports</span>
-                                )
-                            }
+                            {tasksInProgress.length > visibleTasksInProgress && (
+                                <span className='text-muted' onClick={handleShowMoreTasksInProgress}>Show more</span>
+                            )}
 
                         </div>
                         <div className='col-md-6'>
                             <label htmlFor="closed">
-                                Closed:
+                                Closed ({tasksClosed.length})
                             </label>
                             <div id="closed" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                {tasksClosed.map(task => (
+                                {tasksClosed.slice(0, visibleTasksClosed).map(task => (
                                     <div key={task.id} className="d-flex align-items-center">
                                         <FontAwesomeIcon
                                             icon={faCircleDot}
@@ -146,13 +144,9 @@ const ClickableLogo = ({ user }) => {
                                     </div>
                                 ))}
                             </div>
-                            {
-                                tasksClosed.length > 0 ? (
-                                    <span className='text-muted'>Show more</span>
-                                ) : (
-                                    <span className='text-muted'>No reports</span>
-                                )
-                            }
+                            {tasksClosed.length > visibleTasksClosed && (
+                                <span className='text-muted' onClick={handleShowMoreTasksClosed}>Show more</span>
+                            )}
                         </div>
                         <hr className="border-secondary" />
                         <div className='row mx-auto text-center'>
@@ -183,7 +177,7 @@ const ClickableLogo = ({ user }) => {
         >
             <div
                 className="rounded-circle d-flex align-items-center justify-content-center"
-                style={{ width: '50px', height: '50px', backgroundColor: user?.logoColor }}
+                style={{ width: '50px', height: '50px', backgroundColor: user?.logo_color }}
             >
                 <span className="text-white fw-bold">{user?.initials}</span>
             </div>

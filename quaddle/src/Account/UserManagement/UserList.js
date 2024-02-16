@@ -34,8 +34,8 @@ const UserList = ({
                         <div className="row g-2" key={user.id}>
                             <div className="col-md-8 d-flex align-items-center">
                                 <li className="nav-link">
-                                    <FontAwesomeIcon icon={faCircle} style={{ color: user.logoColor }} className='pe-2' />
-                                    {user.name} {user.surname} ({user.username})
+                                    <FontAwesomeIcon icon={faCircle} style={{ color: user.logo_color }} className='pe-2' />
+                                    {user.first_name} {user.last_name} ({user.username})
                                 </li>
                             </div>
                             <div className="col-md-4 d-flex">

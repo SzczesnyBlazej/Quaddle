@@ -5,11 +5,10 @@ async function GetTasksByCustomerId({ clientId, taskStatus }) {
 
     try {
 
-        const response = await axios.get(API_ENDPOINTS.TASKS, {
+        const response = await axios.get(API_ENDPOINTS.TASK_API, {
             params: {
-                clientID: clientId,
+                client_id: clientId,
                 status: taskStatus,
-                _limit: 8,
             },
         });
         return response.data;

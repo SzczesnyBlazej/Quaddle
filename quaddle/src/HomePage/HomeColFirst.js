@@ -9,7 +9,6 @@ import NewTask from '../Tasks/NewTask';
 import axios from 'axios';
 import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
-import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
 import SessionTimer from '../Account/AuthContext/SessionTimer';
 import logo from '../LOGO.png'
 
@@ -22,7 +21,8 @@ const renderSuggestion = (suggestion) => (
 function HomeColFirst() {
     const showNotification = useNotification();
 
-    const { user } = useAuth();
+    const { authState } = useAuth();
+    const user = authState.user;
     const menu = {
         home: ['/', 'Dashboard', faGaugeHigh],
         overviews: ['/Overviews/mytasks', 'Overviews', faListUl],
@@ -40,27 +40,18 @@ function HomeColFirst() {
     const fetchSuggestions = async (inputValue) => {
 
         try {
-            const response = await axios.get(API_ENDPOINTS.TASKS, {
+            const response = await axios.get(API_ENDPOINTS.TASK_API, {
                 params: {
                     q: inputValue,
-                    ...(!await ifUserIsAdminBoolean(user.id) && { clientID: user.id }),
-
-
+                    ...(!user.is_admin && { client_id: user.id }),
                 },
             });
-            const newSuggestions = response.data.map((task) => ({
-                title: task.title,
-                description: task.description,
-                id: task.id,
-                status: task.status,
-            }));
 
-            setSuggestions(newSuggestions);
-            localStorage.setItem('suggestions', JSON.stringify(newSuggestions));
-            return newSuggestions;
+            setSuggestions(response.data);
+            localStorage.setItem('suggestions', JSON.stringify(response.data));
+            return response.data;
         } catch (error) {
             showNotification('Error fetching suggestions:', error.message);
-
             return [];
         }
     };
@@ -84,8 +75,6 @@ function HomeColFirst() {
     }, [value]);
 
     return (
-
-
         <div className="col-md-2 dark-bg min-vh-100 d-flex flex-column position-relative">
             <Link to="/" className="text-decoration-none d-flex align-items-center">
                 <div className='row position-relative'>
@@ -140,7 +129,7 @@ function HomeColFirst() {
                                         <FontAwesomeIcon
                                             icon={faCircleDot}
                                             style={{
-                                                color: suggestion.status === 'Open' ? 'orange' : suggestion.status === 'Close' ? '#00a347' : 'gray',
+                                                color: suggestion.status_fk.value === 'Open' ? 'orange' : suggestion.status_fk.value === 'Close' ? '#00a347' : 'gray',
                                             }}
                                         />
                                     </div>
@@ -159,7 +148,7 @@ function HomeColFirst() {
             </div>
 
             <div className="text-light mt-auto position-absolute bottom-0 w-100">
-                <span className='ps-2'>        <SessionTimer /></span>
+                <span className='ps-2'><SessionTimer /></span>
 
                 <hr className="border-secondary" />
                 <div className='row text-center mb-3'>

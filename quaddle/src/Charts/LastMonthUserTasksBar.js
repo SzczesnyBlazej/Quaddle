@@ -13,66 +13,41 @@ import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 const LastMonthUserTasksBar = ({ userId }) => {
-    const [last14Days, setLast14Days] = useState([]);
-    const [taskData, setTaskData] = useState([]);
-    const showNotification = useNotification();
+    const [taskCounts, setTaskCounts] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const today = new Date();
-                const lastTwoWeeks = new Date(today);
-                lastTwoWeeks.setDate(today.getDate() - 13);
-
-                const dates = [];
-                for (let i = 0; i <= 13; i++) {
-                    const date = new Date(lastTwoWeeks);
-                    date.setDate(lastTwoWeeks.getDate() + i);
-                    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)
-                        .toString()
-                        .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
-                    dates.push(formattedDate);
-                }
-
-                setLast14Days(dates);
-
-                const taskResponse = await axios.get(API_ENDPOINTS.TASKS, {
+                const response = await axios.get(API_ENDPOINTS.GET_LAST_THIRTY_DAYS_COUNT, {
                     params: {
-                        clientID: userId,
-                        createdate: dates,
-                    },
+                        userID: userId,
+                        only_by_id: true
+                    }
                 });
 
-                setTaskData(taskResponse.data);
+                setTaskCounts(response.data);
             } catch (error) {
-                showNotification('Error fetching task data:', error);
+                console.error('Error fetching task data:', error);
             }
         };
 
         fetchData();
-    }, [showNotification, userId]);
+    }, [userId]);
 
-    const chartData = last14Days.map((date) => {
-        const taskCount = Array.isArray(taskData)
-            ? taskData.filter(task => {
-                const taskDate = task.createDate.split('-').reverse().join('-');
-                return taskDate === date;
-            }).length
-            : 0;
+    const chartData = Array.from({ length: 30 }, (_, index) => {
+        const currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() - index);
+        const dateString = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
 
-        const taskCountClosed = Array.isArray(taskData)
-            ? taskData.filter(task => {
-                const taskDate = task.closeDate.split('-').reverse().join('-');
-                return taskDate === date && task.status === 'Close';
-            }).length
-            : 0;
+        const tasksCreatedCount = taskCounts.tasks_created && taskCounts.tasks_created[dateString] ? taskCounts.tasks_created[dateString] : 0;
+        const tasksClosedCount = taskCounts.tasks_closed && taskCounts.tasks_closed[dateString] ? taskCounts.tasks_closed[dateString] : 0;
 
         return {
-            name: date,
-            Opened: taskCount,
-            Closed: taskCountClosed,
+            name: dateString,
+            'Tasks Created': tasksCreatedCount,
+            'Tasks Closed': tasksClosedCount
         };
-    });
+    }).reverse();
 
     return (
         <ResponsiveContainer height={150}>
@@ -85,8 +60,8 @@ const LastMonthUserTasksBar = ({ userId }) => {
                 <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
                 <Tooltip labelClassName='text-dark' />
                 <Legend />
-                <Bar yAxisId="left" dataKey="Opened" fill="#8884d8" />
-                <Bar yAxisId="right" dataKey="Closed" fill="#82ca9d" />
+                <Bar yAxisId="left" dataKey="Tasks Closed" fill="#8884d8" />
+                <Bar yAxisId="right" dataKey="Tasks Created" fill="#82ca9d" />
             </BarChart>
         </ResponsiveContainer>
     );

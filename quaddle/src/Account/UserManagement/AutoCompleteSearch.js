@@ -1,14 +1,12 @@
 // AutoCompleteSearch.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import bcrypt from 'bcryptjs';
 import HomeColFirst from '../../HomePage/HomeColFirst';
 import { useNotification } from '../../Functions/NotificationContext';
 import UserList from './UserList';
 import EditUserForm from './EditUserForm';
 import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
 import getOptions from '../../Config/getOptions';
-import setUserData from '../Functions/SetDataToUser';
 
 const AutoCompleteSearch = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -18,6 +16,7 @@ const AutoCompleteSearch = () => {
     const [showEditForm, setShowEditForm] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const [isSolver, setisSolver] = useState(false);
+    const [is_active, setis_active] = useState(false);
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const showNotification = useNotification();
@@ -27,9 +26,9 @@ const AutoCompleteSearch = () => {
         const fetchUsers = async () => {
             try {
 
-                const unitList = await getOptions('units');
+                const unitList = await getOptions('Units');
                 setUnitsOptions(unitList);
-                const response = await axios.get(API_ENDPOINTS.USERS);
+                const response = await axios.get(API_ENDPOINTS.USERS_LIST);
                 setUsers(response.data);
                 setSuggestions(response.data);
 
@@ -46,16 +45,16 @@ const AutoCompleteSearch = () => {
         if (value.trim() === '') {
             const filteredUsers = users.filter(
                 (user) =>
-                    (user.name.toLowerCase() + ' ' + user.surname.toLowerCase()) ||
-                    (user.surname.toLowerCase() + ' ' + user.name.toLowerCase()) ||
+                    (user.first_name.toLowerCase() + ' ' + user.last_name.toLowerCase()) ||
+                    (user.last_name.toLowerCase() + ' ' + user.first_name.toLowerCase()) ||
                     user.username.toLowerCase()
             );
             setSuggestions(filteredUsers);
         } else {
             const filteredUsers = users.filter(
                 (user) =>
-                    (user.name.toLowerCase() + ' ' + user.surname.toLowerCase()).includes(value.toLowerCase()) ||
-                    (user.surname.toLowerCase() + ' ' + user.name.toLowerCase()).includes(value.toLowerCase()) ||
+                    (user.first_name.toLowerCase() + ' ' + user.last_name.toLowerCase()).includes(value.toLowerCase()) ||
+                    (user.last_name.toLowerCase() + ' ' + user.first_name.toLowerCase()).includes(value.toLowerCase()) ||
                     user.username.toLowerCase().includes(value.toLowerCase())
             );
 
@@ -67,14 +66,15 @@ const AutoCompleteSearch = () => {
     const handleUpdate = (userId) => {
         const userToEdit = users.find((user) => user.id === userId);
         setEditingUser(userToEdit);
-        setIsAdmin(userToEdit.isAdmin || false);
-        setisSolver(userToEdit.isSolver || false);
+        setIsAdmin(userToEdit.is_admin || false);
+        setisSolver(userToEdit.is_solver || false);
+        setis_active(userToEdit.is_active);
         setShowEditForm(true);
     };
 
     const handleDelete = async (userId) => {
         try {
-            await axios.delete(API_ENDPOINTS.USERS + `/${userId}`);
+            await axios.delete(API_ENDPOINTS.USERS_LIST + `${userId}`);
             setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
             setShowEditForm(false);
         } catch (error) {
@@ -83,21 +83,22 @@ const AutoCompleteSearch = () => {
     };
 
     const handleEditFormChange = (e) => {
-        setEditingUser({
-            ...editingUser,
-            [e.target.name]: e.target.value,
-        });
-
-        if (e.target.name === 'isAdmin') {
+        if (e.target.name === 'is_admin') {
             setIsAdmin(e.target.checked);
-        } else if (e.target.name === 'isSolver') {
+        } else if (e.target.name === 'is_solver') {
             setisSolver(e.target.checked);
+        } else if (e.target.name === 'is_active') {
+            setis_active(e.target.checked); // Ustaw stan na wartość zaznaczenia checkboxa
         } else if (e.target.name === 'newPassword') {
-
             setNewPassword(e.target.value);
         } else if (e.target.name === 'confirmPassword') {
             setConfirmPassword(e.target.value);
         }
+
+        setEditingUser({
+            ...editingUser,
+            [e.target.name]: e.target.value,
+        });
     };
 
     const handleEditFormSubmit = async (e) => {
@@ -106,18 +107,17 @@ const AutoCompleteSearch = () => {
         try {
             const updatedUser = {
                 ...editingUser,
-                isAdmin: isAdmin,
-                isSolver: isSolver,
+                is_admin: isAdmin,
+                is_solver: isSolver,
+                is_active: is_active,
             };
 
-            if (newPassword && newPassword === confirmPassword) {
-                if (editingUser.password && !bcrypt.compareSync(editingUser.password, newPassword)) {
-                    const hashedPassword = await bcrypt.hash(newPassword, 10);
-                    updatedUser.password = hashedPassword;
-
+            if (newPassword && newPassword == confirmPassword) {
+                if (editingUser.password && (editingUser.password === newPassword)) {
+                    // Jeśli użytkownik ma już ustawione hasło, użyj nowego hasła
+                    updatedUser.password = newPassword;
                 } else if (!editingUser.password) {
-                    const hashedPassword = await bcrypt.hash(newPassword, 10);
-                    updatedUser.password = hashedPassword;
+                    updatedUser.password = newPassword;
                 } else {
                     showNotification("Current password is incorrect.");
                     return;
@@ -133,11 +133,10 @@ const AutoCompleteSearch = () => {
             } else {
                 const { newPassword, confirmPassword, ...userDataWithoutPasswords } = updatedUser;
 
-                await axios.put(API_ENDPOINTS.USERS + `/${editingUser.id}`, userDataWithoutPasswords);
+                await axios.put(API_ENDPOINTS.UPDATE_USER + `${editingUser.id}`, userDataWithoutPasswords);
                 setUsers((prevUsers) =>
                     prevUsers.map((user) => (user.id === editingUser.id ? userDataWithoutPasswords : user))
                 );
-                await setUserData('dateOfLastChangedPassword', editingUser.id);
                 setShowEditForm(false);
                 showNotification('Successfully saved user data');
             }
@@ -160,9 +159,10 @@ const AutoCompleteSearch = () => {
             <EditUserForm
                 showEditForm={showEditForm}
                 editingUser={editingUser}
+                unitsOptions={unitsOptions}
                 isAdmin={isAdmin}
                 isSolver={isSolver}
-                unitsOptions={unitsOptions}
+                is_active={is_active}
                 newPassword={newPassword}
                 confirmPassword={confirmPassword}
                 handleEditFormChange={handleEditFormChange}

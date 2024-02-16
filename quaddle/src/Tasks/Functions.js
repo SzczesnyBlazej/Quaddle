@@ -8,7 +8,7 @@ export function getCurrentDateFormatted() {
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
     const year = currentDate.getFullYear();
 
-    return `${day}-${month}-${year}`;
+    return `${year}-${month}-${day}`;
 }
 export function getCurrentTimeFormatted() {
     const currentTime = new Date();
@@ -20,17 +20,21 @@ export function getCurrentTimeFormatted() {
     return `${hours}:${minutes}:${seconds}`;
 }
 
-export const sendNotification = async (notificationText, taskID) => {
+export const sendNotification = async (notificationText, taskID, user) => {
 
-    const getStoredUsername = localStorage.getItem('user');
-    const storedUser = JSON.parse(getStoredUsername);
     try {
-        await axios.post(API_ENDPOINTS.NOTIFICATION, {
+        const { data: csrfToken } = await axios.get(API_ENDPOINTS.USER_DATA);
+        await axios.post(API_ENDPOINTS.CREATE_NOTIFICATION, {
             notificationText: notificationText,
             taskId: taskID,
             notificationDate: getCurrentDateFormatted(),
             notificationTime: getCurrentTimeFormatted(),
-            createdBy: storedUser,
+            createdBy: user,
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken,
+            },
         });
 
     } catch (error) {
@@ -39,7 +43,7 @@ export const sendNotification = async (notificationText, taskID) => {
     }
 };
 export const getStatusIconColor = (status) => {
-    return status === 'Open' ? 'orange' : status === 'Close' ? '#00a347' : 'gray';
+    return status === 7 ? 'orange' : status === 8 ? '#00a347' : 'gray';
 };
 
 

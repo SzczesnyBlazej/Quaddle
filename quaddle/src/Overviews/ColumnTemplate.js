@@ -34,7 +34,7 @@ const ColumnTemplate = ({ additionalColumns = [] }) => {
             accessorKey: 'clientID',
             header: 'Client',
             size: 130,
-            Cell: ({ row }) => <Link to={'#'} className='nav-link'><AsyncClientData clientId={row.original.clientID} /></Link>,
+            Cell: ({ row }) => <Link to={'#'} className='nav-link'><AsyncClientData clientId={row.original.client_id} /></Link>,
         },
 
         {
@@ -58,12 +58,12 @@ const ColumnTemplate = ({ additionalColumns = [] }) => {
             size: 130,
         },
         {
-            accessorFn: (row) => `${row.createDate} ${row.createHour}`,
+            accessorFn: (row) => `${row.create_date} ${row.clreate_hour}`,
             header: 'Created',
             size: 140,
         },
         {
-            accessorFn: (row) => `${row.lastModification} ${row.lastModificationHour}`,
+            accessorFn: (row) => `${row.last_modification} ${row.last_modification_hour}`,
             header: 'Last Modification',
             size: 130,
         },

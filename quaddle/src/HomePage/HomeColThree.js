@@ -6,50 +6,39 @@ import LogoCircleTemplate from "../Templates/LogoCircleTemplate";
 import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import { useAuth } from '../Account/AuthContext/authContext';
-import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
-import ifUserIsSolverBoolean from '../Account/AuthContext/ifUserIsSolverBoolean';
 
 function HomeColThree() {
     const [last25Records, setlast25Records] = useState([]);
     const showNotification = useNotification();
-    const { user } = useAuth();
+    const { authState } = useAuth();
+    const user = authState.user;
 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
 
-                const isAdmin = await ifUserIsAdminBoolean(user.id);
-                const isSolver = await ifUserIsSolverBoolean(user.id);
+                const isAdmin = user.is_admin;
+                const isSolver = user.is_solver;
+                const { data: { csrftoken } } = await axios.get(API_ENDPOINTS.USER_DATA);
                 if (isAdmin || isSolver) {
-                    const response = await axios.get(API_ENDPOINTS.NOTIFICATION, {
-                        params: {
-                            _sort: 'id',
-                            _order: 'desc',
-                            _limit: 25,
+                    const response = await axios.get(API_ENDPOINTS.NOTIFICATIONAPI, {
+                        headers: {
+                            'X-CSRFToken': csrftoken
                         }
                     });
-                    const recordsWithTaskDetails = await getTaskDetails(response.data);
-                    setlast25Records(recordsWithTaskDetails);
-                } else {
-                    const taskResponse = await axios.get(API_ENDPOINTS.TASKS, {
+                    setlast25Records(response.data);
+                }
+                else {
+                    const response = await axios.get(API_ENDPOINTS.NOTIFICATIONAPI, {
+                        headers: {
+                            'X-CSRFToken': csrftoken
+                        },
                         params: {
-                            clientID: user.id
-                        }
+                            client_id: user.id,
+                        },
                     });
-                    if (taskResponse.data.length !== 0) {
-                        const taskIds = taskResponse.data.map(task => task.id);
-                        const response = await axios.get(API_ENDPOINTS.NOTIFICATION, {
-                            params: {
-                                _sort: 'id',
-                                _order: 'desc',
-                                taskId: taskIds,
-                                _limit: 25,
-                            }
-                        });
-                        const recordsWithTaskDetails = await getTaskDetails(response.data);
-                        setlast25Records(recordsWithTaskDetails);
-                    }
+                    setlast25Records(response.data);
                 }
             } catch (error) {
                 showNotification('Error fetching last 25 records:', error.message);
@@ -64,31 +53,7 @@ function HomeColThree() {
 
 
         return () => clearInterval(intervalId);
-    }, [showNotification, user.id]);
-
-
-    const getTaskDetails = async (notifications) => {
-        const tasksWithDetails = await Promise.all(
-            notifications.map(async (notification) => {
-                const taskId = notification.taskId;
-                const taskResponse = await axios.get(API_ENDPOINTS.TASKS + `/${taskId}`);
-                const taskDetails = taskResponse.data;
-
-                const userResponse = await axios.get(API_ENDPOINTS.USERS + `/${taskDetails.clientID}`);
-                const userDetails = userResponse.data;
-
-                return {
-                    ...notification,
-                    taskDetails: {
-                        ...taskDetails,
-                        userDetails,
-                    },
-                };
-            })
-        );
-
-        return tasksWithDetails;
-    };
+    }, [showNotification, user]);
 
     return (
         <div className="col-md-2 light-bg min-vh-100 d-flex flex-column position-relative overflow-auto" style={{ maxHeight: 'calc(100vh - 180px)' }}>
@@ -100,16 +65,15 @@ function HomeColThree() {
                 <div key={record?.id} className="card m-3 mt-1 dark-bg text-light">
                     <div className="row g-0">
                         <div className="col-md-3 p-2">
-
-                            {LogoCircleTemplate(record.createdBy)}
+                            {LogoCircleTemplate(record.created_by_user)}
                         </div>
 
                         <div className="col-md-9 p-2">
-                            <Link to={"/tasks/" + record.taskDetails.id} className="nav-link">
-                                <p className="card-text">{record.createdBy.name} {record.createdBy.surname} <b>{record.notificationText}</b> <span data-bs-toggle="tooltip" title={record.taskDetails.description}>{record.taskDetails.title}</span></p>
+                            <Link to={"/tasks/" + record.task_id} className="nav-link">
+                                <p className="card-text">{record.created_by_user.first_name} {record.created_by_user.last_name} <b>{record.notification_text}</b> <span data-bs-toggle="tooltip" title={record.task_detail.description}>{record.task_detail.title}</span></p>
                                 <span className="text-secondary">
-                                    <h6 data-bs-toggle="tooltip" title={record.taskDetails.lastModification + ", " + record.taskDetails.lastModificationHour}>
-                                        {calculateTimeDifference(`${record.notificationDate} ${record.notificationTime}`)} ago
+                                    <h6 data-bs-toggle="tooltip" title={record.task_id.last_modification + ", " + record.task_id.last_modification}>
+                                        {calculateTimeDifference(`${record.notification_date} ${record.notification_time}`)} ago
                                     </h6></span>
                             </Link>
                         </div>

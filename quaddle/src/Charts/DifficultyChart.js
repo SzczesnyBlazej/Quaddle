@@ -1,73 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
-import getOptions from '../Config/getOptions';
 
 function DifficultyChart({ user }) {
-    const [taskCountsByDifficulty, setTaskCountsByDifficulty] = useState({});
-    const showNotification = useNotification();
+    const [taskCountsByDifficulty, setTaskCountsByDifficulty] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const difficultyList = await getOptions('difficulty');
-
-                const response = await axios.get(API_ENDPOINTS.TASKS);
-                const taskData = response.data;
-                const taskDataFiltered = taskData.filter(task => task.solver === user.name);
-
-                const groupedTasks = taskDataFiltered.reduce((groups, task) => {
-                    const key = task.difficulty;
-
-                    if (!groups[key]) {
-                        groups[key] = [];
+                const response = await axios.get(API_ENDPOINTS.GET_DIFFICULTY_COUNTS, {
+                    params: {
+                        userID: user.id
                     }
+                });
 
-                    groups[key].push(task);
-
-                    return groups;
-                }, {});
-
-
-                const taskCountsByDifficulty = difficultyList.map(difficulty => ({
-                    difficulty: `D: ${difficulty}`,
-                    count: (groupedTasks[difficulty] || []).length,
-                }));
-
-                const resultObject = difficultyList.reduce((acc, currentValue, index) => {
-                    acc[`D: ${currentValue}`] = taskCountsByDifficulty[index].count;
-                    return acc;
-                }, {});
-
-                setTaskCountsByDifficulty(resultObject);
-
+                setTaskCountsByDifficulty(response.data.taskCountsByDifficulty);
             } catch (error) {
-                showNotification('Error fetching task data:', error);
-
+                console.error('Error fetching task data:', error);
             }
         };
 
         fetchData();
-    }, [user, showNotification]);
+    }, [user]);
 
     return (
         <ResponsiveContainer height={150}>
             <BarChart
-                data={Object.entries(taskCountsByDifficulty).map(([difficulty, count]) => ({ difficulty, count }))}
+                data={taskCountsByDifficulty}
             >
                 <XAxis dataKey="difficulty" />
                 <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
-                <Tooltip
-                    labelClassName='text-dark'
-                />
+                <Tooltip labelClassName='text-dark' />
                 <Legend
                     payload={[
                         { value: 'Difficulty', type: 'line', color: '#8884d8' },
                     ]}
                 />
-                <Bar yAxisId="left" dataKey="count" fill="#4D4DFF" />
+                <Bar
+                    yAxisId="left"
+                    dataKey="count"
+                    fill="#4D4DFF"
+                    name="Count"
+                />
             </BarChart>
         </ResponsiveContainer>
     );

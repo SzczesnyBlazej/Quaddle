@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import HomeColFirst from '../../HomePage/HomeColFirst';
-import getOptionsToAplicationConfig from './getOptionsToAplicationConfig';
 import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
 import { useNotification } from '../../Functions/NotificationContext';
 import ConfigRenderer from './ConfigRenderer';
@@ -21,15 +20,10 @@ const ApplicationConfig = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const enableSessionTimeout = await getOptionsToAplicationConfig('enableSessionTimeout');
-                const searchByXCharacters = await getOptionsToAplicationConfig('searchByXCharacters');
-
-                setConfigGroups([
-                    { title: 'enableSessionTimeout', options: enableSessionTimeout },
-                    { title: 'searchByXCharacters', options: searchByXCharacters },
-                ]);
+                const config = (await axios.get(API_ENDPOINTS.APPLICATIONCONFIG)).data;
+                setConfigGroups(config);
             } catch (error) {
-                showNotification('Error fetching data:' + error);
+                showNotification(`Error fetching data: ${error}`);
             }
         };
 
@@ -37,21 +31,9 @@ const ApplicationConfig = () => {
     }, [showNotification]);
 
     const handleUpdateOption = async (updatedOption) => {
-        const { groupName, id } = updateOptionData;
-
         try {
-            await axios.put(`${API_ENDPOINTS.APPLICATIONCONFIG}/${groupName}/${id}`, { ...updatedOption });
-            showNotification(`Option "${groupName}" updated successfully.`);
-
-            const updatedOptions = await getOptionsToAplicationConfig(groupName);
-            const updatedConfigGroups = configGroups.map(group => {
-                if (group.title === groupName) {
-                    return { ...group, options: updatedOptions };
-                }
-                return group;
-            });
-
-            setConfigGroups(updatedConfigGroups);
+            await axios.put(`${API_ENDPOINTS.APPLICATIONCONFIG}/${updatedOption.id}/`, { ...updatedOption });
+            showNotification(`Option "${updatedOption.title}" updated successfully.`);
             setShowUpdateForm(false);
         } catch (error) {
             showNotification(`Error updating option: ${error}`);
@@ -68,9 +50,8 @@ const ApplicationConfig = () => {
         setUpdateOptionData({ id: null, groupName: '', optionData: null });
     };
 
-    const filteredConfigGroups = configGroups.filter(group =>
-        group.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredConfigGroups = configGroups
+        .filter(group => group?.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
     return (
         <div className="row g-0">
@@ -80,31 +61,30 @@ const ApplicationConfig = () => {
                 <label className="text-light mb-2">Search config option:</label>
                 <input
                     type="search"
-                    className='form-control pe-3 mb-3'
+                    className="form-control pe-3 mb-3"
                     placeholder="Enter title to search"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <hr className="border-secondary" />
-
-                {filteredConfigGroups.map(group => (
+                {filteredConfigGroups.map(option => (
                     <ConfigRenderer
-                        key={group.title}
-                        title={group.title}
-                        options={group.options}
+                        key={option?.id}
+                        title={option?.title}
+                        options={option}
                         handleUpdateOption={(optionId, groupName, optionData) => handleOpenUpdateForm(optionId, groupName, optionData)}
                     />
                 ))}
             </div>
             <div className="p-3 col-md-4 text-light dark-bg min-vh-100 border-start border-secondary">
-                {showUpdateForm && (
+                {showUpdateForm ? (
                     <UpdateApplicationConfigForm
                         handleUpdateOption={handleUpdateOption}
                         groupName={updateOptionData.groupName}
                         initialOption={updateOptionData.optionData}
                         closeUpdateForm={handleCloseUpdateForm}
                     />
-                )}
+                ) : null}
             </div>
         </div>
     );

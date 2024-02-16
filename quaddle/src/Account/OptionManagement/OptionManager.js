@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import HomeColFirst from '../../HomePage/HomeColFirst';
-import getOptionsToManager from './getOptionsToManager';
 import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
 import { useNotification } from '../../Functions/NotificationContext';
 import OptionRenderer from './OptionRenderer';
@@ -11,7 +10,7 @@ import UpdateOptionForm from './UpdateOptionForm';
 const OptionManager = () => {
     const [optionGroups, setOptionGroups] = useState([]);
     const [groupName, setGroupName] = useState('');
-    const [searchTerm, setSearchTerm] = useState(''); // Dodaj ten stan
+    const [searchTerm, setSearchTerm] = useState('');
 
     const showNotification = useNotification();
     const [showAddForm, setShowAddForm] = useState(false);
@@ -25,16 +24,16 @@ const OptionManager = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const priorityList = await getOptionsToManager('priority');
-                const difficultyList = await getOptionsToManager('difficulty');
-                const statusList = await getOptionsToManager('status');
-                const unitList = await getOptionsToManager('units');
+                const priorityList = await axios.get(API_ENDPOINTS.TASKOPTIONS + "Priority");
+                const difficultyList = await axios.get(API_ENDPOINTS.TASKOPTIONS + "Difficulty");
+                const statusList = await axios.get(API_ENDPOINTS.TASKOPTIONS + "Status");
+                const unitList = await axios.get(API_ENDPOINTS.TASKOPTIONS + "Unit");
 
                 setOptionGroups([
-                    { title: 'Priority', options: priorityList, groupName: 'priority' },
-                    { title: 'Difficulty', options: difficultyList, groupName: 'difficulty' },
-                    { title: 'Status', options: statusList, groupName: 'status' },
-                    { title: 'Units', options: unitList, groupName: 'units' },
+                    { title: 'Priority', options: priorityList.data, groupName: 'Priority' },
+                    { title: 'Difficulty', options: difficultyList.data, groupName: 'Difficulty' },
+                    { title: 'Status', options: statusList.data, groupName: 'Status' },
+                    { title: 'Units', options: unitList.data, groupName: 'Unit' },
                 ]);
             } catch (error) {
                 showNotification('Error fetching data:' + error);
@@ -46,18 +45,9 @@ const OptionManager = () => {
 
     const handleDelete = async (optionId, groupName) => {
         try {
-            await axios.delete(`${API_ENDPOINTS.OPTIONS}/${groupName}/${optionId}`);
+            await axios.delete(`${API_ENDPOINTS.TASKOPTIONS}delete/${optionId}`);
             showNotification('Option deleted successfully.');
 
-            const updatedOptions = await getOptionsToManager(groupName);
-            const updatedOptionGroups = optionGroups.map(group => {
-                if (group.groupName === groupName) {
-                    return { ...group, options: updatedOptions };
-                }
-                return group;
-            });
-
-            setOptionGroups(updatedOptionGroups);
         } catch (error) {
             showNotification('Error deleting option:' + error);
         }
@@ -70,8 +60,8 @@ const OptionManager = () => {
 
     const handleAddNewOptionSubmit = async (option) => {
         try {
-            await axios.post(`${API_ENDPOINTS.OPTIONS}/${groupName}`, { ...option });
-            showNotification(`Option by name ${option.name} added successfully`);
+            await axios.post(`${API_ENDPOINTS.TASKOPTIONS}create`, { ...option });
+            showNotification(`Option by name ${option.value} added successfully`);
             setShowAddForm(false);
         } catch (error) {
             showNotification('Error adding new option:' + error);
@@ -82,18 +72,9 @@ const OptionManager = () => {
         const { groupName, id } = updateOptionData;
 
         try {
-            await axios.put(`${API_ENDPOINTS.OPTIONS}/${groupName}/${id}`, { ...updatedOption });
-            showNotification(`Option by name ${updatedOption.name} updated successfully.`);
+            await axios.put(`${API_ENDPOINTS.TASKOPTIONS}update/${id}/`, { ...updatedOption });
+            showNotification(`Option by name ${updatedOption.value} updated successfully.`);
 
-            const updatedOptions = await getOptionsToManager(groupName);
-            const updatedOptionGroups = optionGroups.map(group => {
-                if (group.groupName === groupName) {
-                    return { ...group, options: updatedOptions };
-                }
-                return group;
-            });
-
-            setOptionGroups(updatedOptionGroups);
             setShowUpdateForm(false);
         } catch (error) {
             showNotification(`Error updating option: ${error}`);
@@ -114,12 +95,10 @@ const OptionManager = () => {
         setShowAddForm(false);
     };
 
-    // Dodaj obsługę zmiany wartości w polu wyszukiwania
     const handleSearchTermChange = (e) => {
         setSearchTerm(e.target.value);
     };
 
-    // Filtruj grupy opcji na podstawie wprowadzonego terminu wyszukiwania
     const filteredOptionGroups = optionGroups.filter(group =>
         group.title.toLowerCase().includes(searchTerm.toLowerCase())
     );

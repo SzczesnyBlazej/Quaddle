@@ -91,12 +91,12 @@ const TaskList = ({ tasks, columnaaaaa }) => {
                 <>
                     <OverlayTrigger
                         trigger={['click']}
-                        placement="right"
+                        placement="auto"
                         rootClose
-                        overlay={ClientPopover({ clientId: row.original.clientID })}
+                        overlay={ClientPopover({ client: row.original.client_fk })}
                     >
                         <Link to={'#'} className='nav-link'>
-                            <AsyncClientData clientId={row.original.clientID} />
+                            <AsyncClientData clientId={row.original.client_fk.id} />
                         </Link>
                     </OverlayTrigger>
                 </>
@@ -106,10 +106,10 @@ const TaskList = ({ tasks, columnaaaaa }) => {
             disableColumnMenu: true,
         },
         {
-            accessorKey: 'unit',
             header: 'Unit',
             size: 100,
-
+            accessorKey: 'unit',
+            Cell: ({ row }) => (row.original.unit_fk.value)
         },
         {
             accessorKey: 'priority',
@@ -119,9 +119,9 @@ const TaskList = ({ tasks, columnaaaaa }) => {
                 <Box
                     sx={(theme) => ({
                         backgroundColor:
-                            cell.row.original.priority === 1
+                            cell.row.original.priority_fk.value === "1"
                                 ? theme.palette.success.dark
-                                : cell.row.original.priority === 2
+                                : cell.row.original.priority_fk.value === "2"
                                     ? theme.palette.warning.light
                                     : theme.palette.error.dark,
                         borderRadius: '0.25rem',
@@ -129,27 +129,32 @@ const TaskList = ({ tasks, columnaaaaa }) => {
                         opacity: 0.75,
                     })}
                 >
-                    {cell.row.original.priority}
+                    {cell.row.original.priority_fk.value}
                 </Box>
             ),
         },
         {
+            id: 'difficulty',
             accessorKey: 'difficulty',
             header: 'Difficulty',
             size: 100,
+            Cell: ({ row }) => (row.original.difficulty_fk ? row.original.difficulty_fk.value : '---')
+
         },
         {
             accessorKey: 'status',
             header: 'Status',
             size: 130,
+            Cell: ({ row }) => (row.original.status_fk ? row.original.status_fk.value : '---')
+
         },
         {
-            accessorFn: (row) => `${row.createDate} ${row.createHour}`,
+            accessorFn: (row) => `${row.create_date} ${row.create_hour}`,
             header: 'Created',
             size: 140,
         },
         {
-            accessorFn: (row) => `${row.lastModification} ${row.lastModificationHour}`,
+            accessorFn: (row) => `${row.last_modification} ${row.last_modification_hour}`,
             header: 'Last Modification',
             id: 'LastModification',
             size: 130,

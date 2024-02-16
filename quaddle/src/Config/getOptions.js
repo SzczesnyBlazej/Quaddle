@@ -3,7 +3,7 @@ import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 
 const getOptions = async (groupName) => {
     try {
-        const response = await axios.get(`${API_ENDPOINTS.OPTIONS}/${groupName}`);
+        const response = await axios.get(`${API_ENDPOINTS.TASKOPTIONS}${groupName}`);
         const options = response.data;
 
         if (!options) {
@@ -12,8 +12,7 @@ const getOptions = async (groupName) => {
         }
 
         const filteredOptions = options.filter(option => option.active);
-        const optionNames = filteredOptions.map(option => option.name);
-        return optionNames;
+        return filteredOptions;
     } catch (error) {
         console.error('Error fetching options:', error);
         return [];

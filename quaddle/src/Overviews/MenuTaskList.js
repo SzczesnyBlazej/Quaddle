@@ -1,51 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AllowOnlyRole from '../Account/AuthContext/AllowOnlyRole';
-import { CountTaskToMenuTaskList } from './Functions/CountTaskToMenuTaskList';
 import { useAuth } from '../Account/AuthContext/authContext';
+import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
+import axios from 'axios';
 
 function MenuTaskList() {
-    const { user } = useAuth();
-
-    const [mytasks, setmytasks] = useState(0);
-    const [myAssignedTasks, setmyAssignedTasks] = useState(0);
-    const [myClosedTasks, setmyClosedTasks] = useState(0);
-
-    const [allOpenedTask, setallOpenedTask] = useState(0);
-    const [allClosedTask, setallClosedTask] = useState(0);
-    const [allUnallocated, setallUnallocated] = useState(0);
-    const [AllInPendendTask, setAllInPendendTask] = useState(0);
-    const [Favorities, setFavorities] = useState(0);
+    const { authState } = useAuth();
+    const user = authState.user;
+    const [counterList, setCounterList] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                setmytasks(await CountTaskToMenuTaskList("MyTasks", user.id, user.name));
-                setmyAssignedTasks(await CountTaskToMenuTaskList("myAssignedTasks", user.id, user.name));
-                setallOpenedTask(await CountTaskToMenuTaskList("allOpenedTask", user.id, user.name));
-                setmyClosedTasks(await CountTaskToMenuTaskList("myClosedTasks", user.id, user.name));
-                setallUnallocated(await CountTaskToMenuTaskList("allUnallocated", user.id, user.name));
-                setallClosedTask(await CountTaskToMenuTaskList("allClosedTask", user.id, user.name));
-                setAllInPendendTask(await CountTaskToMenuTaskList("AllInPendendTask", user.id, user.name));
-                setFavorities(await CountTaskToMenuTaskList("Favorities", user.id, user.name));
+                const response = await axios.get(API_ENDPOINTS.COUNT_ALL_TASKS_TO_MENU, {
+                    params: {
+                        userID: user.id
+                    }
+                });
+                setCounterList(response.data);
             } catch (error) {
-                console.log(error);
+                console.log('Error fetching tasks:', error);
             }
         };
 
         fetchData();
-    }, [user.id, user.name]);
+    }, [user]);
 
     const menuChild = "/Overviews";
     const menu = {
-        mytasks: ['/mytasks', 'My Tasks', false, mytasks],
-        myAllClosedTasks: ['/myClosedTasks', 'My Closed Task', false, myClosedTasks],
-        myAssignedTasks: ['/myAssignedTasks', 'My Assigned Tasks', true, myAssignedTasks],
-        allOpenedTasks: ['/allOpenedTask', 'All Opened Task', true, allOpenedTask],
-        allClosedTask: ['/allClosedTask', 'All Closed Task', true, allClosedTask],
-        allUnallocated: ['/allUnallocated', 'All Unallocated', true, allUnallocated],
-        allInPendendTask: ['/AllInPendendTask', 'All In Pendend Task', true, AllInPendendTask],
-        favorites: ['/Favorities', 'Favorities', false, Favorities],
+        mytasks: ['/mytasks', 'My Tasks', false, counterList.MyTasks],
+        myClosedTasks: ['/myClosedTasks', 'My Closed Task', false, counterList.myClosedTasks],
+        myAssignedTasks: ['/myAssignedTasks', 'My Assigned Tasks', true, counterList.myAssignedTasks],
+        allOpenedTasks: ['/allOpenedTask', 'All Opened Task', true, counterList.allOpenedTask],
+        allClosedTask: ['/allClosedTask', 'All Closed Task', true, counterList.allClosedTask],
+        allUnallocated: ['/allUnallocated', 'All Unallocated', true, counterList.allUnallocated],
+        allInPendendTask: ['/AllInPendendTask', 'All In Pendend Task', true, counterList.AllInPendendTask],
+        favorites: ['/Favorities', 'Favorities', false, counterList.favorites],
     };
 
     return (

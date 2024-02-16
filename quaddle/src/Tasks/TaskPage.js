@@ -7,29 +7,26 @@ import TaskDetail from './TaskDetail';
 import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import { useAuth } from '../Account/AuthContext/authContext';
-import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
-import ifUserIsSolverBoolean from '../Account/AuthContext/ifUserIsSolverBoolean';
 
 const TaskPage = () => {
     const { taskId } = useParams();
     const [task, setTask] = useState(null);
     const showNotification = useNotification();
-    const { user } = useAuth();
-    const userID = user.id;
+    const { authState } = useAuth();
+    const user = authState.user;
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
+            if (!user) return;
+
             try {
-                const [isAdmin, isSolver, taskResponse] = await Promise.all([
-                    ifUserIsAdminBoolean(userID),
-                    ifUserIsSolverBoolean(userID),
-                    axios.get(API_ENDPOINTS.TASKS + `/${taskId}`)
-                ]);
-
+                const taskResponse = await axios.get(API_ENDPOINTS.TASK_API + `${taskId}`);
                 const fetchedTask = taskResponse.data;
+                const isAdmin = user.is_admin;
+                const isSolver = user.is_solver;
 
-                if (isAdmin || isSolver || fetchedTask.clientID === userID) {
+                if (isAdmin || isSolver || fetchedTask.client_fk.id === user.id) {
                     setTask(fetchedTask);
                 } else {
                     showNotification(`No permission to view this task`);
@@ -41,7 +38,8 @@ const TaskPage = () => {
         };
 
         fetchData();
-    }, [taskId, showNotification, navigate, userID]);
+    }, [user, taskId]);
+
 
     return (
         <div>

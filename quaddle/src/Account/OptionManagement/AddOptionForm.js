@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const AddOptionForm = ({ handleAddNewOptionSubmit, groupName, closeAddOptionForm }) => {
     const [newOption, setNewOption] = useState({
-        name: '',
+        title: groupName,
         value: '',
         active: true,
     });
@@ -19,7 +19,7 @@ const AddOptionForm = ({ handleAddNewOptionSubmit, groupName, closeAddOptionForm
         e.preventDefault();
         handleAddNewOptionSubmit(newOption, groupName);
         setNewOption({
-            name: '',
+            title: groupName,
             value: '',
             active: true,
         });
@@ -40,17 +40,17 @@ const AddOptionForm = ({ handleAddNewOptionSubmit, groupName, closeAddOptionForm
 
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="name" className="form-label">
-                        Name:
+                    <label htmlFor="title" className="form-label">
+                        Title:
                     </label>
                     <input
                         type="text"
                         className="form-control"
-                        id="name"
-                        name="name"
-                        value={newOption.name}
+                        id="title"
+                        name="title"
+                        value={groupName}
                         onChange={handleChange}
-                        required
+                        readOnly
                     />
                 </div>
                 <div className="mb-3">

@@ -9,28 +9,29 @@ import { useNotification } from '../Functions/NotificationContext';
 
 const Favorities = () => {
     const [tasks, setTasks] = useState([]);
-    const { user } = useAuth();
+    const { authState } = useAuth();
+    const user = authState.user;
     const userID = user.id;
     const showNotification = useNotification();
 
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const favoritesResponse = await axios.get(API_ENDPOINTS.FAVORITIES, {
+                const favoritesResponse = await axios.get(API_ENDPOINTS.CHECK_FAVORITE, {
                     params: {
-                        userID: userID,
+                        favorite_list: true,
+                        user_id: userID,
                     },
                 });
-
-                if (favoritesResponse.data.length > 0) {
-                    const favoritesTasksID = favoritesResponse.data[0].favoritesTasksID;
+                if (favoritesResponse.data.favorite_list) {
+                    const favoritesTasksID = favoritesResponse.data.favorite_list;
                     if (favoritesTasksID.length > 0) {
-                        const tasksResponse = await axios.get(API_ENDPOINTS.TASKS, {
+                        const tasksResponse = await axios.get(API_ENDPOINTS.GET_TASKS_BY_ID, {
                             params: {
-                                id: favoritesTasksID,
+                                id_list: favoritesTasksID,
                             },
                         });
-
+                        console.log(tasksResponse)
                         setTasks(tasksResponse.data);
                     } else {
                         setTasks([]);
@@ -44,12 +45,14 @@ const Favorities = () => {
         };
 
         fetchTasks();
-    }, [userID, showNotification]);
+    }, [userID]);
 
     const additionalColumns = [{
         accessorKey: 'solver',
         header: 'Solver',
         size: 130,
+        Cell: ({ row }) => (row.original.solver_fk ? (row.original.solver_fk.first_name + ' ' + row.original.solver_fk.last_name) : '---')
+
     },];
 
     return (

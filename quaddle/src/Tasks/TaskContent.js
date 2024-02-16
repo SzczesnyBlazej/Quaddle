@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faLock, faLockOpen, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -7,29 +7,48 @@ import { useAuth } from '../Account/AuthContext/authContext';
 import { useNotification } from '../Functions/NotificationContext';
 import ClickableLogo from '../Overviews/Templates/ClicableLogo';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
-import ifUserIsAdminBoolean from '../Account/AuthContext/ifUserIsAdminBoolean';
-import ifUserIsSolverBoolean from '../Account/AuthContext/ifUserIsSolverBoolean';
 import { Modal } from 'react-bootstrap';
 import DragAndDropFileUpload from './DragAndDropFileUpload';
 
 const TaskContent = ({ task }) => {
     const showNotification = useNotification();
-
-    const [clientDetail, setClientDetail] = useState([]);
+    const { authState } = useAuth();
+    const user = authState.user;
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
-    const { user } = useAuth();
     const [isAdmin, setIsAdmin] = useState(false);
     const [isSolver, setIsSolver] = useState(false);
-
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [messageToDelete, setMessageToDelete] = useState(null);
+    const [prevFiles, setFiles] = useState([]);
+
+    const handleAddedFiles = (e) => {
+        e.preventDefault();
+        const droppedFiles = Array.from(e.dataTransfer.files);
+        setFiles(prevFiles => prevFiles.concat(droppedFiles));
+    };
+
+    const saveFilesLocally = () => {
+        prevFiles.forEach((file) => {
+            const url = URL.createObjectURL(file);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = file.name;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+    };
 
     const confirmDelete = async () => {
-        if (messageToDelete) {
-            await handleDeleteMessage(messageToDelete.id);
-            setShowConfirmModal(false);
-            setMessageToDelete(null);
+        try {
+            if (messageToDelete) {
+                await handleDeleteMessage(messageToDelete.id);
+                setShowConfirmModal(false);
+                setMessageToDelete(null);
+            }
+        } catch (error) {
+            showNotification('Error confirming deletion: ' + error.message);
         }
     };
 
@@ -38,122 +57,124 @@ const TaskContent = ({ task }) => {
         setShowConfirmModal(true);
     };
 
-    const updateLockStatus = async (messageId, isLock) => {
+    const updateLockStatus = async (messageId, is_lock) => {
         try {
-            await axios.patch(API_ENDPOINTS.MESSAGES + `/${messageId}`, {
-                isLock: !isLock,
+            await axios.patch(`${API_ENDPOINTS.UPDATE_MESSAGE}/${messageId}`, {
+                is_lock: !is_lock,
             });
-
+            showNotification('Lock has been modified');
             fetchMessages();
         } catch (error) {
-            showNotification('Error updating lock status:', error.message);
+            showNotification('Error updating lock status: ' + error.message);
         }
     };
+
 
     const handleDeleteMessage = async (messageId) => {
         try {
-            await axios.delete(API_ENDPOINTS.MESSAGES + `/${messageId}`);
+            await axios.delete(`${API_ENDPOINTS.DELETE_MESSAGES_TASK}${messageId}`);
+            showNotification('Message has been deleted');
 
             fetchMessages();
         } catch (error) {
-            showNotification('Error during delete message:' + error.message);
+            showNotification('Error deleting message: ' + error.message);
         }
     };
 
-    const fetchMessages = useCallback(async () => {
-        try {
-            if (task) {
-                const response = await axios.get(API_ENDPOINTS.MESSAGES + `?taskID=${task?.id}`);
-                setMessages(response.data);
-            }
-        } catch (error) {
-            showNotification('Error fetching messages:', error.message);
-        }
-    }, [task, showNotification]);
-
-    useEffect(() => {
-        const fetchUserDetails = async () => {
-            try {
-                setIsAdmin(await ifUserIsAdminBoolean(user.id))
-                setIsSolver(await ifUserIsSolverBoolean(user.id))
-                if (task && task.clientID) {
-                    const userResponse = await axios.get(API_ENDPOINTS.USERS + `/${task?.clientID}`);
-                    setClientDetail(userResponse.data);
-                }
-            } catch (error) {
-                showNotification('Error fetching user details:', error.message);
-            }
-        };
-
-        fetchUserDetails();
-        fetchMessages();
-    }, [task?.clientID, showNotification, fetchMessages, task]);
-
     const updateMessage = async (e) => {
         e.preventDefault();
-
         try {
-            await axios.post(API_ENDPOINTS.MESSAGES, {
+            console.log(prevFiles)
+            await axios.post(API_ENDPOINTS.CREATE_MESSAGE, {
                 message: message,
-                clientID: clientDetail?.id,
+                clientID: task?.client_fk?.id,
                 taskID: task?.id,
-                messageSender: user,
+                messageSender: user.id,
                 createDate: getCurrentDateFormatted(),
                 createHour: getCurrentTimeFormatted(),
                 isLock: false,
             });
-
-            sendNotification("added a comment for", task?.id);
-
+            showNotification('Comment has been added');
+            sendNotification("added a comment for", task?.id, user.id);
+            saveFilesLocally();
             setMessage('');
             fetchMessages();
-
         } catch (error) {
-            showNotification('Error while updating a task:' + error.message);
+            showNotification('Error updating task: ' + error.message);
         }
     };
+
+    const fetchMessages = async () => {
+        try {
+            if (task) {
+                const response = await axios.get(API_ENDPOINTS.MESSAGES_TASK, {
+                    params: {
+                        task_id: task.id,
+                    },
+                });
+                setMessages(response.data);
+            }
+        } catch (error) {
+            showNotification('Error fetching messages: ' + error.message);
+        }
+    };
+
+    useEffect(() => {
+        fetchMessages();
+    }, [task]);
+
+    useEffect(() => {
+
+        setIsAdmin(user?.is_admin);
+        setIsSolver(user?.is_solver);
+    }, [user]);
+
 
     return (
         <div className="col-md-8 dark-bg min-vh-100 border-start border-end border-secondary d-flex flex-column position-relative" style={{ maxHeight: 'calc(100vh - 180px)' }}>
             <div className="d-flex flex-column overflow-auto" style={{ maxHeight: '79vh' }}>
                 <div className='container custom-width'>
                     <div className='d-flex flex-column justify-content-center align-items-center pt-5 text-secondary'>
-                        <ClickableLogo user={clientDetail} />
+                        {task && (
+                            <ClickableLogo user={task.client_fk} />
+                        )}
                         <h2 className='ps-3 pe-3 mt-4 mb-3 ms-5 me-5 light-bg rounded'>{task?.title}</h2>
-                        <p className='text-secondary'>Ticket #{task?.id} {task?.createDate} at {task?.createHour}</p>
+                        <p className='text-secondary'>Ticket #{task?.id} {task?.create_date} at {task?.create_hour}</p>
                     </div>
                     <div className='row flex-row'>
                         <div className='col-md-1'></div>
                         <div className='col-md-10 d-flex flex row justify-content-between'>
                             <span
-                                className={`pt-3 pb-3 mt-3 mb-3 ps-3 pe-3 text-light light-bg rounded w-100 ${user?.id === task?.clientID ? 'green-border' : ''}`}
+                                className={`pt-3 pb-3 mt-3 mb-3 ps-3 pe-3 text-light light-bg rounded w-100 ${user?.id === task?.client_fk.id ? 'green-border' : ''}`}
                             >
                                 {task?.description}
                             </span>
-                            <p className="card-text text-secondary text-center"><small >{task?.createDate} at {task?.createHour}</small></p>
+                            <p className="card-text text-secondary text-center"><small >{task?.create_date} at {task?.create_hour}</small></p>
                         </div>
-                        <div className='col-md-1'><ClickableLogo user={clientDetail} /></div>
+                        <div className='col-md-1'>{task && (
+                            <ClickableLogo user={task.client_fk} />
+                        )}</div>
                     </div>
                     {messages.map((message) => (
                         <div key={message?.id} className='row flex-row'>
-                            {message.messageSender?.id !== user?.id ? (
-                                message.isLock ? (
+                            {message.message_sender_fk?.id !== user?.id ? (
+                                message.is_lock ? (
                                     isAdmin || isSolver ? (
-                                        <div className='col-md-1 mt-3'><ClickableLogo user={message.messageSender} /></div>
+                                        <div className='col-md-1 mt-3'><ClickableLogo user={message.message_sender_fk} /></div>
 
                                     ) : (
                                         <div className='col-md-1 mt-3'></div>)
 
                                 ) : (
-                                    <div className='col-md-1 mt-3'><ClickableLogo user={message.messageSender} /></div>
+                                    <div className='col-md-1 mt-3'><ClickableLogo user={message.message_sender_fk} /></div>
 
                                 )
                             ) : (
                                 <div className='col-md-1 d-flex flex-column align-items-end pt-3'>
                                     {isAdmin || isSolver ? (
                                         <>
-                                            <button className='btn btn-link p-2' onClick={() => updateLockStatus(message.id, message.isLock)}>
-                                                <FontAwesomeIcon icon={message.isLock ? faLockOpen : faLock} style={{ color: "#dedede" }} />
+                                            <button className='btn btn-link p-2' onClick={() => updateLockStatus(message.id, message.is_lock)}>
+                                                <FontAwesomeIcon icon={message.is_lock ? faLockOpen : faLock} style={{ color: "#dedede" }} />
                                             </button>
                                             <button className='btn btn-link p-2' onClick={() => openDeleteModal(message)}>
                                                 <FontAwesomeIcon icon={faTrash} style={{ color: "#dedede" }} />
@@ -167,16 +188,16 @@ const TaskContent = ({ task }) => {
                             )}
                             <div className='col-md-10 d-flex flex row justify-content-between'>
 
-                                {message.isLock ? (
+                                {message.is_lock ? (
                                     isAdmin || isSolver ? (
                                         <>
                                             <span
-                                                className={`pt-3 pb-3 mt-3 mb-3 ps-3 pe-3 text-light light-bg rounded w-100 ${message.messageSender?.id === user?.id ? 'green-border' : ''}`}
+                                                className={`pt-3 pb-3 mt-3 mb-3 ps-3 pe-3 text-light light-bg rounded w-100 ${message.message_sender_fk?.id === user?.id ? 'green-border' : ''}`}
                                                 style={{ border: '2px solid #ff6347' }}
                                             >
                                                 {message.message}
                                             </span>
-                                            <p className="card-text text-secondary text-center"><small >{message?.createDate} at {message?.createHour}</small></p>
+                                            <p className="card-text text-secondary text-center"><small >{message?.create_date} at {message?.create_hour}</small></p>
                                         </>
                                     ) : (
                                         null
@@ -184,16 +205,16 @@ const TaskContent = ({ task }) => {
                                 ) : (
                                     <>
                                         <span
-                                            className={`pt-3 pb-3 mt-3 mb-3 ps-3 pe-3 text-light light-bg rounded w-100 ${message.messageSender?.id === user?.id ? 'green-border' : ''}`}
+                                            className={`pt-3 pb-3 mt-3 mb-3 ps-3 pe-3 text-light light-bg rounded w-100 ${message.message_sender_fk?.id === user?.id ? 'green-border' : ''}`}
                                         >
                                             {message.message}
                                         </span>
-                                        <p className="card-text text-secondary text-center"><small >{message?.createDate} at {message?.createHour}</small></p>
+                                        <p className="card-text text-secondary text-center"><small >{message?.create_date} at {message?.create_hour}</small></p>
                                     </>
                                 )}
                             </div>
-                            {message.messageSender?.id === user?.id ? (
-                                <div className='col-md-1 mt-3'><ClickableLogo user={message.messageSender} /></div>
+                            {message.message_sender_fk?.id === user?.id ? (
+                                <div className='col-md-1 mt-3'><ClickableLogo user={message.message_sender_fk} /></div>
                             ) : (
                                 <div className='col-md-1'></div>
                             )}
@@ -205,7 +226,7 @@ const TaskContent = ({ task }) => {
 
                     <div className='w-100'>
 
-                        <DragAndDropFileUpload />
+                        <DragAndDropFileUpload handleAddedFiles={handleAddedFiles} />
                         <div className='col ms-3 me-3 mb-3'>
                             <div className="input-group">
 

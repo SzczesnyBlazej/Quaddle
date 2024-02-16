@@ -1,13 +1,13 @@
 export const calculateTimeDifference = (targetDateString2) => {
     const targetDateString = targetDateString2 || '';
-    const dateRegex = /^(\d{2})-(\d{2})-(\d{4}) (\d{2}:\d{2}:\d{2})$/;
+    const dateRegex = /^(\d{4})-(\d{2})-(\d{2}) (\d{2}:\d{2}:\d{2})$/;
     const match = targetDateString.match(dateRegex);
     if (!match) {
         return 'Invalid date format';
     }
 
 
-    const [, day, month, year, time] = match;
+    const [, year, month, day, time] = match;
     const [hours, minutes, seconds] = time.split(':');
 
     const targetDate = new Date(year, month - 1, day, hours, minutes, seconds);

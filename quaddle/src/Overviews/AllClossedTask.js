@@ -9,12 +9,13 @@ import { useNotification } from '../Functions/NotificationContext';
 
 function AllClossedTask() {
     const [tasks, setTasks] = useState([]);
-    const { user } = useAuth();
+    const { authState } = useAuth();
+    const user = authState.user;
     const userID = user.id;
     const showNotification = useNotification();
 
     useEffect(() => {
-        axios.get(API_ENDPOINTS.TASKS, {
+        axios.get(API_ENDPOINTS.TASK_API, {
             params: {
                 status: ['Close'],
             },
@@ -30,10 +31,14 @@ function AllClossedTask() {
     const additionalColumns = [
 
         {
-            accessorFn: (row) => `${row.closeDate} ${row.closeHour}`,
+            accessorKey: 'close_date',
             header: 'Closed',
             size: 140,
+            Cell: ({ row }) => (row.original.close_date ? (row.original.close_date + ' ' + row.original.close_hour) : '---')
+
         },
+
+
     ];
 
     return (

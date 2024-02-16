@@ -4,7 +4,6 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const ConfigRenderer = ({ title, options, handleUpdateOption }) => {
     const [isVisible, setIsVisible] = useState(false);
-
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
     };
@@ -30,41 +29,41 @@ const ConfigRenderer = ({ title, options, handleUpdateOption }) => {
                 </div>
             </div>
             {isVisible && (
+
                 <ul className="list-group">
-                    {options.length > 0 ? (
-                        options.map((option) => (
-                            <li
-                                key={option.id}
-                                className="list-group-item border-0 dark-bg text-light mb-2"
-                            >
-                                <div className="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <strong>ID:</strong> {option.id},&nbsp;
-                                        <strong>Value:</strong> {option.value},&nbsp;
-                                        <strong>Active:</strong>{' '}
-                                        <input
-                                            type="checkbox"
-                                            className="form-check-input bg-transparent border border-white"
-                                            checked={option.enable}
-                                            readOnly
-                                        />
-                                    </div>
-                                    <div className="d-flex">
-                                        <button
-                                            className="btn btn-outline-light ms-2"
-                                            onClick={() => handleUpdateOption(option.id, title.toLowerCase(), option)}
-                                        >
-                                            Update
-                                        </button>
 
-                                    </div>
+                    {options ? (
+                        <li
+                            key={options.id}
+                            className="list-group-item border-0 dark-bg text-light mb-2"
+                        >
+                            <div className="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>ID:</strong> {options.id},&nbsp;
+                                    <strong>Value:</strong> {options.value},&nbsp;
+                                    <strong>Active:</strong>{' '}
+                                    <input
+                                        type="checkbox"
+                                        className="form-check-input bg-transparent border border-white"
+                                        checked={options.enable}
+                                        readOnly
+                                    />
                                 </div>
-                                <p>{option.description}</p>
+                                <div className="d-flex">
+                                    <button
+                                        className="btn btn-outline-light ms-2"
+                                        onClick={() => handleUpdateOption(options.id, options.title.toLowerCase(), options)}
+                                    >
+                                        Update
+                                    </button>
 
-                            </li>
-                        ))
+                                </div>
+                            </div>
+                            <p>{options.description}</p>
+
+                        </li>
                     ) : (
-                        <p>No {title.toLowerCase()} options available.</p>
+                        <p>No {options.title.toLowerCase()} options available.</p>
                     )}
                 </ul>
             )}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Popover } from 'react-bootstrap';
-import findCustomerById from '../Functions/FindCustomerByID';
 import GetTasksByCustomerId from '../Functions/getTasksByCustomerId';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
@@ -9,54 +8,64 @@ import { faCircleDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-ic
 import LogoCircleTemplate from '../../Templates/LogoCircleTemplate';
 import LastMonthUserTasksBar from '../../Charts/LastMonthUserTasksBar';
 import { getStatusIconColor } from '../../Tasks/Functions';
-// import AllowOnlyAdmin from '../../Account/AuthContext/AllowOnlyAdmin';
 import AllowOnlyRole from '../../Account/AuthContext/AllowOnlyRole';
+import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
+import axios from 'axios';
 
-export const ClientPopover = ({ clientId }) => {
-    const [customerData, setCustomerData] = useState(null);
+export const ClientPopover = ({ client }) => {
     const [tasksInProgress, setTasksInProgress] = useState([]);
     const [tasksClosed, setTasksClosed] = useState([]);
+    const clientID = client.id
+    const [visibleTasksInProgress, setVisibleTasksInProgress] = useState(5);
+    const [visibleTasksClosed, setVisibleClosed] = useState(5);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await findCustomerById(clientId);
-                setCustomerData(data);
-
-                const tasksInProgressData = await GetTasksByCustomerId({ clientId, taskStatus: ['Open'] });
+                const tasksInProgressData = await GetTasksByCustomerId({ clientId: client.id, taskStatus: ['Open', 'In Pendend'] });
                 setTasksInProgress(tasksInProgressData);
 
-                const tasksClosedData = await GetTasksByCustomerId({ clientId, taskStatus: ['Close'] });
+                const tasksClosedData = await GetTasksByCustomerId({ clientId: client.id, taskStatus: ['Close'] });
                 setTasksClosed(tasksClosedData);
+
             } catch (error) {
                 console.error('Error fetching data:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchData();
-    }, [clientId]);
+    }, [client]);
+    const handleShowMoreTasksInProgress = () => {
+        setVisibleTasksInProgress(prevVisibleTasks => prevVisibleTasks + 5); // Zwiększenie liczby widocznych zadań o 5
+    };
+    const handleShowMoreTasksClosed = () => {
+        setVisibleClosed(prevVisibleTasks => prevVisibleTasks + 5); // Zwiększenie liczby widocznych zadań o 5
+    };
 
 
-    if (!customerData) {
+    if (!client) {
         return null;
     }
 
     return (
-        <Popover id={clientId} className='p-3 popover'>
+        <Popover id={client.id} className='p-3 popover'>
             <div>
                 <div className='row'>
                     <div className='col-md-5 d-flex align-items-center'>
                         <div>
-                            {LogoCircleTemplate(customerData)}
+                            {LogoCircleTemplate(client)}
 
                         </div>
-                        <h5 className='ps-2'>{customerData.name}<br /> {customerData.surname}</h5>
+                        <h5 className='ps-2'>{client.first_name}<br /> {client.last_name}</h5>
                     </div>
                     <div className='col-md-7'>
 
-                        <div id="email"><FontAwesomeIcon icon={faEnvelope} className='pe-2' />{customerData.email}</div>
+                        <div id="email"><FontAwesomeIcon icon={faEnvelope} className='pe-2' />{client.email}</div>
 
-                        <div id="tel"><FontAwesomeIcon icon={faPhone} className='pe-2' />{customerData.phone}</div>
+                        <div id="tel"><FontAwesomeIcon icon={faPhone} className='pe-2' />{client.phone}</div>
                     </div>
                 </div>
 
@@ -65,10 +74,10 @@ export const ClientPopover = ({ clientId }) => {
                     <div className='row'>
                         <div className='col-md-6'>
                             <label htmlFor="opened">
-                                Opened:
+                                Opened ({tasksInProgress.length})
                             </label>
                             <div id="opened" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                {tasksInProgress.map(task => (
+                                {tasksInProgress.slice(0, visibleTasksInProgress).map(task => (
                                     <div key={task.id} className="d-flex align-items-center">
                                         <FontAwesomeIcon
                                             icon={faCircleDot}
@@ -100,24 +109,21 @@ export const ClientPopover = ({ clientId }) => {
                                     </div>
                                 ))}
                             </div>
-                            {
-                                tasksInProgress.length > 0 ? (
-                                    <span className='text-muted'>Show more</span>
-                                ) : (
-                                    <span className='text-muted'>No reports</span>
-                                )
-                            }                    </div>
+                            {tasksInProgress.length > visibleTasksInProgress && (
+                                <span className='text-muted' onClick={handleShowMoreTasksInProgress}>Show more</span>
+                            )}
+                        </div>
                         <div className='col-md-6'>
                             <label htmlFor="closed">
-                                Closed:
+                                Closed ({tasksClosed.length})
                             </label>
                             <div id="closed" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                {tasksClosed.map(task => (
+                                {tasksClosed.slice(0, visibleTasksClosed).map(task => (
                                     <div key={task.id} className="d-flex align-items-center">
                                         <FontAwesomeIcon
                                             icon={faCircleDot}
                                             style={{
-                                                color: getStatusIconColor(task.status),
+                                                color: getStatusIconColor(task && task.status),
                                                 marginRight: '5px',
                                             }}
                                         />
@@ -144,13 +150,9 @@ export const ClientPopover = ({ clientId }) => {
                                     </div>
                                 ))}
                             </div>
-                            {
-                                tasksClosed.length > 0 ? (
-                                    <span className='text-muted'>Show more</span>
-                                ) : (
-                                    <span className='text-muted'>No reports</span>
-                                )
-                            }
+                            {tasksClosed.length > visibleTasksClosed && (
+                                <span className='text-muted' onClick={handleShowMoreTasksClosed}>Show more</span>
+                            )}
                         </div>
                     </div>
                     <hr className="border-secondary" />
@@ -160,7 +162,7 @@ export const ClientPopover = ({ clientId }) => {
                         </label>
                         <div id="userChart">
                             <div>
-                                <LastMonthUserTasksBar userId={clientId} />
+                                <LastMonthUserTasksBar userId={client.id} />
                             </div>
                         </div>
                     </div>

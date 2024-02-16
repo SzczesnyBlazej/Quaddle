@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './authContext';
-import ifUserIsAdminBoolean from './ifUserIsAdminBoolean';
 import { useNotification } from '../../Functions/NotificationContext';
-import ifUserIsSolverBoolean from './ifUserIsSolverBoolean';
 
 const RouteGuard = ({ children, onlyAdmin = false }) => {
-    const { user } = useAuth();
+    const { authState } = useAuth();
+    const user = authState.user;
     const navigate = useNavigate();
     const [isAdmin, setIsAdmin] = useState(false);
     const [isSolver, setIsSolver] = useState(false);
@@ -22,8 +21,8 @@ const RouteGuard = ({ children, onlyAdmin = false }) => {
             }
 
             try {
-                const userIsAdmin = await ifUserIsAdminBoolean(user.id);
-                const userIsSolver = await ifUserIsSolverBoolean(user.id);
+                const userIsAdmin = user.is_admin;
+                const userIsSolver = user.is_solver;
                 setIsAdmin(userIsAdmin);
                 setIsSolver(userIsSolver);
 

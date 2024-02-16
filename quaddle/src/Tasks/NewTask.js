@@ -5,6 +5,7 @@ import { getCurrentTimeFormatted, getCurrentDateFormatted, sendNotification } fr
 import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import getOptions from '../Config/getOptions';
+import { useAuth } from '../Account/AuthContext/authContext';
 
 const NewTask = ({ onClose }) => {
     const [title, setTitle] = useState('');
@@ -16,15 +17,17 @@ const NewTask = ({ onClose }) => {
     const [closeHour] = useState('');
     const [contactNumber, setContactNumber] = useState('');
     const [unitsOptions, setUnitsOptions] = useState([]);
+    const { authState } = useAuth();
+    const user = authState.user;
 
     const [addTaskError, setAddTaskError] = useState('');
     const showNotification = useNotification();
 
     useEffect(() => {
         async function fetchData() {
-            const getStoredUsername = localStorage.getItem('user');
-            const storedUser = JSON.parse(getStoredUsername);
-            const unitList = await getOptions('units');
+
+            const storedUser = user
+            const unitList = await getOptions('Unit');
             setUnitsOptions(unitList);
             if (storedUser) {
                 setContactNumber(storedUser.phone || '');
@@ -39,20 +42,19 @@ const NewTask = ({ onClose }) => {
     const handleAddTask = async (e) => {
         e.preventDefault();
         try {
-            const getStoredUsername = localStorage.getItem('user');
 
-            const getUsers = await axios.get(API_ENDPOINTS.USERS);
+            const getUsers = await axios.get(API_ENDPOINTS.USERS_LIST);
             const customers = getUsers.data;
-            const storedUser = JSON.parse(getStoredUsername);
+            const storedUser = user
             const storedUsername = storedUser.username;
             if (storedUsername) {
                 const foundUser = customers.find(user => user.username === storedUsername);
                 if (foundUser) {
-
-                    const response = await axios.post(API_ENDPOINTS.TASKS, {
+                    const { data: csrfToken } = await axios.get(API_ENDPOINTS.USER_DATA);
+                    const response = await axios.post(API_ENDPOINTS.CREATE_TASK, {
                         title,
                         description,
-                        clientID: foundUser?.id,
+                        clientID: user.id,
                         createDate: getCurrentDateFormatted(),
                         createHour: getCurrentTimeFormatted(),
                         lastModification: getCurrentDateFormatted(),
@@ -62,13 +64,17 @@ const NewTask = ({ onClose }) => {
                         priority: 2,
                         difficulty,
                         solver,
-                        status: "Open",
+                        status: 7,
                         unit,
-                        contactNumber,
 
 
+                    }, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': csrfToken,
+                        },
                     });
-                    sendNotification("created post ", response.data?.id);
+                    sendNotification("created post ", response.data?.id, user.id);
                     showNotification('Successfully added post');
 
                     onClose();
@@ -138,8 +144,8 @@ const NewTask = ({ onClose }) => {
                             <option value="">---</option>
 
                             {unitsOptions.map((value) => (
-                                <option key={value} value={value}>
-                                    {value}
+                                <option key={value.id} value={value.id}>
+                                    {value.value}
                                 </option>
                             ))}
                         </select>

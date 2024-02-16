@@ -12,10 +12,10 @@ function AllUnallocated() {
 
     useEffect(() => {
         axios
-            .get(API_ENDPOINTS.TASKS, {
+            .get(API_ENDPOINTS.TASK_API, {
                 params: {
                     status: ['Open', 'In Pendend'],
-                    solver: '',
+                    solver: 0,
                 },
             })
             .then((response) => {

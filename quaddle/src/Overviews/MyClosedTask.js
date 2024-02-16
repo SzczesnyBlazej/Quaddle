@@ -9,14 +9,16 @@ import { useNotification } from '../Functions/NotificationContext';
 
 function MyAllClosedTask() {
     const [tasks, setTasks] = useState([]);
-    const { user } = useAuth();
+    const { authState } = useAuth();
+    const user = authState.user;
     const userID = user.id;
     const showNotification = useNotification();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(API_ENDPOINTS.TASKS, {
+        axios.get(API_ENDPOINTS.TASK_API, {
             params: {
-                clientID: userID,
+                client_id: userID && userID,
                 status: ['Close'],
             },
         })
@@ -27,13 +29,15 @@ function MyAllClosedTask() {
                 showNotification('Error fetching tasks:' + error);
 
             });
-    }, [userID, showNotification]);
+    }, [user]);
     const additionalColumns = [
 
         {
-            accessorFn: (row) => `${row.closeDate} ${row.closeHour}`,
+            accessorKey: 'close_date',
             header: 'Closed',
             size: 140,
+            Cell: ({ row }) => (row.original.close_date ? (row.original.close_date + ' ' + row.original.close_hour) : '---')
+
         },
     ];
 

@@ -11,7 +11,7 @@ function AllOpenedTask() {
     const showNotification = useNotification();
 
     useEffect(() => {
-        axios.get(API_ENDPOINTS.TASKS, {
+        axios.get(API_ENDPOINTS.TASK_API, {
             params: {
                 status: ['Open'], // Use the appropriate syntax for "not equal" in your API
             },
@@ -29,9 +29,13 @@ function AllOpenedTask() {
             accessorKey: 'solver',
             header: 'Solver',
             size: 130,
+            Cell: ({ row }) => (row.original.solver_fk ? (row.original.solver_fk.first_name + ' ' + row.original.solver_fk.last_name) : '---')
+
         },
 
     ];
+
+
 
     return (
         <div>
