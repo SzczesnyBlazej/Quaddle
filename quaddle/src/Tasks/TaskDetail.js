@@ -193,8 +193,13 @@ const TaskDetail = ({ task }) => {
 
     };
 
-    const handleToggleFavorite = () => {
-        toggleTaskFavorite(user, task, isTaskFavorite, setIsTaskFavorite);
+    const handleToggleFavorite = async () => {
+        try {
+            const success = await toggleTaskFavorite(user, task, isTaskFavorite, setIsTaskFavorite);
+            showNotification(success.message);
+        } catch (error) {
+            showNotification('Error toggling favorite:' + error);
+        }
     };
 
     return (

@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }) => {
             fetchUserData(accessToken)
                 .then((userData) => {
                     setAuthState(userData);
-                    console.log("Dane użytkownika useEffect", userData)
+                    // console.log("Dane użytkownika useEffect", userData)
                 })
                 .catch((error) => {
                     console.error('Error fetching user data:', error);

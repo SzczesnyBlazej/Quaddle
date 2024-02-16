@@ -21,15 +21,15 @@ const checkIsTaskFavorite = async (userID, taskID) => {
 
 const toggleTaskFavorite = async (user, task, isTaskFavorite, setIsTaskFavorite) => {
     try {
-        await axios.post(API_ENDPOINTS.FAVORITE, {
+        const response = await axios.post(API_ENDPOINTS.FAVORITE, {
             user_id: user?.id,
             task_id: task?.id
         });
 
         setIsTaskFavorite(!isTaskFavorite);
+        return response.data;
     } catch (error) {
-        console.error('Error updating favorites:', error);
+        return error;
     }
 };
-
 export { checkIsTaskFavorite, toggleTaskFavorite };

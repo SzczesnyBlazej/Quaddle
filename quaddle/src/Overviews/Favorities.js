@@ -31,7 +31,6 @@ const Favorities = () => {
                                 id_list: favoritesTasksID,
                             },
                         });
-                        console.log(tasksResponse)
                         setTasks(tasksResponse.data);
                     } else {
                         setTasks([]);
