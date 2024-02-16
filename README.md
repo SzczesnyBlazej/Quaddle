@@ -4,11 +4,13 @@
 
 Quaddle is a task management application project that allows users to organize their responsibilities, plan projects and track progress.
 
-The application runs on port 5000 by default, and jsonserver runs on ports 3501-3507
+The application runs on port 5002 by default on frontend, and backend on 8000
 
 ## Installation
 
 To run the project locally, follow these steps:
+
+### Frontend
 
 1. Clone the repository:
 
@@ -28,21 +30,24 @@ cd Quaddle
 npm install
 ```
 
-4. Clean up sample data in json files 
-
-* applicationConfig.json (contains the default settings for the application)
-* favorities.json (Includes favorite tasks for sample added users)
-* messages.json (Includes sample test messages)
-* notifications.json (Includes sample test notifications)
-* taskConfig.json (contains default settings for tasks)
-* tasks.json (contains sample test tasks)
-* users.json (includes sample test users)
-
-5. Launch the application:
+4. Launch the application:
 
 ```bash
 npm start
 ```
+
+### Backend
+1. Go to the project directory:
+
+```bash
+cd quaddle_backend
+```
+2. Launch the application:
+
+```bash
+python manage.py runserver
+```
+
 
 ## How to use
 
@@ -57,6 +62,7 @@ This project is licensed under the MIT license - see the [LICENSE](https://githu
 History of changes to the project.
 
 Version 0.1.0
+Version 0.2.0
 
 ## Contact
 
