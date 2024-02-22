@@ -49,6 +49,18 @@ class Message(models.Model):
     def __str__(self):
         return f"{self.message} - {self.id}"
 
+class File(models.Model):
+    message = models.ForeignKey(Message, related_name='files', on_delete=models.CASCADE)
+    file = models.FileField(upload_to='uploads/')
+    file_name=models.CharField(max_length=255,default='')
+    def save(self, *args, **kwargs):
+        if not self.file_name:
+            self.file_name = self.file
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.message} - {self.id}"
+
 class Favorites(models.Model):
     id = models.AutoField(primary_key=True)
     favorites_tasks_id = models.ManyToManyField(Task, related_name='favorited_by')

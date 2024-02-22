@@ -22,10 +22,15 @@ const TaskContent = ({ task }) => {
     const [messageToDelete, setMessageToDelete] = useState(null);
     const [prevFiles, setFiles] = useState([]);
 
-    const handleAddedFiles = (e) => {
+    const handleAddedFiles = async (e) => {
         e.preventDefault();
         const droppedFiles = Array.from(e.dataTransfer.files);
-        setFiles(prevFiles => prevFiles.concat(droppedFiles));
+        console.log(droppedFiles)
+        const filesWithBase64 = await Promise.all(droppedFiles.map(async (file) => {
+            const base64 = await convertFileToBase64(file);
+            return { file, base64 };
+        }));
+        setFiles((prevFiles) => [...prevFiles, ...filesWithBase64]);
     };
 
     const saveFilesLocally = () => {
@@ -84,25 +89,36 @@ const TaskContent = ({ task }) => {
     const updateMessage = async (e) => {
         e.preventDefault();
         try {
-            console.log(prevFiles)
-            await axios.post(API_ENDPOINTS.CREATE_MESSAGE, {
-                message: message,
-                clientID: task?.client_fk?.id,
-                taskID: task?.id,
-                messageSender: user.id,
-                createDate: getCurrentDateFormatted(),
-                createHour: getCurrentTimeFormatted(),
-                isLock: false,
+            const formData = new FormData();
+            formData.append('message', message);
+            formData.append('clientID', task?.client_fk?.id);
+            formData.append('taskID', task?.id);
+            formData.append('messageSender', user.id);
+            formData.append('createDate', getCurrentDateFormatted());
+            formData.append('createHour', getCurrentTimeFormatted());
+            formData.append('isLock', false);
+
+            prevFiles.forEach((file, index) => {
+                formData.append(`file${index}`, file.file);
             });
+
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            };
+            await axios.post(API_ENDPOINTS.CREATE_MESSAGE, formData, config);
+
             showNotification('Comment has been added');
             sendNotification("added a comment for", task?.id, user.id);
-            saveFilesLocally();
             setMessage('');
+            setFiles([]);
             fetchMessages();
         } catch (error) {
             showNotification('Error updating task: ' + error.message);
         }
     };
+
 
     const fetchMessages = async () => {
         try {
@@ -124,12 +140,29 @@ const TaskContent = ({ task }) => {
     }, [task]);
 
     useEffect(() => {
-
         setIsAdmin(user?.is_admin);
         setIsSolver(user?.is_solver);
     }, [user]);
 
+    const handleDownload = async (fileUrl) => {
+        try {
+            const fileName = fileUrl.substring(fileUrl.indexOf('/') + 1);
 
+            const response = await axios.get(API_ENDPOINTS.DOWNLOAD_ATTACHMENTS + fileName, {
+                responseType: 'blob',
+            });
+
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', fileName);
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link);
+        } catch (error) {
+            console.error('Error downloading file:', error);
+        }
+    };
     return (
         <div className="col-md-8 dark-bg min-vh-100 border-start border-end border-secondary d-flex flex-column position-relative" style={{ maxHeight: 'calc(100vh - 180px)' }}>
             <div className="d-flex flex-column overflow-auto" style={{ maxHeight: '79vh' }}>
@@ -196,18 +229,37 @@ const TaskContent = ({ task }) => {
                                                 style={{ border: '2px solid #ff6347' }}
                                             >
                                                 {message.message}
+                                                {message.attachments && message.attachments.map((attachment, index) => (
+                                                    <div key={index} className="mt-1">
+                                                        <button className="btn btn-unstyled text-white btn-sm" onClick={() => handleDownload(attachment.file_name)}>
+                                                            {attachment.file_name.substring(attachment.file_name.indexOf('/') + 1)}
+                                                        </button>
+                                                    </div>
+                                                ))}
                                             </span>
                                             <p className="card-text text-secondary text-center"><small >{message?.create_date} at {message?.create_hour}</small></p>
+
                                         </>
                                     ) : (
                                         null
                                     )
                                 ) : (
                                     <>
+
                                         <span
                                             className={`pt-3 pb-3 mt-3 mb-3 ps-3 pe-3 text-light light-bg rounded w-100 ${message.message_sender_fk?.id === user?.id ? 'green-border' : ''}`}
                                         >
                                             {message.message}
+                                            {message.attachments && message.attachments.map((attachment, index) => (
+                                                <div key={index} className="mt-1">
+                                                    <button className="btn btn-unstyled text-white btn-sm" onClick={() => handleDownload(attachment.file_name)}>
+                                                        {attachment.file_name.substring(attachment.file_name.indexOf('/') + 1)}
+                                                    </button>
+                                                </div>
+                                            ))}
+
+
+
                                         </span>
                                         <p className="card-text text-secondary text-center"><small >{message?.create_date} at {message?.create_hour}</small></p>
                                     </>
@@ -272,6 +324,15 @@ const TaskContent = ({ task }) => {
             </div>
         </div>
     );
+};
+const convertFileToBase64 = (file) => {
+    console.log("file:" + file)
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = (error) => reject(error);
+    });
 };
 
 export default TaskContent;

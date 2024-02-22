@@ -36,6 +36,7 @@ const API_ENDPOINTS = {
 
     //OTHER FUNCTIONS
     APPLICATIONCONFIG: 'http://127.0.0.1:8000/api/applicationConfig',
+    DOWNLOAD_ATTACHMENTS: 'http://127.0.0.1:8000/api/download/',
 };
 
 export default API_ENDPOINTS;

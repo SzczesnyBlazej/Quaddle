@@ -15,7 +15,7 @@ function MenuTaskList() {
             try {
                 const response = await axios.get(API_ENDPOINTS.COUNT_ALL_TASKS_TO_MENU, {
                     params: {
-                        userID: user.id
+                        userID: user && user.id
                     }
                 });
                 setCounterList(response.data);

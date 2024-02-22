@@ -4,9 +4,11 @@ from rest_framework.routers import DefaultRouter
 from .views.dashboard_views import count_all_tasks_to_menu, get_task_counts_dashboard, get_priority_counts_dashboard, \
     get_difficulty_counts_dashboard, get_units_counts_dashboard, get_last_thirty_days_task_counts
 from .views.favorites_views import FavoritesViewSet, toggle_favorite, check_favorite
-from .views.message_views import MessageViewSet, get_messages, delete_message, update_message, create_message
+from .views.message_views import MessageViewSet, get_messages, delete_message, update_message, create_message, \
+    download_file
 from .views.notification_views import NotificationViewSet, get_notifications, create_notification
 from .views.task_views import TaskViewSet, get_tasks, get_tasks_by_id, create_task, update_task
+from django.urls import path
 
 router = DefaultRouter()
 
@@ -34,7 +36,7 @@ urlpatterns = [
     path('get_units_counts_dashboard/', get_units_counts_dashboard, name='get_units_counts_dashboard'),
     path('get_last_thirty_days_task_counts/', get_last_thirty_days_task_counts,
          name='get_last_thirty_days_task_counts'),
+    path('download/<str:file_name>/', download_file, name='download_file'),
 
 ]
-
 urlpatterns += router.urls

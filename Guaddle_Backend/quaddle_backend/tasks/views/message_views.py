@@ -6,8 +6,10 @@ from django.views.decorators.http import require_POST, require_http_methods
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from ..models import Task, Message
-from ..serializers import MessageSerializer
+
+from quaddle_backend.settings import BASE_DIR
+from ..models import Task, Message, File
+from ..serializers import MessageSerializer, FileSerializer
 from user_management.models import User
 
 
@@ -21,6 +23,11 @@ def get_messages(request):
     task_id = request.GET.get('task_id')
     messages = Message.objects.filter(task_id=task_id)
     serializer = MessageSerializer(messages, many=True)
+    # Pobierz wszystkie załączniki dla wiadomości i dodaj je do odpowiedzi
+    for message in serializer.data:
+        attachments = File.objects.filter(message_id=message['id'])
+        attachment_serializer = FileSerializer(attachments, many=True)
+        message['attachments'] = attachment_serializer.data
     return Response(serializer.data)
 
 
@@ -57,24 +64,20 @@ def update_message(request, message_id):
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
 
-
 @require_POST
 @csrf_exempt
 def create_message(request):
     try:
-        data = json.loads(request.body.decode('utf-8'))
-        message = data.get('message')
-        client_id = data.get('clientID')
-        task_id = data.get('taskID')
-        message_sender = data.get('messageSender')
-        create_date = data.get('createDate')
-        create_hour = data.get('createHour')
-        is_lock = data.get('isLock')
-
+        message = request.POST.get('message')
+        client_id = request.POST.get('clientID')
+        task_id = request.POST.get('taskID')
+        message_sender = request.POST.get('messageSender')
+        create_date = request.POST.get('createDate')
+        create_hour = request.POST.get('createHour')
+        is_lock = request.POST.get('isLock') == 'true'
         client_option = User.objects.get(pk=client_id)
         sender_option = User.objects.get(pk=message_sender)
         task_option = Task.objects.get(pk=task_id)
-
         message = Message.objects.create(
             message=message,
             client_id=client_option,
@@ -84,10 +87,43 @@ def create_message(request):
             message_sender=sender_option,
             is_lock=is_lock,
         )
-        message.save()
-        # Zwracanie odpowiedzi z ID utworzonego zadania
+        for file_field in request.FILES:
+            uploaded_file = request.FILES.get(file_field)
+            file_instance = File.objects.create(
+                message=message,
+                file=uploaded_file,
+            )
+            file_instance.save()
+
         return JsonResponse({'id': message.id}, status=201)
 
     except Exception as e:
-        # Obsługa błędu
+        print(str(e))
         return JsonResponse({'error': str(e)}, status=400)
+from django.http import HttpResponse
+import os
+@api_view(['GET'])
+@csrf_exempt
+def download_file(request, file_name):
+    # Ustaw ścieżkę do katalogu, w którym znajdują się pliki
+    media_root = os.path.join(BASE_DIR, 'media/uploads')
+    print(file_name)
+    # Ustaw pełną ścieżkę do pliku
+    file_path = os.path.join(media_root, file_name)
+    try:
+        # Sprawdź, czy plik istnieje
+        if os.path.exists(file_path):
+            # Otwórz plik do odczytu binarnego
+            with open(file_path, 'rb') as file:
+                # Utwórz odpowiedź HTTP z zawartością pliku
+                response = HttpResponse(file.read(), content_type='application/octet-stream')
+                # Ustaw nagłówek Content-Disposition, aby przeglądarka pobrała plik zamiast go otworzyć
+                response['Content-Disposition'] = 'attachment; filename=' + os.path.basename(file_path)
+                return response
+        else:
+            # Jeśli plik nie istnieje, zwróć odpowiedni komunikat błędu
+            return HttpResponse("Plik nie istnieje", status=404)
+    except Exception as e:
+        # W przypadku wystąpienia błędu, zwróć odpowiedni komunikat błędu
+        return HttpResponse("Wystąpił błąd: " + str(e), status=500)
+
