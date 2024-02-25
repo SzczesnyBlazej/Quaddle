@@ -21,16 +21,47 @@ const TaskContent = ({ task }) => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [messageToDelete, setMessageToDelete] = useState(null);
     const [prevFiles, setFiles] = useState([]);
+    const [clearFilesFn, setClearFilesFn] = useState(null);
+    const [height, setHeight] = useState();
+
+    const handleFilesChange = (files) => {
+        return files
+    };
+
+    useEffect(() => {
+        const element = document.getElementById("DragAndDropFileUploadDiv");
+        console.log(element)
+        if (element) {
+            const newHeight = element.offsetHeight;
+            console.log(newHeight);
+            setHeight(newHeight);
+        }
+    }, [handleFilesChange]);
+
+
+
 
     const handleAddedFiles = async (e) => {
         e.preventDefault();
-        const droppedFiles = Array.from(e.dataTransfer.files);
-        console.log(droppedFiles)
-        const filesWithBase64 = await Promise.all(droppedFiles.map(async (file) => {
-            const base64 = await convertFileToBase64(file);
-            return { file, base64 };
-        }));
-        setFiles((prevFiles) => [...prevFiles, ...filesWithBase64]);
+        if (e.dataTransfer && e.dataTransfer.files) {
+            const droppedFiles = Array.from(e.dataTransfer.files);
+            console.log(droppedFiles)
+            const filesWithBase64 = await Promise.all(droppedFiles.map(async (file) => {
+                const base64 = await convertFileToBase64(file);
+                return { file, base64 };
+            }));
+            setFiles((prevFiles) => [...prevFiles, ...filesWithBase64]);
+        }
+        if (e.target && e.target.files) {
+            const selectedFiles = Array.from(e.target.files);
+            console.log(selectedFiles)
+
+            const filesWithBase64 = await Promise.all(selectedFiles.map(async (file) => {
+                const base64 = await convertFileToBase64(file);
+                return { file, base64 };
+            }));
+            setFiles((prevFiles) => [...prevFiles, ...filesWithBase64]);
+        }
     };
 
     const saveFilesLocally = () => {
@@ -112,6 +143,9 @@ const TaskContent = ({ task }) => {
             showNotification('Comment has been added');
             sendNotification("added a comment for", task?.id, user.id);
             setMessage('');
+            if (clearFilesFn) {
+                clearFilesFn();
+            }
             setFiles([]);
             fetchMessages();
         } catch (error) {
@@ -164,8 +198,11 @@ const TaskContent = ({ task }) => {
         }
     };
     return (
-        <div className="col-md-8 dark-bg min-vh-100 border-start border-end border-secondary d-flex flex-column position-relative" style={{ maxHeight: 'calc(100vh - 180px)' }}>
-            <div className="d-flex flex-column overflow-auto" style={{ maxHeight: '79vh' }}>
+
+        <div className="col-md-8 dark-bg min-vh-100 border-start border-end border-secondary d-flex flex-column position-relative" style={{ height: 'auto' }}>
+
+            <div className="d-flex flex-column overflow-auto" style={{ maxHeight: `calc(100vh - ${height}px)` }}>
+
                 <div className='container custom-width'>
                     <div className='d-flex flex-column justify-content-center align-items-center pt-5 text-secondary'>
                         {task && (
@@ -229,6 +266,9 @@ const TaskContent = ({ task }) => {
                                                 style={{ border: '2px solid #ff6347' }}
                                             >
                                                 {message.message}
+                                                {message.attachments && message.attachments.length > 0 && (
+                                                    <div className="mt-1">attachments</div>
+                                                )}
                                                 {message.attachments && message.attachments.map((attachment, index) => (
                                                     <div key={index} className="mt-1">
                                                         <button className="btn btn-unstyled text-white btn-sm" onClick={() => handleDownload(attachment.file_name)}>
@@ -236,6 +276,7 @@ const TaskContent = ({ task }) => {
                                                         </button>
                                                     </div>
                                                 ))}
+
                                             </span>
                                             <p className="card-text text-secondary text-center"><small >{message?.create_date} at {message?.create_hour}</small></p>
 
@@ -250,16 +291,19 @@ const TaskContent = ({ task }) => {
                                             className={`pt-3 pb-3 mt-3 mb-3 ps-3 pe-3 text-light light-bg rounded w-100 ${message.message_sender_fk?.id === user?.id ? 'green-border' : ''}`}
                                         >
                                             {message.message}
-                                            {message.attachments && message.attachments.map((attachment, index) => (
-                                                <div key={index} className="mt-1">
-                                                    <button className="btn btn-unstyled text-white btn-sm" onClick={() => handleDownload(attachment.file_name)}>
-                                                        {attachment.file_name.substring(attachment.file_name.indexOf('/') + 1)}
-                                                    </button>
-                                                </div>
-                                            ))}
+                                            <div className='dark-bg rounded'>
 
-
-
+                                                {message.attachments && message.attachments.length > 0 && (
+                                                    <div className=" mt-1 p-2">Attachments:</div>
+                                                )}
+                                                {message.attachments && message.attachments.map((attachment, index) => (
+                                                    <div key={index} className="mt-1 pb-1 dark-bg rounded">
+                                                        <button className="btn btn-unstyled text-white btn-sm" onClick={() => handleDownload(attachment.file_name)}>
+                                                            {attachment.file_name.substring(attachment.file_name.indexOf('/') + 1)}
+                                                        </button>
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </span>
                                         <p className="card-text text-secondary text-center"><small >{message?.create_date} at {message?.create_hour}</small></p>
                                     </>
@@ -273,28 +317,25 @@ const TaskContent = ({ task }) => {
                         </div>
                     ))}
                 </div>
-                <div className="text-light mt-auto position-absolute bottom-0 w-100">
+                <div className="container text-light mt-auto position-absolute bottom-0 w-100" id='DragAndDropFileUploadDiv'>
+
                     <hr className="border-secondary" />
+                    <DragAndDropFileUpload handleAddedFiles={handleAddedFiles} setClearFilesFn={setClearFilesFn} onFilesChange={handleFilesChange} />
+                    <div className='col ms-3 me-3 mb-3'>
+                        <div className="input-group">
 
-                    <div className='w-100'>
+                            <textarea
+                                className="form-control"
+                                id="exampleTextarea"
+                                rows="3"
+                                placeholder="Enter your message"
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                            ></textarea>
+                            <button className="btn btn-outline-light send-icon" type="button" onClick={updateMessage}>
+                                <FontAwesomeIcon icon={faPaperPlane} style={{ color: 'antiquewhite' }} size="2xl" />
+                            </button>
 
-                        <DragAndDropFileUpload handleAddedFiles={handleAddedFiles} />
-                        <div className='col ms-3 me-3 mb-3'>
-                            <div className="input-group">
-
-                                <textarea
-                                    className="form-control"
-                                    id="exampleTextarea"
-                                    rows="3"
-                                    placeholder="Enter your message"
-                                    value={message}
-                                    onChange={(e) => setMessage(e.target.value)}
-                                ></textarea>
-                                <button className="btn btn-outline-light send-icon" type="button" onClick={updateMessage}>
-                                    <FontAwesomeIcon icon={faPaperPlane} style={{ color: 'antiquewhite' }} size="2xl" />
-                                </button>
-
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,12 +1,23 @@
-import React, { useState, useRef } from 'react';
-import { Modal, Button, Image } from 'react-bootstrap';
+import React, { useState, useRef, useEffect } from 'react';
+import { Modal, Button } from 'react-bootstrap';
 
-const DragAndDropFileUpload = ({ handleAddedFiles }) => {
+const DragAndDropFileUpload = ({ handleAddedFiles, setClearFilesFn, onFilesChange }) => {
   const [dragging, setDragging] = useState(false);
   const [files, setFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const fileInputRef = useRef(null);
+  useEffect(() => {
+    onFilesChange(files);
+  }, [files, selectedFile]);
+
+  useEffect(() => {
+    setClearFilesFn(() => clearFiles);
+  }, [setClearFilesFn]);
+
+  const clearFiles = () => {
+    setFiles([]);
+  };
 
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -40,12 +51,17 @@ const DragAndDropFileUpload = ({ handleAddedFiles }) => {
     updatedFiles.splice(index, 1);
     setFiles(updatedFiles);
     setSelectedFile(null);
+    onFilesChange(e);
+
   };
 
   const handleFileInputChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
     setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
     setSelectedFile(null);
+    handleAddedFiles(e);
+    onFilesChange(files);
+
   };
 
   const handleDropZoneClick = (e) => {
@@ -89,6 +105,7 @@ const DragAndDropFileUpload = ({ handleAddedFiles }) => {
       );
     }
   };
+
   const downloadFile = () => {
     const url = URL.createObjectURL(selectedFile);
     const a = document.createElement('a');
@@ -99,18 +116,13 @@ const DragAndDropFileUpload = ({ handleAddedFiles }) => {
     document.body.removeChild(a);
   };
 
-  const handleDropAndAddedFiles = (e) => {
-    handleDrop(e);
-    handleAddedFiles(e);
-  };
-
   return (
     <div
-      className={`drop-zone border ${dragging ? 'border-primary' : 'border-secondary'} rounded m-3 p-2 pt-3 pb-3 text-center light-bg`}
+      className={`drop-zone border ${dragging ? 'border-primary' : 'border-secondary'} rounded m-3 p-2 pt-3 pb-3 text-center light-bg `}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDragOver={handleDragOver}
-      onDrop={handleDropAndAddedFiles}
+      onDrop={handleDrop}
       onClick={handleDropZoneClick}
     >
       <div className='selectFile btn btn-outline-light'>Drag and drop files here</div>
@@ -121,12 +133,14 @@ const DragAndDropFileUpload = ({ handleAddedFiles }) => {
         onChange={handleFileInputChange}
         multiple
       />
+
       {files.length > 0 && (
         <div>
           <div className="d-flex align-items-start">
             <p className="ms-0">Uploaded Files:</p>
           </div>
           <ul className="list-unstyled">
+
             {files.map((file, index) => (
               <li
                 key={index}
