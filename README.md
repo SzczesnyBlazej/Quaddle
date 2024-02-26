@@ -65,8 +65,18 @@ Version 0.1.0
 Version 0.2.0
 
 ## Gallery
-
+### Dashboard
 ![alt text](https://github.com/SzczesnyBlazej/Quaddle/blob/main/Images/Dashboard.png?raw=true)
+
+### Overviews
+![alt text](https://github.com/SzczesnyBlazej/Quaddle/blob/main/Images/Overviews.png?raw=true)
+
+### Task Content
+![alt text](https://github.com/SzczesnyBlazej/Quaddle/blob/main/Images/Overviews.png?raw=true)
+
+### User Management
+![alt text](https://github.com/SzczesnyBlazej/Quaddle/blob/main/Images/Overviews.png?raw=true)
+
 
 ## Contact
 
