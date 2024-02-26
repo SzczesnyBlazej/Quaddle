@@ -64,6 +64,10 @@ History of changes to the project.
 Version 0.1.0
 Version 0.2.0
 
+## Gallery
+
+![alt text](https://github.com/SzczesnyBlazej/Quaddle/blob/main/Images/Dashboard.png?raw=true)
+
 ## Contact
 
 If you have any questions or suggestions, please contact me through [my email address](mailto:bszczesny59@gmail.com) or via [Linkedin](https://www.linkedin.com/in/blazej-szczesny/)
