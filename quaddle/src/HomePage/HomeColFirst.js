@@ -119,7 +119,7 @@ function HomeColFirst() {
                         <hr className="border-secondary m-2" />
                     </React.Fragment>
                 ))}
-                <div style={{ overflowY: 'auto', maxHeight: '60vh' }}>
+                <div style={{ overflowY: 'auto', maxHeight: '55vh' }}>
 
                     {suggestions.map((suggestion) => (
                         <React.Fragment key={suggestion.id}>

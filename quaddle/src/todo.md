@@ -1,1 +1,0 @@
-drag and drop files to database

@@ -140,7 +140,7 @@ def get_last_thirty_days_task_counts(request):
         last_thirty_days = today - timedelta(days=30)
         tasks_created = {}
         tasks_closed = {}
-        for i in range(1,31):
+        for i in range(0,31):
             date = last_thirty_days + timedelta(days=i)
             date_str = date.strftime('%Y-%m-%d')
             tasks_created[date_str] = 0

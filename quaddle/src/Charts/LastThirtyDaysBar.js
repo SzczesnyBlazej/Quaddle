@@ -24,7 +24,7 @@ const LastThirtyDaysBar = ({ user }) => {
         fetchData();
     }, [user]);
 
-    const chartData = Array.from({ length: 30 }, (_, index) => {
+    const chartData = Array.from({ length: 31 }, (_, index) => {
         const currentDate = new Date();
         currentDate.setDate(currentDate.getDate() - index);
         const dateString = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
