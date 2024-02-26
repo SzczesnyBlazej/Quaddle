@@ -72,10 +72,10 @@ Version 0.2.0
 ![alt text](https://github.com/SzczesnyBlazej/Quaddle/blob/main/Images/Overviews.png?raw=true)
 
 ### Task Content
-![alt text](https://github.com/SzczesnyBlazej/Quaddle/blob/main/Images/Overviews.png?raw=true)
+![alt text](https://github.com/SzczesnyBlazej/Quaddle/blob/main/Images/Task%20Content.png?raw=true)
 
 ### User Management
-![alt text](https://github.com/SzczesnyBlazej/Quaddle/blob/main/Images/Overviews.png?raw=true)
+![alt text](https://github.com/SzczesnyBlazej/Quaddle/blob/main/Images/User%20Management.png?raw=true)
 
 
 ## Contact
