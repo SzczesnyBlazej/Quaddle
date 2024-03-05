@@ -88,7 +88,7 @@ const AutoCompleteSearch = () => {
         } else if (e.target.name === 'is_solver') {
             setisSolver(e.target.checked);
         } else if (e.target.name === 'is_active') {
-            setis_active(e.target.checked); // Ustaw stan na wartość zaznaczenia checkboxa
+            setis_active(e.target.checked);
         } else if (e.target.name === 'newPassword') {
             setNewPassword(e.target.value);
         } else if (e.target.name === 'confirmPassword') {
@@ -114,7 +114,6 @@ const AutoCompleteSearch = () => {
 
             if (newPassword && newPassword == confirmPassword) {
                 if (editingUser.password && (editingUser.password === newPassword)) {
-                    // Jeśli użytkownik ma już ustawione hasło, użyj nowego hasła
                     updatedUser.password = newPassword;
                 } else if (!editingUser.password) {
                     updatedUser.password = newPassword;

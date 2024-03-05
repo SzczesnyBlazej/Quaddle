@@ -53,7 +53,7 @@ const EditUserForm = ({
                         {currentTab === 0 && (<div>
 
                             <div className='row'>
-                                <h4 className='p-3'>Personal data of user ID:{editingUser.id}</h4>
+                                <h4 className='p-3'>Personal data of user ID: {editingUser.username} (ID:{editingUser.id})</h4>
                                 <div className="mb-3 col-md-4">
                                     <label htmlFor="editName" className="form-label">
                                         Name:

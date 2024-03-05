@@ -25,7 +25,8 @@ const OptionRenderer = ({ title, options, handleDelete, handleAddOption, handleU
     return (
         <div className="mb-4">
             <div className="d-flex justify-content-between align-items-center">
-                <h4>{title}</h4>
+                <h4 className='light-bg p-2 m-1 rounded'>{title}</h4>
+
                 <div className="d-flex">
                     <div className="input-group mb-2">
                         <button

@@ -72,7 +72,7 @@ function HomeColThree() {
                             <Link to={"/tasks/" + record.task_id} className="nav-link">
                                 <p className="card-text">{record.created_by_user.first_name} {record.created_by_user.last_name} <b>{record.notification_text}</b> <span data-bs-toggle="tooltip" title={record.task_detail.description}>{record.task_detail.title}</span></p>
                                 <span className="text-secondary">
-                                    <h6 data-bs-toggle="tooltip" title={record.task_id.last_modification + ", " + record.task_id.last_modification}>
+                                    <h6 data-bs-toggle="tooltip" title={record.notification_date + ", " + record.notification_time}>
                                         {calculateTimeDifference(`${record.notification_date} ${record.notification_time}`)} ago
                                     </h6></span>
                             </Link>
