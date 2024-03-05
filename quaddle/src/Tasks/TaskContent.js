@@ -223,8 +223,10 @@ const TaskContent = ({ task }) => {
                             <ClickableLogo user={task.client_fk} />
                         )}</div>
                     </div>
+
                     {messages.map((message) => (
-                        <div key={message?.id} className='row flex-row'>
+
+                        <div key={message?.id} className='row flex-row '>
                             {message.message_sender_fk?.id !== user?.id ? (
                                 message.is_lock ? (
                                     isAdmin || isSolver ? (
@@ -234,7 +236,7 @@ const TaskContent = ({ task }) => {
                                         <div className='col-md-1 mt-3'></div>)
 
                                 ) : (
-                                    <div className='col-md-1 mt-3'><ClickableLogo user={message.message_sender_fk} /></div>
+                                    <div className='col-md-1 mt-3  d-flex  justify-content-end'><ClickableLogo user={message.message_sender_fk} /></div>
 
                                 )
                             ) : (
@@ -264,16 +266,19 @@ const TaskContent = ({ task }) => {
                                                 style={{ border: '2px solid #ff6347' }}
                                             >
                                                 {message.message}
-                                                {message.attachments && message.attachments.length > 0 && (
-                                                    <div className="mt-1">attachments</div>
-                                                )}
-                                                {message.attachments && message.attachments.map((attachment, index) => (
-                                                    <div key={index} className="mt-1">
-                                                        <button className="btn btn-unstyled text-white btn-sm" onClick={() => handleDownload(attachment.file_name)}>
-                                                            {attachment.file_name.substring(attachment.file_name.indexOf('/') + 1)}
-                                                        </button>
-                                                    </div>
-                                                ))}
+                                                <div className='dark-bg rounded '>
+
+                                                    {message.attachments && message.attachments.length > 0 && (
+                                                        <div className=" mt-1 p-2 text-secondary">Attachments:</div>
+                                                    )}
+                                                    {message.attachments && message.attachments.map((attachment, index) => (
+                                                        <div key={index} className="mt-1 pb-1 dark-bg rounded ">
+                                                            <button className="btn btn-unstyled text-secondary btn-sm" onClick={() => handleDownload(attachment.file_name)}>
+                                                                {attachment.file_name.substring(attachment.file_name.indexOf('/') + 1)}
+                                                            </button>
+                                                        </div>
+                                                    ))}
+                                                </div>
 
                                             </span>
                                             <p className="card-text text-secondary text-center"><small >{message?.create_date} at {message?.create_hour}</small></p>
@@ -292,11 +297,11 @@ const TaskContent = ({ task }) => {
                                             <div className='dark-bg rounded '>
 
                                                 {message.attachments && message.attachments.length > 0 && (
-                                                    <div className=" mt-1 p-2">Attachments:</div>
+                                                    <div className=" mt-1 p-2 text-secondary">Attachments:</div>
                                                 )}
                                                 {message.attachments && message.attachments.map((attachment, index) => (
                                                     <div key={index} className="mt-1 pb-1 dark-bg rounded ">
-                                                        <button className="btn btn-unstyled text-white btn-sm" onClick={() => handleDownload(attachment.file_name)}>
+                                                        <button className="btn btn-unstyled text-secondary btn-sm" onClick={() => handleDownload(attachment.file_name)}>
                                                             {attachment.file_name.substring(attachment.file_name.indexOf('/') + 1)}
                                                         </button>
                                                     </div>

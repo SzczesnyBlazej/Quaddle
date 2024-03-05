@@ -57,12 +57,12 @@ function HomeColThree() {
 
     return (
         <div className="col-md-2 light-bg min-vh-100 d-flex flex-column position-relative overflow-auto" style={{ maxHeight: 'calc(100vh - 180px)' }}>
-            <div className='dark-bg'>
+            <div className="d-flex align-items-center justify-content-between p-2 dark-bg">
                 <h2 className='text-light p-2'>Activity</h2>
             </div>
             <hr className="border-white m-2" />
             {last25Records.map(record => (
-                <div key={record?.id} className="card m-3 mt-1 dark-bg text-light">
+                <div key={record?.id} className="card m-2 mt-1 dark-bg text-light">
                     <div className="row g-0">
                         <div className="col-md-3 p-2">
                             {LogoCircleTemplate(record.created_by_user)}

@@ -348,23 +348,24 @@ const TaskDetail = ({ task }) => {
                         />
                     </div>
                 </div>
-                <div className="text-light mt-auto position-absolute bottom-0 w-100">
+
+                <div className="container text-light mt-auto position-absolute bottom-0 w-100 justify-content-center">
                     <hr className="border-secondary" />
-                    <div className="row w-100">
-                        <div className="col-md-4">
+                    <div className="row ">
+                        <div className="col-md-4 d-flex justify-content-center">
                             <AllowOnlyRole roles={["admin", "solver"]}>
-                                <button className="btn btn-outline-light m-3" onClick={acceptTask}>
+                                <button className="btn btn-outline-light m-2" onClick={acceptTask}>
                                     Accept
                                 </button>
                             </AllowOnlyRole>
                         </div>
-                        <div className="col-md-4">
-                            <button className="btn btn-outline-light m-3" onClick={closeTask}>
+                        <div className="col-md-4 d-flex justify-content-center">
+                            <button className="btn btn-outline-light m-2" onClick={closeTask}>
                                 Close
                             </button>
                         </div>
-                        <div className="col-md-4">
-                            <button className="btn btn-outline-light m-3" onClick={updateTask}>
+                        <div className="col-md-4 d-flex justify-content-center">
+                            <button className="btn btn-outline-light m-2" onClick={updateTask}>
                                 Save
                             </button>
                         </div>

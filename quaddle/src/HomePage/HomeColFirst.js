@@ -6,6 +6,7 @@ import './home.css';
 import { useAuth } from '../Account/AuthContext/authContext';
 import LogoTemplate from './LogoTemplate';
 import NewTask from '../Tasks/NewTask';
+import HelpModal from '../Tasks/HelpModal';
 import axios from 'axios';
 import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
@@ -28,6 +29,7 @@ function HomeColFirst() {
         overviews: ['/Overviews/mytasks', 'Overviews', faListUl],
     };
     const [showNewTask, setShowNewTask] = useState(false);
+    const [showHelp, setHelp] = useState(false);
     const [value, setValue] = useState(sessionStorage.getItem('searchValue') || '');
     const [suggestions, setSuggestions] = useState(
         JSON.parse(localStorage.getItem('suggestions')) || []
@@ -35,6 +37,9 @@ function HomeColFirst() {
 
     const handleNewTaskButtonClick = () => {
         setShowNewTask(true);
+    };
+    const handleShowHelpButtonClick = () => {
+        setHelp(true);
     };
 
     const fetchSuggestions = async (inputValue) => {
@@ -171,11 +176,15 @@ function HomeColFirst() {
                         <button
                             type="button"
                             className="btn rounded-circle border-0"
+                            onClick={handleShowHelpButtonClick}
+
                         >
                             <div className="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
                                 <span><FontAwesomeIcon icon={faQuestion} size="2xl" /></span>
                             </div>
                         </button>
+                        {showHelp && <HelpModal onClose={() => setHelp(false)} />}
+
                     </div>
                 </div>
             </div>
