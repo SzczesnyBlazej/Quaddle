@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faCircleDot, faPhone, faEnvelope, faBuilding } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
 import LogoCircleTemplate from '../../Templates/LogoCircleTemplate';
@@ -37,10 +37,10 @@ const ClickableLogo = ({ user }) => {
         fetchData();
     }, [user, user.id]);
     const handleShowMoreTasksInProgress = () => {
-        setVisibleTasksInProgress(prevVisibleTasks => prevVisibleTasks + 5); // Zwiększenie liczby widocznych zadań o 5
+        setVisibleTasksInProgress(prevVisibleTasks => prevVisibleTasks + 5);
     };
     const handleShowMoreTasksClosed = () => {
-        setVisibleClosed(prevVisibleTasks => prevVisibleTasks + 5); // Zwiększenie liczby widocznych zadań o 5
+        setVisibleClosed(prevVisibleTasks => prevVisibleTasks + 5);
     };
 
     const renderPopover = () => (
@@ -57,8 +57,8 @@ const ClickableLogo = ({ user }) => {
                     <div className='col-md-7'>
 
                         <div id="email"><FontAwesomeIcon icon={faEnvelope} className='pe-2' />{user.email}</div>
-
                         <div id="tel"><FontAwesomeIcon icon={faPhone} className='pe-2' />{user.phone}</div>
+                        <div id="unit"><FontAwesomeIcon icon={faBuilding} className='pe-2' />{user.unit_fk.value}</div>
                     </div>
                 </div>
                 <hr className="border-secondary" />

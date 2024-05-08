@@ -63,6 +63,34 @@ const UpdateOptionForm = ({ handleUpdateOption, groupName, initialOption, closeU
                         required
                     />
                 </div>
+                <div className="mb-3">
+                    <label htmlFor="name" className="form-label">
+                        Name:
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="name"
+                        name="name"
+                        value={updatedOption.name}
+                        onChange={handleChange}
+
+                    />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="advice" className="form-label">
+                        Advice:
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="advice"
+                        name="advice"
+                        value={updatedOption.advice}
+                        onChange={handleChange}
+
+                    />
+                </div>
                 <div className="mb-3 form-check">
                     <input
                         type="checkbox"

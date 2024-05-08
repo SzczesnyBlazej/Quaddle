@@ -67,6 +67,32 @@ const AddOptionForm = ({ handleAddNewOptionSubmit, groupName, closeAddOptionForm
                         required
                     />
                 </div>
+                <div className="mb-3">
+                    <label htmlFor="name" className="form-label">
+                        Name:
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="name"
+                        name="name"
+                        value={newOption.name}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="advice" className="form-label">
+                        Advice:
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="advice"
+                        name="advice"
+                        value={newOption.advice}
+                        onChange={handleChange}
+                    />
+                </div>
                 <div className="mb-3 form-check">
                     <input
                         type="checkbox"
