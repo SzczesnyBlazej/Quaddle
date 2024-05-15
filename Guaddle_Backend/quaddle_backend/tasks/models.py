@@ -81,3 +81,11 @@ class Favorites(models.Model):
 
     def __str__(self):
         return f"Favorites for User {self.user_id.username} - {self.id}"
+
+class RecentlyViewedTasks(models.Model):
+    id = models.AutoField(primary_key=True)
+    recently_viewed_tasks_id = models.ManyToManyField(Task, related_name='recently_viewed', null=True, blank=True)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return f"Recently Viewed Tasks for User {self.user_id.username} - {self.id}"

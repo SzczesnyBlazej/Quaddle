@@ -12,6 +12,7 @@ import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import SessionTimer from '../Account/AuthContext/SessionTimer';
 import logo from '../LOGO.png'
+import ShowLastViewedTasks from '../Overviews/ShowLastViewedTasks'
 
 const renderSuggestion = (suggestion) => (
     <div>
@@ -124,7 +125,13 @@ function HomeColFirst() {
                         <hr className="border-secondary m-2" />
                     </React.Fragment>
                 ))}
-                <div style={{ overflowY: 'auto', maxHeight: '55vh' }}>
+                <div style={{ overflowY: 'auto', maxHeight: '27vh' }}>
+                    <ShowLastViewedTasks />
+
+                </div>
+                {suggestions.length > 0 ? <strong className='text-white text-center pb-2'>Results search</strong>
+                    : ''}
+                <div style={{ overflowY: 'auto', maxHeight: '27vh' }}>
 
                     {suggestions.map((suggestion) => (
                         <React.Fragment key={suggestion.id}>

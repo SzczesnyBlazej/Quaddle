@@ -7,6 +7,7 @@ from .models import User
 
 class UserSerializer(serializers.ModelSerializer):
     unit_fk = TaskOptionsSerializer(source='unit')
+    recently_viewed_tasks = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = User
@@ -23,10 +24,11 @@ class UserSerializer(serializers.ModelSerializer):
                   'phone',
                   'date_of_last_changed_password',
                   'date_of_last_incorrect_login',
-                  'unit',
                   'last_login',
                   'date_joined',
-                  'unit_fk']
+                  'unit_fk',
+                  'recently_viewed_tasks']
+
 
 def validate_unique_username(value):
     if User.objects.filter(username=value).exists():

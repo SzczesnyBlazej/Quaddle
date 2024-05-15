@@ -25,6 +25,7 @@ const TaskPage = () => {
                 const fetchedTask = taskResponse.data;
                 const isAdmin = user.is_admin;
                 const isSolver = user.is_solver;
+                console.log(user)
 
                 if (isAdmin || isSolver || fetchedTask.client_fk.id === user.id) {
                     setTask(fetchedTask);
