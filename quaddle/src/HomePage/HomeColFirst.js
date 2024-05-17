@@ -153,7 +153,7 @@ function HomeColFirst() {
                                     </div>
                                 </div>
                             </Link>
-                            <hr className="border-secondary m-2" />
+                            <hr className="border-secondary m-1" />
                         </React.Fragment>
                     ))}
                 </div>

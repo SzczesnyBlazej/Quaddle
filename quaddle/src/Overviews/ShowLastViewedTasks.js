@@ -11,62 +11,78 @@ const ShowLastViewedTasks = () => {
     const [tasks, setTasks] = useState([]);
     const { authState } = useAuth();
     const user = authState.user;
-    const userID = user.id;
+    const userID = user?.id;
     const showNotification = useNotification();
-    const renderSuggestion = (suggestion) => (
-        <div>
-            <strong>{suggestion.title}</strong>
-        </div>
-    );
+
+    const handleRemove = async (taskId) => {
+        try {
+            await axios.delete(`${API_ENDPOINTS.RECENTLY_VIEWED_TASKS}/${taskId}`);
+
+            setTasks((prevTasks) => prevTasks.filter(task => task.id !== taskId));
+            showNotification('Task removed successfully');
+        } catch (error) {
+            showNotification('Error removing task: ' + error);
+        }
+    };
+
+
+
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                console.log(user.recently_viewed_tasks.length)
-                if (user.recently_viewed_tasks.length > 0) {
-                    const tasksResponse = await axios.get(API_ENDPOINTS.GET_TASKS_BY_ID, {
-                        params: {
-                            id_list: user.recently_viewed_tasks,
-                        },
-                    });
-                    setTasks(tasksResponse.data);
-
-                }
-
+                const tasksResponse = await axios.get(API_ENDPOINTS.RECENTLY_VIEWED_TASKS, {
+                    params: {
+                        client_id: userID,
+                    },
+                });
+                setTasks(tasksResponse.data.tasks);
             } catch (error) {
                 showNotification('Error fetching data:' + error);
             }
         };
 
         fetchTasks();
-    }, [userID]);
-
+    }, [userID, showNotification]);
 
 
     return (
         <div>
-            <div className="row g-0 ">
-                {tasks.length > 0 ? <strong className='text-white text-center'>Last viewed tasks</strong> : ''}
-                {tasks.map((tasks) => (
-                    <React.Fragment key={tasks.id}>
-                        <Link to={"/tasks/" + tasks?.id} className="nav-link">
-                            <div className='d-flex align-items-center text-light'>
-                                <div className='col-md-2 text-center'>
-                                    <FontAwesomeIcon
-                                        icon={faCircleDot}
-                                        style={{
-                                            color: tasks.status_fk.value === 'Open' ? 'orange' : tasks.status_fk.value === 'Close' ? '#00a347' : 'gray',
-                                        }}
-                                    />
-                                </div>
 
-                                <div className='col-md-10'>
-                                    <small >
-                                        {renderSuggestion(tasks)}
-                                    </small>
-                                </div>
+            <div style={{ overflowY: 'auto', maxHeight: '27vh' }}>
+
+                {tasks.map((suggestion) => (
+                    <React.Fragment key={suggestion.id}>
+                        <div className='row g-0'>
+                            <div className='col-md-10'>
+                                <Link to={"/tasks/" + suggestion?.id} className="nav-link">
+                                    <div className='d-flex align-items-center text-light'>
+                                        <div className='col-md-2 text-center'>
+                                            <FontAwesomeIcon
+                                                icon={faCircleDot}
+                                                style={{
+                                                    color: suggestion.status_fk.value === 'Open' ? 'orange' : suggestion.status_fk.value === 'Close' ? '#00a347' : 'gray',
+                                                }}
+                                            />
+                                        </div>
+                                        <div className='col-md-10'>
+                                            <small>
+                                                <div>
+                                                    <strong>{suggestion.title}</strong>
+                                                </div>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </Link>
                             </div>
-                        </Link>
-                        <hr className="border-secondary" />
+                            <div className='col-md-2'>
+                                <button
+                                    type="button"
+                                    className="btn text-danger"
+                                    onClick={() => handleRemove(suggestion.id)}>X
+                                </button>
+                            </div>
+                        </div>
+                        <hr className="border-secondary m-1" />
                     </React.Fragment>
                 ))}
             </div>

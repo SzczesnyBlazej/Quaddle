@@ -64,9 +64,8 @@ export const ClientPopover = ({ client }) => {
                     <div className='col-md-7'>
 
                         <div id="email"><FontAwesomeIcon icon={faEnvelope} className='pe-2' />{client.email}</div>
-
                         <div id="tel"><FontAwesomeIcon icon={faPhone} className='pe-2' />{client.phone}</div>
-                        <div id="unit"><FontAwesomeIcon icon={faBuilding} className='pe-2' />{client.unit_fk.value}</div>
+                        <div id="unit"><FontAwesomeIcon icon={faBuilding} className='pe-2' />{client.unit_fk.value} s</div>
 
                     </div>
                 </div>

@@ -84,7 +84,7 @@ class Favorites(models.Model):
 
 class RecentlyViewedTasks(models.Model):
     id = models.AutoField(primary_key=True)
-    recently_viewed_tasks_id = models.ManyToManyField(Task, related_name='recently_viewed', null=True, blank=True)
+    recently_viewed_tasks_id = models.ManyToManyField(Task, related_name='recently_viewed', blank=True)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):

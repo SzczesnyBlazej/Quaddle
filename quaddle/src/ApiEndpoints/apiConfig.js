@@ -21,6 +21,7 @@ const API_ENDPOINTS = {
     TASKOPTIONS: 'http://127.0.0.1:8000/api/taskOptions/',
     FAVORITE: 'http://127.0.0.1:8000/api/toggle_favorite',
     CHECK_FAVORITE: 'http://127.0.0.1:8000/api/check_favorite',
+    RECENTLY_VIEWED_TASKS: 'http://127.0.0.1:8000/api/get_recently_viewed_tasks',
 
     // NOTIFICATION
     CREATE_NOTIFICATION: 'http://127.0.0.1:8000/api/create_notification',

@@ -50,10 +50,10 @@ class User(AbstractUser):
         color = '#{:06x}'.format(random.randint(0, 0xFFFFFF))
         return color
 
-
-    def recently_viewed_tasks(self):
-        recently_viewed_tasks, created = RecentlyViewedTasks.objects.get_or_create(user_id=self)
-        return recently_viewed_tasks.recently_viewed_tasks_id.all() if recently_viewed_tasks else []
+    #
+    # def recently_viewed_tasks(self):
+    #     recently_viewed_tasks, created = RecentlyViewedTasks.objects.get_or_create(user_id=self)
+    #     return recently_viewed_tasks.recently_viewed_tasks_id.all() if recently_viewed_tasks else []
 
 
 
