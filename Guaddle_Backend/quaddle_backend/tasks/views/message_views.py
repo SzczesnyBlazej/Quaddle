@@ -23,7 +23,6 @@ def get_messages(request):
     task_id = request.GET.get('task_id')
     messages = Message.objects.filter(task_id=task_id)
     serializer = MessageSerializer(messages, many=True)
-    # Pobierz wszystkie załączniki dla wiadomości i dodaj je do odpowiedzi
     for message in serializer.data:
         attachments = File.objects.filter(message_id=message['id'])
         attachment_serializer = FileSerializer(attachments, many=True)
@@ -105,25 +104,17 @@ import os
 @api_view(['GET'])
 @csrf_exempt
 def download_file(request, file_name):
-    # Ustaw ścieżkę do katalogu, w którym znajdują się pliki
     media_root = os.path.join(BASE_DIR, 'media/uploads')
     print(file_name)
-    # Ustaw pełną ścieżkę do pliku
     file_path = os.path.join(media_root, file_name)
     try:
-        # Sprawdź, czy plik istnieje
         if os.path.exists(file_path):
-            # Otwórz plik do odczytu binarnego
             with open(file_path, 'rb') as file:
-                # Utwórz odpowiedź HTTP z zawartością pliku
                 response = HttpResponse(file.read(), content_type='application/octet-stream')
-                # Ustaw nagłówek Content-Disposition, aby przeglądarka pobrała plik zamiast go otworzyć
                 response['Content-Disposition'] = 'attachment; filename=' + os.path.basename(file_path)
                 return response
         else:
-            # Jeśli plik nie istnieje, zwróć odpowiedni komunikat błędu
             return HttpResponse("Plik nie istnieje", status=404)
     except Exception as e:
-        # W przypadku wystąpienia błędu, zwróć odpowiedni komunikat błędu
         return HttpResponse("Wystąpił błąd: " + str(e), status=500)
 

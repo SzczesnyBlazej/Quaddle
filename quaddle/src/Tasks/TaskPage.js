@@ -7,10 +7,12 @@ import TaskDetail from './TaskDetail';
 import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import { useAuth } from '../Account/AuthContext/authContext';
-
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 const TaskPage = () => {
     const { taskId } = useParams();
     const [task, setTask] = useState(null);
+    const [isLoading, setIsLoading] = useState(true); // Dodaj stan isLoading
     const showNotification = useNotification();
     const { authState } = useAuth();
     const user = authState.user;
@@ -21,11 +23,15 @@ const TaskPage = () => {
             if (!user) return;
 
             try {
+                await axios.post(API_ENDPOINTS.ADD_RECENTLY_VIEWED_TASKS, {
+                    client_id: user?.id,
+                    task_id: taskId
+                });
+
                 const taskResponse = await axios.get(API_ENDPOINTS.TASK_API + `${taskId}`);
                 const fetchedTask = taskResponse.data;
                 const isAdmin = user.is_admin;
                 const isSolver = user.is_solver;
-                console.log(user)
 
                 if (isAdmin || isSolver || fetchedTask.client_fk.id === user.id) {
                     setTask(fetchedTask);
@@ -33,8 +39,10 @@ const TaskPage = () => {
                     showNotification(`No permission to view this task`);
                     navigate('/');
                 }
+                setIsLoading(false);
             } catch (error) {
                 showNotification(`Error fetching task with ID ${taskId}: ${error.message}`);
+                setIsLoading(false);
             }
         };
 
@@ -45,7 +53,8 @@ const TaskPage = () => {
     return (
         <div>
             <div className="row g-0">
-                <HomeColFirst />
+                {isLoading ? <HomeColFirst isLoading={isLoading} /> : <HomeColFirst />}
+
                 <TaskContent task={task} />
                 <TaskDetail task={task} />
             </div>

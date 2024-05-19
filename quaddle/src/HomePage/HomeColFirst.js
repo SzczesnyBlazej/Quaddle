@@ -12,7 +12,9 @@ import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import SessionTimer from '../Account/AuthContext/SessionTimer';
 import logo from '../LOGO.png'
-import ShowLastViewedTasks from '../Overviews/ShowLastViewedTasks'
+import ShowLastViewedTasks from '../Overviews/ShowLastViewedTasks';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const renderSuggestion = (suggestion) => (
     <div>
@@ -20,7 +22,7 @@ const renderSuggestion = (suggestion) => (
     </div>
 );
 
-function HomeColFirst() {
+function HomeColFirst({ isLoading = false }) {
     const showNotification = useNotification();
 
     const { authState } = useAuth();
@@ -44,7 +46,6 @@ function HomeColFirst() {
     };
 
     const fetchSuggestions = async (inputValue) => {
-
         try {
             const response = await axios.get(API_ENDPOINTS.TASK_API, {
                 params: {
@@ -76,9 +77,8 @@ function HomeColFirst() {
         }
     };
 
-    useEffect(() => {
+    useEffect(() => { }, [value]);
 
-    }, [value]);
 
     return (
         <div className="col-md-2 dark-bg min-vh-100 d-flex flex-column position-relative">
@@ -126,13 +126,13 @@ function HomeColFirst() {
                     </React.Fragment>
                 ))}
                 <div style={{ overflowY: 'auto', maxHeight: '27vh' }}>
-                    <ShowLastViewedTasks />
-
+                    {isLoading ? <Box >
+                        <CircularProgress />
+                    </Box> : <ShowLastViewedTasks />
+                    }
                 </div>
-                {suggestions.length > 0 ? <strong className='text-white text-center pb-2'>Results search</strong>
-                    : ''}
+                {suggestions.length > 0 ? <strong className='text-white text-center pb-2'>Results search</strong> : ''}
                 <div style={{ overflowY: 'auto', maxHeight: '27vh' }}>
-
                     {suggestions.map((suggestion) => (
                         <React.Fragment key={suggestion.id}>
                             <Link to={"/tasks/" + suggestion?.id} className="nav-link">
@@ -145,11 +145,8 @@ function HomeColFirst() {
                                             }}
                                         />
                                     </div>
-
                                     <div className='col-md-10'>
-                                        <small >
-                                            {renderSuggestion(suggestion)}
-                                        </small>
+                                        <small>{renderSuggestion(suggestion)}</small>
                                     </div>
                                 </div>
                             </Link>
@@ -158,21 +155,19 @@ function HomeColFirst() {
                     ))}
                 </div>
             </div>
-
             <div className="text-light mt-auto position-absolute bottom-0 w-100">
                 <span className='ps-2'><SessionTimer /></span>
-
                 <hr className="border-secondary" />
                 <div className='row text-center mb-3'>
                     <div className='col-md-4'>
                         {LogoTemplate(user)}
-
                     </div>
                     <div className='col-md-4'>
                         <button
                             type="button"
                             className="btn dropdown-toggle rounded-circle dropdown-toggle-no-arrow border-0"
-                            onClick={handleNewTaskButtonClick}>
+                            onClick={handleNewTaskButtonClick}
+                        >
                             <div className="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
                                 <span><FontAwesomeIcon icon={faPlus} size="2xl" /></span>
                             </div>
@@ -184,14 +179,12 @@ function HomeColFirst() {
                             type="button"
                             className="btn rounded-circle border-0"
                             onClick={handleShowHelpButtonClick}
-
                         >
                             <div className="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
                                 <span><FontAwesomeIcon icon={faQuestion} size="2xl" /></span>
                             </div>
                         </button>
                         {showHelp && <HelpModal onClose={() => setHelp(false)} />}
-
                     </div>
                 </div>
             </div>

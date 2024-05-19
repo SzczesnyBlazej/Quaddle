@@ -7,7 +7,8 @@ from .views.favorites_views import FavoritesViewSet, toggle_favorite, check_favo
 from .views.message_views import MessageViewSet, get_messages, delete_message, update_message, create_message, \
     download_file
 from .views.notification_views import NotificationViewSet, get_notifications, create_notification
-from .views.recentlytasks_views import get_recently_viewed_tasks
+from .views.recentlytasks_views import get_recently_viewed_tasks, delete_recently_viewed_tasks, \
+    add_recently_viewed_tasks
 from .views.task_views import TaskViewSet, get_tasks, get_tasks_by_id, create_task, update_task
 from django.urls import path
 
@@ -28,6 +29,8 @@ urlpatterns = [
     path('create_notification', create_notification, name='create_notification'),
     path('get_messages', get_messages, name='get_messages'),
     path('get_recently_viewed_tasks', get_recently_viewed_tasks, name='get_recently_viewed_tasks'),
+    path('delete_recently_viewed_tasks', delete_recently_viewed_tasks, name='delete_recently_viewed_tasks'),
+    path('add_recently_viewed_tasks', add_recently_viewed_tasks, name='add_recently_viewed_tasks'),
     path('delete_message/<int:message_id>/', delete_message, name='delete_message'),
     path('update_message/<int:message_id>', update_message, name='update_message'),
     path('create_message', create_message, name='create_message'),

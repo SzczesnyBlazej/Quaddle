@@ -16,15 +16,17 @@ const ShowLastViewedTasks = () => {
 
     const handleRemove = async (taskId) => {
         try {
-            await axios.delete(`${API_ENDPOINTS.RECENTLY_VIEWED_TASKS}/${taskId}`);
-
+            const response = await axios.post(API_ENDPOINTS.DELETE_RECENTLY_VIEWED_TASKS, {
+                client_id: user?.id,
+                task_id: taskId
+            });
+            console.log(response.data)
             setTasks((prevTasks) => prevTasks.filter(task => task.id !== taskId));
-            showNotification('Task removed successfully');
+            showNotification(response.data.message);
         } catch (error) {
             showNotification('Error removing task: ' + error);
         }
     };
-
 
 
     useEffect(() => {
