@@ -16,7 +16,6 @@ class RecentlyViewedTasksAPITests(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # Dodaj kod inicjalizujący tutaj
 
     def setUp(self):
         self.client = Client()

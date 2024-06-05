@@ -1,0 +1,5 @@
+Świnie:
+Podstawowa żywność (Base food) (Kukurydza / Sorgo) - 50% efektywności,
+Ziarna (Grains) (Pszenica / Jęczmień) - 25% efektywności,
+Białka (Proteins) (Soja / Rzepak / Słonecznik) - 20% efektywności,
+Owoce ziemi (Root crops) (Ziemniaki / Buraki) - 5% efektywności.

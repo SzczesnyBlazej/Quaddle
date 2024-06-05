@@ -1,5 +1,5 @@
 import React from 'react';
-import SpinnerSVG from './SpinnerSVG.svg'; // Dodaj ścieżkę do swojego pliku SVG
+import SpinnerSVG from './SpinnerSVG.svg';
 const LoadingSpinner = () => {
     return (
         <div className="loading-spinner-overlay d-flex align-items-center justify-content-center">

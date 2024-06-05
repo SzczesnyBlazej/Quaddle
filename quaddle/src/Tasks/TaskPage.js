@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 const TaskPage = () => {
     const { taskId } = useParams();
     const [task, setTask] = useState(null);
-    const [isLoading, setIsLoading] = useState(true); // Dodaj stan isLoading
+    const [isLoading, setIsLoading] = useState(true);
     const showNotification = useNotification();
     const { authState } = useAuth();
     const user = authState.user;

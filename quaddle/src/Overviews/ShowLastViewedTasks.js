@@ -20,7 +20,6 @@ const ShowLastViewedTasks = () => {
                 client_id: user?.id,
                 task_id: taskId
             });
-            console.log(response.data)
             setTasks((prevTasks) => prevTasks.filter(task => task.id !== taskId));
             showNotification(response.data.message);
         } catch (error) {

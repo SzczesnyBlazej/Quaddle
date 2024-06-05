@@ -5,12 +5,13 @@ import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import { useAuth } from '../Account/AuthContext/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import { checkIsTaskFavorite, toggleTaskFavorite } from './FavoriteService';
 import AllowOnlyRole from '../Account/AuthContext/AllowOnlyRole';
 import getSolverList from '../Account/UserManagement/getSolverList';
 import getOptions from '../Config/getOptions';
+import TaskHistoryModal from '../Tasks/TaskHistoryModal';
 
 const TaskDetail = ({ task }) => {
     const showNotification = useNotification();
@@ -30,6 +31,7 @@ const TaskDetail = ({ task }) => {
     const [difficultyOptions, setDifficultyOptions] = useState([]);
     const [statusOptions, setStatusOptions] = useState([]);
     const [unitsOptions, setUnitsOptions] = useState([]);
+    const [showHistoryModal, setShowHistoryModal] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -70,6 +72,9 @@ const TaskDetail = ({ task }) => {
 
     const handleInputChange = (e, setterFunction) => {
         setterFunction(e.target.value);
+    };
+    const handleShowHistoryButtonClick = () => {
+        setShowHistoryModal(true);
     };
 
     const dropdownOptions = (options) => (
@@ -208,14 +213,36 @@ const TaskDetail = ({ task }) => {
                 <div className="container text-light">
                     <div className="d-flex align-items-center justify-content-between p-2">
                         <h2 className="mb-0">Task</h2>
-                        <FontAwesomeIcon
-                            icon={isTaskFavorite ? faStar : faStarRegular}
-                            style={{ color: isTaskFavorite ? 'gold' : 'inherit', cursor: 'pointer' }}
-                            size="xl"
-                            title={isTaskFavorite ? 'Click to remove from favorites' : 'Click to add to favorites'}
-                            onClick={handleToggleFavorite}
-                        />
+                        <div className="ms-auto d-flex align-items-center">
+
+                            <button
+                                type="button"
+                                className="btn rounded-circle border-0"
+                                onClick={handleShowHistoryButtonClick}
+                            >
+                                <div className="btn d-flex align-items-center justify-content-center">
+                                    <span>
+                                        <FontAwesomeIcon
+                                            icon={faClockRotateLeft}
+                                            style={{ cursor: 'pointer', color: 'white' }}
+                                            size="xl"
+                                            title={'Show task history'}
+                                        />
+                                    </span>
+                                </div>
+                            </button>
+
+                            {showHistoryModal && <TaskHistoryModal taskId={task ? task.id : null} onClose={() => setShowHistoryModal(false)} />}
+                            <FontAwesomeIcon
+                                icon={isTaskFavorite ? faStar : faStarRegular}
+                                style={{ color: isTaskFavorite ? 'gold' : 'inherit', cursor: 'pointer', marginLeft: '10px' }}
+                                size="xl"
+                                title={isTaskFavorite ? 'Click to remove from favorites' : 'Click to add to favorites'}
+                                onClick={handleToggleFavorite}
+                            />
+                        </div>
                     </div>
+
                     <hr className="border-secondary" />
 
                     <div className="form-group p-1">

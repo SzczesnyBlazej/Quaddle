@@ -57,8 +57,8 @@ const ClickableLogo = ({ user }) => {
                     <div className='col-md-7'>
 
                         <div id="email"><FontAwesomeIcon icon={faEnvelope} className='pe-2' />{user.email}</div>
-                        <div id="tel"><FontAwesomeIcon icon={faPhone} className='pe-2' />{user.phone}</div>
-                        <div id="unit"><FontAwesomeIcon icon={faBuilding} className='pe-2' />{user.unit_fk.value}</div>
+                        <div id="tel"><FontAwesomeIcon icon={faPhone} className='pe-2' />{user.phone ? user.phone : "No data"}</div>
+                        <div id="unit"><FontAwesomeIcon icon={faBuilding} className='pe-2' />{user.unit_fk ? user.unit_fk.value : "No data"}</div>
                     </div>
                 </div>
                 <hr className="border-secondary" />

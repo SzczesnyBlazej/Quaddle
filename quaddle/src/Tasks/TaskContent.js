@@ -30,10 +30,8 @@ const TaskContent = ({ task }) => {
 
     useEffect(() => {
         const element = document.getElementById("DragAndDropFileUploadDiv");
-        // console.log(element)
         if (element) {
             const newHeight = element.offsetHeight;
-            // console.log(newHeight);
             setHeight(newHeight);
         }
     }, [handleFilesChange]);
