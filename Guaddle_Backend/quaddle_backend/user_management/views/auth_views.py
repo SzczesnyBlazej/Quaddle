@@ -6,6 +6,7 @@ from rest_framework import status, viewsets
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth import authenticate, login as auth_login
+from rest_framework.exceptions import AuthenticationFailed
 
 from ..models import User
 from ..serializers import UserSerializer, CreateUserSerializer
@@ -70,6 +71,11 @@ def validate_token(request):
     try:
         authentication = JWTAuthentication()
         user, _ = authentication.authenticate(request)
-        return Response({'message': 'Valid token'}, status=status.HTTP_200_OK)
-    except:
-        return Response({'error': 'Invalid token'}, status=status.HTTP_401_UNAUTHORIZED)
+        if user:
+            return Response({'message': 'Valid token'}, status=status.HTTP_200_OK)
+        else:
+            raise AuthenticationFailed('Invalid token')
+    except AuthenticationFailed as e:
+        return Response({'error': str(e)}, status=status.HTTP_401_UNAUTHORIZED)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -1,4 +1,3 @@
-// AllowOnlyRole.js
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNotification } from '../../Functions/NotificationContext';
@@ -12,37 +11,31 @@ const AllowOnlyRole = ({ children, roles = [], taskId = null, onlyAdmin = false 
     const user = authState.user;
 
     useEffect(() => {
-        const fetchData = async () => {
+        const checkAuthorization = async () => {
             try {
-                const hasAccess = roles.some(role => {
-                    if (role === 'admin') {
-                        return user.is_admin;
-                    } else if (role === 'solver') {
-                        return user.is_solver;
-                    }
+                let authorized = roles.some(role => {
+                    if (role === 'admin') return user?.is_admin;
+                    if (role === 'solver') return user?.is_solver;
                     return false;
                 });
 
-                const allowOnlyAdmin = onlyAdmin && user.is_admin;
-
-                if (hasAccess || allowOnlyAdmin) {
-                    setIsAuthorized(true);
-                } else if (taskId) {
-                    const taskResponse = await axios.get(API_ENDPOINTS.TASK_API + `/${taskId}`);
-                    const task = taskResponse.data;
-
-                    const isAuthorizedUser = task && task.customerId === user.id;
-                    setIsAuthorized(isAuthorizedUser);
-                } else {
-                    setIsAuthorized(false);
+                if (!authorized && onlyAdmin) {
+                    authorized = user?.is_admin;
                 }
-            } catch (e) {
-                showNotification('Error fetching user or task:', e);
+
+                if (!authorized && taskId) {
+                    const { data: task } = await axios.get(`${API_ENDPOINTS.TASK_API}/${taskId}`);
+                    authorized = task?.customerId === user?.id;
+                }
+
+                setIsAuthorized(authorized);
+            } catch (error) {
+                showNotification('Error fetching user or task: ' + error.message);
             }
         };
 
-        fetchData();
-    }, [showNotification, roles, onlyAdmin]);
+        checkAuthorization();
+    }, [roles, onlyAdmin, taskId, showNotification, user]);
 
     return isAuthorized ? <>{children}</> : null;
 };

@@ -12,6 +12,8 @@ from .views.recentlytasks_views import get_recently_viewed_tasks, delete_recentl
 from .views.task_views import TaskViewSet, get_tasks, get_tasks_by_id, create_task, update_task
 from django.urls import path
 
+from .views.taskhistory_views import create_task_history, get_task_history
+
 router = DefaultRouter()
 
 router.register(r'task', TaskViewSet)
@@ -23,11 +25,13 @@ urlpatterns = [
     path('task/', get_tasks, name='get_tasks'),
     path('get_tasks_by_id/', get_tasks_by_id, name='get_tasks_by_id'),
     path('create_task', create_task, name='create_task'),
+    path('create_task_history', create_task_history, name='create_task_history'),
     path('toggle_favorite', toggle_favorite, name='toggle_favorite'),
     path('check_favorite', check_favorite, name='check_favorite'),
     path('update_task/<int:task_id>', update_task, name='update_task'),
     path('create_notification', create_notification, name='create_notification'),
     path('get_messages', get_messages, name='get_messages'),
+    path('get_task_history', get_task_history, name='get_task_history'),
     path('get_recently_viewed_tasks', get_recently_viewed_tasks, name='get_recently_viewed_tasks'),
     path('delete_recently_viewed_tasks', delete_recently_viewed_tasks, name='delete_recently_viewed_tasks'),
     path('add_recently_viewed_tasks', add_recently_viewed_tasks, name='add_recently_viewed_tasks'),

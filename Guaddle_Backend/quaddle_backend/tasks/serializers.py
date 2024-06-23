@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Task, Notification, Message, Favorites, File, RecentlyViewedTasks
+from .models import Task, Notification, Message, Favorites, File, RecentlyViewedTasks, TaskHistory
 from user_management.serializers import UserSerializer
 
 from task_options.serializers import TaskOptionsSerializer
@@ -36,6 +36,14 @@ class MessageSerializer(serializers.ModelSerializer):
     def get_files(self, obj):
         files = File.objects.filter(message=obj)
         return FileSerializer(files, many=True).data
+
+class TaskHistorySerializer(serializers.ModelSerializer):
+    task_detail = TaskSerializer(source='task_id')
+    client_fk = UserSerializer(source='created_by')
+
+    class Meta:
+        model = TaskHistory
+        fields = '__all__'
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = File

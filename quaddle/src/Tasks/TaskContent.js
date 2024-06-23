@@ -9,6 +9,7 @@ import ClickableLogo from '../Overviews/Templates/ClicableLogo';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import { Modal } from 'react-bootstrap';
 import DragAndDropFileUpload from './DragAndDropFileUpload';
+import { AddHistoryEvent } from './addHistoryEvent';
 
 const TaskContent = ({ task }) => {
     const showNotification = useNotification();
@@ -76,6 +77,8 @@ const TaskContent = ({ task }) => {
         try {
             if (messageToDelete) {
                 await handleDeleteMessage(messageToDelete.id);
+                const result = await AddHistoryEvent(`Deleted message "${messageToDelete.message}" by id: ${messageToDelete.id} `, user.id, task.id);
+
                 setShowConfirmModal(false);
                 setMessageToDelete(null);
             }
@@ -95,6 +98,9 @@ const TaskContent = ({ task }) => {
                 is_lock: !is_lock,
             });
             showNotification('Lock has been modified');
+            const result = await AddHistoryEvent(`Lock status for message ${messageId} has been modified to ${!is_lock}`, user.id, task.id);
+
+
             fetchMessages();
         } catch (error) {
             showNotification('Error updating lock status: ' + error.message);
@@ -134,6 +140,8 @@ const TaskContent = ({ task }) => {
                     'Content-Type': 'multipart/form-data',
                 }
             };
+            const result = await AddHistoryEvent(`Added comment: "${message}" `, user.id, task.id);
+
             await axios.post(API_ENDPOINTS.CREATE_MESSAGE, formData, config);
 
             showNotification('Comment has been added');
@@ -368,7 +376,6 @@ const TaskContent = ({ task }) => {
     );
 };
 const convertFileToBase64 = (file) => {
-    console.log("file:" + file)
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
