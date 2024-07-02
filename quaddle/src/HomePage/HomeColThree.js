@@ -6,6 +6,7 @@ import LogoCircleTemplate from "../Templates/LogoCircleTemplate";
 import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import { useAuth } from '../Account/AuthContext/authContext';
+import { Tooltip } from '@mui/material';
 
 function HomeColThree() {
     const [last25Records, setlast25Records] = useState([]);
@@ -13,24 +14,21 @@ function HomeColThree() {
     const { authState } = useAuth();
     const user = authState.user;
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-
                 const isAdmin = user.is_admin;
                 const isSolver = user.is_solver;
                 const { data: { csrftoken } } = await axios.get(API_ENDPOINTS.USER_DATA);
+                let response;
                 if (isAdmin || isSolver) {
-                    const response = await axios.get(API_ENDPOINTS.NOTIFICATIONAPI, {
+                    response = await axios.get(API_ENDPOINTS.NOTIFICATIONAPI, {
                         headers: {
                             'X-CSRFToken': csrftoken
                         }
                     });
-                    setlast25Records(response.data);
-                }
-                else {
-                    const response = await axios.get(API_ENDPOINTS.NOTIFICATIONAPI, {
+                } else {
+                    response = await axios.get(API_ENDPOINTS.NOTIFICATIONAPI, {
                         headers: {
                             'X-CSRFToken': csrftoken
                         },
@@ -38,8 +36,8 @@ function HomeColThree() {
                             client_id: user.id,
                         },
                     });
-                    setlast25Records(response.data);
                 }
+                setlast25Records(response.data);
             } catch (error) {
                 showNotification('Error fetching last 25 records:', error.message);
             }
@@ -51,7 +49,6 @@ function HomeColThree() {
             fetchData();
         }, 120000);
 
-
         return () => clearInterval(intervalId);
     }, [showNotification, user]);
 
@@ -61,27 +58,29 @@ function HomeColThree() {
                 <h2 className='text-light p-2'>Activity</h2>
             </div>
             <hr className="border-white m-2" />
-            {last25Records.map(record => (
-                <div key={record?.id} className="card m-2 mt-1 dark-bg text-light">
-                    <div className="row g-0">
-                        <div className="col-md-3 p-2">
-                            {LogoCircleTemplate(record.created_by_user)}
+            {last25Records.map(record => {
+                const tooltipTitle = `${record.notification_date}, ${record.notification_time}`;
+                return (
+                    <div key={record?.id} className="card m-2 mt-1 dark-bg text-light">
+                        <div className="row g-0">
+                            <div className="col-md-3 p-2">
+                                {LogoCircleTemplate(record.created_by_user)}
+                            </div>
+
+                            <div className="col-md-9 p-2">
+                                <Link to={"/tasks/" + record.task_id} className="nav-link">
+                                    <p className="card-text">{record.created_by_user.first_name} {record.created_by_user.last_name} <b>{record.notification_text}</b> <span data-bs-toggle="tooltip" title={record.task_detail.description}>{record.task_detail.title}</span></p>
+                                    <span className="text-secondary">
+                                        <Tooltip title={tooltipTitle} placement="right-start">
+                                            {calculateTimeDifference(`${record.notification_date} ${record.notification_time}`)} ago
+                                        </Tooltip>
+                                    </span>
+                                </Link>
+                            </div>
                         </div>
-
-                        <div className="col-md-9 p-2">
-                            <Link to={"/tasks/" + record.task_id} className="nav-link">
-                                <p className="card-text">{record.created_by_user.first_name} {record.created_by_user.last_name} <b>{record.notification_text}</b> <span data-bs-toggle="tooltip" title={record.task_detail.description}>{record.task_detail.title}</span></p>
-                                <span className="text-secondary">
-                                    <h6 data-bs-toggle="tooltip" title={record.notification_date + ", " + record.notification_time}>
-                                        {calculateTimeDifference(`${record.notification_date} ${record.notification_time}`)} ago
-                                    </h6></span>
-                            </Link>
-                        </div>
-
-
                     </div>
-                </div>
-            ))}
+                );
+            })}
         </div>
     );
 }

@@ -13,7 +13,7 @@ import getSolverList from '../Account/UserManagement/getSolverList';
 import getOptions from '../Config/getOptions';
 import TaskHistoryModal from '../Tasks/TaskHistoryModal';
 import { AddHistoryEvent } from './addHistoryEvent';
-
+import { Tooltip } from '@mui/material';
 const TaskDetail = ({ task }) => {
     const showNotification = useNotification();
     const { authState } = useAuth();
@@ -274,23 +274,28 @@ const TaskDetail = ({ task }) => {
                             >
                                 <div className="btn d-flex align-items-center justify-content-center">
                                     <span>
-                                        <FontAwesomeIcon
-                                            icon={faClockRotateLeft}
-                                            style={{ cursor: 'pointer', color: 'white' }}
-                                            size="xl"
-                                            title={'Show task history'}
-                                        />
+                                        <Tooltip title={'Show task history'}
+                                            placement="right-start">
+                                            <FontAwesomeIcon
+                                                icon={faClockRotateLeft}
+                                                style={{ cursor: 'pointer', color: 'white' }}
+                                                size="xl"
+                                            />
+                                        </Tooltip>
                                     </span>
                                 </div>
                             </button>
                             {showHistoryModal && <TaskHistoryModal taskId={task ? task.id : null} onClose={() => setShowHistoryModal(false)} />}
-                            <FontAwesomeIcon
-                                icon={isTaskFavorite ? faStar : faStarRegular}
-                                style={{ color: isTaskFavorite ? 'gold' : 'inherit', cursor: 'pointer', marginLeft: '10px' }}
-                                size="xl"
-                                title={isTaskFavorite ? 'Click to remove from favorites' : 'Click to add to favorites'}
-                                onClick={handleToggleFavorite}
-                            />
+                            <Tooltip title={isTaskFavorite ? 'Click to remove from favorites' : 'Click to add to favorites'} placement="right-start">
+
+                                <FontAwesomeIcon
+                                    icon={isTaskFavorite ? faStar : faStarRegular}
+                                    style={{ color: isTaskFavorite ? 'gold' : 'inherit', cursor: 'pointer', marginLeft: '10px' }}
+                                    size="xl"
+
+                                    onClick={handleToggleFavorite}
+                                />
+                            </Tooltip>
                         </div>
                     </div>
                     <hr className="border-secondary" />

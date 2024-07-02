@@ -100,3 +100,13 @@ class TaskHistory(models.Model):
 
     def __str__(self):
         return f"{self.id} History of task {self.task_id}"
+
+class RecentVisitors(models.Model):
+    id = models.AutoField(primary_key=True)
+    task_id = models.ForeignKey(Task, on_delete=models.SET_NULL, null=True)
+    create_date = models.DateField()
+    create_hour = models.TimeField()
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return f"{self.id} History of task {self.task_id}"

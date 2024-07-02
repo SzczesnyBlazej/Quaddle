@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane, faLock, faLockOpen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faLock, faLockOpen, faTrash, faWindowRestore } from '@fortawesome/free-solid-svg-icons';
 import { getCurrentDateFormatted, getCurrentTimeFormatted, sendNotification } from './Functions'
 import { useAuth } from '../Account/AuthContext/authContext';
 import { useNotification } from '../Functions/NotificationContext';
@@ -10,6 +10,7 @@ import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import { Modal } from 'react-bootstrap';
 import DragAndDropFileUpload from './DragAndDropFileUpload';
 import { AddHistoryEvent } from './addHistoryEvent';
+import { Tooltip } from '@mui/material';
 
 const TaskContent = ({ task }) => {
     const showNotification = useNotification();
@@ -326,24 +327,54 @@ const TaskContent = ({ task }) => {
                         </div>
                     ))}
                 </div>
-                <div className="container text-light mt-auto position-absolute bottom-0 w-100" id='DragAndDropFileUploadDiv'>
+                <div className="container text-light mt-auto position-absolute bottom-0 mw-100" id='DragAndDropFileUploadDiv'>
 
                     <hr className="border-secondary" />
                     <DragAndDropFileUpload handleAddedFiles={handleAddedFiles} setClearFilesFn={setClearFilesFn} onFilesChange={handleFilesChange} />
                     <div className='col ms-3 me-3 mb-3'>
                         <div className="input-group">
 
-                            <textarea
-                                className="form-control"
-                                id="exampleTextarea"
-                                rows="3"
-                                placeholder="Enter your message"
-                                value={message}
-                                onChange={(e) => setMessage(e.target.value)}
-                            ></textarea>
-                            <button className="btn btn-outline-light send-icon" type="button" onClick={updateMessage}>
-                                <FontAwesomeIcon icon={faPaperPlane} style={{ color: 'antiquewhite' }} size="2xl" />
-                            </button>
+                            <div className="position-relative" style={{ width: '100%' }}>
+                                <textarea
+                                    className="form-control"
+                                    id="exampleTextarea"
+                                    rows="3"
+                                    placeholder="Enter your message"
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
+                                ></textarea>
+                                <Tooltip title="Use predefined phrases" placement="right-start">
+
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-secondary position-absolute"
+                                        style={{
+                                            top: '5px',
+                                            right: '5px',
+                                            zIndex: 1,
+                                        }}
+
+                                    >
+                                        <FontAwesomeIcon icon={faWindowRestore} />
+                                    </button>
+                                </Tooltip>
+                                <Tooltip title="Send comment" placement="right-start">
+
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-secondary position-absolute"
+                                        style={{
+                                            top: '45px',
+                                            right: '5px',
+                                            zIndex: 1,
+                                        }}
+                                        onClick={updateMessage}
+                                    >
+                                        <FontAwesomeIcon icon={faPaperPlane} />
+                                    </button>
+                                </Tooltip>
+
+                            </div>
 
                         </div>
                     </div>

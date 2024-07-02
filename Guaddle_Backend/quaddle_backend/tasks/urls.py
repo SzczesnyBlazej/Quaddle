@@ -9,6 +9,7 @@ from .views.message_views import MessageViewSet, get_messages, delete_message, u
 from .views.notification_views import NotificationViewSet, get_notifications, create_notification
 from .views.recentlytasks_views import get_recently_viewed_tasks, delete_recently_viewed_tasks, \
     add_recently_viewed_tasks
+from .views.recentvisitors_views import create_recently_visitors, get_recently_visitors
 from .views.task_views import TaskViewSet, get_tasks, get_tasks_by_id, create_task, update_task
 from django.urls import path
 
@@ -21,31 +22,48 @@ router.register(r'notification', NotificationViewSet)
 router.register(r'message', MessageViewSet)
 router.register(r'favorites', FavoritesViewSet)
 urlpatterns = [
-    path('notification/', get_notifications, name='get_notifications'),
+
+    # Task related views
     path('task/', get_tasks, name='get_tasks'),
     path('get_tasks_by_id/', get_tasks_by_id, name='get_tasks_by_id'),
     path('create_task', create_task, name='create_task'),
-    path('create_task_history', create_task_history, name='create_task_history'),
-    path('toggle_favorite', toggle_favorite, name='toggle_favorite'),
-    path('check_favorite', check_favorite, name='check_favorite'),
     path('update_task/<int:task_id>', update_task, name='update_task'),
-    path('create_notification', create_notification, name='create_notification'),
-    path('get_messages', get_messages, name='get_messages'),
+
+    # Task History related views
+    path('create_task_history', create_task_history, name='create_task_history'),
     path('get_task_history', get_task_history, name='get_task_history'),
-    path('get_recently_viewed_tasks', get_recently_viewed_tasks, name='get_recently_viewed_tasks'),
-    path('delete_recently_viewed_tasks', delete_recently_viewed_tasks, name='delete_recently_viewed_tasks'),
-    path('add_recently_viewed_tasks', add_recently_viewed_tasks, name='add_recently_viewed_tasks'),
+
+    # Notification related views
+    path('notification/', get_notifications, name='get_notifications'),
+    path('create_notification', create_notification, name='create_notification'),
+
+    # Message related views
+    path('get_messages', get_messages, name='get_messages'),
     path('delete_message/<int:message_id>/', delete_message, name='delete_message'),
     path('update_message/<int:message_id>', update_message, name='update_message'),
     path('create_message', create_message, name='create_message'),
+    path('download/<str:file_name>/', download_file, name='download_file'),
+
+    # Favorites related views
+    path('toggle_favorite', toggle_favorite, name='toggle_favorite'),
+    path('check_favorite', check_favorite, name='check_favorite'),
+
+    # Recently Viewed Tasks related views
+    path('get_recently_viewed_tasks', get_recently_viewed_tasks, name='get_recently_viewed_tasks'),
+    path('delete_recently_viewed_tasks', delete_recently_viewed_tasks, name='delete_recently_viewed_tasks'),
+    path('add_recently_viewed_tasks', add_recently_viewed_tasks, name='add_recently_viewed_tasks'),
+
+    # Recently Visitors related views
+    path('create_recently_visitors', create_recently_visitors, name='create_recently_visitors'),
+    path('get_recently_visitors', get_recently_visitors, name='get_recently_visitors'),
+
+    # Dashboard related views
     path('count_all_tasks_to_menu/', count_all_tasks_to_menu, name='count_all_tasks_to_menu'),
     path('get_task_counts_dashboard/', get_task_counts_dashboard, name='get_task_counts_dashboard'),
     path('get_priority_counts_dashboard/', get_priority_counts_dashboard, name='get_priority_counts_dashboard'),
     path('get_difficulty_counts_dashboard/', get_difficulty_counts_dashboard, name='get_difficulty_counts_dashboard'),
     path('get_units_counts_dashboard/', get_units_counts_dashboard, name='get_units_counts_dashboard'),
-    path('get_last_thirty_days_task_counts/', get_last_thirty_days_task_counts,
-         name='get_last_thirty_days_task_counts'),
-    path('download/<str:file_name>/', download_file, name='download_file'),
+    path('get_last_thirty_days_task_counts/', get_last_thirty_days_task_counts, name='get_last_thirty_days_task_counts'),
 
 ]
 urlpatterns += router.urls

@@ -11,7 +11,7 @@ const Favorities = () => {
     const [tasks, setTasks] = useState([]);
     const { authState } = useAuth();
     const user = authState.user;
-    const userID = user.id;
+    const userID = user?.id;
     const showNotification = useNotification();
 
     useEffect(() => {

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Task, Notification, Message, Favorites, File, RecentlyViewedTasks, TaskHistory
+from .models import Task, Notification, Message, Favorites, File, RecentlyViewedTasks, TaskHistory, RecentVisitors
 from user_management.serializers import UserSerializer
 
 from task_options.serializers import TaskOptionsSerializer
@@ -57,4 +57,10 @@ class FavoritesSerializer(serializers.ModelSerializer):
 class RecentlyViewedTasksSerializer(serializers.ModelSerializer):
     class Meta:
         model = RecentlyViewedTasks
+        fields = '__all__'
+class RecentlyVisitorsTasksSerializer(serializers.ModelSerializer):
+    visitors_fk = UserSerializer(source='created_by')
+
+    class Meta:
+        model = RecentVisitors
         fields = '__all__'

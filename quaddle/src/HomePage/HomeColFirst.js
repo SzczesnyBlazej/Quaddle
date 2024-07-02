@@ -141,7 +141,7 @@ function HomeColFirst({ isLoading = false }) {
                                         <FontAwesomeIcon
                                             icon={faCircleDot}
                                             style={{
-                                                color: suggestion.status_fk.value === 'Open' ? 'orange' : suggestion.status_fk.value === 'Close' ? '#00a347' : 'gray',
+                                                color: suggestion.status_fk?.value === 'Open' ? 'orange' : suggestion.status_fk?.value === 'Close' ? '#00a347' : 'gray',
                                             }}
                                         />
                                     </div>

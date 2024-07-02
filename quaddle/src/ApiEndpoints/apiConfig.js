@@ -26,6 +26,8 @@ const API_ENDPOINTS = {
     ADD_RECENTLY_VIEWED_TASKS: 'http://127.0.0.1:8000/api/add_recently_viewed_tasks',
     CREATE_TASK_HISTORY: 'http://127.0.0.1:8000/api/create_task_history',
     GET_TASK_HISTORY: 'http://127.0.0.1:8000/api/get_task_history',
+    CREATE_RECENTLY_VISITORS: 'http://127.0.0.1:8000/api/create_recently_visitors',
+    GET_RECENTLY_VISITORS: 'http://127.0.0.1:8000/api/get_recently_visitors',
 
 
     // NOTIFICATION

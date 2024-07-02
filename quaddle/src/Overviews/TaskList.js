@@ -11,6 +11,7 @@ import { ClientPopover } from './Templates/clientPopover';
 import { getStatusIconColor } from '../Tasks/Functions';
 import Box from '@mui/material/Box';
 import LoadingSpinner from '../spinner';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 const TaskList = ({ tasks, columnaaaaa }) => {
@@ -89,6 +90,7 @@ const TaskList = ({ tasks, columnaaaaa }) => {
             size: 130,
             Cell: ({ row }) => (
                 <>
+
                     <OverlayTrigger
                         trigger={['click']}
                         placement="auto"
@@ -109,7 +111,11 @@ const TaskList = ({ tasks, columnaaaaa }) => {
             header: 'Unit',
             size: 100,
             accessorKey: 'unit',
-            Cell: ({ row }) => (row.original.unit_fk.value)
+            Cell: ({ row }) => (
+                row.original.unit_fk && row.original.unit_fk.value !== undefined
+                    ? row.original.unit_fk.value
+                    : <CircularProgress size={24} />
+            ),
         },
         {
             accessorKey: 'priority',

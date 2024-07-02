@@ -9,6 +9,7 @@ import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import { useAuth } from '../Account/AuthContext/authContext';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { getCurrentDateFormatted, getCurrentTimeFormatted } from './Functions';
 const TaskPage = () => {
     const { taskId } = useParams();
     const [task, setTask] = useState(null);
@@ -26,6 +27,12 @@ const TaskPage = () => {
                 await axios.post(API_ENDPOINTS.ADD_RECENTLY_VIEWED_TASKS, {
                     client_id: user?.id,
                     task_id: taskId
+                });
+                await axios.post(API_ENDPOINTS.CREATE_RECENTLY_VISITORS, {
+                    createdBy: user && user.id,
+                    task_id: taskId,
+                    createDate: getCurrentDateFormatted(),
+                    createHour: getCurrentTimeFormatted()
                 });
 
                 const taskResponse = await axios.get(API_ENDPOINTS.TASK_API + `${taskId}`);
