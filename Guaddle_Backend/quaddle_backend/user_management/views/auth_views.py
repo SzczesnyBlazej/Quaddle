@@ -8,6 +8,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth import authenticate, login as auth_login
 from rest_framework.exceptions import AuthenticationFailed
 
+from tasks.models import RecentlyViewedTasks
 from ..models import User
 from ..serializers import UserSerializer, CreateUserSerializer
 class UserViewSet(viewsets.ModelViewSet):
@@ -27,6 +28,8 @@ def login(request):
             refresh_token = RefreshToken.for_user(user)
             serializer = UserSerializer(user)
             user_data = serializer.data
+
+
             data = {
                 'access_token': str(access_token),
                 'refresh_token': str(refresh_token),

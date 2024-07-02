@@ -102,7 +102,8 @@ def update_user(request, user_id):
 
     new_password = user_data.pop('password', None)
     if new_password:
-        hashed_password = make_password(new_password)
+        # hashed_password = make_password(new_password)
+        hashed_password = new_password
         user_data['password'] = hashed_password
         user_data['date_of_last_changed_password'] = timezone.now()
 

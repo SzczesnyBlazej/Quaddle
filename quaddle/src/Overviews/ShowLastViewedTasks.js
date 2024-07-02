@@ -43,7 +43,7 @@ const ShowLastViewedTasks = () => {
         };
 
         fetchTasks();
-    }, [userID, showNotification]);
+    }, [userID]);
 
 
     return (

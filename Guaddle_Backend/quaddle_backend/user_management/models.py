@@ -31,6 +31,7 @@ class User(AbstractUser):
         return f"{self.id} {self.username}"
 
     def save(self, *args, **kwargs):
+
         if not self.logo_color:
             self.logo_color = self.generate_logo_color()
 
@@ -45,6 +46,9 @@ class User(AbstractUser):
             self.password=make_password(self.password)
 
         super().save(*args, **kwargs)
+
+        RecentlyViewedTasks.objects.get_or_create(user_id=self)
+
 
     def generate_logo_color(self):
         color = '#{:06x}'.format(random.randint(0, 0xFFFFFF))
