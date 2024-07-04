@@ -1,4 +1,9 @@
 const API_ENDPOINTS = {
+    //PHRASES
+    CREATE_PHRASE: 'http://127.0.0.1:8000/api/create_phrases',
+    GET_PHRASES: 'http://127.0.0.1:8000/api/get_phrases',
+
+
     // MESSAGES
     CREATE_MESSAGE: 'http://127.0.0.1:8000/api/create_message',
     UPDATE_MESSAGE: 'http://127.0.0.1:8000/api/update_message',

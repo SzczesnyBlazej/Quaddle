@@ -17,7 +17,6 @@ from ..serializers import  RecentlyVisitorsTasksSerializer
 def create_recently_visitors(request):
     try:
         data = json.loads(request.body.decode('utf-8'))
-        print(data)
         created_by = data.get('createdBy')
         task_id = data.get('task_id')
         create_date = data.get('createDate')
@@ -35,7 +34,6 @@ def create_recently_visitors(request):
         return JsonResponse({'id': new_task_visitors.id}, status=201)
 
     except Exception as e:
-        print(str(e))
         return JsonResponse({'error': str(e)}, status=400)
 
 @api_view(['GET'])

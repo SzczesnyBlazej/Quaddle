@@ -5,6 +5,7 @@ import axios from 'axios';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import CircularProgress from '@mui/material/CircularProgress';
 import TaskLastViewedModal from './TaskLastViewedModal';
+import AllowOnlyRole from '../Account/AuthContext/AllowOnlyRole';
 
 const TaskHistoryModal = ({ taskId, onClose }) => {
     const [task, setTask] = useState(null);
@@ -83,11 +84,13 @@ const TaskHistoryModal = ({ taskId, onClose }) => {
                         <CircularProgress />
                     )}
                 </Modal.Body>
-                <Modal.Footer>
-                    <button className="btn btn-outline-dark m-2" type="button" onClick={handleShowLastViewedButtonClick}>
-                        Show recent visitors
-                    </button>
-                </Modal.Footer>
+                <AllowOnlyRole roles={["admin", "solver"]}>
+                    <Modal.Footer>
+                        <button className="btn btn-outline-dark m-2" type="button" onClick={handleShowLastViewedButtonClick}>
+                            Show recent visitors
+                        </button>
+                    </Modal.Footer>
+                </AllowOnlyRole>
             </Modal>
             {showLastViewedModal && (
                 <TaskLastViewedModal

@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 from django.conf import settings
 from django.db import models
 
@@ -110,3 +112,13 @@ class RecentVisitors(models.Model):
 
     def __str__(self):
         return f"{self.id} History of task {self.task_id}"
+
+class Phrase(models.Model):
+    id = models.AutoField(primary_key=True)
+    phrase = models.CharField(max_length=255)
+    create_date = models.DateTimeField(default=timezone.now, blank=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+
+
+    def __str__(self):
+        return f"{self.id} - {self.phrase}"

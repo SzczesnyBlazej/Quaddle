@@ -11,6 +11,7 @@ import { Modal } from 'react-bootstrap';
 import DragAndDropFileUpload from './DragAndDropFileUpload';
 import { AddHistoryEvent } from './addHistoryEvent';
 import { Tooltip } from '@mui/material';
+import PredefinedPhrasesModal from './PredefinedPhrases/PredefinedPhrasesModal';
 
 const TaskContent = ({ task }) => {
     const showNotification = useNotification();
@@ -25,6 +26,7 @@ const TaskContent = ({ task }) => {
     const [prevFiles, setFiles] = useState([]);
     const [clearFilesFn, setClearFilesFn] = useState(null);
     const [height, setHeight] = useState();
+    const [showPredefinedPhrasesModal, setShowPredefinedPhrasesModal] = useState(false);
 
     const handleFilesChange = (files) => {
         return files
@@ -39,7 +41,9 @@ const TaskContent = ({ task }) => {
     }, [handleFilesChange]);
 
 
-
+    const handleShowPredefinedPhrasesModal = () => {
+        setShowPredefinedPhrasesModal(true);
+    };
 
     const handleAddedFiles = async (e) => {
         e.preventDefault();
@@ -343,8 +347,9 @@ const TaskContent = ({ task }) => {
                                     value={message}
                                     onChange={(e) => setMessage(e.target.value)}
                                 ></textarea>
-                                <Tooltip title="Use predefined phrases" placement="right-start">
+                                {showPredefinedPhrasesModal && <PredefinedPhrasesModal onClose={() => setShowPredefinedPhrasesModal(false)} />}
 
+                                <Tooltip title="Use predefined phrases" placement="right-start">
                                     <button
                                         type="button"
                                         className="btn btn-outline-secondary position-absolute"
@@ -353,8 +358,10 @@ const TaskContent = ({ task }) => {
                                             right: '5px',
                                             zIndex: 1,
                                         }}
+                                        onClick={handleShowPredefinedPhrasesModal}
 
                                     >
+
                                         <FontAwesomeIcon icon={faWindowRestore} />
                                     </button>
                                 </Tooltip>

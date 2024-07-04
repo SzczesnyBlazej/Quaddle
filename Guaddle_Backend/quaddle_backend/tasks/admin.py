@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import Task, Notification, Message, Favorites, File, RecentlyViewedTasks, TaskHistory, RecentVisitors
+from .models import Task, Notification, Message, Favorites, File, RecentlyViewedTasks, TaskHistory, RecentVisitors, \
+    Phrase
 
 # Register your models here.
 
@@ -12,3 +13,4 @@ admin.site.register(File)
 admin.site.register(RecentlyViewedTasks)
 admin.site.register(TaskHistory)
 admin.site.register(RecentVisitors)
+admin.site.register(Phrase)
