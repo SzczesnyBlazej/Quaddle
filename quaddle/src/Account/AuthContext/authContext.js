@@ -1,5 +1,3 @@
-// AuthContext.js
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -10,7 +8,7 @@ const AuthContext = createContext();
 
 const fetchUserData = async (accessToken) => {
     try {
-        const response = await axios.get(`${API_ENDPOINTS.USER_MANAGEMENT}get_user_data_by_token`, {
+        const response = await axios.get(`${API_ENDPOINTS.USER_MANAGEMENT}get_user_data_by_token/`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
@@ -51,7 +49,7 @@ export const AuthProvider = ({ children }) => {
             });
         } catch (error) {
             console.error('Login Error:', error);
-            throw new Error('Invalid login credentials'); // Można to również obsłużyć lepiej
+            throw new Error('Invalid login credentials');
         }
     };
 
@@ -65,6 +63,42 @@ export const AuthProvider = ({ children }) => {
         });
 
         navigate('/login');
+    };
+
+    const checkTokenValidity = async () => {
+        const accessToken = Cookies.get('access_token');
+        if (accessToken) {
+            try {
+                await axios.get(`${API_ENDPOINTS.USER_MANAGEMENT}validate_token/`, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                });
+            } catch (error) {
+                console.error('Token validation error:', error);
+                logout();
+            }
+        } else {
+            logout();
+        }
+    };
+
+    const refreshToken = async () => {
+        const refresh_token = Cookies.get('refresh_token');
+        try {
+            const response = await axios.post(
+                `${API_ENDPOINTS.USER_MANAGEMENT}token/refresh/`,
+                { refresh: refresh_token }
+            );
+            Cookies.set('access_token', response.data.access, { expires: 7 });
+            setAuthState((prevState) => ({
+                ...prevState,
+                isAuthenticated: true,
+            }));
+        } catch (error) {
+            console.error('Error refreshing access token:', error);
+            logout();
+        }
     };
 
     useEffect(() => {
@@ -81,29 +115,23 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
-    // Dodaj obsługę odświeżania tokena JWT
     useEffect(() => {
-        const refreshToken = Cookies.get('refresh_token');
+        const accessToken = Cookies.get('access_token');
+        if (accessToken) {
+            const interval = setInterval(() => {
+                checkTokenValidity();
+            }, 300000); // Sprawdzanie co 5 minut
 
-        const refreshAccessToken = async () => {
-            try {
-                const response = await axios.post(
-                    `${API_ENDPOINTS.USER_MANAGEMENT}token/refresh/`,
-                    { refresh: refreshToken }
-                );
-                Cookies.set('access_token', response.data.access, { expires: 7 });
-                setAuthState((prevState) => ({
-                    ...prevState,
-                    isAuthenticated: true,
-                }));
-            } catch (error) {
-                console.error('Error refreshing access token:', error);
-                logout();
-            }
-        };
+            const timeout = setTimeout(() => {
+                refreshToken();
+            }, 840000); // Odświeżanie co 14 minut
 
-        if (!authState.isAuthenticated && refreshToken) {
-            refreshAccessToken();
+            return () => {
+                clearInterval(interval);
+                clearTimeout(timeout);
+            };
+        } else {
+            logout();
         }
     }, [authState.isAuthenticated]);
 

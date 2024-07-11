@@ -8,9 +8,8 @@ import EditPhraseModal from './EditPharseModal';
 import API_ENDPOINTS from '../../ApiEndpoints/apiConfig';
 import { Tooltip } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faTrash, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import Cookies from 'js-cookie';
-
 const PredefinedPhrasesModal = ({ onClose, onSelectPhrase }) => {
     const [history, setHistory] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false);
@@ -82,7 +81,11 @@ const PredefinedPhrasesModal = ({ onClose, onSelectPhrase }) => {
         <>
             <Modal show={true} onHide={onClose} size="lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Use predefined phrases in your message</Modal.Title>
+                    <Modal.Title>Use predefined phrases in your message
+                        <Tooltip title="Double-click on the phrase text to add it to the message field" placement="right-start">
+                            <FontAwesomeIcon icon={faCircleInfo} />
+                        </Tooltip>
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <TableContainer component={Paper}>
