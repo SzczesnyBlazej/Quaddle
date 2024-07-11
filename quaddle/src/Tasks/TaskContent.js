@@ -278,7 +278,7 @@ const TaskContent = ({ task }) => {
                                                 className={`pt-3 pb-3 mt-3 mb-3 ps-3 pe-3 text-light light-bg rounded w-100 ${message.message_sender_fk?.id === user?.id ? 'green-border' : ''}`}
                                                 style={{ border: '2px solid #ff6347' }}
                                             >
-                                                {message.message}
+                                                <pre>{message.message}</pre>
                                                 <div className='dark-bg rounded '>
 
                                                     {message.attachments && message.attachments.length > 0 && (
@@ -306,7 +306,7 @@ const TaskContent = ({ task }) => {
                                         <span
                                             className={`pt-3 pb-3 mt-3 mb-3 ps-3 pe-3 text-light light-bg rounded w-100 ${message.message_sender_fk?.id === user?.id ? 'green-border' : ''}`}
                                         >
-                                            {message.message}
+                                            <pre>{message.message}</pre>
                                             <div className='dark-bg rounded '>
 
                                                 {message.attachments && message.attachments.length > 0 && (

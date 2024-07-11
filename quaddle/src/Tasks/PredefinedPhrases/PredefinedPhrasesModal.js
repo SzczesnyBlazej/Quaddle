@@ -82,7 +82,7 @@ const PredefinedPhrasesModal = ({ onClose, onSelectPhrase }) => {
             <Modal show={true} onHide={onClose} size="lg">
                 <Modal.Header closeButton>
                     <Modal.Title>Use predefined phrases in your message
-                        <Tooltip title="Double-click on the phrase text to add it to the message field" placement="right-start">
+                        <Tooltip className="p-1" title="Double-click on the phrase text to add it to the message field" placement="right-start">
                             <FontAwesomeIcon icon={faCircleInfo} />
                         </Tooltip>
                     </Modal.Title>
