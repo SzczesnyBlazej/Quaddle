@@ -40,7 +40,8 @@ const AddNewPhraseModal = ({ show, onClose, onAdd, refreshHistory }) => {
                     <Form.Group controlId="formPhrase">
                         <Form.Label>Phrase</Form.Label>
                         <Form.Control
-                            type="text"
+                            as="textarea"
+                            rows={4}
                             placeholder="Enter new phrase"
                             value={newPhrase}
                             onChange={(e) => setNewPhrase(e.target.value)}

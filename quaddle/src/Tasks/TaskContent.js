@@ -111,7 +111,9 @@ const TaskContent = ({ task }) => {
             showNotification('Error updating lock status: ' + error.message);
         }
     };
-
+    const handleInsertPhrase = (phrase) => {
+        setMessage((prevMessage) => `${prevMessage} ${phrase}`);
+    };
 
     const handleDeleteMessage = async (messageId) => {
         try {
@@ -347,8 +349,12 @@ const TaskContent = ({ task }) => {
                                     value={message}
                                     onChange={(e) => setMessage(e.target.value)}
                                 ></textarea>
-                                {showPredefinedPhrasesModal && <PredefinedPhrasesModal onClose={() => setShowPredefinedPhrasesModal(false)} />}
-
+                                {showPredefinedPhrasesModal && (
+                                    <PredefinedPhrasesModal
+                                        onClose={() => setShowPredefinedPhrasesModal(false)}
+                                        onSelectPhrase={handleInsertPhrase}
+                                    />
+                                )}
                                 <Tooltip title="Use predefined phrases" placement="right-start">
                                     <button
                                         type="button"

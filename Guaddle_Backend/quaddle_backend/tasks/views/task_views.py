@@ -110,7 +110,6 @@ def update_task(request, task_id):
         if request.method == 'PUT':
             task = Task.objects.get(pk=task_id)
             data = json.loads(request.body.decode('utf-8'))
-            print(data)
             serializer = TaskSerializer(task, data=data, partial=True)
             if serializer.is_valid():
                 serializer.save()

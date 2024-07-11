@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
             });
         } catch (error) {
             console.error('Login Error:', error);
-            throw new Error('Invalid login credentials');
+            throw new Error('Invalid login credentials'); // Można to również obsłużyć lepiej
         }
     };
 
@@ -81,6 +81,31 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
+    // Dodaj obsługę odświeżania tokena JWT
+    useEffect(() => {
+        const refreshToken = Cookies.get('refresh_token');
+
+        const refreshAccessToken = async () => {
+            try {
+                const response = await axios.post(
+                    `${API_ENDPOINTS.USER_MANAGEMENT}token/refresh/`,
+                    { refresh: refreshToken }
+                );
+                Cookies.set('access_token', response.data.access, { expires: 7 });
+                setAuthState((prevState) => ({
+                    ...prevState,
+                    isAuthenticated: true,
+                }));
+            } catch (error) {
+                console.error('Error refreshing access token:', error);
+                logout();
+            }
+        };
+
+        if (!authState.isAuthenticated && refreshToken) {
+            refreshAccessToken();
+        }
+    }, [authState.isAuthenticated]);
 
     return (
         <AuthContext.Provider value={{ login, logout, authState }}>

@@ -27,7 +27,6 @@ const ShowLastViewedTasks = () => {
         }
     };
 
-
     useEffect(() => {
         const fetchTasks = async () => {
             try {
@@ -41,16 +40,12 @@ const ShowLastViewedTasks = () => {
                 showNotification('Error fetching data:' + error);
             }
         };
-
         fetchTasks();
     }, [userID]);
 
-
     return (
         <div>
-
             <div style={{ overflowY: 'auto', maxHeight: '27vh' }}>
-
                 {tasks.map((suggestion) => (
                     <React.Fragment key={suggestion.id}>
                         <div className='row g-0'>

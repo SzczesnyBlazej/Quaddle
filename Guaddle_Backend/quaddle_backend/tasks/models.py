@@ -117,8 +117,13 @@ class Phrase(models.Model):
     id = models.AutoField(primary_key=True)
     phrase = models.CharField(max_length=255)
     create_date = models.DateTimeField(default=timezone.now, blank=True)
+    edited_date = models.DateTimeField(null=True, blank=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
 
+    def save(self, *args, **kwargs):
+        if self.pk is not None:
+            self.edited_date = timezone.now()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.id} - {self.phrase}"
