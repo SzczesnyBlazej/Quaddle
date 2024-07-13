@@ -2,7 +2,11 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from rest_framework import viewsets, status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.exceptions import NotFound, ValidationError
+from rest_framework.permissions import IsAuthenticated
+
+from user_management.serializers import UserSerializer
 from ..models import RecentlyViewedTasks, Task
 from ..serializers import RecentlyViewedTasksSerializer, TaskSerializer  # Założenie, że masz taki serializer
 import json
@@ -62,3 +66,26 @@ def add_recently_viewed_tasks(request):
     except RecentlyViewedTasks.DoesNotExist:
             response_data = {'message': 'Task added to favorites', 'user_id': client_id, 'task_id': task_id}
             return JsonResponse(response_data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_users_by_task(request, task_id):
+    try:
+        recently_viewed_tasks = RecentlyViewedTasks.objects.filter(recently_viewed_tasks_id__id=task_id)
+        if not recently_viewed_tasks.exists():
+            raise NotFound(detail="No tasks found with the given ID")
+
+        users = [rv_task.user_id for rv_task in recently_viewed_tasks]
+        if not users:
+            raise NotFound(detail="No users found for the given task ID")
+
+        serializer = UserSerializer(users, many=True)
+        return JsonResponse(serializer.data, safe=False, status=200)
+
+    except NotFound as e:
+        return JsonResponse({'error': str(e)}, status=404)
+    except ValidationError as e:
+        return JsonResponse({'error': str(e)}, status=400)
+    except Exception as e:
+        return JsonResponse({'error': 'Something went wrong'}, status=500)

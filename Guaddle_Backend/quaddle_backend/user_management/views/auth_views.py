@@ -69,6 +69,22 @@ def logout(request):
     except:
         return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['POST'])
+@csrf_exempt
+def token_refresh(request):
+    if request.method == 'POST':
+        refresh_token = request.data.get('refresh')
+        if refresh_token:
+            try:
+                refresh = RefreshToken(refresh_token)
+                access_token = str(refresh.access_token)
+                return Response({'access': access_token}, status=status.HTTP_200_OK)
+            except Exception as e:
+                return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'error': 'Refresh token not provided'}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response({'error': 'Method Not Allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 @api_view(['GET'])
 def validate_token(request):
     try:

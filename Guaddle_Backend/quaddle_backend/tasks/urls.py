@@ -8,7 +8,7 @@ from .views.message_views import MessageViewSet, get_messages, delete_message, u
     download_file
 from .views.notification_views import NotificationViewSet, get_notifications, create_notification
 from .views.recentlytasks_views import get_recently_viewed_tasks, delete_recently_viewed_tasks, \
-    add_recently_viewed_tasks
+    add_recently_viewed_tasks, get_users_by_task
 from .views.recentvisitors_views import create_recently_visitors, get_recently_visitors
 from .views.task_views import TaskViewSet, get_tasks, get_tasks_by_id, create_task, update_task
 from django.urls import path
@@ -62,6 +62,7 @@ urlpatterns = [
     path('get_recently_viewed_tasks', get_recently_viewed_tasks, name='get_recently_viewed_tasks'),
     path('delete_recently_viewed_tasks', delete_recently_viewed_tasks, name='delete_recently_viewed_tasks'),
     path('add_recently_viewed_tasks', add_recently_viewed_tasks, name='add_recently_viewed_tasks'),
+    path('get_users_by_tasks/<int:task_id>/', get_users_by_task, name='get_users_by_task'),
 
     # Recently Visitors related views
     path('create_recently_visitors', create_recently_visitors, name='create_recently_visitors'),

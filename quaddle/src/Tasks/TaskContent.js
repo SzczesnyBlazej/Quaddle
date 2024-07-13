@@ -12,6 +12,7 @@ import DragAndDropFileUpload from './DragAndDropFileUpload';
 import { AddHistoryEvent } from './addHistoryEvent';
 import { Tooltip } from '@mui/material';
 import PredefinedPhrasesModal from './PredefinedPhrases/PredefinedPhrasesModal';
+import Cookies from 'js-cookie';
 
 const TaskContent = ({ task }) => {
     const showNotification = useNotification();
@@ -27,6 +28,7 @@ const TaskContent = ({ task }) => {
     const [clearFilesFn, setClearFilesFn] = useState(null);
     const [height, setHeight] = useState();
     const [showPredefinedPhrasesModal, setShowPredefinedPhrasesModal] = useState(false);
+    const [taskUsers, setTaskUsers] = useState([]);
 
     const handleFilesChange = (files) => {
         return files
@@ -43,6 +45,27 @@ const TaskContent = ({ task }) => {
 
     const handleShowPredefinedPhrasesModal = () => {
         setShowPredefinedPhrasesModal(true);
+    };
+
+    useEffect(() => {
+        if (task) {
+            fetchTaskUsers();
+        }
+    }, [task]);
+
+
+    const fetchTaskUsers = async () => {
+        try {
+            const accessToken = Cookies.get('access_token');
+            const response = await axios.get(API_ENDPOINTS.GET_RECENTLY_VIEWED_USER_FOR_TASK + "/" + task.id, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+            setTaskUsers(response.data);
+        } catch (error) {
+            showNotification('Error fetching task users: ' + error.message);
+        }
     };
 
     const handleAddedFiles = async (e) => {
@@ -215,7 +238,17 @@ const TaskContent = ({ task }) => {
             <div className="d-flex flex-column overflow-auto" style={{ maxHeight: `calc(100vh - ${height}px)` }}>
 
                 <div className='container custom-width'>
-                    <div className='d-flex flex-column justify-content-center align-items-center pt-5 text-secondary'>
+                    <div className='d-flex flex-column p-1 justify-content-start align-items-start text-secondary'>
+                        <div className='d-flex justify-content-start align-items-start text-secondary'>
+                            {taskUsers.map(user => (
+                                <div key={user.id} className='me-2'>
+                                    <ClickableLogo user={user} />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className='d-flex flex-column justify-content-center align-items-center text-secondary'>
                         {task && (
                             <ClickableLogo user={task.client_fk} />
                         )}

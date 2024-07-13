@@ -29,6 +29,7 @@ const API_ENDPOINTS = {
     FAVORITE: 'http://127.0.0.1:8000/api/toggle_favorite',
     CHECK_FAVORITE: 'http://127.0.0.1:8000/api/check_favorite',
     RECENTLY_VIEWED_TASKS: 'http://127.0.0.1:8000/api/get_recently_viewed_tasks',
+    GET_RECENTLY_VIEWED_USER_FOR_TASK: 'http://127.0.0.1:8000/api/get_users_by_tasks',
     DELETE_RECENTLY_VIEWED_TASKS: 'http://127.0.0.1:8000/api/delete_recently_viewed_tasks',
     ADD_RECENTLY_VIEWED_TASKS: 'http://127.0.0.1:8000/api/add_recently_viewed_tasks',
     CREATE_TASK_HISTORY: 'http://127.0.0.1:8000/api/create_task_history',

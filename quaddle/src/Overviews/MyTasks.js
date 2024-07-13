@@ -16,7 +16,6 @@ const MyTasks = () => {
 
     useEffect(() => {
         if (!user) {
-            // Jeśli dane użytkownika nie są jeszcze dostępne, nie wykonuj żadnych zapytań
             return;
         }
         axios.get(API_ENDPOINTS.TASK_API, {
