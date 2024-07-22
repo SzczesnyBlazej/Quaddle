@@ -71,7 +71,6 @@ def edit_pharse(request, pharse_id):
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def delete_phrase(request, pharse_id):
-    print(pharse_id)
     try:
         phrase = Phrase.objects.get(id=pharse_id)
         if phrase.owner != request.user:

@@ -127,3 +127,15 @@ class Phrase(models.Model):
 
     def __str__(self):
         return f"{self.id} - {self.phrase}"
+
+class NotificationsBadge(models.Model):
+    id = models.AutoField(primary_key=True)
+    notification = models.ForeignKey(Task, on_delete=models.SET_NULL, null=True)
+    create_date = models.DateTimeField(default=timezone.now, blank=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    is_read = models.BooleanField(default=False)
+    message = models.CharField(max_length=255,blank=True,null=True)
+
+
+    def __str__(self):
+        return f"{self.id} - {self.notification}"

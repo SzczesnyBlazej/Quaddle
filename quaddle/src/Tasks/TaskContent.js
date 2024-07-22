@@ -242,6 +242,7 @@ const TaskContent = ({ task }) => {
                         <div className='d-flex justify-content-start align-items-start text-secondary'>
                             {taskUsers.map(user => (
                                 <div key={user.id} className='me-2'>
+
                                     <ClickableLogo user={user} />
                                 </div>
                             ))}

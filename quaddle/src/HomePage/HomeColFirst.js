@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGaugeHigh, faListUl, faMagnifyingGlass, faPlus, faCircleDot, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faGaugeHigh, faListUl, faMagnifyingGlass, faCircleDot, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import './home.css';
 import { useAuth } from '../Account/AuthContext/authContext';
 import LogoTemplate from './LogoTemplate';
-import NewTask from '../Tasks/NewTask';
-import HelpModal from '../Tasks/HelpModal';
 import axios from 'axios';
 import { useNotification } from '../Functions/NotificationContext';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
-import SessionTimer from '../Account/AuthContext/SessionTimer';
-import logo from '../LOGO.png'
+import logo from '../LOGO.png';
 import ShowLastViewedTasks from '../Overviews/ShowLastViewedTasks';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import NotificationsDropdown from './NotificationsDropdown';
 
 const renderSuggestion = (suggestion) => (
     <div>
@@ -24,25 +22,16 @@ const renderSuggestion = (suggestion) => (
 
 function HomeColFirst({ isLoading = false }) {
     const showNotification = useNotification();
-
+    const [value, setValue] = useState(sessionStorage.getItem('searchValue') || '');
+    const [suggestions, setSuggestions] = useState(
+        JSON.parse(localStorage.getItem('suggestions')) || []
+    );
     const { authState } = useAuth();
     const user = authState.user;
     const menu = {
         home: ['/', 'Dashboard', faGaugeHigh],
         overviews: ['/Overviews/mytasks', 'Overviews', faListUl],
-    };
-    const [showNewTask, setShowNewTask] = useState(false);
-    const [showHelp, setHelp] = useState(false);
-    const [value, setValue] = useState(sessionStorage.getItem('searchValue') || '');
-    const [suggestions, setSuggestions] = useState(
-        JSON.parse(localStorage.getItem('suggestions')) || []
-    );
-
-    const handleNewTaskButtonClick = () => {
-        setShowNewTask(true);
-    };
-    const handleShowHelpButtonClick = () => {
-        setHelp(true);
+        notification: ['#', 'Notifications', faPaperPlane],
     };
 
     const fetchSuggestions = async (inputValue) => {
@@ -76,9 +65,6 @@ function HomeColFirst({ isLoading = false }) {
             await fetchSuggestions(newValue);
         }
     };
-
-    useEffect(() => { }, [value]);
-
 
     return (
         <div className="col-md-2 dark-bg min-vh-100 d-flex flex-column position-relative">
@@ -115,7 +101,11 @@ function HomeColFirst({ isLoading = false }) {
                         <Link to={value[0]} className="nav-link">
                             <div className='d-flex align-items-center text-light'>
                                 <div className='col-md-2 text-center'>
-                                    <FontAwesomeIcon icon={value[2]} size="xl" />
+                                    {key === 'notification' ? (
+                                        <NotificationsDropdown />
+                                    ) : (
+                                        <FontAwesomeIcon icon={value[2]} size="xl" />
+                                    )}
                                 </div>
                                 <div className='col-md-10'>
                                     {value[1]}
@@ -141,51 +131,18 @@ function HomeColFirst({ isLoading = false }) {
                                         <FontAwesomeIcon
                                             icon={faCircleDot}
                                             style={{
-                                                color: suggestion.status_fk?.value === 'Open' ? 'orange' : suggestion.status_fk?.value === 'Close' ? '#00a347' : 'gray',
+                                                color: suggestion.status_fk?.value === 'Open' ? 'orange' : suggestion.status_fk?.value === 'Close' ? '#00a347' : 'gray'
                                             }}
                                         />
                                     </div>
                                     <div className='col-md-10'>
-                                        <small>{renderSuggestion(suggestion)}</small>
+                                        {suggestion.title}
                                     </div>
                                 </div>
                             </Link>
-                            <hr className="border-secondary m-1" />
+                            <hr className="border-secondary m-2" />
                         </React.Fragment>
                     ))}
-                </div>
-            </div>
-            <div className="text-light mt-auto position-absolute bottom-0 w-100">
-                <span className='ps-2'><SessionTimer /></span>
-                <hr className="border-secondary" />
-                <div className='row text-center mb-3'>
-                    <div className='col-md-4'>
-                        {LogoTemplate(user)}
-                    </div>
-                    <div className='col-md-4'>
-                        <button
-                            type="button"
-                            className="btn dropdown-toggle rounded-circle dropdown-toggle-no-arrow border-0"
-                            onClick={handleNewTaskButtonClick}
-                        >
-                            <div className="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
-                                <span><FontAwesomeIcon icon={faPlus} size="2xl" /></span>
-                            </div>
-                        </button>
-                        {showNewTask && <NewTask onClose={() => setShowNewTask(false)} />}
-                    </div>
-                    <div className='col-md-4'>
-                        <button
-                            type="button"
-                            className="btn rounded-circle border-0"
-                            onClick={handleShowHelpButtonClick}
-                        >
-                            <div className="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
-                                <span><FontAwesomeIcon icon={faQuestion} size="2xl" /></span>
-                            </div>
-                        </button>
-                        {showHelp && <HelpModal onClose={() => setHelp(false)} />}
-                    </div>
                 </div>
             </div>
         </div>

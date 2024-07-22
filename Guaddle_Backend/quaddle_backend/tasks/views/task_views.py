@@ -7,7 +7,7 @@ from django.views.decorators.http import require_POST
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from ..models import Task
+from ..models import Task, NotificationsBadge
 from ..serializers import TaskSerializer
 from task_options.models import TaskOptions
 from user_management.models import User
@@ -36,9 +36,8 @@ def get_tasks(request):
             tasks = tasks.filter(solver_id=solver)
     serializer = TaskSerializer(tasks, many=True)
     return Response(serializer.data)
-
-@require_POST
 @csrf_exempt
+@require_POST
 def create_task(request):
     try:
         data = json.loads(request.body.decode('utf-8'))
@@ -86,11 +85,17 @@ def create_task(request):
             last_modification_hour=last_modification_hour,
         )
         task.save()
-        # Zwracanie odpowiedzi z ID utworzonego zadania
+        users_to_notify = User.objects.filter(is_admin=True) | User.objects.filter(is_solver=True)
+
+        for user in users_to_notify:
+            NotificationsBadge.objects.create(
+                owner=user,
+                notification=task,
+                message="Created a new task"
+            )
         return JsonResponse({'id': task.id}, status=201)
 
     except Exception as e:
-        # Obsługa błędu
         return JsonResponse({'error': str(e)}, status=400)
 
 @api_view(['GET'])

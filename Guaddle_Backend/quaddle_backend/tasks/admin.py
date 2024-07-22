@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Task, Notification, Message, Favorites, File, RecentlyViewedTasks, TaskHistory, RecentVisitors, \
-    Phrase
+    Phrase, NotificationsBadge
 
 # Register your models here.
 
@@ -14,3 +14,4 @@ admin.site.register(RecentlyViewedTasks)
 admin.site.register(TaskHistory)
 admin.site.register(RecentVisitors)
 admin.site.register(Phrase)
+admin.site.register(NotificationsBadge)

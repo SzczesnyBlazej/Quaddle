@@ -42,6 +42,10 @@ const API_ENDPOINTS = {
     CREATE_NOTIFICATION: 'http://127.0.0.1:8000/api/create_notification',
     NOTIFICATIONAPI: 'http://127.0.0.1:8000/api/notification/',
 
+    // NOTIFICATION BADGE
+    CREATE_NOTIFICATION_BADGE: 'http://127.0.0.1:8000/api/create_notification_badge',
+    GET_NOTIFICATION_FOR_USER_BADGE: 'http://127.0.0.1:8000/api/get_notifications_for_user/',
+
     // DASHBOARD
     GET_PRIORITY_COUNTS: 'http://127.0.0.1:8000/api/get_priority_counts_dashboard',
     GET_DIFFICULTY_COUNTS: 'http://127.0.0.1:8000/api/get_difficulty_counts_dashboard',

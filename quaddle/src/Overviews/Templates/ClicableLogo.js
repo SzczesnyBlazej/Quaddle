@@ -44,6 +44,7 @@ const ClickableLogo = ({ user }) => {
     };
 
     const renderPopover = () => (
+
         <Popover id={`popover-${user.id}`} className="p-3 popover">
             <div>
                 <div className='row'>
@@ -169,18 +170,21 @@ const ClickableLogo = ({ user }) => {
 
 
     return (
+
         <OverlayTrigger
             trigger="click"
             placement="right"
             rootClose
             overlay={loading ? <div>Loading...</div> : renderPopover()} // Render the popover only when loading is false
         >
+
             <div
                 className="rounded-circle d-flex align-items-center justify-content-center"
                 style={{ width: '50px', height: '50px', backgroundColor: user?.logo_color }}
             >
                 <span className="text-white fw-bold">{user?.initials}</span>
             </div>
+
         </OverlayTrigger>
     );
 };

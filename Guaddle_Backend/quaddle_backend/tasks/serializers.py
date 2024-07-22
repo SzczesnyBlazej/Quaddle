@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .models import Task, Notification, Message, Favorites, File, RecentlyViewedTasks, TaskHistory, RecentVisitors, \
-    Phrase
+    Phrase, NotificationsBadge
 from user_management.serializers import UserSerializer
 
 from task_options.serializers import TaskOptionsSerializer
@@ -22,6 +22,13 @@ class NotificationSerializer(serializers.ModelSerializer):
     task_detail = TaskSerializer(source='task_id')
     class Meta:
         model = Notification
+        fields = '__all__'
+
+class NotificationsBadgeSerializer(serializers.ModelSerializer):
+    owner_fk = UserSerializer(source='owner')
+    notification_fk = TaskSerializer(source='notification')
+    class Meta:
+        model = NotificationsBadge
         fields = '__all__'
 
 class MessageSerializer(serializers.ModelSerializer):

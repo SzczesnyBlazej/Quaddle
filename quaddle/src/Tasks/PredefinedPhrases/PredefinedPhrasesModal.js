@@ -10,6 +10,7 @@ import { Tooltip } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import Cookies from 'js-cookie';
+
 const PredefinedPhrasesModal = ({ onClose, onSelectPhrase }) => {
     const [history, setHistory] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false);
