@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from ..models import Notification, Task, NotificationsBadge
 from ..serializers import NotificationSerializer, NotificationsBadgeSerializer
 from user_management.models import User
+from django.shortcuts import get_object_or_404
 
 
 class NotificationViewSet(viewsets.ModelViewSet):
@@ -51,3 +52,26 @@ def create_notification_badge(request):
     except Exception as e:
         # Obsługa błędu
         return JsonResponse({'error': str(e)}, status=400)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def mark_notifications_as_read(request):
+    notification_id = request.data.get('notification_id')
+    owner_id = request.data.get('owner_id')
+
+    if not notification_id or not owner_id:
+        return Response({"error": "notification_id and owner_id parameters are required"}, status=400)
+
+    try:
+        notifications = NotificationsBadge.objects.filter(
+            notification=notification_id,
+            owner=owner_id
+        )
+        notifications.update(is_read=True)
+
+        return Response({"status": "success"}, status=200)
+
+    except Exception as e:
+        # Obsługa błędu
+        return Response({'error': str(e)}, status=400)

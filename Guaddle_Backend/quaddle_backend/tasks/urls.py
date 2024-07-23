@@ -7,7 +7,8 @@ from .views.favorites_views import FavoritesViewSet, toggle_favorite, check_favo
 from .views.message_views import MessageViewSet, get_messages, delete_message, update_message, create_message, \
     download_file
 from .views.notification_views import NotificationViewSet, get_notifications, create_notification
-from .views.notificationbadge_views import get_notifications_for_user, create_notification_badge
+from .views.notificationbadge_views import get_notifications_for_user, create_notification_badge, \
+    mark_notifications_as_read
 from .views.recentlytasks_views import get_recently_viewed_tasks, delete_recently_viewed_tasks, \
     add_recently_viewed_tasks, get_users_by_task
 from .views.recentvisitors_views import create_recently_visitors, get_recently_visitors
@@ -51,6 +52,7 @@ urlpatterns = [
     # Notification Badge
     path('get_notifications_for_user/', get_notifications_for_user, name='get_notifications_for_user'),
     path('create_notification_badge', create_notification_badge, name='create_notification_badge'),
+    path('mark_notifications_as_read/', mark_notifications_as_read, name='mark_notifications_as_read'),
 
     # Message related views
     path('get_messages', get_messages, name='get_messages'),
