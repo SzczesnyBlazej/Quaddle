@@ -48,7 +48,6 @@ def create_notification(request):
             created_by=created_by_option
         )
         notification.save()
-        # Zwracanie odpowiedzi z ID utworzonego zadania
         return JsonResponse({'id': notification.id}, status=201)
 
     except Exception as e:

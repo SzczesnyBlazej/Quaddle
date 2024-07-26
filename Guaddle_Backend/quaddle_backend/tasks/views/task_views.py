@@ -7,6 +7,8 @@ from django.views.decorators.http import require_POST
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
+from .notificationbadge_views import mark_notifications_as_read_if_closed
 from ..models import Task, NotificationsBadge
 from ..serializers import TaskSerializer
 from task_options.models import TaskOptions
@@ -69,7 +71,6 @@ def create_task(request):
             difficulty_option = TaskOptions.objects.get(pk=difficulty)
         else:
             difficulty_option = None
-
         task = Task.objects.create(
             title=title,
             description=description,
@@ -115,6 +116,11 @@ def update_task(request, task_id):
         if request.method == 'PUT':
             task = Task.objects.get(pk=task_id)
             data = json.loads(request.body.decode('utf-8'))
+            notification_value = TaskOptions.objects.filter(pk=data.get('status')).first()
+
+            if notification_value.value == "Close":
+                mark_notifications_as_read_if_closed(task_id)
+
             serializer = TaskSerializer(task, data=data, partial=True)
             if serializer.is_valid():
                 serializer.save()

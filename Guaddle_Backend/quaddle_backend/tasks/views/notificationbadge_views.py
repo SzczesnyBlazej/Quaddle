@@ -23,7 +23,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
 def get_notifications_for_user(request):
     user_id = request.GET.get('user_id')
     if user_id:
-        notifications = NotificationsBadge.objects.filter(owner=user_id).order_by('-create_date')[:10]
+        notifications = NotificationsBadge.objects.filter(owner=user_id).filter(is_read=False).order_by('-create_date')
         serializer = NotificationsBadgeSerializer(notifications, many=True)
         return Response(serializer.data)
     else:
@@ -44,7 +44,6 @@ def create_notification_badge(request):
         notificationBadge = NotificationsBadge.objects.create(
             notification=notification,
             owner=owner,
-            message="xd"
         )
         notificationBadge.save()
         return JsonResponse({'id': notificationBadge.id}, status=201)
@@ -73,5 +72,29 @@ def mark_notifications_as_read(request):
         return Response({"status": "success"}, status=200)
 
     except Exception as e:
-        # Obsługa błędu
+        return Response({'error': str(e)}, status=400)
+
+
+def mark_notifications_as_read_if_closed(task_id):
+    try:
+        notifications = NotificationsBadge.objects.filter(notification_id=task_id)
+        if notifications.exists():
+            notifications.update(is_read=True)
+            return True
+        else:
+            return False
+    except Exception as e:
+        return False
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def mark_all_notifications_as_read(request):
+    user = request.user
+    try:
+        notifications = NotificationsBadge.objects.filter(owner=user, is_read=False)
+        notifications.update(is_read=True)
+
+        return Response({"status": "success"}, status=200)
+
+    except Exception as e:
         return Response({'error': str(e)}, status=400)

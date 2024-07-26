@@ -186,7 +186,13 @@ const TaskContent = ({ task }) => {
             showNotification('Error updating task: ' + error.message);
         }
     };
+    useEffect(() => {
+        const interval = setInterval(() => {
+            fetchMessages();
+        }, 30000);
 
+        return () => clearInterval(interval); // Clear interval on component unmount
+    }, [task]);
 
     const fetchMessages = async () => {
         try {

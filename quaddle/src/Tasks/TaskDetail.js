@@ -185,6 +185,7 @@ const TaskDetail = ({ task }) => {
 
             const changeMessage = `Updated task with changes: ${changes.join(', ')}`;
             await AddHistoryEvent(changeMessage, user.id, task.id);
+            sendNotification('Updated post', task?.id, user.id);
 
             await axios.put(
                 `${API_ENDPOINTS.UPDATE_TASK}/${task?.id}`,

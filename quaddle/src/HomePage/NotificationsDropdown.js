@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import API_ENDPOINTS from '../ApiEndpoints/apiConfig';
 import { useAuth } from '../Account/AuthContext/authContext';
-import { Popover, List, ListItem, ListItemText, ListItemIcon, Divider } from '@mui/material';
+import { Popover, List, ListItem, ListItemText, ListItemIcon, Divider, Button, Box } from '@mui/material';
 import { Notifications as NotificationsIcon } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
@@ -34,6 +34,10 @@ function NotificationsDropdown({ open, handleClose, anchorRef, onNotificationCou
         };
 
         fetchNotifications();
+
+        const intervalId = setInterval(fetchNotifications, 30000);
+
+        return () => clearInterval(intervalId);
     }, [user, onNotificationCountChange]);
 
     const formatDate = (dateString) => {
@@ -42,6 +46,26 @@ function NotificationsDropdown({ open, handleClose, anchorRef, onNotificationCou
             return format(date, 'dd-MM-yyyy HH:mm');
         }
         return 'Unable to retrieve date';
+    };
+
+    const handleMarkAllAsRead = async () => {
+        try {
+            const accessToken = Cookies.get('access_token');
+            await axios.patch(API_ENDPOINTS.MARK_ALL_NOTIFICATIONS_AS_READ, {
+                user_id: user.id,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+            setNotifications(notifications.map(notification => ({
+                ...notification,
+                is_read: true,
+            })));
+            onNotificationCountChange(0);
+        } catch (error) {
+            console.error('Error marking all notifications as read:', error);
+        }
     };
 
     return (
@@ -65,6 +89,20 @@ function NotificationsDropdown({ open, handleClose, anchorRef, onNotificationCou
                 },
             }}
         >
+            {notifications.length > 0 ?
+                <Box display="flex" justifyContent="flex-start" padding="8px">
+                    <button
+                        className='btn btn-outline-light m-2'
+                        type='button'
+                        onClick={handleMarkAllAsRead}
+                        disabled={notifications.every(notification => notification.is_read)}
+                    >
+                        Mark All as Read
+                    </button>
+                </Box> : ''
+            }
+
+            <Divider sx={{ backgroundColor: 'white' }} />
             <List dense>
                 {notifications.length > 0 ? (
                     notifications.map((notification, index) => (
@@ -89,8 +127,6 @@ function NotificationsDropdown({ open, handleClose, anchorRef, onNotificationCou
                                     }} />
                                 </ListItemIcon>
 
-
-
                                 <ListItemText
                                     primary={`${notification.message} - ${notification.notification_fk.title}`}
                                     secondary={`${formatDate(notification.create_date)}`}
@@ -105,7 +141,6 @@ function NotificationsDropdown({ open, handleClose, anchorRef, onNotificationCou
                                         }
                                     }}
                                 />
-
                             </ListItem>
                             {index < notifications.length - 1 && <Divider variant="middle" sx={{ backgroundColor: 'white' }} />}
                         </React.Fragment>
