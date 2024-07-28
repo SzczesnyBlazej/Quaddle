@@ -16,7 +16,7 @@ class User(AbstractUser):
     password = models.CharField(max_length=255)
     is_admin = models.BooleanField(default=False)
     is_solver = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     initials = models.CharField(max_length=2, null=True, blank=True)
     logo_color = models.CharField(max_length=7, null=True, blank=True)
     id = models.AutoField(primary_key=True)
@@ -40,8 +40,6 @@ class User(AbstractUser):
             first_letter_last_name = self.last_name[0].upper()
             self.initials = first_letter_first_name + first_letter_last_name
 
-        if not self.is_active:
-            self.is_active = True
         if self.password:
             self.password=make_password(self.password)
 

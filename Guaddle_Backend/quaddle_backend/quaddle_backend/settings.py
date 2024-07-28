@@ -10,8 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+import sys
 from datetime import timedelta
 from pathlib import Path
+import datetime
+import shutil
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -164,3 +167,52 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+def backup_database():
+    db_path = os.path.join(BASE_DIR, 'db.sqlite3')
+    backup_dir = os.path.join(BASE_DIR, 'backups')
+    os.makedirs(backup_dir, exist_ok=True)
+
+    now = datetime.datetime.now()
+    now_str = now.strftime('%Y%m%d_%H%M%S')
+
+    backup_path = os.path.join(backup_dir, f'db_backup_{now_str}.sqlite3')
+    last_backup_file = os.path.join(backup_dir, 'last_backup.txt')
+
+    if os.path.exists(last_backup_file):
+        with open(last_backup_file, 'r') as file:
+            last_backup_str = file.read().strip()
+        last_backup = datetime.datetime.strptime(last_backup_str, '%Y%m%d_%H%M%S')
+    else:
+        last_backup = now - datetime.timedelta(hours=1)
+
+    if now - last_backup >= datetime.timedelta(hours=1):
+        shutil.copyfile(db_path, backup_path)
+        with open(last_backup_file, 'w') as file:
+            file.write(now_str)
+        print(f'Successfully created backup: {backup_path}')
+    else:
+        print(f'Backup not created. Last backup was less than an hour ago.')
+
+    cleanup_backups(backup_dir)
+
+def cleanup_backups(backup_dir):
+    now = datetime.datetime.now()
+    seven_days_ago = now - datetime.timedelta(days=7)
+
+    for filename in os.listdir(backup_dir):
+        if filename.startswith('db_backup_') and filename.endswith('.sqlite3'):
+            backup_path = os.path.join(backup_dir, filename)
+            backup_time_str = filename[len('db_backup_'):-len('.sqlite3')]
+            backup_time = datetime.datetime.strptime(backup_time_str, '%Y%m%d_%H%M%S')
+
+            if backup_time < seven_days_ago:
+                os.remove(backup_path)
+                print(f'Removed old backup: {backup_path}')
+
+if 'runserver' in sys.argv and os.environ.get('RUN_MAIN') == 'true':
+    backup_database()

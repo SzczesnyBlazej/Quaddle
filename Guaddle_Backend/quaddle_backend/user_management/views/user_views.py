@@ -58,7 +58,6 @@ def get_solvers_list(request):
 
 
 @api_view(['POST', 'GET'])
-@csrf_exempt
 def get_user_from_access_token(request):
     token = request.data.get('token')
     if not token:
@@ -116,10 +115,8 @@ def update_user(request, user_id):
         except TaskOptions.DoesNotExist:
             return Response({'error': 'Unit not found'}, status=status.HTTP_400_BAD_REQUEST)
     active = user_data.get('is_active')
-    if active:
-        user_data['is_active'] = True
-    else:
-        user_data['is_active'] = False
+    if active is not None:
+        user_data['is_active'] = bool(active)
 
     for key, value in user_data.items():
         setattr(user, key, value)

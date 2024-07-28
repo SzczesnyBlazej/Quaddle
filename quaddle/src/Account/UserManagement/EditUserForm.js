@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import getOptions from '../../Config/getOptions';
+import { format } from 'date-fns';
 
 const EditUserForm = ({
     showEditForm,
@@ -30,6 +31,14 @@ const EditUserForm = ({
 
         fetchData();
     }, []);
+    const formatDate = (dateString) => {
+        if (dateString) {
+            const date = new Date(dateString);
+            return format(date, 'dd-MM-yyyy HH:mm');
+        }
+        return 'Unable to retrieve date';
+    };
+
 
     return (
         <div className="p-3 col-md-4 text-light dark-bg min-vh-100 border-start border-secondary">
@@ -184,7 +193,7 @@ const EditUserForm = ({
                                                 onChange={handleEditFormChange}
                                             />
                                             <label className="form-check-label" htmlFor="editIsAdmin">
-                                                Admin
+                                                Is Admin
                                             </label>
                                         </div>
                                     </div>
@@ -215,7 +224,7 @@ const EditUserForm = ({
                                                 onChange={handleEditFormChange}
                                             />
                                             <label className="form-check-label" htmlFor="editis_active">
-                                                User is is_active
+                                                Is active
                                             </label>
                                         </div>
                                     </div>
@@ -268,7 +277,7 @@ const EditUserForm = ({
                                             className="form-control"
                                             id="dateOfLastLogin"
                                             name="dateOfLastLogin"
-                                            value={editingUser.last_login ? editingUser.last_login : 'None'}
+                                            value={editingUser.last_login ? formatDate(editingUser.last_login) : 'None'}
                                             readOnly
                                         />
                                     </div>
@@ -281,7 +290,7 @@ const EditUserForm = ({
                                             className="form-control"
                                             id="dateOfLastChangedPassword"
                                             name="dateOfLastChangedPassword"
-                                            value={editingUser.date_of_last_changed_password ? editingUser.date_of_last_changed_password : 'None'}
+                                            value={editingUser.date_of_last_changed_password ? formatDate(editingUser.date_of_last_changed_password) : 'None'}
                                             readOnly
                                         />
                                     </div>
@@ -295,7 +304,7 @@ const EditUserForm = ({
                                             className="form-control"
                                             id="dateOfLastIncorrectLogin"
                                             name="dateOfLastIncorrectLogin"
-                                            value={editingUser.date_of_last_incorrect_login ? editingUser.date_of_last_incorrect_login : 'None'}
+                                            value={editingUser.date_of_last_incorrect_login ? formatDate(editingUser.date_of_last_incorrect_login) : 'None'}
                                             readOnly
                                         />
                                     </div>
@@ -310,7 +319,7 @@ const EditUserForm = ({
                                             className="form-control"
                                             id="dateOfJoined"
                                             name="dateOfJoined"
-                                            value={editingUser.date_joined ? editingUser.date_joined : 'None'}
+                                            value={editingUser.date_joined ? formatDate(editingUser.date_joined) : 'None'}
                                             readOnly
                                         />
                                     </div>

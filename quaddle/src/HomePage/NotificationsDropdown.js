@@ -90,7 +90,7 @@ function NotificationsDropdown({ open, handleClose, anchorRef, onNotificationCou
             }}
         >
             {notifications.length > 0 ?
-                <Box display="flex" justifyContent="flex-start" padding="8px">
+                <><Box display="flex" justifyContent="flex-start" padding="8px">
                     <button
                         className='btn btn-outline-light m-2'
                         type='button'
@@ -99,10 +99,13 @@ function NotificationsDropdown({ open, handleClose, anchorRef, onNotificationCou
                     >
                         Mark All as Read
                     </button>
-                </Box> : ''
+                </Box>
+                    <Divider sx={{ backgroundColor: 'white' }} />
+                </>
+
+                : ''
             }
 
-            <Divider sx={{ backgroundColor: 'white' }} />
             <List dense>
                 {notifications.length > 0 ? (
                     notifications.map((notification, index) => (

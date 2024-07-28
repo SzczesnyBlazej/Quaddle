@@ -37,6 +37,8 @@ def login(request):
             }
             return Response(data, status=status.HTTP_200_OK)
         else:
+            print(f"Authentication failed for user: {user}")
+
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
     else:
         return Response({'error': 'Method Not Allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -70,7 +72,6 @@ def logout(request):
         return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
-@csrf_exempt
 def token_refresh(request):
     if request.method == 'POST':
         refresh_token = request.data.get('refresh')

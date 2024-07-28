@@ -4,6 +4,7 @@ const AddOptionForm = ({ handleAddNewOptionSubmit, groupName, closeAddOptionForm
     const [newOption, setNewOption] = useState({
         title: groupName,
         value: '',
+        name: groupName,
         active: true,
     });
 
@@ -20,6 +21,7 @@ const AddOptionForm = ({ handleAddNewOptionSubmit, groupName, closeAddOptionForm
         handleAddNewOptionSubmit(newOption, groupName);
         setNewOption({
             title: groupName,
+            name: groupName,
             value: '',
             active: true,
         });

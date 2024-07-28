@@ -1,4 +1,3 @@
-// AutoCompleteSearch.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import HomeColFirst from '../../HomePage/HomeColFirst';
@@ -22,23 +21,22 @@ const AutoCompleteSearch = () => {
     const showNotification = useNotification();
     const [unitsOptions, setUnitsOptions] = useState([]);
 
+    const fetchUsers = async () => {
+        try {
+            const unitList = await getOptions('Units');
+            setUnitsOptions(unitList);
+            const response = await axios.get(API_ENDPOINTS.USERS_LIST);
+            setUsers(response.data);
+            setSuggestions(response.data);
+        } catch (error) {
+            console.error('Error fetching users:', error);
+        }
+    };
+
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-
-                const unitList = await getOptions('Units');
-                setUnitsOptions(unitList);
-                const response = await axios.get(API_ENDPOINTS.USERS_LIST);
-                setUsers(response.data);
-                setSuggestions(response.data);
-
-            } catch (error) {
-                console.error('Error fetching users:', error);
-            }
-        };
-
         fetchUsers();
     }, []);
+
     const handleSearch = (value) => {
         setSearchTerm(value);
 
@@ -62,7 +60,6 @@ const AutoCompleteSearch = () => {
         }
     };
 
-
     const handleUpdate = (userId) => {
         const userToEdit = users.find((user) => user.id === userId);
         setEditingUser(userToEdit);
@@ -70,6 +67,8 @@ const AutoCompleteSearch = () => {
         setisSolver(userToEdit.is_solver || false);
         setis_active(userToEdit.is_active);
         setShowEditForm(true);
+        fetchUsers();
+
     };
 
     const handleDelete = async (userId) => {
@@ -112,15 +111,8 @@ const AutoCompleteSearch = () => {
                 is_active: is_active,
             };
 
-            if (newPassword && newPassword == confirmPassword) {
-                if (editingUser.password && (editingUser.password === newPassword)) {
-                    updatedUser.password = newPassword;
-                } else if (!editingUser.password) {
-                    updatedUser.password = newPassword;
-                } else {
-                    showNotification("Current password is incorrect.");
-                    return;
-                }
+            if (newPassword && newPassword === confirmPassword) {
+                updatedUser.password = newPassword;
             } else if (newPassword || confirmPassword) {
                 showNotification("New password and confirm password must match.");
                 return;
@@ -133,9 +125,7 @@ const AutoCompleteSearch = () => {
                 const { newPassword, confirmPassword, ...userDataWithoutPasswords } = updatedUser;
 
                 await axios.put(API_ENDPOINTS.UPDATE_USER + `${editingUser.id}`, userDataWithoutPasswords);
-                setUsers((prevUsers) =>
-                    prevUsers.map((user) => (user.id === editingUser.id ? userDataWithoutPasswords : user))
-                );
+                fetchUsers();
                 setShowEditForm(false);
                 showNotification('Successfully saved user data');
             }
